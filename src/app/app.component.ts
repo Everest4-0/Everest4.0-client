@@ -7,7 +7,7 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+    isLogedin=false;
      constructor(public location: Location) {}
 
     ngOnInit(){
