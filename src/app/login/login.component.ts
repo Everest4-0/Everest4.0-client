@@ -17,13 +17,14 @@ export class LoginComponent implements OnInit {
   user: SocialUser;
   localUser: User = new User();
   loggedIn: boolean;
-  constructor(private authService: SocialAuthService, private auth: AuthService) { }
+  constructor(private authService: SocialAuthService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.localUser.castSocialUser(user);
       this.auth.authenticate(this.localUser).subscribe((u: User) => {
         this.localUser = u;
+        window.open('url', '_self')
       })
       this.user = user;
       this.loggedIn = (user != null);
@@ -31,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    alert(1)
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 

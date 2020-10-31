@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 
@@ -7,20 +8,22 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    isLogedin=false;
-     constructor(public location: Location) {}
+  isLogedin = false;
+  constructor(public location: Location, public auth: AuthService) {
+    this.isLogedin = !!auth.user
+  }
 
-    ngOnInit(){
-    }
+  ngOnInit() {
+  }
 
-    isMap(path){
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      titlee = titlee.slice( 1 );
-      if(path == titlee){
-        return false;
-      }
-      else {
-        return true;
-      }
+  isMap(path) {
+    var titlee = this.location.prepareExternalUrl(this.location.path());
+    titlee = titlee.slice(1);
+    if (path == titlee) {
+      return false;
     }
+    else {
+      return true;
+    }
+  }
 }

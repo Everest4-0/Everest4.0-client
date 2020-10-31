@@ -31,7 +31,7 @@
                 <a (click)="signInWithGoogle()" class="login100-social-item">
                     <img src="assets/img/icon/google.svg" alt="GOOGLE">
                 </a>
-                <a href="https://colorlib.com/etc/lf/Login_v9/index.html#" class="login100-social-item">
+                <a (click)="signInWithFB()" class="login100-social-item">
                     <img src="assets/img/icon/facebook.svg" alt="GOOGLE">
                 </a>
             </div>
@@ -44,12 +44,6 @@
     </div>
 </div>
 
-<div>
-    <p>{{ user|json }}</p>
-    <hr>
-    <p>{{ localUser|json }}</p>
-
-</div>
 <div id="dropDownSelect1"></div>
 
 <script async="" src="assets/login/js"></script>

@@ -1,9 +1,11 @@
+import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { StorageServiceModule } from 'ngx-webstorage-service';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
@@ -33,7 +35,8 @@ import { LoginComponent } from './login/login.component';
     SidebarModule,
     AppRoutingModule,
 
-    SocialLoginModule
+    SocialLoginModule,
+    StorageServiceModule
   ],
   declarations: [
     AppComponent,
@@ -41,6 +44,7 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   providers: [
+    StorageServices,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

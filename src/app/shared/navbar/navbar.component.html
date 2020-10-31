@@ -45,17 +45,14 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/img/faces/face-5.jpg" class="img-thumbnail img-circle" style="width: 30px">
+                        {{auth.user.firstName}} {{auth.user.lastName}}
                             <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something</a></li>
+                        <li> <img src="{{auth.user.photoUrl}}" class="img-thumbnail" style="width: 100%;"></li>
+                        <li><a href="#">Perfil</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a (click)="signOut()"><i class="fa fa-sign-out">Sair</i></a></li>
                     </ul>
                 </li>
                 <li class="separator hidden-lg hidden-md"></li>
