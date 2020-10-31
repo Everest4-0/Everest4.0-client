@@ -7,18 +7,22 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends AppService<User, 'users'> implements IService<any> {
+export class AuthService extends AppService<User> implements IService<any> {
 
   constructor(public http: HttpClient) {
-    super(http);
+    super(http, 'users');
+  }
+
+  authenticate(o: User): Observable<any> {
+    return this.http.post(this.url + '/authenticate', o)
   }
 
   one(id: string): Observable<User> {
-      return this.getOne(id)
+    return this.getOne(id)
   }
 
   all(f: any): Observable<Array<User>> {
-      return this.getAll(f)
+    return this.getAll(f)
   }
 
   update(o: any): Observable<User> {

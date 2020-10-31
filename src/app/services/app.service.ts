@@ -5,32 +5,32 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class AppService<T,s> {
+export class AppService<T> {
 
   private identity = ''
-  private url;
-  private serverAddress='0.0.0.0:9800';
-  constructor(public http: HttpClient) {
-    this.url=`http://${this.serverAddress}/api/v1/${s}`
+  protected url;
+  private serverAddress = '0.0.0.0:9800';
+  constructor(public http: HttpClient, private service: string) {
+    this.url = `http://${this.serverAddress}/api/v1/${service}`
   }
 
-  getOne(s: string): Observable<any> {
+  protected getOne(s: string): Observable<any> {
+    return this.http.get(this.url + '/' + s)
+  }
+
+  protected getAll(a: any): Observable<any> {
     return this.http.get(this.url)
   }
 
-  getAll(a: any): Observable<any> {
-    return this.http.get(this.url)
+  protected createOne(o: T): Observable<any> {
+    return this.http.post(this.url, o)
   }
 
-  createOne(o: T): Observable<any> {
-    return this.http.get(this.url)
+  protected updateOne(o: T): Observable<any> {
+    return this.http.put(this.url, o)
   }
 
-  updateOne(o: T): Observable<any> {
-    return this.http.get(this.url)
-  }
-
-  deleteOne(o: T): Observable<any> {
-    return this.http.get(this.url)
+  protected deleteOne(o: T): Observable<any> {
+    return this.http.delete(this.url + '/' + o)
   }
 }
