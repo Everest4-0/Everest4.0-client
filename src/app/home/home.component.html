@@ -20,6 +20,25 @@
                     </lbd-chart>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="title">NOTÍCIAS</h4>
+                    <p class="category">Backend development</p>
+                </div>
+                <div class="col-md-3" *ngFor="let new of news">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ new.image }}" class="img-responsive" /></div>
+                        <div class="card-body" style="padding: 5px 15px;">
+                            <h5>{{ new.title }}</h5>
+                            <p style="display: none;">{{ new.body }}</p>
+                        </div>
+                        <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
+                                class="badge badge-info">{{ new.footer }}</span></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-4">
             <div class="card">
@@ -40,8 +59,10 @@
                                             </label>
                                         </div>
                                     </td>
-                                    <td><h4 style="padding: 0;margin: 0;line-height: 0px;">10:30</h4><br>
-                                        Sign contract for "What are conference organizers?"</td>
+                                    <td>
+                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">10:30</h4><br>
+                                        Sign contract for "What are conference organizers?"
+                                    </td>
                                     <td class="td-actions text-right">
                                         <button type="button" rel="tooltip" title="Remove"
                                             class="btn btn-danger btn-simple btn-xs">
@@ -172,79 +193,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item title">
-                    <h4>AGENDA E PENDENTES</h4>
-                </li>
-                <li class="list-group-item active">Reuniões</li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item active">Tarefas em atraso</li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item active">Tarefas semanais</li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-sm-2">10:30</div>
-                        <div class="col-sm-9">First item</div>
-                        <div class="col-sm-1"><i class="fa fa-chevron-right"></i></div>
-                    </div>
-                </li>
-            </ul>
         </div>
 
         <div class="row">

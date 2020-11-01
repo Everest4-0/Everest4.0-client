@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Edit Profile</h4>
+                        <h4 class="title">Editar Perfil</h4>
                     </div>
                     <div class="content">
                         <form>
@@ -96,10 +96,10 @@
                     <div class="content">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
+                                <img class="avatar border-gray" src="{{auth.user.photoUrl}}" alt="..."/>
 
-                                <h4 class="title">Mike Andrew<br />
-                                    <small>michael24</small>
+                                <h4 class="title">{{auth.user.firstName}} {{auth.user.lastName}}<br />
+                                    <small>{{auth.user.code}}</small>
                                 </h4>
                             </a>
                         </div>
