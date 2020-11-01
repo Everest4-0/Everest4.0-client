@@ -1,3 +1,4 @@
+import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from '../../home/home.component';
@@ -11,6 +12,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
+    { path: 'diagnostic',     component: DiagnosticComponent },
     { path: 'user',           component: UserComponent },
     { path: 'table',          component: TablesComponent },
     { path: 'typography',     component: TypographyComponent },

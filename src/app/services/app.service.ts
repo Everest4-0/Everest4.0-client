@@ -9,7 +9,7 @@ export class AppService<T> {
 
   private identity = ''
   protected url;
-  private serverAddress = '0.0.0.0:9800';
+  private serverAddress = '154.127.179.14:9800';
   constructor(public http: HttpClient, private service: string) {
     this.url = `http://${this.serverAddress}/api/v1/${service}`
   }

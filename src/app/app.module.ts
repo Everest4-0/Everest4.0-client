@@ -1,3 +1,4 @@
+import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.component';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -41,7 +42,8 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    DiagnosticComponent
   ],
   providers: [
     StorageServices,
