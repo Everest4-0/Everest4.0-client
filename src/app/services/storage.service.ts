@@ -22,6 +22,7 @@ export class StorageServices {
       isChecked: false
     });
     // insert updated array to local storage
+    this.remove(key);
     this.storage.set(STORAGE_KEY, storage);
     console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
   }

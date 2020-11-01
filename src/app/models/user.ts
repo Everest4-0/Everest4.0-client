@@ -14,6 +14,7 @@ export class User {
 
     photoUrl: string;
     provider: string;
+    roleId: string;
     role: Role = new Role();
 
     isActive: boolean;

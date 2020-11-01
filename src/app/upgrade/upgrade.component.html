@@ -62,13 +62,22 @@
                                     <td>Free</td>
                                     <td>Just $49</td>
                                 </tr>
-                                <tr>
+                                <tr *ngIf="auth.user.roleId=='PREMIUM'">
+                                    <td></td>
+                                    <td>
+                                        <a href="#" (click)="upgrade('FREE')" class="btn btn-round btn-fill btn-default">Mudar para FREE</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-round btn-fill btn-info disabled">Versão Actual</a>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="auth.user.roleId=='FREE'">
                                     <td></td>
                                     <td>
                                         <a href="#" class="btn btn-round btn-fill btn-default disabled">Versão Actual</a>
                                     </td>
                                     <td>
-                                        <a target="_blank" href="https://www.creative-tim.com/product/light-bootstrap-dashboard-pro-angular2/?ref=lbd-angular2-free" class="btn btn-round btn-fill btn-info">Mudar para Premium</a>
+                                        <a (click)="upgrade('PREMIUM')" class="btn btn-round btn-fill btn-info">Mudar para Premium</a>
                                     </td>
                                 </tr>
                             </tbody>

@@ -50,6 +50,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li> <img src="{{auth.user.photoUrl}}" class="img-thumbnail" style="width: 100%;"></li>
+                        <li><a href="#">{{auth.user.firstName}} {{auth.user.lastName}}</a></li>
+                        <li><a href="#">{{auth.user.roleId}}</a></li>
                         <li><a href="#">Perfil</a></li>
                         <li class="divider"></li>
                         <li><a (click)="signOut()"><i class="fa fa-sign-out">Sair</i></a></li>

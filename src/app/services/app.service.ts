@@ -26,8 +26,8 @@ export class AppService<T> {
     return this.http.post(this.url, o)
   }
 
-  protected updateOne(o: T): Observable<any> {
-    return this.http.put(this.url, o)
+  protected updateOne(o: any): Observable<any> {
+    return this.http.put(this.url + '/' + o.id, o)
   }
 
   protected deleteOne(o: T): Observable<any> {

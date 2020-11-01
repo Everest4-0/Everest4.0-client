@@ -1,32 +1,25 @@
-import { StorageServices } from './storage.service';
-
-import { User } from './../models/user';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { StorageServices } from './storage.service';
+import { IService } from './service.interface';
+import { User } from './../models/user';
 import { AppService } from './app.service';
 import { Injectable } from '@angular/core';
-import { IService } from './service.interface';
-import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends AppService<User> implements IService<any> {
+export class UserService extends AppService<User> implements IService<User> {
 
   public user: User;
   constructor(public http: HttpClient, private store: StorageServices) {
     super(http, 'users');
-    this.user = store.get('current_user').data;
   }
 
-  authenticate(o: User): Observable<any> {
-    const service = this.http.post(this.url + '/authenticate', o);
-    service.subscribe((u: User) => {
-      this.store.save('current_user', u);
-    })
-    return service;
-  }
 
-  signOut(): void {
-    this.store.remove('current_user')
+  upgrade(u: User, to: string): Observable<User> {
+    u.roleId = to;
+    return this.update(u)
   }
 
   one(id: string): Observable<User> {
@@ -44,4 +37,5 @@ export class AuthService extends AppService<User> implements IService<any> {
   create(o: any): Observable<User> {
     return this.createOne(o)
   }
+
 }
