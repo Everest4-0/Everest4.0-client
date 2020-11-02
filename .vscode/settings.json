@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/eed81562-799c-423f-be4c-911e23819ba4/resourceGroups/srv/providers/Microsoft.Web/sites/everest40",
+    "appService.deploySubpath": "dist"
+}
