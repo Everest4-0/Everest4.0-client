@@ -1,12 +1,18 @@
 import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.component';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+<<<<<<< HEAD
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+=======
+import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
+>>>>>>> a82f29c37c5b3224ef10b480fa4aeb03ae2c046d
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule} from '@angular/forms' 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
@@ -42,7 +48,13 @@ import { ModalModule } from './components/modal';
     FooterModule,
     SidebarModule,
     AppRoutingModule,
+<<<<<<< HEAD
     ModalModule,
+=======
+
+
+    MDBBootstrapModule.forRoot(),
+>>>>>>> a82f29c37c5b3224ef10b480fa4aeb03ae2c046d
     SocialLoginModule,
     StorageServiceModule
   ],
@@ -86,6 +98,8 @@ import { ModalModule } from './components/modal';
       } as SocialAuthServiceConfig,
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

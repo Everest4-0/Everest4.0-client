@@ -15,5 +15,6 @@
     "typeRoots": [
       "../node_modules/@types"
     ]
-  }
+  },
+    "include": [ "**/*.ts", "../node_modules/angular-bootstrap-md/index.ts" ]
 }

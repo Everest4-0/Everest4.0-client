@@ -252,7 +252,7 @@
     position: relative;
     z-index: 2;
     float: right;
-    width: $sidebar-width;
+    width: #{$sidebar-width};
     min-height: 100%;
     overflow: auto;
 
