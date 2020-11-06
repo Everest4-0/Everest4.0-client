@@ -2,7 +2,9 @@ import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.compone
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms' 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -24,18 +26,23 @@ import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
+import { MessageComponent } from './components/message/message.component';
+import { ModalModule } from './components/modal';
+
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     FormsModule,
+    NgbModule,
     RouterModule,
     HttpClientModule,
     NavbarModule,
     FooterModule,
     SidebarModule,
     AppRoutingModule,
-
+    ModalModule,
     SocialLoginModule,
     StorageServiceModule
   ],
@@ -43,7 +50,8 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    DiagnosticComponent
+    DiagnosticComponent,
+    MessageComponent
   ],
   providers: [
     StorageServices,

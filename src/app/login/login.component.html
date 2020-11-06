@@ -2,18 +2,22 @@
         type="file" name="files"></button></div>
 <div class="container-login100" style="background-image: url(assets/img/full-screen-image-3.jpg);">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-        <form class="login100-form validate-form">
-            <h3 class="login100-form-title p-b-37">Everest4.0</h3>
+        <h3 class="login100-form-title p-b-37">Everest4.0</h3>
+        <form class="login100-form validate-form" [ngbCollapse]="isCollapsed"  #signOnForm [formGroup]="signInForm " (ngSubmit)="signIn()">
             <span class="login100-form-title p-b-37">
                 Sign In
             </span>
             <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter username or email">
-                <input class="input100" type="text" name="username" placeholder="username or email">
+                <input class="input100" type="text" name="email" placeholder="email" formControlName="email" [(ngModel)]="signInUser.email">
                 <span class="focus-input100"></span></div>
             <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
-                <input class="input100" type="password" name="pass" placeholder="password">
+                <input class="input100" type="password" name="passw" placeholder="password" formControlName="passw" [(ngModel)]="signInUser.passw">
                 <span class="focus-input100"></span>
             </div>
+            {{signInUser|json}}
+            <div class="alert alert-warning" *ngIf="signInErro">
+                <strong>{{signInErro.status}}</strong> {{signInErro.statusText}}
+              </div>
             <div class="container-login100-form-btn">
                 <button class="login100-form-btn" (click)="signIn()">
                     Sign In
@@ -37,8 +41,46 @@
                 </a>
             </div>
             <div class="text-center">
-                <a href="https://colorlib.com/etc/lf/Login_v9/index.html#" class="txt2 hov1">
-                    Sign Up
+                <a href="#" (click)="isCollapsed = !isCollapsed" class="txt2 hov1">
+                    Registar-se
+                </a>
+            </div>
+        </form>
+
+
+        <form class="login100-form validate-form" #signOnForm [formGroup]="userForm" (ngSubmit)="signOn()"
+            [ngbCollapse]="!isCollapsed">
+            <span class="login100-form-title p-b-37">
+                Sign On
+            </span>
+            <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter email">
+                <input class="input100" type="text" formControlName="email" [(ngModel)]="signOnUser.email"
+                    placeholder="email">
+                <app-control-messages [control]="userForm.get('email')"></app-control-messages>
+
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
+                <input class="input100" type="password" formControlName="passw" [(ngModel)]="signOnUser.passw"
+                    placeholder="password">
+                <app-control-messages [control]="userForm.get('password')"></app-control-messages>
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
+                <input class="input100" type="password" formControlName="passw" [(ngModel)]="passy"
+                    placeholder="password">
+                    <app-control-messages [control]="userForm.get('email')"></app-control-messages>
+                <span class="focus-input100"></span>
+            </div>
+            {{signOnUser|json}}
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit" >
+                    Registar
+                </button>
+            </div>
+            <div class="text-center">
+                <a href="#" (click)="isCollapsed = !isCollapsed" class="txt2 hov1">
+                    Autenticar-se
                 </a>
             </div>
         </form>

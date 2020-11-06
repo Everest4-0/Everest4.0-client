@@ -1,0 +1,17 @@
+
+
+body.modal-open{
+    .modal-dialog {
+    margin: 15% auto;
+}
+.d-block.modal.show {
+    opacity: 1;
+}
+.d-block.modal.show {
+    opacity: 1 !important;
+}
+
+.fade.modal-backdrop.show, .d-block.fade.modal.show{
+    opacity: 1 !important;
+}
+}

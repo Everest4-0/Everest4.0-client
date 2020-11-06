@@ -12,8 +12,10 @@ export class User {
     email: string;
     apikey: string;
 
+    password: string;
+
     photoUrl: string;
-    provider: string;
+    provider: string = 'LOCAL';
     roleId: string;
     role: Role = new Role();
 
@@ -31,8 +33,12 @@ export class User {
         this.photoUrl = user.photoUrl
         this.apikey = user.authToken
         this.provider = user.provider
-        
+
 
         return this;
+    }
+
+    set passw(p: string) {
+        this.password = p + '~'
     }
 }

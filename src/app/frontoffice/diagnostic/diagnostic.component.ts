@@ -1,15 +1,28 @@
+import { ModalService } from './../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-diagnostic',
   templateUrl: './diagnostic.component.html',
-  styleUrls: ['./diagnostic.component.css']
+  styleUrls: ['./diagnostic.component.scss']
 })
 export class DiagnosticComponent implements OnInit {
 
-  constructor() { }
+  title = 'appBootstrap';
+  bodyText: string;
 
-  ngOnInit(): void {
+  constructor(private modalService: ModalService) { }
+
+  ngOnInit() {
+      this.bodyText = 'This text can be updated in modal 1';
   }
 
+  openModal(id: string) {
+      this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
 }

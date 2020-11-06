@@ -4,3 +4,17 @@
 .hidden{
     display: none;
 }
+
+.modal-dialog {
+    margin: 15% auto;
+}
+.modal.show {
+    opacity: 1;
+}
+.modal.show {
+    opacity: 1 !important;
+}
+
+.fade.modal-backdrop.show, .d-block.fade.modal.show{
+    opacity: 1;
+}
