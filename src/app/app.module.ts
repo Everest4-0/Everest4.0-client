@@ -1,3 +1,5 @@
+import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
+import { ModalModule } from './components/modal/modal.module';
 import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.component';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,8 +30,9 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { MessageComponent } from './components/message/message.component';
-import { ModalModule } from './components/modal';
-import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { DragAndDropDirective } from './directive/drag-and-drop.directive';
+
 
 @NgModule({
   imports: [
@@ -42,17 +45,20 @@ import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.compone
     FooterModule,
     SidebarModule,
     AppRoutingModule,
-    ModalModule,
     SocialLoginModule,
-    StorageServiceModule
+    StorageServiceModule,
+    ModalModule,
   ],
   declarations: [
+    FirstloginComponent,
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    DiagnosticComponent,
     MessageComponent,
-    FirstloginComponent
+    ImageUploaderComponent,
+    DragAndDropDirective
+  ],exports:[
+    DragAndDropDirective
   ],
   providers: [
     StorageServices,

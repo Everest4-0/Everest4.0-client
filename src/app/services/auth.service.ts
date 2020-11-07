@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService extends AppService<User> implements IService<any> {
 
-  public user: User;
+  public user: User = new User();
   constructor(public http: HttpClient, private store: StorageServices) {
     super(http, 'users');
     this.user = store.get('current_user').data;

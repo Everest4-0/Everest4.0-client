@@ -11,19 +11,20 @@ export class DiagnosticComponent implements OnInit {
   title = 'appBootstrap';
   bodyText: string;
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService) { 
+    //this.modalService.open('custom-modal-1')
+  }
 
   ngOnInit() {
       this.bodyText = 'This text can be updated in modal 1';
-      this.modalService.open('custom-modal-1')
+      
   }
 
   openModal(id: string) {
-    alert(id)
       this.modalService.open(id);
   }
 
-  closeModal(id) {
+  closeModal(id: string) {
       this.modalService.close(id);
   }
 

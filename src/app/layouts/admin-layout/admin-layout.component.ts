@@ -1,3 +1,5 @@
+import { ModalService } from 'app/components/modal';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
@@ -17,7 +19,7 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+  constructor( public location: Location, private router: Router, public auth: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
     console.log(this.router)
@@ -57,6 +59,15 @@ export class AdminLayoutComponent implements OnInit {
           ps = new PerfectScrollbar(elemSidebar);
       }
   }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+  
   ngAfterViewInit() {
       this.runOnRouteChange();
   }

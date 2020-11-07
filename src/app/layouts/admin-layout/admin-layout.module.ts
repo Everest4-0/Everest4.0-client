@@ -1,3 +1,8 @@
+import { FirstloginComponent } from './../../frontoffice/firstlogin/firstlogin.component';
+import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
+import { ModalModule } from './../../components/modal';
+
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -26,7 +31,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     LbdModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
-  declarations: [
+  declarations: [ 
+    DiagnosticComponent,
     HomeComponent,
     UserComponent,
     TablesComponent,

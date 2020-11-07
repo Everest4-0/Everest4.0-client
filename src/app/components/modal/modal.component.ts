@@ -1,8 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
 
-
-
 @Component({
   selector: 'jw-modal',
   templateUrl: 'modal.component.html',
@@ -12,6 +10,7 @@ import { ModalService } from '../modal/modal.service';
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   @Input() class: string;
+  @Input() opened: boolean;
   @Input() title: string;
   private element: any;
 
@@ -25,7 +24,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       console.error('modal must have an id');
       return;
     }
-
     // move element to bottom of page (just before </body>) so it can be displayed above everything else
     document.body.appendChild(this.element);
 
@@ -38,6 +36,9 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
+    if(this.opened){
+      this.open()
+    }
   }
 
   // remove self from modal service when component is destroyed

@@ -91,8 +91,9 @@
   <button (click)="reg()">Open Modal 3</button>
 </div>
 
-<jw-modal id="custom-modal-1" class="lg">
-  <h1>A Custom Modal!</h1>
+<jw-modal id="custom-modal-1" class="lg" opened="{{true}}">
+  <h1>Só falta mais um pouco!</h1>
+  <hr>
   <app-firstlogin (dismiss)="closeModal('custom-modal-1')"></app-firstlogin>
 </jw-modal>
 

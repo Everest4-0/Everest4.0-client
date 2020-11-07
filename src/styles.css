@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-
+*{
+    transition: .5;
+}
 .hidden{
     display: none;
 }
