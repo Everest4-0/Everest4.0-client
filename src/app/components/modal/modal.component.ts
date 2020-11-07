@@ -11,6 +11,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   @Input() class: string;
   @Input() opened: boolean;
+  @Input() closeOnBackgroundClick: string = 'true';
   @Input() title: string;
   private element: any;
 
@@ -29,14 +30,15 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // close modal on background click
     this.element.addEventListener('click', el => {
-      if (el.target.className === 'jw-modal') {
-        this.close();
-      }
+      if (this.closeOnBackgroundClick=='true')
+        if (el.target.className === 'jw-modal') {
+          this.close();
+        }
     });
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
-    if(this.opened){
+    if (this.opened) {
       this.open()
     }
   }
