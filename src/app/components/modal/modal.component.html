@@ -1,5 +1,9 @@
 <div class="jw-modal">
-    <div class="jw-modal-body">
+    <div class="{{class}} jw-modal-body ">
+        <div class="header" *ngIf="title">
+            <h3>{{title}}</h3>
+            <img src="assets/img/sidebar-5.jpg">
+        </div>
         <ng-content></ng-content>
     </div>
 </div>

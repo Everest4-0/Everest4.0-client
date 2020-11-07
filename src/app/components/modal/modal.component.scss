@@ -23,7 +23,44 @@ jw-modal {
             background: #fff;
 
             /* margin exposes part of the modal background */
-            margin: 40px;
+            margin: 40px auto;
+            .header{
+                background: #FFF;
+                padding: 15px;
+                margin-top: -30px;
+                border-radius: 5px;
+                box-shadow: 0 0 5px rgba(0,0,0,.5);
+                position: relative;
+                overflow: hidden;
+                background: #1DC7EA;
+                background: linear-gradient(to bottom, #1DC7EA 0%, #4091ff 100%);
+                background-size: 150% 150%;
+                h1,h2,h3 {
+                    padding: 5px;
+                    position: relative;
+                    z-index: 2;
+                    color: #fff;
+                }
+                img {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: auto;
+                    opacity: 0.6;
+                }
+            }
+        }
+        .jw-modal-body.lg{
+            max-width: 960px;
+        }.jw-modal-body.md{
+            max-width: 600px;
+        }
+        .jw-modal-body.sm{
+            max-width: 400px;
+        }
+        .jw-modal-body.xs{
+            max-width: 300px;
         }
     }
 
