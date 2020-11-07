@@ -1,3 +1,5 @@
+import { SelfEvaluationService } from './../../services/self-evaluation.service';
+import { SelfEvaluation } from './../../models/self-evaluation';
 import { ModalService } from './../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'
@@ -10,25 +12,37 @@ export class DiagnosticComponent implements OnInit {
 
   title = 'appBootstrap';
   bodyText: string;
+  selfEvaluations: Array<SelfEvaluation> = []
+  currentSelfEvaluations: SelfEvaluation = new SelfEvaluation();
 
-  constructor(private modalService: ModalService) { 
-    //this.modalService.open('custom-modal-1')
+  constructor(private modalService: ModalService, private selfEvaluationService: SelfEvaluationService) {
   }
 
   ngOnInit() {
-      this.bodyText = 'This text can be updated in modal 1';
-      
-  }
+    this.bodyText = 'This text can be updated in modal 1';
 
-  openModal(id: string) {
+    this.selfEvaluationService.all().subscribe(selfEvaluations => this.selfEvaluations = this.groupBy(selfEvaluations,'group'))
+
+  }
+  groupBy(xs, key) {
+    let final= xs.reduce(function(rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+
+
+    return Object.keys(final).map((k) => [k, final[k]]);
+  };
+  openModal(id: string,v:SelfEvaluation) {
+      this.currentSelfEvaluations=v
       this.modalService.open(id);
   }
 
   closeModal(id: string) {
-      this.modalService.close(id);
+    this.modalService.close(id);
   }
 
-  reg(){
+  reg() {
     Swal.fire({
       title: '<strong>HTML <u>example</u></strong>',
       icon: 'info',

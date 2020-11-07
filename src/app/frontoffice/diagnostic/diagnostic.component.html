@@ -1,18 +1,17 @@
 <div class="main-content">
   <div class="container-fluid">
+    {{selfEvaluations|json}}
     <div class="col-md-8">
-      <div class="col-md-6">
+      <div class="col-md-6" *ngFor="let item of selfEvaluations; let i =index">
         <div class="card">
-          <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-2.jpg)">
+          <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
             <img src="" class="img-responsive" />
-            <h4>PROFISSIONAL</h4>
+            <h4>{{item[0]}}</h4>
           </div>
           <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
             <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
+              <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngFor="let v of item[1]">{{v.name}}</li>
             </ul>
           </div>
           <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
@@ -20,63 +19,6 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-1.jpg)">
-            <img src="" class="img-responsive" />
-            <h4>PESSOAL</h4>
-          </div>
-          <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
-            <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-            </ul>
-          </div>
-          <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
-              class="badge badge-info"></span></div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header" style="padding: 5px 15px;  background-image:url(assets/img/sidebar-3.jpg)">
-            <img src="" class="img-responsive" />
-            <h4>RELACIONAMENTOS</h4>
-          </div>
-          <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
-            <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-            </ul>
-          </div>
-          <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
-              class="badge badge-info"></span></div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header"
-            style="padding: 5px 15px; background-image:url(assets/img/sidebar-5.jpg) centered no-repeat rgba(255,255,255,.2)">
-            <img src="" class="img-responsive" />
-            <h4>QUALIDADE DE VIDA</h4>
-          </div>
-          <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
-            <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-            </ul>
-          </div>
-          <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
-              class="badge badge-info"></span></div>
-        </div>
-      </div>
 
 
     </div>
@@ -91,13 +33,9 @@
   <button (click)="reg()">Open Modal 3</button>
 </div>
 
-<jw-modal id="custom-modal-1" class="lg" opened="{{true}}">
-  <h1>Só falta mais um pouco!</h1>
+<jw-modal id="self-evaluation-modal" class="sm" title="Pontuar">
+  <h5>{{currentSelfEvaluations.name}}</h5>
+  <h4>{{currentSelfEvaluations.group}}</h4>
   <hr>
-  <app-firstlogin (dismiss)="closeModal('custom-modal-1')"></app-firstlogin>
-</jw-modal>
-
-<jw-modal id="custom-modal-2">
-  <h1 style="height:1000px">A Tall Custom Modal!</h1>
-  <button (click)="closeModal('custom-modal-2');">Close</button>
+  {{currentSelfEvaluations|json}}
 </jw-modal>

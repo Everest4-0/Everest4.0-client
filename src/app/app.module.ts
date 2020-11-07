@@ -1,3 +1,4 @@
+import { ModalComponent } from './components/modal/modal.component';
 import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
 import { ModalModule } from './components/modal/modal.module';
 import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.component';
@@ -58,7 +59,9 @@ import { DragAndDropDirective } from './directive/drag-and-drop.directive';
     ImageUploaderComponent,
     DragAndDropDirective
   ],exports:[
-    DragAndDropDirective
+    DragAndDropDirective,
+    ModalModule,
+    ModalComponent
   ],
   providers: [
     StorageServices,
