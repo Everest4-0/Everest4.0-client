@@ -1,5 +1,8 @@
-import { SelfEvaluationService } from './../../services/self-evaluation.service';
-import { SelfEvaluation } from './../../models/self-evaluation';
+import { UserEvaluationService } from './../../services/user-evaluation.service';
+import { AuthService } from 'app/services/auth.service';
+import { UserEvaluation } from './../../models/user-evaluation';
+import { EvaluationService } from '../../services/evaluation.service';
+import { Evaluation } from '../../models/evaluation';
 import { ModalService } from './../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'
@@ -12,18 +15,22 @@ export class DiagnosticComponent implements OnInit {
 
   title = 'appBootstrap';
   bodyText: string;
-  selfEvaluations: Array<any> = []
-  currentSelfEvaluations: SelfEvaluation = new SelfEvaluation();
+  evaluations: Array<any> = []
+  userEvaluations : Array<UserEvaluation> = [];
+  currentEvaluation: UserEvaluation = new UserEvaluation();
   label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
-  rate=0;
-  constructor(private modalService: ModalService, private selfEvaluationService: SelfEvaluationService) {
+
+  constructor(
+    private modalService: ModalService,
+    private evaluationService: EvaluationService,
+    private userEvaluationService: UserEvaluationService,
+    private auth: AuthService) {
   }
 
   ngOnInit() {
-    this.bodyText = 'This text can be updated in modal 1';
-
-    this.selfEvaluationService.all().subscribe(selfEvaluations => this.selfEvaluations = this.groupBy(selfEvaluations, 'group'))
-
+    this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
+    this.evaluationService.all().subscribe(evaluations => this.evaluations = this.groupBy(evaluations, 'group'))
+    this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => this.userEvaluations = evaluations)
   }
   groupBy(xs, key) {
     let final = xs.reduce(function (rv, x) {
@@ -34,8 +41,9 @@ export class DiagnosticComponent implements OnInit {
 
     return Object.keys(final).map((k) => [k, final[k]]);
   };
-  openModal(id: string, v: SelfEvaluation) {
-    this.currentSelfEvaluations = v
+  openModal(id: string, v: Evaluation) {
+    this.currentEvaluation.evaluation = v
+    this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
 
@@ -43,9 +51,17 @@ export class DiagnosticComponent implements OnInit {
     this.modalService.close(id);
   }
   onChange(e) {
-    this.rate=e
+    this.currentEvaluation.points = e
   }
-  saveEvaluation(){
+  saveEvaluation() {
+    this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
+      this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
+      Swal.fire(
+        'Good job!',
+        'Avaliação salva com sucesso',
+        'success'
+      )
+    })
     this.modalService.close('self-evaluation-modal');
   }
   reg() {

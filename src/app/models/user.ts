@@ -1,3 +1,4 @@
+import { Evaluation } from './evaluation';
 import { SocialUser } from 'angularx-social-login';
 import { Role } from './role';
 
@@ -19,9 +20,14 @@ export class User {
     roleId: string;
     role: Role = new Role();
 
+    evaluators: Array<Evaluation> = []
+    evaluations: Array<Evaluation> = []
+
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
+
+
 
     /*constructor(description?: string) {
         this.description = description;

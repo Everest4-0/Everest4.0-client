@@ -3,6 +3,14 @@
 *{
     transition: .5;
 }
+
+h2#swal2-title {
+    font-size: 3.4em !important;
+}
+div#swal2-content {
+    font-size: 1.4em !important;
+}
+
 .hidden{
     display: none;
 }

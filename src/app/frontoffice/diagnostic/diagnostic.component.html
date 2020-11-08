@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
-    {{selfEvaluations|json}}
+    {{currentEvaluation|json}}
     <div class="col-md-8">
-      <div class="col-md-6" *ngFor="let item of selfEvaluations; let i =index">
+      <div class="col-md-6" *ngFor="let item of evaluations; let i =index">
         <div class="card">
           <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
             <img src="" class="img-responsive" />
@@ -33,12 +33,12 @@
   <button (click)="reg()">Open Modal 3</button>
 </div>
 
-<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentSelfEvaluations.name}}">
-  <h4>{{currentSelfEvaluations.group}}</h4>
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.name}}">
+  <h4>{{currentEvaluation.group}}</h4>
   <hr>
   <div class="row text-center">
-    <app-rating max=4 (change)='onChange($event)'></app-rating>
-    <h5>{{label[rate-1]}}</h5>
+    <app-rating max=4 (change)='onChange($event)' rate={{currentEvaluation.points}}></app-rating>
+    <h5>{{label[currentEvaluation.points-1]}}</h5>
   </div>  
   <div class="row text-center"><br>
     <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>

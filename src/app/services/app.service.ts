@@ -19,7 +19,15 @@ export class AppService<T> {
   }
 
   protected getAll(a: any): Observable<any> {
-    return this.http.get(this.url)
+    let str = "";
+    
+      for (var key in a) {
+          if (str != '') {
+              str += "&";
+          }
+          str += key + "=" + encodeURIComponent(a[key]);
+      }
+    return this.http.get(this.url+'?'+str)
   }
 
   protected createOne(o: T): Observable<any> {

@@ -1,4 +1,4 @@
-export class SelfEvaluation {
+export class Evaluation {
     id: string;
     code: string;
     name: string;
