@@ -1,0 +1,5 @@
+<div class="book-rating" data-jest="stars">
+    <span *ngFor="let fullStar of fullStars; let i=index" class="fa fa-star checked" data-jest="full star" (click)="removeStar(i)"></span>
+    <span *ngIf="hasAnHalfStar" class="fa fa-star-half-empty" data-jest="half star"></span>
+    <span *ngFor="let emptyStar of emptyStars; let i=index" class="fa fa-star-o" data-jest="empty star"  (click)="addStar(i)"></span>
+  </div>

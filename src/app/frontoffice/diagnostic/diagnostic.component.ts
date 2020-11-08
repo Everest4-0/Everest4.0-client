@@ -12,20 +12,21 @@ export class DiagnosticComponent implements OnInit {
 
   title = 'appBootstrap';
   bodyText: string;
-  selfEvaluations: Array<SelfEvaluation> = []
+  selfEvaluations: Array<any> = []
   currentSelfEvaluations: SelfEvaluation = new SelfEvaluation();
-
+  label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
+  rate=0;
   constructor(private modalService: ModalService, private selfEvaluationService: SelfEvaluationService) {
   }
 
   ngOnInit() {
     this.bodyText = 'This text can be updated in modal 1';
 
-    this.selfEvaluationService.all().subscribe(selfEvaluations => this.selfEvaluations = this.groupBy(selfEvaluations,'group'))
+    this.selfEvaluationService.all().subscribe(selfEvaluations => this.selfEvaluations = this.groupBy(selfEvaluations, 'group'))
 
   }
   groupBy(xs, key) {
-    let final= xs.reduce(function(rv, x) {
+    let final = xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
     }, {});
@@ -33,15 +34,20 @@ export class DiagnosticComponent implements OnInit {
 
     return Object.keys(final).map((k) => [k, final[k]]);
   };
-  openModal(id: string,v:SelfEvaluation) {
-      this.currentSelfEvaluations=v
-      this.modalService.open(id);
+  openModal(id: string, v: SelfEvaluation) {
+    this.currentSelfEvaluations = v
+    this.modalService.open(id);
   }
 
   closeModal(id: string) {
     this.modalService.close(id);
   }
-
+  onChange(e) {
+    this.rate=e
+  }
+  saveEvaluation(){
+    this.modalService.close('self-evaluation-modal');
+  }
   reg() {
     Swal.fire({
       title: '<strong>HTML <u>example</u></strong>',

@@ -1,3 +1,4 @@
+import { UploaderService } from './uploader.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

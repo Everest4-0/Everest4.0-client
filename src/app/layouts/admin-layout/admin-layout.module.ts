@@ -1,4 +1,5 @@
-import { FirstloginComponent } from './../../frontoffice/firstlogin/firstlogin.component';
+import { RatingComponent } from './../../components/rating/rating.component';
+
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
 import { ModalModule } from './../../components/modal';
 
@@ -41,7 +42,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    RatingComponent
   ]
 })
 

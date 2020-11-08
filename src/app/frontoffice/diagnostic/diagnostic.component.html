@@ -33,9 +33,14 @@
   <button (click)="reg()">Open Modal 3</button>
 </div>
 
-<jw-modal id="self-evaluation-modal" class="sm" title="Pontuar">
-  <h5>{{currentSelfEvaluations.name}}</h5>
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentSelfEvaluations.name}}">
   <h4>{{currentSelfEvaluations.group}}</h4>
   <hr>
-  {{currentSelfEvaluations|json}}
+  <div class="row text-center">
+    <app-rating max=4 (change)='onChange($event)'></app-rating>
+    <h5>{{label[rate-1]}}</h5>
+  </div>  
+  <div class="row text-center"><br>
+    <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>
+  </div>
 </jw-modal>
