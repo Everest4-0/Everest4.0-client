@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="container-fluid">
-    {{currentEvaluation|json}}
+    
     <div class="col-md-8">
-      <div class="col-md-6" *ngFor="let item of evaluations; let i =index">
+      <div class="col-md-6" *ngFor="let item of evaluations| groupBy:'group'; let i =index">
         <div class="card">
           <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
             <img src="" class="img-responsive" />
@@ -11,10 +11,13 @@
           <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
             <ul class="list-group">
-              <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngFor="let v of item[1]">{{v.name}}</li>
+              <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngFor="let v of item[1]">{{v.name}} - {{v.points}}</li>
             </ul>
           </div>
-          <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee"><span
+          <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
+            
+            <app-progress-bar done="{{item[1]|arrSum:'points' }}"></app-progress-bar>
+            <span
               class="badge badge-info"></span></div>
         </div>
       </div>

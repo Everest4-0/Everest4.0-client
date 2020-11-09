@@ -2,7 +2,7 @@ import { Evaluation } from './evaluation';
 import { User } from './user';
 export class UserEvaluation {
     id: string;
-    points: Number = 0;
+    points: number = 0;
     descriptions: string;
     user: User = new User()
     evaluator: User = new User()

@@ -1,3 +1,6 @@
+import { ArrSumPipe } from './../../pipes/arr-sum.pipe';
+import { GroupByPipe } from './../../pipes/group-by.pipe';
+import { ProgressBarComponent } from './../../components/progress-bar/progress-bar.component';
 import { RatingComponent } from './../../components/rating/rating.component';
 
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
@@ -43,7 +46,10 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    RatingComponent
+    RatingComponent,
+    ProgressBarComponent,
+    GroupByPipe,
+    ArrSumPipe
   ]
 })
 

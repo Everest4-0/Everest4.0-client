@@ -1,7 +1,11 @@
+import { FormStepsService } from './../../services/form-steps.service';
+import { Observable } from 'rxjs';
+import { StepModel } from './../../models/step-model';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from 'app/models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,8 +18,13 @@ export class FirstloginComponent implements OnInit {
   @Output() dismiss = new EventEmitter();
   public user: User = new User()
   public file: any = {}
-
-  constructor(public auth: AuthService, private fb: FormBuilder) {
+  currentStep: Observable<StepModel>;
+  constructor(
+    public auth: AuthService,
+    private fb: FormBuilder,
+    private stepsService: FormStepsService,
+    private router: Router
+  ) {
     this.user = this.auth.user;
   }
 
@@ -28,6 +37,23 @@ export class FirstloginComponent implements OnInit {
   });
   ngOnInit(): void {
     this.file.imageUrl = this.auth.user.photoUrl
+    this.currentStep = this.stepsService.getCurrentStep();
+  }
+
+  onNextStep() {
+    if (!this.stepsService.isLastStep()) {
+      this.stepsService.moveToNextStep();
+    } else {
+      this.onSubmit();
+    }
+  }
+
+  showButtonLabel() {
+    return !this.stepsService.isLastStep() ? 'Continue' : 'Finish';
+  }
+
+  onSubmit(): void {
+    this.router.navigate(['/complete']);
   }
 
   close = () => this.dismiss.emit('');
@@ -45,7 +71,7 @@ export class FirstloginComponent implements OnInit {
         this.file.imageUrl = reader.result;
       };
     }
-  }onFileDropped($event) {
+  } onFileDropped($event) {
     this.onChange($event[0]);
   }
 }

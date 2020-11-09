@@ -16,7 +16,7 @@ export class DiagnosticComponent implements OnInit {
   title = 'appBootstrap';
   bodyText: string;
   evaluations: Array<any> = []
-  userEvaluations : Array<UserEvaluation> = [];
+  userEvaluations: Array<UserEvaluation> = [];
   currentEvaluation: UserEvaluation = new UserEvaluation();
   label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
 
@@ -29,24 +29,27 @@ export class DiagnosticComponent implements OnInit {
 
   ngOnInit() {
     this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
-    this.evaluationService.all().subscribe(evaluations => this.evaluations = this.groupBy(evaluations, 'group'))
-    this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => this.userEvaluations = evaluations)
+
+    this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
+      this.evaluationService.all().subscribe(evaluations => {
+        evaluations.forEach(e => {
+          e.points = this.evaluationPoints(e.id);
+        })
+        this.evaluations = evaluations// this.groupBy(, 'group')
+      })
+      this.userEvaluations = evaluations
+    })
   }
-  groupBy(xs, key) {
-    let final = xs.reduce(function (rv, x) {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, {});
-
-
-    return Object.keys(final).map((k) => [k, final[k]]);
-  };
   openModal(id: string, v: Evaluation) {
     this.currentEvaluation.evaluation = v
     this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
+  evaluationPoints(id: string): number {
+    let total = this.userEvaluations.filter(e=>e.evaluation.id==id).reduce((t, m) => { return t + m.points }, 0);
 
+    return total;
+  }
   closeModal(id: string) {
     this.modalService.close(id);
   }
@@ -55,6 +58,7 @@ export class DiagnosticComponent implements OnInit {
   }
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
+      this.evaluations.push(e)
       this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
       Swal.fire(
         'Good job!',

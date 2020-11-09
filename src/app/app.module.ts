@@ -33,6 +33,14 @@ import { LoginComponent } from './login/login.component';
 import { MessageComponent } from './components/message/message.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { DragAndDropDirective } from './directive/drag-and-drop.directive';
+import { StepsComponent } from './components/steps/steps.component';
+import { FormStepsComponent } from './components/form-steps/form-steps.component';
+import { FormStepsTemplateComponent } from './components/form-steps-template/form-steps-template.component';
+import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
+
+
+
+
 
 
 @NgModule({
@@ -48,7 +56,7 @@ import { DragAndDropDirective } from './directive/drag-and-drop.directive';
     AppRoutingModule,
     SocialLoginModule,
     StorageServiceModule,
-    ModalModule,
+    ModalModule
   ],
   declarations: [
     FirstloginComponent,
@@ -57,7 +65,11 @@ import { DragAndDropDirective } from './directive/drag-and-drop.directive';
     LoginComponent,
     MessageComponent,
     ImageUploaderComponent,
-    DragAndDropDirective
+    DragAndDropDirective,
+    StepsComponent,
+    FormStepsComponent,
+    FormStepsTemplateComponent,
+    FormStepsCompleteComponent
   ],exports:[
     DragAndDropDirective,
     ModalModule,

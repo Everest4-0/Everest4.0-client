@@ -1,3 +1,5 @@
+import { FormStepsCompleteComponent } from './../../components/form-steps-complete/form-steps-complete.component';
+import { FormStepsComponent } from './../../components/form-steps/form-steps.component';
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
 import { Routes } from '@angular/router';
 
@@ -20,4 +22,18 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+
+    {
+        path: 'form',
+        component: FormStepsComponent
+      },
+      {
+        path: 'complete',
+        component: FormStepsCompleteComponent
+      },
+      {
+        path: '',
+        redirectTo: '/form',
+        pathMatch: 'full'
+      }
 ];
