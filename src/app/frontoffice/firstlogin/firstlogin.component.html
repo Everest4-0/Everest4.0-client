@@ -1,51 +1,12 @@
-<form [formGroup]="userForm" class="hidden">
-    <div class="row">
-        <div class="col-md-6">
-            <label for="email">Foto de perfil</label>
-            <div style="background-image: url({{file.imageUrl}});" class="cover">
-                <div class="uploader" appDragAndDrop (fileDropped)="onChange($event[0])">
-                    <input type="file" #fileDropRef id="fileDropRef" 
-                    (change)="onChange(fileDropRef.files[0])"
-                        [(ngModel)]="user.photoUrl" name="files" accept="jpg;png"/>
-                    <i class="now-ui-icons arrows-1_cloud-upload-94" style="font-size:94px !important"></i>
-                    <h3>Drag and drop your music file here</h3>
-                    <h3>or</h3>
-                    <label for="fileDropRef" class="btn">Browse for file</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" placeholder="Enter email" id="email" value="{{user.email}}" disabled>
-            </div>
-            <div class="form-group">
-                <label for="email">Primeiro nome:</label>
-                <input type="email" class="form-control" formControlName="firstName" [(ngModel)]="user.firstName" placeholder="Primeiro Nome" >
-            </div>
-            <div class="form-group">
-                <label for="email">Último nome:</label>
-                <input type="email" class="form-control" placeholder="Enter email" formControlName="lastName" [(ngModel)]="user.lastName" >
-            </div>
-            <div class="form-group">
-                <label for="email">Telefone:</label>
-                <input type="number" class="form-control" placeholder="Telefone" >
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-right ">
-            <button (click)="close();" class="btn btn-default">Ignorar</button>
-            <button type="submit" class="btn btn-success">Salvar</button>
-        </div>
-    </div>
-</form>
 
 
 <div class="form-page-container">
     <app-form-steps></app-form-steps>
+
+    
   <div class="step-page-container">
     <div class="form-step">
+        <form [formGroup]="userForm">
         <ng-container [ngSwitch]="(currentStep | async)?.stepIndex">
             <ng-container *ngSwitchCase="'1'">
                 <app-form-steps-template [step]="(currentStep | async)">
@@ -95,6 +56,7 @@
               <app-form-steps-template [step]="(currentStep | async)"></app-form-steps-template>
             </ng-container>
         </ng-container>
+    </form>
     </div>
   </div>
   <button 
