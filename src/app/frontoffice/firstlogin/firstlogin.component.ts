@@ -1,3 +1,5 @@
+import { StorageServices } from './../../services/storage.service';
+import Swal from 'sweetalert2'
 import { FormStepsService } from './../../services/form-steps.service';
 import { Observable } from 'rxjs';
 import { StepModel } from './../../models/step-model';
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 export class FirstloginComponent implements OnInit {
 
   @Output() dismiss = new EventEmitter();
+  isvalid = {};
   public user: User = new User()
   public file: any = {}
   currentStep: Observable<StepModel>;
@@ -23,7 +26,8 @@ export class FirstloginComponent implements OnInit {
     public auth: AuthService,
     private fb: FormBuilder,
     private stepsService: FormStepsService,
-    private router: Router
+    private router: Router,
+    private store: StorageServices
   ) {
     this.user = this.auth.user;
   }
@@ -39,6 +43,14 @@ export class FirstloginComponent implements OnInit {
     this.file.imageUrl = this.auth.user.photoUrl
     this.currentStep = this.stepsService.getCurrentStep();
   }
+  formValid(e) {
+    this.isvalid={...this.isvalid,...e}
+debugger
+let final = Object.keys(this.isvalid).map(key => {
+  return this.isvalid[key];
+});
+    //this.currentStep.subscribe(r=>r.isComplete = e);
+  };
 
   onNextStep() {
     if (!this.stepsService.isLastStep()) {
@@ -53,7 +65,21 @@ export class FirstloginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.router.navigate(['/complete']);
+    this.auth.update(this.user).subscribe(user=>{
+      this.auth.user=user;
+      this.store.save('current_user', user);
+      Swal.fire(
+        'Good job!',
+        'Seja bem vindo ao Everes4.0',
+        'success'
+      )
+      this.dismiss.emit('');
+    })
+    Swal.fire(
+      'Good job!',
+      'submited',
+      'success'
+    )
   }
 
   close = () => this.dismiss.emit('');
@@ -68,7 +94,8 @@ export class FirstloginComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = event => {
-        this.file.imageUrl = reader.result;
+       this.file.imageUrl = reader.result;
+       this.user.photoUrl = this.file.imageUrl;
       };
     }
   } onFileDropped($event) {

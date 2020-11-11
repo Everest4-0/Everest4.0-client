@@ -14,7 +14,7 @@ const STEPS = [
   providedIn: 'root'
 })
 export class FormStepsService {
-
+  s: Array<any> = []
   steps$: BehaviorSubject<StepModel[]> = new BehaviorSubject<StepModel[]>(STEPS);
   currentStep$: BehaviorSubject<StepModel> = new BehaviorSubject<StepModel>(null);
 
@@ -30,7 +30,10 @@ export class FormStepsService {
     return this.currentStep$.asObservable();
   }
 
-  getSteps(): Observable<StepModel[]> {
+  getSteps(n: number=6): Observable<StepModel[]> {
+    for (let i = 0; i < n; i++)
+      this.s.push({ stepIndex: i+1, isComplete: false })
+    this.steps$ = new BehaviorSubject<StepModel[]>(this.s);
     return this.steps$.asObservable();
   }
 

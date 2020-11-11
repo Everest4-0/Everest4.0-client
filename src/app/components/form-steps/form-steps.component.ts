@@ -1,7 +1,7 @@
 import { FormStepsService } from './../../services/form-steps.service';
 import { StepModel } from './../../models/step-model';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-form-steps',
@@ -10,14 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormStepsComponent implements OnInit {
 
- 
+  @Input() count=3;
   steps: Observable<StepModel[]>;
   currentStep: Observable<StepModel>;
 
   constructor(private stepsService: FormStepsService) { }
 
   ngOnInit(): void {
-    this.steps = this.stepsService.getSteps();
+    this.steps = this.stepsService.getSteps(this.count);
     this.currentStep = this.stepsService.getCurrentStep();
   }
 

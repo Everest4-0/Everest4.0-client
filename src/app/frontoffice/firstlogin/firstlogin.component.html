@@ -1,12 +1,13 @@
 
 
 <div class="form-page-container">
-    <app-form-steps></app-form-steps>
+    <app-form-steps count=3></app-form-steps>
 
     
   <div class="step-page-container">
     <div class="form-step">
         <form [formGroup]="userForm">
+            {{isvalid|json}}
         <ng-container [ngSwitch]="(currentStep | async)?.stepIndex">
             <ng-container *ngSwitchCase="'1'">
                 <app-form-steps-template [step]="(currentStep | async)">
@@ -15,18 +16,22 @@
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" placeholder="Enter email" id="email" value="{{user.email}}" disabled>
+                                
                             </div>
                             <div class="form-group">
                                 <label for="email">Primeiro nome:</label>
-                                <input type="email" class="form-control" formControlName="firstName" [(ngModel)]="user.firstName" placeholder="Primeiro Nome" >
+                                <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="user.firstName" placeholder="Primeiro Nome" >
+                                <form-validator formControlKey="firstName" (valid)="formValid($event)" [value]="user.firstName" [rules]="['required']"></form-validator>
                             </div>
                             <div class="form-group">
                                 <label for="email">Último nome:</label>
-                                <input type="email" class="form-control" placeholder="Enter email" formControlName="lastName" [(ngModel)]="user.lastName" >
+                                <input type="text" class="form-control" placeholder="Enter your last name" formControlName="lastName" [(ngModel)]="user.lastName" >
+                                <form-validator formControlKey="lastName" (valid)="formValid($event)" [value]="user.lastName" [rules]="['required']"></form-validator>
                             </div>
                             <div class="form-group">
                                 <label for="email">Telefone:</label>
-                                <input type="number" class="form-control" placeholder="Telefone" >
+                                <input type="text" class="form-control" placeholder="Telefone"  formControlName="telephone" [(ngModel)]="user.telePhone" >
+                                <form-validator formControlKey="telePhone" (valid)="formValid($event)" [value]="user.telePhone" [rules]="['number']"></form-validator>
                             </div>
                         </div>
                     </div>

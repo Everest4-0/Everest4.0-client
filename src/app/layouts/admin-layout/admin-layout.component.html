@@ -8,7 +8,7 @@
         <navbar-cmp></navbar-cmp>
         <router-outlet></router-outlet>
 
-        <jw-modal id="firstlogin-modal" class="lg" opened="{{!auth.user.isActive}}" closeOnBackgroundClick="false">
+        <jw-modal id="firstlogin-modal" class="lg" opened="true" *ngIf="!auth.user.isActive" closeOnBackgroundClick="false">
             <h1>Só falta mais um pouco!</h1>
             <hr>
             <app-firstlogin (dismiss)="closeModal('firstlogin-modal')"></app-firstlogin>

@@ -11,7 +11,7 @@ export class AppService<T> {
   protected url;
   private serverAddress = '154.127.179.14:9800';
   constructor(public http: HttpClient, private service: string) {
-    this.url = `https://${this.serverAddress}/api/v1/${service}`
+    this.url = `http://${this.serverAddress}/api/v1/${service}`
   }
 
   protected getOne(s: string): Observable<any> {
@@ -35,7 +35,7 @@ export class AppService<T> {
   }
 
   protected updateOne(o: any): Observable<any> {
-    return this.http.put(this.url + '/' + o.id, o)
+    return this.http.put(this.url, o)
   }
 
   protected deleteOne(o: T): Observable<any> {

@@ -40,13 +40,17 @@ export class DiagnosticComponent implements OnInit {
       this.userEvaluations = evaluations
     })
   }
+  getPbvalue(arr: Array<any>) {
+    return (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
+
+  }
   openModal(id: string, v: Evaluation) {
     this.currentEvaluation.evaluation = v
     this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
   evaluationPoints(id: string): number {
-    let total = this.userEvaluations.filter(e=>e.evaluation.id==id).reduce((t, m) => { return t + m.points }, 0);
+    let total = this.userEvaluations.filter(e => e.evaluation.id == id).reduce((t, m) => { return t + m.points }, 0);
 
     return total;
   }
@@ -58,13 +62,15 @@ export class DiagnosticComponent implements OnInit {
   }
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
-      this.evaluations.push(e)
+      this.evaluations.push(this.currentEvaluation)
       this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
       Swal.fire(
         'Good job!',
         'Avaliação salva com sucesso',
         'success'
       )
+
+      this.currentEvaluation = new UserEvaluation();
     })
     this.modalService.close('self-evaluation-modal');
   }

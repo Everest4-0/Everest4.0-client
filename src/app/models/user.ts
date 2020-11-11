@@ -11,6 +11,7 @@ export class User {
     othersName: string;
     fullName: string;
     email: string;
+    telePhone: number;
     apikey: string;
 
     password: string;

@@ -15,6 +15,7 @@ export class FormStepsTemplateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.step.isComplete = true;
   }
 
   onCompleteStep() {

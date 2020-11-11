@@ -4,14 +4,27 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ValidationService {
+  static validate() {
+    return {
+      credit_card: this.creditCardValidator,
+      email : this.emailValidator,
+      password : this.passwordValidator,
+      required : this.isRequired,
+      number : this.isNumber,
+      min : this.minSize,
+      max : this.maxSize
+    }
+  }
   static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
+    
     let config = {
       required: 'Required',
+      number: 'Number required',
       invalidCreditCard: 'Is invalid credit card number',
       invalidEmailAddress: 'Invalid email address',
       invalidPassword:
         'Invalid password. Password must be at least 6 characters long, and contain a number.',
-      minlength: `Minimum length ${validatorValue.requiredLength}`
+    //  minlength: `Minimum length ${validatorValue.requiredLength}`
     };
 
     return config[validatorName];
@@ -52,5 +65,21 @@ export class ValidationService {
     } else {
       return { invalidPassword: true };
     }
+  }
+
+
+  static isRequired(control) {
+    return (control !== null && control !== undefined && control !== "");
+  }
+
+  static isNumber(control) {
+    return ValidationService.isRequired(control) ? control.match(/^\d+$/) :  true
+  }
+
+  static minSize(control, size: number) {
+    return control.length > size
+  }
+  static maxSize(control, size: number) {
+    return control.length < size
   }
 }

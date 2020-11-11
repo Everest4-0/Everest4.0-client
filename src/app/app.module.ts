@@ -1,3 +1,4 @@
+import { FormValidatorComponent } from './components/form-validator/form-validator.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
 import { ModalModule } from './components/modal/modal.module';
@@ -43,6 +44,7 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
 
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -69,11 +71,16 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
     StepsComponent,
     FormStepsComponent,
     FormStepsTemplateComponent,
-    FormStepsCompleteComponent
+    FormStepsCompleteComponent,
+    FormValidatorComponent
   ],exports:[
     DragAndDropDirective,
     ModalModule,
-    ModalComponent
+    ModalComponent,
+    FormValidatorComponent,
+    FormStepsComponent,
+    FormStepsTemplateComponent,
+    FormStepsCompleteComponent
   ],
   providers: [
     StorageServices,

@@ -1,4 +1,24 @@
 .progress-bar:not(.done){
     background-color: #eee; 
     width: 100%;
+    border:solid 1px #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+.progress-bar.done{
+    padding: 1px;
+}
+.progress-bar{
+    max-width: 100%;
+}
+.bg-danger {
+    background-color: #dc3545!important;
+}
+.bg-success {
+    background-color: #28a745!important;
+}
+.bg-warning {
+    background-color: #ffc107!important;
+}
+.bg-info {
+    background-color: #17a2b8!important;
 }
