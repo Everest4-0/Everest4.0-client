@@ -1,0 +1,19 @@
+.user-filter{
+    position: fixed;
+    padding: 5px;
+    border: solid 1px #eee;
+    background: #FFF;
+    width: 350px;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,.3);
+    border-radius: 3px;
+    span{
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid #eee;
+        cursor: pointer;
+    }
+    span:hover{
+        background: #eee;
+    }
+
+}

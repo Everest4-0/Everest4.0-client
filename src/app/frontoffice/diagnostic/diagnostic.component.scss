@@ -15,3 +15,21 @@ body.modal-open{
     opacity: 1 !important;
 }
 }
+
+
+
+.bg-dark {
+    background-color: #343a40!important;
+}
+.bg-dark * {
+    color: #FFFF;
+}
+.navbar{
+        .btn:not(.active){
+            border-color:transparent;
+        }
+    }
+
+    body{
+        background:#F00
+    }

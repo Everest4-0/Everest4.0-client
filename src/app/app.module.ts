@@ -45,6 +45,7 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
 
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -77,6 +78,7 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
     DragAndDropDirective,
     ModalModule,
     ModalComponent,
+    FormsModule,
     FormValidatorComponent,
     FormStepsComponent,
     FormStepsTemplateComponent,

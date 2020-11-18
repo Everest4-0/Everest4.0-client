@@ -44,11 +44,11 @@ export class FirstloginComponent implements OnInit {
     this.currentStep = this.stepsService.getCurrentStep();
   }
   formValid(e) {
-    this.isvalid={...this.isvalid,...e}
-debugger
-let final = Object.keys(this.isvalid).map(key => {
-  return this.isvalid[key];
-});
+    this.isvalid = { ...this.isvalid, ...e }
+    debugger
+    let final = Object.keys(this.isvalid).map(key => {
+      return this.isvalid[key];
+    });
     //this.currentStep.subscribe(r=>r.isComplete = e);
   };
 
@@ -65,8 +65,8 @@ let final = Object.keys(this.isvalid).map(key => {
   }
 
   onSubmit(): void {
-    this.auth.update(this.user).subscribe(user=>{
-      this.auth.user=user;
+    this.auth.update(this.user).subscribe(user => {
+      this.auth.user = user;
       this.store.save('current_user', user);
       Swal.fire(
         'Good job!',
@@ -94,8 +94,8 @@ let final = Object.keys(this.isvalid).map(key => {
       reader.readAsDataURL(file);
 
       reader.onload = event => {
-       this.file.imageUrl = reader.result;
-       this.user.photoUrl = this.file.imageUrl;
+        this.file.imageUrl = reader.result;
+        this.user.photoUrl = this.file.imageUrl;
       };
     }
   } onFileDropped($event) {

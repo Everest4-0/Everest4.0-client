@@ -7,34 +7,34 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProgressBarComponent implements OnInit {
   @Input() done;
-  @Input() showLabel:boolean =false;
-  get pbColor(){
+  @Input() showLabel: boolean = false;
+  get pbColor() {
     let pbColor;
     if (this.done < 50) {
-     pbColor = 'danger';
+      pbColor = 'danger';
     }
     else if (this.done < 60) {
-     pbColor = 'warning';
+      pbColor = 'warning';
     }
     else if (this.done < 70) {
-     pbColor = '';
+      pbColor = '';
     }
     else if (this.done < 80) {
-     pbColor = 'info';
+      pbColor = 'info';
     }
     else {
-     pbColor = 'success';
+      pbColor = 'success';
     }
     return pbColor;
-  } 
-  get label(){
-    return this.showLabel ? this.done +'%' : ''
+  }
+  get label() {
+    return this.showLabel ? this.done + '%' : ''
   }
   constructor() { }
 
   ngOnInit(): void {
-    
+
 
   }
-  
+
 }

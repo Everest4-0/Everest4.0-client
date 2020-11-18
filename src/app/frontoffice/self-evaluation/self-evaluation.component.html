@@ -1,0 +1,38 @@
+<div class="col-md-6" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
+    <div class="card">
+        <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
+            <img src="" class="img-responsive" />
+            <h4>{{item[0]}}</h4>
+        </div>
+        <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+
+            <ul class="list-group">
+                <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngFor="let v of item[1]">
+                    {{v.name}} - {{v.points}}</li>
+            </ul>
+        </div>
+        <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
+
+            <app-progress-bar done="{{getPbvalue(item[1])}}"></app-progress-bar>
+            <span class="badge badge-info"></span>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+
+    <app-progress-bar done="{{getPbvalue(evaluations)}}" showLabel=true></app-progress-bar>
+</div>
+
+
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.name}}">
+    <h4>{{currentEvaluation.group}}</h4>
+    <hr>
+    <div class="row text-center">
+        <app-rating max=4 (change)='onChange($event)' rate={{currentEvaluation.points}}></app-rating>
+        <h5>{{label[currentEvaluation.points-1]}}</h5>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>
+    </div>
+</jw-modal>

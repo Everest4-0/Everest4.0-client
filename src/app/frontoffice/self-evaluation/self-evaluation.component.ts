@@ -1,24 +1,26 @@
+import { Evaluation } from './../../models/evaluation';
+import { AuthService } from './../../services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';
-import { AuthService } from 'app/services/auth.service';
-import { UserEvaluation } from './../../models/user-evaluation';
-import { EvaluationService } from '../../services/evaluation.service';
-import { Evaluation } from '../../models/evaluation';
+import { EvaluationService } from './../../services/evaluation.service';
 import { ModalService } from './../../components/modal/modal.service';
+import { UserEvaluation } from './../../models/user-evaluation';
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-diagnostic',
-  templateUrl: './diagnostic.component.html',
-  styleUrls: ['./diagnostic.component.scss']
+  selector: 'app-self-evaluation',
+  templateUrl: './self-evaluation.component.html',
+  styleUrls: ['./self-evaluation.component.css']
 })
-export class DiagnosticComponent implements OnInit {
+export class SelfEvaluationComponent implements OnInit {
+
 
   title = 'appBootstrap';
   bodyText: string;
   evaluations: Array<any> = []
   userEvaluations: Array<UserEvaluation> = [];
   currentEvaluation: UserEvaluation = new UserEvaluation();
-  isSelfEvaluation = 3;
+  isSelfEvaluation = true;
   label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
 
   constructor(
@@ -41,6 +43,7 @@ export class DiagnosticComponent implements OnInit {
       this.userEvaluations = evaluations
     })
   }
+
   getPbvalue(arr: Array<any>) {
     return (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
 
@@ -50,13 +53,13 @@ export class DiagnosticComponent implements OnInit {
     this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
   evaluationPoints(id: string): number {
     let total = this.userEvaluations.filter(e => e.evaluation.id == id).reduce((t, m) => { return t + m.points }, 0);
 
     return total;
-  }
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
   onChange(e) {
     this.currentEvaluation.points = e
@@ -95,7 +98,4 @@ export class DiagnosticComponent implements OnInit {
     })
   }
 
-  switchtabTo(v: number) {
-    this.isSelfEvaluation = v
-  }
 }

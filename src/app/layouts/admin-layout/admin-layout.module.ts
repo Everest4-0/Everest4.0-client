@@ -1,3 +1,7 @@
+import { ArrFilterPipe } from './../../pipes/arr-filter.pipe';
+import { EvaluationRequestComponent } from './../../frontoffice/evaluation-request/evaluation-request.component';
+import { FeedbackEvaluationComponent } from './../../frontoffice/feedback-evaluation/feedback-evaluation.component';
+import { SelfEvaluationComponent } from './../../frontoffice/self-evaluation/self-evaluation.component';
 import { ArrSumPipe } from './../../pipes/arr-sum.pipe';
 import { GroupByPipe } from './../../pipes/group-by.pipe';
 import { ProgressBarComponent } from './../../components/progress-bar/progress-bar.component';
@@ -32,6 +36,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     LbdModule,
     ModalModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
@@ -48,8 +53,12 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     UpgradeComponent,
     RatingComponent,
     ProgressBarComponent,
+    SelfEvaluationComponent,
+    FeedbackEvaluationComponent,
+    EvaluationRequestComponent,
     GroupByPipe,
-    ArrSumPipe
+    ArrSumPipe,
+    ArrFilterPipe
   ]
 })
 

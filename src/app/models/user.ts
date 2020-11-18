@@ -1,3 +1,4 @@
+import { EvaluationRequest } from './evaluation-request';
 import { Evaluation } from './evaluation';
 import { SocialUser } from 'angularx-social-login';
 import { Role } from './role';
@@ -23,6 +24,8 @@ export class User {
 
     evaluators: Array<Evaluation> = []
     evaluations: Array<Evaluation> = []
+    evaluationRequestes: Array<EvaluationRequest> = []
+    evaluationRequested: Array<EvaluationRequest> = []
 
     isActive: boolean;
     createdAt: Date;

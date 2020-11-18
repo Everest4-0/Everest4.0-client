@@ -1,0 +1,58 @@
+
+<div class="card">
+    <div class="header">
+        <h4 class="title">Feedbacks</h4>
+        <p class="category">Backend development</p>
+    </div>
+    <div class="content">
+        <div class="table-full-width">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let item of requests|arrFilter:'item.requester.id':auth.user.id">
+                        <td>
+                            <div class="checkbox">
+                                <input id="checkbox1" type="checkbox">
+                                <label for="checkbox1">
+
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <h4 style="padding: 0;margin: 0;line-height: 0px;">10:30</h4><br>
+                            {{item.requester.firstName}} 
+                            {{item.requester.lastName}} - 
+                            {{item.requester.email}}
+                        </td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                <i class="fa fa-times"></i>
+                            </button>
+
+                            <button type="button" rel="tooltip" title="Edit Task"
+                                class="btn btn-info btn-simple btn-xs">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-history"></i> Updated 3 minutes ago
+            </div>
+        </div>
+    </div>
+</div>
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.name}}">
+    <h4>{{currentEvaluation.group}}</h4>
+    <hr>
+    <div class="row text-center">
+        <app-rating max=4 (change)='onChange($event)' rate={{currentEvaluation.points}}></app-rating>
+        <h5>{{label[currentEvaluation.points-1]}}</h5>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>
+    </div>
+</jw-modal>
