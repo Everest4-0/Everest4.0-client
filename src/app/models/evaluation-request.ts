@@ -1,3 +1,4 @@
+import { UserEvaluation } from './user-evaluation';
 import { Evaluation } from './evaluation';
 import { User } from './user';
 export class EvaluationRequest {
@@ -5,9 +6,14 @@ export class EvaluationRequest {
     code: string;
     requester: User = new User();
     requested: User = new User();
-    evaluation: Evaluation = new Evaluation();
-    relationId: Number;
+    evaluations: Array<UserEvaluation> = [];
+    relationId: number;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
+    
+    get relation(){
+        alert( ['Familiar','Colega de trabalho','Amigo'][this.relationId-1])
+        return ['Familiar','Colega de trabalho','Amigo'][this.relationId-1];
+    }
 }
