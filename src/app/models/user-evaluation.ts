@@ -1,12 +1,15 @@
+import { EvaluationRequest } from './evaluation-request';
 import { Evaluation } from './evaluation';
 import { User } from './user';
 export class UserEvaluation {
     id: string;
-    points: number = 0;
+    points = 0;
     descriptions: string;
-    user: User = new User()
-    evaluator: User = new User()
+    requester: User = new User()
+    requested: User = new User()
+    request: EvaluationRequest = new EvaluationRequest()
     evaluation: Evaluation = new Evaluation()
+    evaluationId: string;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
