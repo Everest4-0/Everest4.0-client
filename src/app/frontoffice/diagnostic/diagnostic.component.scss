@@ -16,20 +16,15 @@ body.modal-open{
 }
 }
 
-
-
-.bg-dark {
-    background-color: #343a40!important;
-}
-.bg-dark * {
-    color: #FFFF;
-}
-.navbar{
-        .btn:not(.active){
-            border-color:transparent;
-        }
+.bg-aqua{background: #def7ff;
+    //*{color: #FFF !important;}
     }
-
-    body{
-        background:#F00
+    nav.navbar{
+        .btn{
+            text-align: left;
+            border-color: transparent;
+            i.fa{
+                font-size: 36px;
+            }
+        }
     }

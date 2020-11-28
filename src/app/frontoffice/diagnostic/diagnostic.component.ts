@@ -18,7 +18,7 @@ export class DiagnosticComponent implements OnInit {
   evaluations: Array<any> = []
   userEvaluations: Array<UserEvaluation> = [];
   currentEvaluation: UserEvaluation = new UserEvaluation();
-  isSelfEvaluation = 3;
+  isTab = 1;
   label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
 
   constructor(
@@ -29,7 +29,7 @@ export class DiagnosticComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
+    this.currentEvaluation.requester = this.currentEvaluation.requested = this.auth.user
 
     this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
       this.evaluationService.all().subscribe(evaluations => {
@@ -64,7 +64,7 @@ export class DiagnosticComponent implements OnInit {
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
       this.evaluations.push(this.currentEvaluation)
-      this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
+      this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
       Swal.fire(
         'Good job!',
         'Avaliação salva com sucesso',
@@ -96,6 +96,6 @@ export class DiagnosticComponent implements OnInit {
   }
 
   switchtabTo(v: number) {
-    this.isSelfEvaluation = v
+    this.isTab = v
   }
 }

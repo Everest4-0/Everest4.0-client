@@ -1,26 +1,43 @@
-<nav class="navbar navbar-dark bg-dark">
-  <div class="main-content" style="padding:0 15px;">
+<nav class="navbar navbar-dark bg-aqua">
+  <div class="main-content">
     <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="col-md-4">
+          <h2>{{['Auto avaliação','FeedBack 360º','FeedBack request'][isTab-1]}}</h2>
+        </div>
+        <div class="col-md-6 text-right" style="padding:0 15px;">
+          <div class="btn {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
 
-        <div class="col-md-8">
-          <button class="btn {{isSelfEvaluation==1 ? 'active' : ''}}" (click)="switchtabTo(1)">Auto avaliação</button>
-          <button class="btn {{isSelfEvaluation==2 ? 'active' : ''}}" (click)="switchtabTo(2)">FeedBack 360º</button>
-          <button class="btn {{isSelfEvaluation==3 ? 'active' : ''}}" (click)="switchtabTo(3)">FeedBack request</button>
+            <i class="pe-7s-refresh" style="font-size:24px"></i><br>
+            <h5>Auto avaliação</h5>
+          </div>
+          <div class="btn {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
+
+            <i class="pe-7s-repeat" style="font-size:24px"></i><br>
+            <h5>FeedBack 360º</h5>
+          </div>
+          <div class="btn {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
+            <i class="pe-7s-mail-open-file" style="font-size:24px"></i>
+            <br>
+            <h5>Solicitações de Feedback </h5>
+          </div>
         </div>
         <div class="col-md-4">
+        </div>
       </div>
     </div>
   </div>
 </nav>
+
 <div class="main-content">
   <div class="container-fluid">
-    <div class="col-md-8">
-      <app-self-evaluation *ngIf="isSelfEvaluation==1"></app-self-evaluation>
-      <app-feedback-evaluation *ngIf="isSelfEvaluation==2"></app-feedback-evaluation>
-      <app-evaluation-request  *ngIf="isSelfEvaluation==3"></app-evaluation-request>
+    <div class="col-md-10">
+      <app-self-evaluation *ngIf="isTab==1"></app-self-evaluation>
+      <app-feedback-evaluation *ngIf="isTab==2"></app-feedback-evaluation>
+      <app-evaluation-request *ngIf="isTab==3"></app-evaluation-request>
     </div>
-      <div class="col-md-4">
-        
-      </div>
+    <div class="col-md-2">
+
+    </div>
   </div>
 </div>
