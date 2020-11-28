@@ -70,6 +70,6 @@ export class NavbarComponent implements OnInit {
 
     signOut() {
         this.auth.signOut();
-        window.open('url', '_self')
+        window.open('/', '_self')
     }
 }
