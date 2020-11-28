@@ -1,7 +1,7 @@
 
 
 <div class="form-page-container">
-    <app-form-steps count=3></app-form-steps>
+    <app-form-steps count=4></app-form-steps>
 
     
   <div class="step-page-container">
@@ -58,6 +58,9 @@
               </app-form-steps-template>
             </ng-container>
             <ng-container *ngSwitchCase="'3'">
+              <app-form-steps-template [step]="(currentStep | async)"></app-form-steps-template>
+            </ng-container>
+            <ng-container *ngSwitchCase="'4'">
               <app-form-steps-template [step]="(currentStep | async)"></app-form-steps-template>
             </ng-container>
         </ng-container>

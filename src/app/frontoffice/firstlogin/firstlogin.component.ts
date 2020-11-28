@@ -40,7 +40,7 @@ export class FirstloginComponent implements OnInit {
     telephone: ['']
   });
   ngOnInit(): void {
-    this.file.imageUrl = this.auth.user.photoUrl
+    this.file.imageUrl = this.auth.serverAdresss + this.auth.user.photoUrl
     this.currentStep = this.stepsService.getCurrentStep();
   }
   formValid(e) {
@@ -67,6 +67,7 @@ export class FirstloginComponent implements OnInit {
   onSubmit(): void {
     this.auth.update(this.user).subscribe(user => {
       this.auth.user = user;
+      this.store.remove('current_user');
       this.store.save('current_user', user);
       Swal.fire(
         'Good job!',
