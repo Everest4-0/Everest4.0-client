@@ -1,3 +1,10 @@
+import { BudgetsComponent } from './../../frontoffice/goals/budgets/budgets.component';
+import { PlansComponent } from './../../frontoffice/goals/plans/plans.component';
+import { ResultsComponent } from './../../frontoffice/goals/results/results.component';
+import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
+import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
+import { UserDetailsComponent } from './../../frontoffice/user/user-details/user-details.component';
+import { UserEditComponent } from './../../frontoffice/user/user-edit/user-edit.component';
 import { ArrFilterPipe } from './../../pipes/arr-filter.pipe';
 import { EvaluationRequestComponent } from './../../frontoffice/evaluation-request/evaluation-request.component';
 import { FeedbackEvaluationComponent } from './../../frontoffice/feedback-evaluation/feedback-evaluation.component';
@@ -9,7 +16,6 @@ import { RatingComponent } from './../../components/rating/rating.component';
 
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
 import { ModalModule } from './../../components/modal';
-
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -29,6 +35,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 
 
 @NgModule({
@@ -39,6 +46,11 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     ReactiveFormsModule,
     LbdModule,
     ModalModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TimeagoModule.forRoot({ intl: { provide: TimeagoIntl/*, useClass: MyIntl */},
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [ 
@@ -56,6 +68,14 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     SelfEvaluationComponent,
     FeedbackEvaluationComponent,
     EvaluationRequestComponent,
+    UserDetailsComponent,
+    UserEditComponent,
+    UserHomeComponent,
+    GoalsComponent,
+    ResultsComponent,
+    PlansComponent,
+    BudgetsComponent,
+
     GroupByPipe,
     ArrSumPipe,
     ArrFilterPipe

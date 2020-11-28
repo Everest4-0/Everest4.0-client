@@ -1,3 +1,6 @@
+import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
+import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
+import { UserDetailsComponent } from './../../frontoffice/user/user-details/user-details.component';
 import { FormStepsCompleteComponent } from './../../components/form-steps-complete/form-steps-complete.component';
 import { FormStepsComponent } from './../../components/form-steps/form-steps.component';
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
@@ -15,7 +18,8 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
     { path: 'diagnostic',     component: DiagnosticComponent },
-    { path: 'user',           component: UserComponent },
+    { path: 'goals',          component: GoalsComponent },
+    { path: 'user',           component: UserHomeComponent },
     { path: 'table',          component: TablesComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
