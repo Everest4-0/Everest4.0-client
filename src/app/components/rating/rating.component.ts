@@ -16,6 +16,7 @@ export class RatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.rating = 0
   }
 
   private get numberOfFullStars(): number {
@@ -23,7 +24,8 @@ export class RatingComponent implements OnInit {
   }
 
   addStar(i) {
-    this.rating += i + 1;
+    debugger
+    this.rating = (this.rating*1) + i + 1;
     this.change.emit(this.rating)
   }
 
