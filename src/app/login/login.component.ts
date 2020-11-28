@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { UserForm } from './../forms/user.form';
 import { User } from './../models/user';
 import { AuthService } from './../services/auth.service';
@@ -27,12 +28,22 @@ export class LoginComponent implements OnInit {
   signInUser: User = new User();
   signInForm: FormGroup;
   signInErro: any;
-  constructor(private authService: SocialAuthService, public fb: FormBuilder, public auth: AuthService) {
+  w;
+  x;
+  constructor(
+    private authService: SocialAuthService,
+    public fb: FormBuilder,
+    public auth: AuthService,
+    private route: ActivatedRoute) {
     this.userForm = this.fb.group(new UserForm(this.fb));
     this.signInForm = this.fb.group({ email: [''], passw: [''] });
   }
   ngOnInit(): void {
 
+    this.route.queryParamMap.subscribe(queryParams => {
+      this.w = queryParams.get("w");
+      this.x = queryParams.get("x");
+    })
 
     this.authService.authState.subscribe((user) => {
       this.localUser.castSocialUser(user);
@@ -60,16 +71,17 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.auth.authenticate(this.signInUser).subscribe((u: User) => {
       this.localUser = u;
-      window.open('url', '_self')
+      window.open('/', '_self')
     },
       error => this.signInErro = error)
   }
   signOn() {
-    alert(JSON.stringify(this.signOnUser))
-    this.auth.create(this.signOnUser).subscribe(user => {
+    debugger
+    this.auth.create({ email: this.signOnUser.email, password: this.signOnUser.password, provider: 'LOCAL' }).subscribe(user => {
+      //alert(JSON.stringify(user))
       this.auth.authenticate(user).subscribe((u: User) => {
         this.localUser = u;
-        window.open('url', '_self')
+        window.open('/', '_self')
       })
     })
     if (this.userForm.dirty && this.userForm.valid) {
