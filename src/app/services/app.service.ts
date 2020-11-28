@@ -9,9 +9,13 @@ export class AppService<T> {
 
   private identity = ''
   protected url;
-  private serverAddress = '127.0.0.1:9800';
+  public serverAdresss;
+  private serverAddress = 'http://localhost:9800';
+  //private serverAddress = 'https://everest40-server.azurewebsites.net';
   constructor(public http: HttpClient, private service: string) {
-    this.url = `http://${this.serverAddress}/api/v1/${service}`
+    this.url = `${this.serverAddress}/api/v1/${service}`;
+    
+    this.serverAdresss=this.serverAddress;
   }
 
   protected getOne(s: string): Observable<any> {
