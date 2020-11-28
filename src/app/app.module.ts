@@ -38,6 +38,12 @@ import { StepsComponent } from './components/steps/steps.component';
 import { FormStepsComponent } from './components/form-steps/form-steps.component';
 import { FormStepsTemplateComponent } from './components/form-steps-template/form-steps-template.component';
 import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
+import { UserHomeComponent } from './frontoffice/user/user-home/user-home.component';
+import { GoalsComponent } from './frontoffice/goals/goals/goals.component';
+import { ResultsComponent } from './frontoffice/goals/results/results.component';
+import { PlansComponent } from './frontoffice/goals/plans/plans.component';
+import { BudgetsComponent } from './frontoffice/goals/budgets/budgets.component';
+
 
 
 
@@ -59,7 +65,9 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
     AppRoutingModule,
     SocialLoginModule,
     StorageServiceModule,
-    ModalModule
+    ModalModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     FirstloginComponent,
@@ -75,6 +83,7 @@ import { FormStepsCompleteComponent } from './components/form-steps-complete/for
     FormStepsCompleteComponent,
     FormValidatorComponent
   ],exports:[
+    FirstloginComponent,
     DragAndDropDirective,
     ModalModule,
     ModalComponent,
