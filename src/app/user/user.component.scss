@@ -1,0 +1,11 @@
+.bg-dark {
+    background-color: #343a40!important;
+}
+.bg-dark * {
+    color: #FFFF;
+}
+.navbar{
+        .btn:not(.active){
+            border-color:transparent;
+        }
+    }
