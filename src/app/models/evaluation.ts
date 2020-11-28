@@ -4,9 +4,8 @@ export class Evaluation {
     name: string;
     points: number;
     descriptions: string;
-    group:string;
+    group: string;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
-
 }
