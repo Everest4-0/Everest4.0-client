@@ -27,8 +27,11 @@ export class ProgressBarComponent implements OnInit {
     }
     return pbColor;
   }
+  get total(){
+    return parseFloat(this.done).toFixed(2)
+  }
   get label() {
-    return this.showLabel ? this.done + '%' : ''
+    return this.showLabel ? parseFloat(this.done).toFixed(2) + '-%' : ''
   }
   constructor() { }
 
