@@ -45,8 +45,11 @@ export class FeedbackEvaluationComponent implements OnInit {
   public userEvaluations: Array<any> = []
   public evaluationRequest: EvaluationRequest = new EvaluationRequest();
   public evaluationRequestform;
-
+  public requests: Array<any> = [];
+  public activeRelation: Array<any>;
   public users = []
+
+  public relationLabel = ['Familiar', 'Colega de trabalho', 'Amigo'];
   constructor(
     private fb: FormBuilder,
     private modalService: ModalService,
@@ -66,8 +69,19 @@ export class FeedbackEvaluationComponent implements OnInit {
       seriesBarDistance: 10,
       reverseData: true,
       horizontalBars: true,
+      high: 4,
+      onlyInteger: true,
+      divisor: 1,
+      scaleMinSpace: 1,
+      scaleMaxSpace: 1,
+      low: 0,
       axisY: {
-        offset: 70
+        offset: 70,
+        interval: 1,
+      },
+      axisX: {
+        title: "Axis X with interval 50",
+        interval: 1
       },
       height: '145px'
     };
@@ -82,20 +96,27 @@ export class FeedbackEvaluationComponent implements OnInit {
       }]
     ];
     this.activityChartLegendItems = [
-      { title: 'Semana anterior', imageClass: 'fa fa-circle text-info' },
-      { title: 'Semana Actual', imageClass: 'fa fa-circle text-danger' },
-      { title: 'Em curso', imageClass: 'fa fa-circle text-warning' }
+      { title: 'Familiar', imageClass: 'fa fa-circle text-violet' },
+      { title: 'Colega de trabalho', imageClass: 'fa fa-circle text-warning' },
+      { title: 'Amigo', imageClass: 'fa fa-circle text-danger' },
+      { title: 'Eu', imageClass: 'fa fa-circle text-info' }
     ];
-
-
 
     this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
       this.evaluationService.all().subscribe(evaluations => {
         evaluations.forEach(e => {
           e.points = this.evaluationPoints(e.id);
         })
+
         this.evaluations = this.groupBy(evaluations, 'group')
       })
+
+      this.evaluationRequestService.all({ requesterId: this.auth.user.id }).subscribe(requests => {
+        this.requests = requests
+
+        this.setActiveRelation()
+      })
+
       this.userEvaluations = evaluations
     })
   }
@@ -103,7 +124,8 @@ export class FeedbackEvaluationComponent implements OnInit {
     let filter = this.evaluationRequest.requested.email;
     if (filter.length > 3)
       this.auth.all({ $filter: filter }).subscribe(users => {
-        this.users = users
+        debugger
+        this.users = users//.filter(x=>x.id!==this.auth.user.id)
         if (ValidationService.emailValidator({ value: filter }) == null) {
           this.users.push({ firstName: filter, email: filter })
         }
@@ -111,9 +133,25 @@ export class FeedbackEvaluationComponent implements OnInit {
 
   }
   getActivityChartData(section) {
-    let arr = [[1], [2], [4]];
+    let arr = [];
+
     this.activityChartData = this.evaluations.filter(x => x[0] === section)[0][1]
-    let y = (this.activityChartData.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (arr.length)).toFixed(2)
+
+    let calculatePoints = (i: number): number => {
+      let g = this.userEvaluations.filter(x => x.evaluation.group == section && x.request != undefined && x.request.relationId === i)
+      if (g.length === 0) return 0;
+      let p = g.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / 3
+      let f = p.toFixed(2)
+      return parseFloat(f)
+    }
+
+    for (let i = 1; i < 4; i++)
+      arr.push([calculatePoints(i)])
+    let g = this.userEvaluations.filter(x => x.evaluation.group == section && x.request == undefined)
+    let y = '0';
+    if (g.length > 0) {
+      y = (g.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / 3).toFixed(2)
+    }
 
     arr.push([parseFloat(y)])
 
@@ -141,8 +179,15 @@ export class FeedbackEvaluationComponent implements OnInit {
     this.users = [];
   }
 
+  setActiveRelation() {
+    var t = [1, 2, 3].filter(y => !this.requests.map(x => parseInt(x.relationId)).includes(y))
+    this.activeRelation=t;
+  }
   askEvaluation() {
     this.evaluationRequestService.create(this.evaluationRequest).subscribe(request => {
+      debugger
+      this.requests.push(request)
+      this.setActiveRelation()
       if (request.id) {
         Swal.fire(
           'Good job!',
@@ -155,7 +200,7 @@ export class FeedbackEvaluationComponent implements OnInit {
       }
     })
   }
-  openModal(id: string, v: Evaluation) {
+  openModal(id: string) {
     //this.currentEvaluation.evaluation = v
     //this.currentEvaluation.points = 0
     this.modalService.open(id);

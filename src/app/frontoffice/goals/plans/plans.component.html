@@ -1,0 +1,218 @@
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col col-xs-6">Objectivo</div>
+                    <div class="col col-xs-4">Meta(Anual)</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col-xs-12">
+                <div class="row" *ngFor="let goal of goals">
+                    <div class="col col-xs-6">{{goal.objectives}}</div>
+                    <div class="col col-xs-4 text-right">{{anualGoal(goal)}}</div>
+                    <div class="col col-xs-2 actions text-right"><button class="btn" (click)="addTask(goal)"><i
+                                class="pe-7s-plus"></i></button> </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"> . . .</div>
+    </div>
+    <h2>Tarefas</h2>
+    <div class="card">
+        <div class="card-header">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col col-xs-6">Tarefa</div>
+                    <div class="col col-xs-6 text-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-xs"><i class="pe-7s-angle-left"></i></button>
+                            <button type="button" class="btn btn-xs"><i class="pe-7s-angle-right"></i></button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col-xs-12">
+                <div class="row" *ngFor="let task of tasks">
+                    <div class="col col-sm-8 col-md-8" (click)="showTaskDetails(task)">{{task.descriptions}} <br>
+                        <span class="tin-text">{{task.updatedAt|date}} <i class="pe-7s-clock" style="color: #F00;"
+                                *ngIf="!inTime(task.dueDate)"></i></span>
+                    </div>
+                    <div class="col col-sm-4 col-md-4 actions text-right">
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="label label-{{['default','danger','warning','success','danger'][task.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][task.state]}}
+                                    
+                                    <b class="caret"  *ngIf="states(task.state).length"></b></span>
+
+                            </a>
+                            <ul class="dropdown-menu" *ngIf="states(task.state).length">
+                                <li *ngFor="let state of states(task.state)">
+                                    <a (click)="updateState(task,state)">{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"> . . .</div>
+    </div>
+</div>
+<div class="col-sm-4">
+    <div class="col-sm-12">
+        <a href="#" class="thumbnail">
+            <div class="frontpage_square">
+                <img src="" class="img img-responsive full-width" />
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<jw-modal id="plan-modal" class="md" title="{{task.goal.objectives}}">
+    <h4>Registar nova tarefa</h4>
+    <hr>
+    <div class="row">
+        <form [formGroup]="form" (ngSubmit)="saveTask()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tarefa</label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="task.descriptions"
+                        formControlName="descriptions" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text formContro text-muted hidden">We'll never share your email
+                        with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Data de conclusão</label>
+                    <input type="date" class="form-control form-control-lg" [(ngModel)]="task.dueDate"
+                        formControlName="dueDate">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Receitas</label>
+                    <input type="number" class="form-control form-control-lg" [(ngModel)]="task.revenue"
+                        formControlName="revenue">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Curstos</label>
+                    <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
+                        formControlName="expenses">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Estado</label>
+                    <div>
+                    <div class="o-switch btn-group" data-toggle="buttons" role="group">
+                        <label class="btn btn-secondary active color-yellow" (click)="setEstate(1)">
+                            <input type="radio" [(ngModel)]="task.state" name="option1" value="1" id="option1"
+                                autocomplete="off" [ngModelOptions]="{standalone: true}" checked  > Por iniciar
+                        </label>
+                        <label class="btn btn-secondary color-green" (click)="setEstate(2)">
+                            <input type="radio" [(ngModel)]="task.state" name="option2" value="2" id="option2"
+                                autocomplete="off" [ngModelOptions]="{standalone: true}"> Em curso
+                        </label>
+                        <label class="btn btn-secondary color-red" (click)="setEstate(3)">
+                            <input type="radio" [(ngModel)]="task.state" name="option3" value="3" id="option3"
+                                autocomplete="off" [ngModelOptions]="{standalone: true}" > Concluido
+                        </label>
+                    </div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Observações</label>
+                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
+                        formControlName="observations"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success btn-fill" (click)="saveTask()">Salvar</button>
+    </div>
+</jw-modal>
+
+<jw-modal id="task-detail-modal" class="lg">
+    <button class="btn pull-right" style="font-size: 50px; border:none;" (click)="closeModal('task-detail-modal')"><i
+            class="pe-7s-close"></i></button>
+    <h1>Detalhes</h1>
+
+    <hr>
+    <div class="col-md-12 details">
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Tarefa</h5>
+                <h3 style="font-weight: 900;">{{taskDetails.descriptions}}</h3>
+            </div>
+            <div class="row">
+                <h5>Receitas</h5>
+                <h4>{{taskDetails.revenue}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Curstos</h5>
+                <h4>{{taskDetails.expenses}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Estado</h5>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span
+                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por inicial','Em curso','Concluido'][taskDetails.state]}}
+                            <b class="caret" *ngIf="states(taskDetails.state).length"></b></span>
+                    </a>
+                    <ul class="dropdown-menu" *ngIf="states(taskDetails.state).length">
+                        <li *ngFor="let state of states(taskDetails.state)">
+                            <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Data de criação</h5>
+                <h4>{{taskDetails.createdAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Último acesso</h5>
+                <h4>{{taskDetails.updatedAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Data de conclusão</h5>
+                <h4>{{taskDetails.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
+                        *ngIf="!inTime(taskDetails.dueDate)"></i></h4>
+            </div>
+            <div class="row bd-callout bd-callout-info">
+
+                <h5>Observações</h5>
+                <span>{{taskDetails.observations}}</span>
+                    
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12" style="border:solid 1px #eee; background-color: #eee;">
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Objectivo</h5>
+                    <h4>{{taskDetails.goal.objectives}} - {{anualGoal(taskDetails.goal)}} por ano</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Domínio</h5>
+                    <h4>{{taskDetails.goal.group}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center"><br>
+
+    </div>
+</jw-modal>

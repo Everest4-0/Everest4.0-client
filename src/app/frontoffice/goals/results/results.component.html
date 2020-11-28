@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-3">
+        <div class="col-sm-12 col-xs-6" (click)="setResults(item)" *ngFor="let item of results">
+            <a class="thumbnail">
+                <div class="frontpage_square  {{item.class}}">
+                    <img src="" class="img img-responsive full-width" />
+                    <div class="label-box vertical-center">
+                        <h1>{{item.code}}</h1>
+                        <span>{{item.evaluations.length}} {{item.name}}<br>+</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <div class="col-sm-9">
+        <div class="col-sm-12">
+                <div class="col-md-12">
+                    <div>
+                        <h2>{{currentResults.name}}</h2>
+                        <ul class="list-group" *ngFor="let group of currentResults.groups">
+                            <li (click)="registGoal(currentResults, group)"
+                                class="list-group-item list-group-item-action active">
+                                <h3>{{group}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i></h3>
+                            </li>
+                            <div *ngFor="let item of evaluations">
+                                <li class="list-group-item" *ngIf="item.evaluation.group==group">
+                                    {{item.evaluation.name}}</li>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+    <jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}">
+        <h4>Carregar Objectivos e metas para <b>{{goal.group}} </b></h4>
+        <hr>
+        <div class="row">
+            <form [formGroup]="form" (ngSubmit)="saveGoal()">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Objectivo</label>
+                        <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
+                            formControlName="objectives" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text formContro text-muted hidden">We'll never share your
+                            email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Meta Anual</label>
+                        <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
+                            [(ngModel)]="goal.anualGoal" formControlName="anualGoal">
+                    </div>
+                    <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">
+                        <div class="form-group" *ngFor="let item of goal.partials; let i=index">
+                            <label for="exampleInputPassword1">{{i+1}}º Trimestre</label>
+                            <input type="number" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" [(ngModel)]="item.value" name="{{i}}_partial"
+                                (keyup)="setAnualGoal()" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row text-center"><br>
+            <button class="btn btn-success btn-fill" (click)="saveGoal()">Salvar</button>
+        </div>
+    </jw-modal>

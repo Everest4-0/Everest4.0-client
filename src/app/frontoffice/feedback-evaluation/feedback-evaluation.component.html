@@ -3,12 +3,10 @@
     <button class="btn btn-success">Partilhar</button>
 </div>
 <div>
-
-
     <div class="col-md-12" *ngFor="let item of evaluations">
         <lbd-chart [title]="item[0]" [subtitle]="'All products including Taxes'" [chartType]="activityChartType"
             [chartData]="getActivityChartData(item[0])" chartClass="lite" [chartOptions]="activityChartOptions"
-            [chartResponsive]="activityChartResponsive">
+            [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems">
         </lbd-chart>
     </div>
 </div>
@@ -19,9 +17,9 @@
     <form [formGroup]="evaluationRequestform">
         <div class="form-group">
             <label for="exampleFormControlSelect2">Utilizador</label>
-            <input type="text" class="form-control" formControlName="requested"
-                [(ngModel)]="evaluationRequest.requested.email" (keyup)="filterValues()">
-            <div *ngIf='users.length>1' class="user-filter">
+            <input type="text" class="form-control" formControlName="requested" placeholder="(Nome ou E-mail)"
+                [(ngModel)]="evaluationRequest.requested.email" (keyup)="filterValues($event)">
+            <div *ngIf='users.length>0' class="user-filter">
                 <span *ngFor="let item of users" (click)="selectRequested(item)">
                     {{item.firstName}} {{item.lastName}}
                 </span>
@@ -30,13 +28,11 @@
         <div class="form-group">
             <label for="exampleFormControlSelect2">Relação</label>
             <select class="form-control" formControlName="relationId" [(ngModel)]="evaluationRequest.relationId">
-                <option value="1">I Managed him</option>
-                <option value="2">We have same manager</option>
-                <option value="3">He is my manager</option>
+                <option value="{{item}}" *ngFor="let item of activeRelation">{{relationLabel[item-1]}}</option>                
             </select>
         </div>
     </form>
     <div class="row text-center"><br>
-        <button class="btn btn-success bg-success" (click)="askEvaluation()">Salvar</button>
+        <button class="btn btn-info btn-fill bg-info" (click)="askEvaluation()">Salvar</button>
     </div>
 </jw-modal>

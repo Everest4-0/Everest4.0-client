@@ -1,0 +1,114 @@
+
+.card{
+    .card-header{
+        .row{
+            border-bottom: solid 1px #ccc;
+            div.col{
+                padding: 15px;
+                font-size: 18px;
+                font-weight: 0;
+            }
+            .btn{
+                border-color: transparent;
+                i{
+                    font-size: 25px;
+                }
+            }
+            
+        }
+    }
+    .card-body{
+        .row{
+            border-bottom: solid 1px #eee;
+            background-color: #f4fbff;
+            div.col{
+                padding: 15px;
+                font-size: 16px;
+                font-weight: 900;
+                span.tin-text{
+                    font-size: 12px;
+                    font-weight: 100;
+                }
+            }
+            div.col.actions{ 
+                padding-left: 15px;
+                padding-right: 15px;
+                .btn{
+                padding: 0 15px;
+                font-size: 25px;
+                border-color: transparent;
+                margin: -15px;
+                opacity: .6;
+                }
+                
+            }
+        }
+        .row:hover {
+            background-color: rgb(236, 246, 255);
+            div.col.actions{
+            .btn{opacity: 1;}
+            }
+        }
+    }
+}
+        
+.frontpage_square{
+    position:relative;
+    overflow:hidden;
+    padding-bottom:100%;
+
+    div.label-box{
+            position: absolute;
+            
+            width: 100%;
+            text-align: center;
+            *{
+                text-align: center;
+            }
+    }
+    }
+    .frontpage_square img{
+    position:absolute;
+    }
+
+    .o-switch.btn-group{
+        label.btn{
+            border-width:0;
+            border-bottom-width: 5px;
+            border-bottom-style: solid;
+        }
+        label.btn.active{
+           // background-color: rgb(0, 122, 170);
+            color: #FFF;
+        }
+
+        .color-yellow{
+            border-bottom-color: rgb(194, 194, 1);
+        }
+
+        .color-green{
+            border-bottom-color: rgb(6, 177, 0);
+        }
+        .color-red{
+            border-bottom-color: rgb(168, 2, 2);
+        }
+
+        .color-yellow.active{
+            background-color: rgb(194, 194, 1);
+        }
+
+        .color-green.active{
+            background-color: rgb(6, 177, 0);
+        }
+        .color-red.active{
+            background-color: rgb(168, 2, 2);
+        }
+    }
+
+    .details{
+        .row{
+            h4, h3{
+                margin-top: -10px;
+            }
+        }
+    }

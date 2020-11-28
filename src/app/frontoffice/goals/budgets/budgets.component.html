@@ -1,0 +1,109 @@
+<div class="col-md-8">
+
+    <h2>Receitas</h2>
+    <div class="card">
+        <div class="card-header">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col col-xs-6">Tarefa
+                    </div>
+                    <div class="col col-xs-6">Orçamento</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col-xs-12">
+                <div class="row" *ngFor="let item of revenue">
+                    <div class="col col-xs-6">{{item.descriptions}}
+                        <span class="tin-text"></span>
+                    </div>
+                    <div class="col col-xs-3 text-right">
+                        {{item.revenue}} kzs<br>
+                        <span class="tin-text">{{valueToFix(item)}}</span>
+                    </div>
+                    <div class="col col-xs-2">
+                        <span class="label label-{{['success','danger','danger'][stateBudget(item,true)]}} label-xs">{{['Em dia','Desvio','Desvio'][stateBudget(item,true)]}}</span>
+                    </div>
+                    <div class="col col-xs-1 actions text-right"><button class="btn"
+                            (click)="createBudget(item, true)" *ngIf="item.state<3"><i class="pe-7s-plus"></i></button></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">. . . </div>
+    </div>
+    <h2>Despesas</h2>
+    <div class="card">
+        <div class="card-header">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col col-xs-6">Tarefa
+                    </div>
+                    <div class="col col-xs-6">Orçamento</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col-xs-12">
+                <div class="row" *ngFor="let item of expenses">
+                    <div class="col col-xs-6">{{item.descriptions}}
+                        <span class="tin-text"></span>
+                    </div>
+                    <div class="col col-xs-3 text-right">
+                        {{item.expenses}} kzs<br>
+                        <span class="tin-text">{{valueToFix(item)}}</span>
+                    </div>
+                    
+                    <div class="col col-xs-2">
+                        <span class="label label-{{['danger','warning','success'][stateBudget(item,false)]}} label-xs">{{['Desvio','Crítico','Em dia'][stateBudget(item,false)]}}</span>
+                    </div>
+
+                    <div class="col col-xs-1 actions text-right"><button class="btn"
+                            (click)="createBudget(item, false)" *ngIf="item.state<3"><i class="pe-7s-plus"></i></button></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">. . . </div>
+    </div>
+</div>
+<div class="col-sm-4">
+    <h2>...</h2>
+    <div class="col-sm-12">
+        <a href="#" class="thumbnail">
+            <div class="frontpage_square">
+                <img src="" class="img img-responsive full-width" />
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<jw-modal id="budget-modal" class="sm" title="{{budget.task.descriptions}}">
+    <h4>Registar {{budget.direction ? 'receitas' : 'despesas'}}</h4>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Orçamento</h5>
+            <h6>{{budget.direction ?  budget.task.revenue : budget.task.expenses }}</h6>
+        </div>
+        <div class="col-md-6">
+            <h5>Realizado</h5>
+            <h6>{{valueToFix(budget.task)}}</h6>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="saveBudget()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Valor</label>
+                    <input type="number" class="form-control form-control-lg" [(ngModel)]="budget.value"
+                        formControlName="value">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success btn-fill" (click)="saveBudget()">Salvar</button>
+    </div>
+</jw-modal>

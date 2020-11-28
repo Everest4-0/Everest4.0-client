@@ -1,0 +1,45 @@
+<nav class="navbar navbar-dark bg-aqua">
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="col-lg-4 col-md-4">
+            <h2>{{['Resultados esperados','Planos de acção','Orçamento'][isTab-1]}}</h2>
+          </div>
+          <div class="col-lg-6 col-md-8 text-right">
+              <div class="row">
+            <div class="col-xs-4 col {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
+              <i class="pe-7s-arc"></i><br>
+              <h4>Resultados esperados</h4>
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</span>
+            </div>
+            <div class="col-xs-4 col {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
+              <i class="pe-7s-plugin"></i><br>
+              <h4>Planos de acção</h4>
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</span>
+            </div>
+            <div class="col-xs-4 col {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
+              <i class="pe-7s-piggy"></i><br>
+              <h4>Orçamento</h4>
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</span>
+            </div>
+        </div>
+          </div>
+          <div class="col-lg-2">
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="main-content">
+    <div class="container-fluid">
+      <div class="col-lg-10">
+        <app-results *ngIf="isTab==1"></app-results>
+        <app-plans *ngIf="isTab==2"></app-plans>
+        <app-budgets *ngIf="isTab==3"></app-budgets>
+      </div>
+      <div class="col-lg-2">
+  
+      </div>
+    </div>
+  </div>
