@@ -48,7 +48,16 @@ export class User {
         return this;
     }
 
+    get ownRole(){
+        debugger
+        return [{name:this.roleId,icon:'pe-7s-medal',color:'bg-warning'},
+        {name:this.roleId,icon:'pe-7s-delete-user',color:'bg-default'},][this.roleId=='FREE' ? 0 : 1]
+    }
     set passw(p: string) {
         this.password = p + '~'
+    }
+
+    get avatar(){
+        return this.photoUrl
     }
 }
