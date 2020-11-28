@@ -31,9 +31,9 @@ export class SelfEvaluationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
+    this.currentEvaluation.requester = this.currentEvaluation.requested = this.auth.user
 
-    this.userEvaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
+    this.userEvaluationService.all({ userId: this.auth.user.id, requestedId: this.auth.user.id }).subscribe(evaluations => {
       this.evaluationService.all().subscribe(evaluations => {
         evaluations.forEach(e => {
           e.points = this.evaluationPoints(e.id);
@@ -49,11 +49,13 @@ export class SelfEvaluationComponent implements OnInit {
 
   }
   openModal(id: string, v: Evaluation) {
+    if (v.points > 0) return;
     this.currentEvaluation.evaluation = v
     this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
   closeModal(id: string) {
+    this.currentEvaluation.points = 0
     this.modalService.close(id);
   }
   evaluationPoints(id: string): number {
@@ -66,36 +68,22 @@ export class SelfEvaluationComponent implements OnInit {
   }
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
-      this.evaluations.push(this.currentEvaluation)
-      this.currentEvaluation.user = this.currentEvaluation.evaluator = this.auth.user
-      Swal.fire(
+      this.evaluations.forEach(x => {
+        if (x.id == e.evaluationId)
+          x.points = e.points
+      })
+      this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
+     /* Swal.fire(
         'Good job!',
         'Avaliação salva com sucesso',
         'success'
       )
-
+*/
       this.currentEvaluation = new UserEvaluation();
+
+      this.currentEvaluation.requester = this.currentEvaluation.requested = this.auth.user
     })
     this.modalService.close('self-evaluation-modal');
-  }
-  reg() {
-    Swal.fire({
-      title: '<strong>HTML <u>example</u></strong>',
-      icon: 'info',
-      html:
-        'You can use <b>bold text</b>, ' +
-        '<a href="//sweetalert2.github.io">links</a> ' +
-        'and other HTML tags',
-      showCloseButton: true,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Great!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-        '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down'
-    })
   }
 
 }

@@ -1,3 +1,9 @@
+
+<div class="col-md-12" style=" padding: 15px;">
+<h3>Evolução geral</h3>
+    <app-progress-bar done="{{getPbvalue(evaluations)}}" showLabel=true></app-progress-bar>
+    <br>
+</div>
 <div class="col-md-6" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
     <div class="card">
         <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
@@ -7,8 +13,11 @@
         <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
             <ul class="list-group">
-                <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngFor="let v of item[1]">
-                    {{v.name}} - {{v.points}}</li>
+                <div  *ngFor="let v of evaluations">
+                <li (click)="openModal('self-evaluation-modal', v)" class="list-group-item" *ngIf="v.group==item[0]">
+                    {{v.name}} - <label class="label">{{label[v.points-1]}}</label>
+                </li>
+                </div>
             </ul>
         </div>
         <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
@@ -19,17 +28,13 @@
     </div>
 </div>
 
-<div class="col-md-12">
-
-    <app-progress-bar done="{{getPbvalue(evaluations)}}" showLabel=true></app-progress-bar>
-</div>
 
 
-<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.name}}">
-    <h4>{{currentEvaluation.group}}</h4>
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.evaluation.name}}">
+    <h4>{{currentEvaluation.evaluation.group}}</h4>
     <hr>
     <div class="row text-center">
-        <app-rating max=4 (change)='onChange($event)' rate={{currentEvaluation.points}}></app-rating>
+        <app-rating max=4 (change)='onChange($event)' rating={{currentEvaluation.points}}></app-rating>
         <h5>{{label[currentEvaluation.points-1]}}</h5>
     </div>
     <div class="row text-center"><br>
