@@ -11,7 +11,10 @@ export class User {
     firstName: string;
     lastName: string;
     othersName: string;
-    fullName: string;
+    
+    get fullName(){
+        return this.firstName + ' ' + this.lastName
+    }
     email: string;
     telePhone: number;
     apikey: string;

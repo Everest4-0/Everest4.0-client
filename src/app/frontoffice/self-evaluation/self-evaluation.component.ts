@@ -1,3 +1,5 @@
+import { take } from 'rxjs/operators';
+import { ToastService } from 'ng-uikit-pro-standard';
 import { Evaluation } from './../../models/evaluation';
 import { AuthService } from './../../services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';
@@ -27,7 +29,8 @@ export class SelfEvaluationComponent implements OnInit {
     private modalService: ModalService,
     private evaluationService: EvaluationService,
     private userEvaluationService: UserEvaluationService,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private toast: ToastService) {
   }
 
   ngOnInit() {
@@ -49,7 +52,13 @@ export class SelfEvaluationComponent implements OnInit {
 
   }
   openModal(id: string, v: Evaluation) {
-    if (v.points > 0) return;
+    if (v.points > 0) {
+      this.toast.warning('Já foi feita auto avaliação sobre ' + v.name + ' no Dominio ' + v.group + ' Aguarde próximo ciclo ou contacte o apoio ao cliente',
+        'Atenção', {
+        timeOut: 300000,
+      })
+      return;
+    };
     this.currentEvaluation.evaluation = v
     this.currentEvaluation.points = 0
     this.modalService.open(id);
@@ -72,13 +81,12 @@ export class SelfEvaluationComponent implements OnInit {
         if (x.id == e.evaluationId)
           x.points = e.points
       })
+
       this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
-     /* Swal.fire(
-        'Good job!',
-        'Avaliação salva com sucesso',
-        'success'
-      )
-*/
+      this.toast.success('Auto avaliação sobre ' + this.currentEvaluation.evaluation.name + ' no Dominio ' + this.currentEvaluation.evaluation.group + ' feito com successo', 'Sucesso', {
+        timeOut: 300000,
+        progressBar: true,
+      })
       this.currentEvaluation = new UserEvaluation();
 
       this.currentEvaluation.requester = this.currentEvaluation.requested = this.auth.user

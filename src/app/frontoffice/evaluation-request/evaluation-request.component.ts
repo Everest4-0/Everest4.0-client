@@ -1,3 +1,4 @@
+import { ToastService } from 'ng-uikit-pro-standard';
 import { UserEvaluation } from './../../models/user-evaluation';
 import { TimeagoIntl } from 'ngx-timeago';
 import { EvaluationRequest } from './../../models/evaluation-request';
@@ -31,6 +32,7 @@ export class EvaluationRequestComponent implements OnInit {
     private evaluationRequestService: EvaluationRequestService,
     private userEvaluationService: UserEvaluationService,
     public auth: AuthService,
+    private toast:ToastService,
     intl: TimeagoIntl) {
     intl.strings = pt;
     intl.changes.next();
@@ -64,6 +66,10 @@ export class EvaluationRequestComponent implements OnInit {
       this.evaluations.forEach(e => {
         if (e.id == userEvaluation.evaluationId)
           return e.points = parseFloat(e.points) + (userEvaluation.points * 1)
+      })
+      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para '+ this.userEvaluation.requester.fullName , 'Sucesso', {
+        timeOut: 300000,
+        progressBar: true,
       })
       this.closeModal('self-evaluation-modal')
     })

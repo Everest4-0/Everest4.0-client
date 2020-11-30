@@ -1,6 +1,7 @@
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   isLogedin = false;
-  constructor(public location: Location, public auth: AuthService) {
+  constructor(public location: Location,
+    public auth: AuthService,
+    private toast: ToastService) {
     this.isLogedin = !!auth.user
   }
 

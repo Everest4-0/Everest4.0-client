@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule} from '@angular/forms' 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { ToastModule } from 'ng-uikit-pro-standard';
 
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
@@ -64,6 +64,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastModule.forRoot({
+      timeOut: 10000
+    }),
     MsalModule.forRoot({
       auth: {
         clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
@@ -110,7 +113,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormValidatorComponent,
     FormStepsComponent,
     FormStepsTemplateComponent,
-    FormStepsCompleteComponent
+    FormStepsCompleteComponent,
+    ToastModule
   ],
   providers: [
     StorageServices,

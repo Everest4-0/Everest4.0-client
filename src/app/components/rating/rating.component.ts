@@ -24,7 +24,7 @@ export class RatingComponent implements OnInit {
   }
 
   addStar(i) {
-    debugger
+    
     this.rating = (this.rating*1) + i + 1;
     this.change.emit(this.rating)
   }

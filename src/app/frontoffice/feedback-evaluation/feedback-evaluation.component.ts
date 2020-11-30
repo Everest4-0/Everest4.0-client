@@ -1,3 +1,4 @@
+import { ToastService } from 'ng-uikit-pro-standard';
 import Swal from 'sweetalert2';
 import { EvaluationRequestService } from './../../services/evaluation-request.service';
 import { ValidationService } from './../../services/validators/validation.service';
@@ -56,7 +57,8 @@ export class FeedbackEvaluationComponent implements OnInit {
     private evaluationService: EvaluationService,
     private evaluationRequestService: EvaluationRequestService,
     private userEvaluationService: UserEvaluationService,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private toast: ToastService) {
   }
 
 
@@ -181,7 +183,7 @@ export class FeedbackEvaluationComponent implements OnInit {
 
   setActiveRelation() {
     var t = [1, 2, 3].filter(y => !this.requests.map(x => parseInt(x.relationId)).includes(y))
-    this.activeRelation=t;
+    this.activeRelation = t;
   }
   askEvaluation() {
     this.evaluationRequestService.create(this.evaluationRequest).subscribe(request => {
@@ -189,11 +191,11 @@ export class FeedbackEvaluationComponent implements OnInit {
       this.requests.push(request)
       this.setActiveRelation()
       if (request.id) {
-        Swal.fire(
-          'Good job!',
-          'Sua avaliação foi solicitada com sucesso',
-          'success'
-        )
+        this.toast.success('Solicitação de Feedback ao seu ' +
+         this.evaluationRequest.relation + ' ' + this.evaluationRequest.requested.fullName + ' foi efectuado com suecceso', 'Sucesso', {
+          timeOut: 300000,
+          progressBar: true,
+        })
         this.evaluationRequest = new EvaluationRequest();
         this.evaluationRequest.requester = this.auth.user;
         this.closeModal('ask-evaluation-modal')
