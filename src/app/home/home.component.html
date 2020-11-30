@@ -44,14 +44,13 @@
             <div class="card">
                 <div class="header">
                     <h4 class="title">AGENDA E PENDENTES</h4>
-                    <p class="category">Backend development</p>
                 </div>
                 <div class="content">
                     <div class="table-full-width">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td style="width: 30px;">
                                         <div class="checkbox">
                                             <input id="checkbox1" type="checkbox">
                                             <label for="checkbox1"></label>
@@ -78,26 +77,28 @@
                     </div>
                     
                 </div>
+                <div class="footer">
+                    <hr>
+                </div>
                 <div class="header">
                     <h4 class="title">Tarefas em atraso</h4>
-                    <p class="category">Backend development</p>
                 </div>
                 <div class="content">
                     <div class="table-full-width">
                         <table class="table">
                             <tbody>
                                 <tr *ngFor="let item of tasks.overDue; let i = index">
-                                    <td>
+                                    <td style="width: 30px;">
                                         <div class="checkbox">
-                                            <input  id="checkbox_{{i}}" type="checkbox">
-                                            <label for="checkbox_{{i}}"></label>
+                                            <input  id="checkbox_{{i}}" type="checkbox" (change)="updateState(item, 3,'overDue')">
+                                            <label for="checkbox_{{i}}" ></label>
                                         </div>
                                     </td>
                                     <td>
                                         <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
-                                        {{item.descriptions}}
+                                        <span (click)="showTaskDetails(item)">{{item.descriptions}}</span> <span class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
                                     </td>
-                                    <td class="td-actions text-right">
+                                    <td class="td-actions text-right hidden">
                                         <button type="button" rel="tooltip" title="Remove"
                                             class="btn btn-danger btn-simple btn-xs">
                                             <i class="fa fa-times"></i>
@@ -113,16 +114,18 @@
                         </table>
                     </div>
                 </div>
+                <div class="footer">
+                    <hr>
+                </div>
                 <div class="header">
                     <h4 class="title">Tarefas da semana</h4>
-                    <p class="category">Backend development</p>
                 </div>
                 <div class="content">
                     <div class="table-full-width">
                         <table class="table">
                             <tbody>
                                 <tr *ngFor="let item of tasks.thisWeek; let i = index">
-                                    <td>
+                                    <td style="width: 30px;">
                                         <div class="checkbox">
                                             <input id="checkbo_{{i}}" type="checkbox">
                                             <label for="checkbox_{{i}}"></label>
@@ -130,9 +133,9 @@
                                     </td>
                                     <td>
                                         <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
-                                        {{item.descriptions}}
+                                        <span (click)="showTaskDetails(item)">{{item.descriptions}} </span> <span class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
                                     </td>
-                                    <td class="td-actions text-right">
+                                    <td class="td-actions text-right hidden">
                                         <button type="button" rel="tooltip" title="Remove"
                                             class="btn btn-danger btn-simple btn-xs">
                                             <i class="fa fa-times"></i>
@@ -162,3 +165,84 @@
         </div>
     </div>
 </div>
+
+<jw-modal id="task-detail-modal" class="lg">
+    <button class="btn pull-right" style="font-size: 50px; border:none;" (click)="closeModal('task-detail-modal')"><i
+            class="pe-7s-close"></i></button>
+    <h1>Detalhes</h1>
+
+    <hr>
+    <div class="col-md-12 details">
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Tarefa</h5>
+                <h3 style="font-weight: 900;">{{taskDetails.descriptions}}</h3>
+            </div>
+            <div class="row">
+                <h5>Receitas</h5>
+                <h4>{{taskDetails.revenue}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Curstos</h5>
+                <h4>{{taskDetails.expenses}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Estado</h5>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span
+                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por inicial','Em curso','Concluido'][taskDetails.state]}}
+                            <b class="caret" *ngIf="states(taskDetails.state).length>0"></b></span>
+                    </a>
+                    <ul class="dropdown-menu" >
+                        <li *ngFor="let state of states(taskDetails.state)">
+                            <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Data de criação</h5>
+                <h4>{{taskDetails.createdAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Último acesso</h5>
+                <h4>{{taskDetails.updatedAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Data de conclusão</h5>
+                <h4>{{taskDetails.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
+                        *ngIf="!inTime(taskDetails.dueDate)"></i></h4>
+            </div>
+            <div class="row bd-callout bd-callout-info">
+
+                <h5>Observações</h5>
+                <span>{{taskDetails.observations}}</span>
+                    
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12" style="border:solid 1px #eee; background-color: #eee;">
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Objectivo</h5>
+                    <h4>{{taskDetails.goal.objectives}} - {{anualGoal(taskDetails.goal)}} por ano</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Domínio</h5>
+                    <h4>{{taskDetails.goal.group}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center"><br>
+
+    </div>
+</jw-modal>

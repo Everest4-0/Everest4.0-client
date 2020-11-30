@@ -68,11 +68,10 @@ export class PlansComponent implements OnInit {
     this.task.state = s
   }
   inTime(t){
-
     return new Date(t) > new Date()
   }
   addTask(g) {
-    debugger
+    
     this.task.goal = g
     this.openModal('plan-modal');
   }

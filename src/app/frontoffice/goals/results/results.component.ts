@@ -74,7 +74,7 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
-    debugger
+    
     this.goalService.create(this.goal).subscribe(goal => {
       this.goal = new Goal()
       this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
@@ -97,7 +97,6 @@ export class ResultsComponent implements OnInit {
   }
 
   setResults(e) {
-    debugger
     this.currentResults = e
   }
 }
