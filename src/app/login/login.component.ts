@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.localUser.castSocialUser(user);
       this.auth.authenticate(this.localUser).subscribe((u: User) => {
         this.localUser = u;
-        window.open('url', '_self')
+        window.open('./', '_self')
       })
       this.user = user;
       this.loggedIn = (user != null);
@@ -71,17 +71,16 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.auth.authenticate(this.signInUser).subscribe((u: User) => {
       this.localUser = u;
-      window.open('/', '_self')
+      window.open('./', '_self')
     },
       error => this.signInErro = error)
   }
   signOn() {
-    debugger
     this.auth.create({ email: this.signOnUser.email, password: this.signOnUser.password, provider: 'LOCAL' }).subscribe(user => {
       //alert(JSON.stringify(user))
       this.auth.authenticate(user).subscribe((u: User) => {
         this.localUser = u;
-        window.open('/', '_self')
+        window.open('./', '_self')
       })
     })
     if (this.userForm.dirty && this.userForm.valid) {

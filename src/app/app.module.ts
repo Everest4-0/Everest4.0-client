@@ -103,7 +103,7 @@ import { BudgetsComponent } from './frontoffice/goals/budgets/budgets.component'
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com'
+              '909647647828-ksij1o4rn7neefcv0soo16af3e3unkuj.apps.googleusercontent.com'
             ),
           },
           {
