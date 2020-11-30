@@ -66,7 +66,7 @@ export class BudgetsComponent implements OnInit {
         })
       }
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Orçamento registado com sucesso',
         'success'
       )

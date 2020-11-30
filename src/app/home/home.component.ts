@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
       total: 200
     };
     this.emailChartLegendItems = [
-      { title: 'Realizado', imageClass: 'fa fa-circle text-success' },
+      { title: 'Realizado', imageClass: 'fa fa-circle text-info' },
       { title: 'Por realizar', imageClass: 'fa fa-circle text-danger' }
     ];
 

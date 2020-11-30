@@ -66,7 +66,7 @@ export class DiagnosticComponent implements OnInit {
       this.evaluations.push(this.currentEvaluation)
       this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Avaliação salva com sucesso',
         'success'
       )

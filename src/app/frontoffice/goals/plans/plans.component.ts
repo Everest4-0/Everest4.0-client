@@ -83,7 +83,7 @@ export class PlansComponent implements OnInit {
           t = task
       });
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Resultados esperado registado com sucesso',
         'success'
       )
@@ -97,7 +97,7 @@ export class PlansComponent implements OnInit {
       this.task = new Task()
       this.tasks.push(task)
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Resultados esperado registado com sucesso',
         'success'
       )

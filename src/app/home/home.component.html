@@ -4,19 +4,18 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <lbd-chart [title]="'% OBJECTIVOS SEMANAIS'" *ngIf="tasks.all.length>0" [subtitle]="'Last Campaign Performance'"
+                    <lbd-chart [title]="'% OBJECTIVOS SEMANAIS'" *ngIf="tasks.all.length>0" [subtitle]="''"
                         [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="getEmailChartDataSeries()"
                         [legendItems]="emailChartLegendItems" [withHr]="true" [chartOptions]="chartOptions"
-                        [footerIconClass]="'fa fa-clock-o'" [footerText]="'Campaign sent 2 days ago'">
+                        >
                     </lbd-chart>
                 </div>
 
                 <div class="col-md-6">
-                    <lbd-chart [title]="'DASHBOARD EXECUTIVO'" [subtitle]="'All products including Taxes'"
+                    <lbd-chart [title]="'DASHBOARD EXECUTIVO'" [subtitle]="''"
                         [chartType]="activityChartType" [chartData]="activityChartData"
                         [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive"
-                        [legendItems]="activityChartLegendItems" [withHr]="true" [footerIconClass]="'fa fa-check'"
-                        [footerText]="'Data information certified'">
+                        [legendItems]="activityChartLegendItems" [withHr]="true">
                     </lbd-chart>
                 </div>
             </div>

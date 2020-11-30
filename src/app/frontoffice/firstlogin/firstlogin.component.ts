@@ -70,14 +70,14 @@ export class FirstloginComponent implements OnInit {
       this.store.remove('current_user');
       this.store.save('current_user', user);
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Seja bem vindo ao Everes4.0',
         'success'
       )
       this.dismiss.emit('');
     })
     Swal.fire(
-      'Good job!',
+      'Sucesso!',
       'submited',
       'success'
     )

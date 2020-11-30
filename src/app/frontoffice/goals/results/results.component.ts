@@ -79,7 +79,7 @@ export class ResultsComponent implements OnInit {
       this.goal = new Goal()
       this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
       Swal.fire(
-        'Good job!',
+        'Sucesso!',
         'Resultados esperado registado com sucesso',
         'success'
       )
