@@ -38,11 +38,7 @@ import { StepsComponent } from './components/steps/steps.component';
 import { FormStepsComponent } from './components/form-steps/form-steps.component';
 import { FormStepsTemplateComponent } from './components/form-steps-template/form-steps-template.component';
 import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
-import { UserHomeComponent } from './frontoffice/user/user-home/user-home.component';
-import { GoalsComponent } from './frontoffice/goals/goals/goals.component';
-import { ResultsComponent } from './frontoffice/goals/results/results.component';
-import { PlansComponent } from './frontoffice/goals/plans/plans.component';
-import { BudgetsComponent } from './frontoffice/goals/budgets/budgets.component';
+import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 
 
 
@@ -51,7 +47,7 @@ import { BudgetsComponent } from './frontoffice/goals/budgets/budgets.component'
 
 
 
-
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -67,7 +63,30 @@ import { BudgetsComponent } from './frontoffice/goals/budgets/budgets.component'
     StorageServiceModule,
     ModalModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MsalModule.forRoot({
+      auth: {
+        clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
+        authority: "https://login.microsoftonline.com/common/", // This is your tenant ID
+        redirectUri: 'http://localhost:4200'// This is your redirect URI
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
+      },
+    }, {
+      popUp: !isIE,
+      consentScopes: [
+        'user.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
+      protectedResourceMap: [
+        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+      ],
+      extraQueryParameters: {}
+    })
   ],
   declarations: [
     FirstloginComponent,

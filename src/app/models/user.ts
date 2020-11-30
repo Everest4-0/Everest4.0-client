@@ -2,6 +2,7 @@ import { EvaluationRequest } from './evaluation-request';
 import { Evaluation } from './evaluation';
 import { SocialUser } from 'angularx-social-login';
 import { Role } from './role';
+import { Account } from 'msal';
 
 export class User {
     id: string;
@@ -36,28 +37,50 @@ export class User {
     /*constructor(description?: string) {
         this.description = description;
     }*/
-    castSocialUser(user: SocialUser) {
-        this.firstName = user.name.split(' ')[0]
-        this.lastName = user.name.split(' ').slice(-1).pop()
+    castSocialUser(user) {
+        user = { 'GOOGLE': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
+        this.firstName = user.firstName
+        this.lastName = user.lastName
+        this.email = user.email
+        this.photoUrl = user.photoUrl
+        this.apikey = user.apikey
+        this.provider = user.provider
+
+        //return { 'GOOGLE': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
+    }
+    castGoogleUser(user: SocialUser) {
+        let fullName = user.name.split(' ')
+        this.firstName = fullName.shift()
+        this.lastName = fullName.join(' ');
         this.email = user.email
         this.photoUrl = user.photoUrl
         this.apikey = user.authToken
         this.provider = user.provider
 
+        return this;
+    }
+    castMicrosoftUser(user: Account) {
+        let fullName = user.name.split(' ')
+        this.firstName = fullName.shift()
+        this.lastName = fullName.join(' ');
+        this.email = user.userName
+        //this.photoUrl = user.photoUrl
+        this.apikey = user.homeAccountIdentifier
+        this.provider = 'MICROSOFT'
 
         return this;
     }
 
-    get ownRole(){
+    get ownRole() {
         debugger
-        return [{name:this.roleId,icon:'pe-7s-medal',color:'bg-warning'},
-        {name:this.roleId,icon:'pe-7s-delete-user',color:'bg-default'},][this.roleId=='FREE' ? 0 : 1]
+        return [{ name: this.roleId, icon: 'pe-7s-medal', color: 'bg-warning' },
+        { name: this.roleId, icon: 'pe-7s-delete-user', color: 'bg-default' },][this.roleId == 'FREE' ? 0 : 1]
     }
     set passw(p: string) {
         this.password = p + '~'
     }
 
-    get avatar(){
+    get avatar() {
         return this.photoUrl
     }
 }

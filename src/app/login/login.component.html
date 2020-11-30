@@ -29,7 +29,7 @@
             </div>
 
             <div class="flex-c p-b-112">
-                <a href="#" class="login100-social-item">
+                <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
                     <img src="assets/img/icon/microsoft.svg" alt="GOOGLE">
                 </a>
                 <a (click)="signInWithGoogle()" class="login100-social-item">
@@ -101,3 +101,5 @@
 <div id="the_lights">
     <div id="the_lights_close"></div>
 </div>
+
+{{newUser.idToken|json}}
