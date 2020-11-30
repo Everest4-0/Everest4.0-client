@@ -1,12 +1,11 @@
 <div class="main-content">
-    {{tasks|json}}
     <div class="container-fluid">
 
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <lbd-chart [title]="'% OBJECTIVOS SEMANAIS'" [subtitle]="'Last Campaign Performance'"
-                        [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="emailChartData"
+                    <lbd-chart [title]="'% OBJECTIVOS SEMANAIS'" *ngIf="tasks.all.length>0" [subtitle]="'Last Campaign Performance'"
+                        [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="getEmailChartDataSeries()"
                         [legendItems]="emailChartLegendItems" [withHr]="true" [chartOptions]="chartOptions"
                         [footerIconClass]="'fa fa-clock-o'" [footerText]="'Campaign sent 2 days ago'">
                     </lbd-chart>
@@ -55,9 +54,7 @@
                                     <td>
                                         <div class="checkbox">
                                             <input id="checkbox1" type="checkbox">
-                                            <label for="checkbox1">
-
-                                            </label>
+                                            <label for="checkbox1"></label>
                                         </div>
                                     </td>
                                     <td>
@@ -76,110 +73,74 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div class="header">
+                    <h4 class="title">Tarefas em atraso</h4>
+                    <p class="category">Backend development</p>
+                </div>
+                <div class="content">
+                    <div class="table-full-width">
+                        <table class="table">
+                            <tbody>
+                                <tr *ngFor="let item of tasks.overDue; let i = index">
                                     <td>
                                         <div class="checkbox">
-                                            <input id="checkbox2" type="checkbox" checked>
-                                            <label for="checkbox2">
-
-                                            </label>
+                                            <input id="checkbo_{{i}}" type="checkbox">
+                                            <label for="checkbox_{{i}}"></label>
                                         </div>
                                     </td>
-                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                    <td>
+                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
+                                        {{item.descriptions}}
+                                    </td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
                                         <button type="button" rel="tooltip" title="Remove"
                                             class="btn btn-danger btn-simple btn-xs">
                                             <i class="fa fa-times"></i>
+                                        </button>
+
+                                        <button type="button" rel="tooltip" title="Edit Task"
+                                            class="btn btn-info btn-simple btn-xs">
+                                            <i class="fa fa-chevron-right"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="header">
+                    <h4 class="title">Tarefas da semana</h4>
+                    <p class="category">Backend development</p>
+                </div>
+                <div class="content">
+                    <div class="table-full-width">
+                        <table class="table">
+                            <tbody>
+                                <tr *ngFor="let item of tasks.thisWeek; let i = index">
                                     <td>
                                         <div class="checkbox">
-                                            <input id="checkbox3" type="checkbox" checked>
-                                            <label for="checkbox3">
-
-                                            </label>
+                                            <input id="checkbo_{{i}}" type="checkbox">
+                                            <label for="checkbox_{{i}}"></label>
                                         </div>
                                     </td>
-                                    <td>Flooded: One year later, assessing what was lost and what was found when a
-                                        ravaging rain swept through metro Detroit
+                                    <td>
+                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
+                                        {{item.descriptions}}
                                     </td>
                                     <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
                                         <button type="button" rel="tooltip" title="Remove"
                                             class="btn btn-danger btn-simple btn-xs">
                                             <i class="fa fa-times"></i>
                                         </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox">
-                                            <input id="checkbox4" type="checkbox">
-                                            <label for="checkbox4">
 
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                    <td class="td-actions text-right">
                                         <button type="button" rel="tooltip" title="Edit Task"
                                             class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox">
-                                            <input id="checkbox5" type="checkbox">
-                                            <label for="checkbox5">
-
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>Read "Following makes Medium better"</td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox">
-                                            <input id="checkbox6" type="checkbox">
-                                            <label for="checkbox6">
-
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>Unfollow 5 enemies from twitter</td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
+                                            <i class="fa fa-chevron-right"></i>
                                         </button>
                                     </td>
                                 </tr>

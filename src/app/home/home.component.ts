@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { AuthService } from './../services/auth.service';
 import { GoalService } from './../services/goal.service';
 import { Component, OnInit } from '@angular/core';
@@ -27,8 +28,10 @@ export class HomeComponent implements OnInit {
   public activityChartOptions: any;
   public activityChartResponsive: any[];
   public activityChartLegendItems: LegendItem[];
-  public activityChartDataSeries: Array<any>
-  tasks = []
+  public activityChartDataSeries: Array<any>;
+  public emailChartDataSeries: Array<number> = []
+  public tasks: any = { overDue: [], thisWeek: [], all: [] }
+
   news = [
     {
       title: 'COVID-19. Angola com mais 247 casos e cinco mortes no último dia do mês com mais casos',
@@ -59,16 +62,28 @@ export class HomeComponent implements OnInit {
   constructor(private goalService: GoalService, public auth: AuthService) { }
 
   ngOnInit() {
-    let a, b, c;
+    debugger
+    let lSunday, nSunday, oSunday, now;
+    lSunday =  oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
+    nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
+    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 7);
+    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
+    let sAnt, sAct, eAtr, dashBoard;
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
 
-      this.tasks = goals.map(goal => goal.tasks)
-      this.tasks = this.tasks.reduce((x, y) => x.concat(y[0]), [])
-      a=this.tasks.filter(task=>task.dueDate)
+      this.tasks.all = goals.map(goal => goal.tasks)
+      this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), [])
+      this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now)
+      this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday)
+      eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
+      sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
+      sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
+
     })
+
     this.emailChartType = ChartType.Pie;
     this.emailChartData = {
-      series: [80, 20]
+      series: this.emailChartDataSeries
     };
     this.chartOptions = {
       donut: true,
@@ -148,10 +163,27 @@ export class HomeComponent implements OnInit {
     this.activityChartLegendItems = [
       { title: 'Semana anterior', imageClass: 'fa fa-circle text-info' },
       { title: 'Semana Actual', imageClass: 'fa fa-circle text-danger' },
-      { title: 'Em curso', imageClass: 'fa fa-circle text-warning' }
+      { title: 'Em atraso', imageClass: 'fa fa-circle text-warning' }
     ];
 
 
   }
 
+  getEmailChartDataSeries() {
+    debugger
+
+    let now = new Date((new Date()).setHours(0, 0, 0, 0))
+    let done = this.tasks.all.filter(task => new Date(task.dueDate) > now).filter(task => task.state == '3').length,
+      toDo = this.tasks.all.filter(task => new Date(task.dueDate) > now).filter(task => task.state == '1').length
+
+    let f = {
+      series: [
+        done / (done + toDo) * 100,
+        toDo / (done + toDo) * 100
+
+      ]
+    }
+
+    return f;
+  }
 }
