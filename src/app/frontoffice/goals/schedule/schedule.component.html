@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title"><b>Agendas e pendentes</b></h4>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-1">
+                            <div class="checkbox">
+                                <input id="checkbox1" type="checkbox">
+                                <label for="checkbox1"></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-10">
+                            <h5 style="padding: 0;margin: 0; font-weight: 600;">10:30</h5>
+                            Sign contract for "What are conference organizers?"
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h4 class="title"><b>Tarefas em atraso</b></h4>
+    </div>
+
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="list-group">
+                <a class="list-group-item" *ngFor="let item of tasks.overDue; let i = index">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-1">
+                            <div class="checkbox">
+                                <input id="checkbox_{{i}}" type="checkbox" (change)="updateState(item, 3,'overDue')">
+                                <label for="checkbox_{{i}}"></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                            <h5 style="padding: 0;margin: 0; font-weight: 600;">
+                                {{item.dueDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM " }}
+                            </h5>
+                            <span>{{item.descriptions}}</span><br> <span
+                                class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
+                            <label class="pull-right"> {{item.dueDate|amLocale:'pt'| amTimeAgo}}</label>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h4 class="title"><b>Tarefas da semana</b></h4>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+            <div class="list-group">
+                <a class="list-group-item" *ngFor="let item of tasks.thisWeek; let i = index">
+                    <div class="row">
+                        <div class="col-xs-2 col-md-1">
+                            <div class="checkbox">
+                                <input id="checkbox_{{i}}" type="checkbox" (change)="updateState(item, 3,'overDue')">
+                                <label for="checkbox_{{i}}"></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                            <h5 style="padding: 0;margin: 0; font-weight: 600;">
+                                {{item.dueDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM " }}
+                            </h5>
+                            <span>{{item.descriptions}}</span><br> <span
+                                class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
+                            <label class="pull-right"> {{item.dueDate|amLocale:'pt'| amTimeAgo}}</label>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <hr>
+        <div class="stats">
+            <i class="fa fa-history"></i> Updated 3 minutes ago
+        </div>
+    </div>
+</div>

@@ -5,17 +5,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <lbd-chart [title]="'% OBJECTIVOS SEMANAIS'" *ngIf="tasks.all.length>0" [subtitle]="''"
-                        [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="getEmailChartDataSeries()"
-                        [legendItems]="emailChartLegendItems" [withHr]="true" [chartOptions]="chartOptions"
-                        >
+                        [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType"
+                        [chartData]="getEmailChartDataSeries()" [legendItems]="emailChartLegendItems" [withHr]="true"
+                        [chartOptions]="chartOptions">
                     </lbd-chart>
                 </div>
 
                 <div class="col-md-6">
-                    <lbd-chart [title]="'DASHBOARD EXECUTIVO'" [subtitle]="''"
-                        [chartType]="activityChartType" [chartData]="activityChartData"
-                        [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive"
-                        [legendItems]="activityChartLegendItems" [withHr]="true">
+                    <lbd-chart [title]="'DASHBOARD EXECUTIVO'" [subtitle]="''" [chartType]="activityChartType"
+                        [chartData]="activityChartData" [chartOptions]="activityChartOptions"
+                        [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems"
+                        [withHr]="true">
                     </lbd-chart>
                 </div>
             </div>
@@ -40,123 +40,14 @@
 
         </div>
         <div class="col-md-4">
-            <div class="card">
-                <div class="header">
-                    <h4 class="title">AGENDA E PENDENTES</h4>
-                </div>
-                <div class="content">
-                    <div class="table-full-width">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 30px;">
-                                        <div class="checkbox">
-                                            <input id="checkbox1" type="checkbox">
-                                            <label for="checkbox1"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">10:30</h4><br>
-                                        Sign contract for "What are conference organizers?"
-                                    </td>
-                                    <td class="td-actions text-right">
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
 
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-chevron-right"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                </div>
-                <div class="footer">
-                    <hr>
-                </div>
-                <div class="header">
-                    <h4 class="title">Tarefas em atraso</h4>
-                </div>
-                <div class="content">
-                    <div class="table-full-width">
-                        <table class="table">
-                            <tbody>
-                                <tr *ngFor="let item of tasks.overDue; let i = index">
-                                    <td style="width: 30px;">
-                                        <div class="checkbox">
-                                            <input  id="checkbox_{{i}}" type="checkbox" (change)="updateState(item, 3,'overDue')">
-                                            <label for="checkbox_{{i}}" ></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
-                                        <span (click)="showTaskDetails(item)">{{item.descriptions}}</span> <span class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
-                                    </td>
-                                    <td class="td-actions text-right hidden">
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-chevron-right"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="footer">
-                    <hr>
-                </div>
-                <div class="header">
-                    <h4 class="title">Tarefas da semana</h4>
-                </div>
-                <div class="content">
-                    <div class="table-full-width">
-                        <table class="table">
-                            <tbody>
-                                <tr *ngFor="let item of tasks.thisWeek; let i = index">
-                                    <td style="width: 30px;">
-                                        <div class="checkbox">
-                                            <input id="checkbo_{{i}}" type="checkbox">
-                                            <label for="checkbox_{{i}}"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h4 style="padding: 0;margin: 0;line-height: 0px;">{{item.dueDate|date}}</h4><br>
-                                        <span (click)="showTaskDetails(item)">{{item.descriptions}} </span> <span class="label label-{{['default','danger','warning','success','danger'][item.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.state]}}</span>
-                                    </td>
-                                    <td class="td-actions text-right hidden">
-                                        <button type="button" rel="tooltip" title="Remove"
-                                            class="btn btn-danger btn-simple btn-xs">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-
-                                        <button type="button" rel="tooltip" title="Edit Task"
-                                            class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-chevron-right"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="footer">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Updated 3 minutes ago
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="btn-group pull-right" style="">
+                <button type="button" (click)="isCalendar=!isCalendar" class="btn active" style="border: none;font-size: 24px;"><i class="pe-7s-menu"></i></button>
+                <button type="button" (click)="isCalendar=!isCalendar" class="btn" style="border: none;font-size: 24px;"><i class="pe-7s-date"></i></button>
+                <button type="button" class="btn" style="border: none;font-size: 24px;"><i class="pe-7s-plus"></i></button>
+              </div>
+              <app-schedule *ngIf="!isCalendar"></app-schedule>
+              <app-calendar *ngIf="isCalendar"></app-calendar>
         </div>
 
         <div class="row">
@@ -193,12 +84,12 @@
                             class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por inicial','Em curso','Concluido'][taskDetails.state]}}
                             <b class="caret" *ngIf="states(taskDetails.state).length>0"></b></span>
                     </a>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu">
                         <li *ngFor="let state of states(taskDetails.state)">
                             <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
                         </li>
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
@@ -220,7 +111,7 @@
 
                 <h5>Observações</h5>
                 <span>{{taskDetails.observations}}</span>
-                    
+
             </div>
         </div>
         <div class="col-md-12">

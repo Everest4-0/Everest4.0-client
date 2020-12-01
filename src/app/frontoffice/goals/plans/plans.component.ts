@@ -105,7 +105,7 @@ export class PlansComponent implements OnInit {
     })
   }
   anualGoal(goal: Goal) {
-    return goal.partials.reduce((x: number, y) => { return x + parseFloat(y.value || 0) }, 0)
+    return 0//goal.partials.reduce((x: number, y) => { return x + parseFloat(y.value || 0) }, 0)
   };
   openModal(id) {
     this.modalService.open(id);

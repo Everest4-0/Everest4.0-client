@@ -1,3 +1,6 @@
+import { MomentModule } from 'ngx-moment';
+import { CalendarComponent } from './../../frontoffice/goals/calendar/calendar.component';
+import { ScheduleComponent } from './../../frontoffice/goals/schedule/schedule.component';
 import { BudgetsComponent } from './../../frontoffice/goals/budgets/budgets.component';
 import { PlansComponent } from './../../frontoffice/goals/plans/plans.component';
 import { ResultsComponent } from './../../frontoffice/goals/results/results.component';
@@ -48,6 +51,7 @@ import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } 
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
+    MomentModule,
     TimeagoModule.forRoot({ intl: { provide: TimeagoIntl/*, useClass: MyIntl */},
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
     }),
@@ -76,6 +80,9 @@ import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } 
     PlansComponent,
     BudgetsComponent,
 
+
+    ScheduleComponent,
+    CalendarComponent,
     GroupByPipe,
     ArrSumPipe,
     ArrFilterPipe

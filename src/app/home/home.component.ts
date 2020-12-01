@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
   public emailChartDataSeries: Array<number> = []
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
+  isCalendar=false;
   news = [
     {
       title: 'COVID-19. Angola com mais 247 casos e cinco mortes no último dia do mês com mais casos',
@@ -199,7 +200,7 @@ export class HomeComponent implements OnInit {
 
   updateState(task, state, list) {
 
-    debugger
+    
     task.state = state
     this.taskService.update(task).subscribe(task => {
       this.tasks[list].forEach((t, i) => {
@@ -220,7 +221,7 @@ export class HomeComponent implements OnInit {
   }
   //['Pendente','Por inicial','Em curso','Concluido']
   states(s) {
-    debugger
+    
     switch (parseInt(s)) {
       case 0:
         return [2, 3, 4]
@@ -238,7 +239,7 @@ export class HomeComponent implements OnInit {
   }
 
   anualGoal(goal: Goal) {
-    return goal.partials.reduce((x: number, y) => { return x + parseFloat(y.value || 0) }, 0)
+    return //goal.partials.reduce((x: number, y) => { return x + parseFloat(y.value || 0) }, 0)
   };
   openModal(id) {
     this.modalService.open(id);

@@ -86,14 +86,14 @@ export class BudgetsComponent implements OnInit {
     this.modalService.close(id);
   }
   valueToFix(task: Task, direction: boolean = true) {
-    let final = task.budgets.reduce((x: number, y) => x + parseFloat(y.value), 0).toFixed(2)
+    let final = 0//task.budgets.reduce((x: number, y) => x + parseFloat(y.value), 0).toFixed(2)
 
     return final;
   }
   stateBudget(task: Task, direction: boolean) {
     debugger
     let total = (direction ? task.revenue : task.expenses)
-    let pago =  parseFloat(this.valueToFix(task, direction))
+    let pago =  0//parseFloat(this.valueToFix(task, direction))
     let resto = total - pago
     //
     if (pago > total )

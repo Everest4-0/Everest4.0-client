@@ -2,7 +2,6 @@ import { FormValidatorComponent } from './components/form-validator/form-validat
 import { ModalComponent } from './components/modal/modal.component';
 import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
 import { ModalModule } from './components/modal/modal.module';
-import { DiagnosticComponent } from './frontoffice/diagnostic/diagnostic.component';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
@@ -39,12 +38,6 @@ import { FormStepsComponent } from './components/form-steps/form-steps.component
 import { FormStepsTemplateComponent } from './components/form-steps-template/form-steps-template.component';
 import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
-
-
-
-
-
-
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -103,7 +96,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsComponent,
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
-    FormValidatorComponent
+    FormValidatorComponent,
   ],exports:[
     FirstloginComponent,
     DragAndDropDirective,
