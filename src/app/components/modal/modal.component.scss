@@ -56,7 +56,11 @@ jw-modal {
                 }
             }
         }
-        .jw-modal-body.lg{
+        .jw-modal-body.xx-lg{
+            max-width: 98%;
+        }.jw-modal-body.x-lg{
+            max-width: 1020px;
+        }.jw-modal-body.lg{
             max-width: 960px;
         }.jw-modal-body.md{
             max-width: 600px;
