@@ -1,3 +1,5 @@
+import { TaskComponent } from './../../frontoffice/goals/task/task.component';
+
 import { MomentModule } from 'ngx-moment';
 import { CalendarComponent } from './../../frontoffice/goals/calendar/calendar.component';
 import { ScheduleComponent } from './../../frontoffice/goals/schedule/schedule.component';
@@ -41,6 +43,20 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import  dayGridPlugin  from '@fullcalendar/daygrid';
+import  interactionPlugin  from '@fullcalendar/interaction';
+import  timeGridPlugin  from '@fullcalendar/timegrid';
+import  listPlugin  from '@fullcalendar/list';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+
+FullCalendarModule.registerPlugins([ 
+  listPlugin,
+  interactionPlugin,
+  dayGridPlugin,
+  timeGridPlugin,
+  bootstrapPlugin
+]);
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +68,7 @@ import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } 
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
+    FullCalendarModule,
     TimeagoModule.forRoot({ intl: { provide: TimeagoIntl/*, useClass: MyIntl */},
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
     }),
@@ -79,6 +96,7 @@ import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } 
     ResultsComponent,
     PlansComponent,
     BudgetsComponent,
+    TaskComponent,
 
 
     ScheduleComponent,
