@@ -1,3 +1,5 @@
+import { TodoService } from './../../../services/todo.service';
+import { CalendarOptions } from '@fullcalendar/angular';
 import { Goal } from './../../../models/goal/goal';
 import { Task } from './../../../models/goal/task';
 import { ModalService } from 'app/components/modal';
@@ -5,8 +7,13 @@ import { ToastService } from 'ng-uikit-pro-standard';
 import { TaskService } from './../../../services/task.service';
 import { AuthService } from 'app/services/auth.service';
 import { GoalService } from './../../../services/goal.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
 
 @Component({
   selector: 'app-calendar',
@@ -15,14 +22,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
 
-  public tasks: any = { overDue: [], thisWeek: [], all: [] }
+  public tasks: Array<any>=[]
   public taskDetails: Task = new Task()
-  calendarOptions = {
-
+  calendarOptions: CalendarOptions = {
+    themeSystem: 'bootstrap',
+    // emphasizes business hours
+    businessHours: false,
+    // event dragging & resizing
+    editable: true,
+    // header
     dateClick: this.handleDateClick.bind(this), // bind is important!
+    eventClick: this.handleEventClick.bind(this), // bind is important!
     locale: 'pt',
     droppable: true,
-    events: this.tasks.all
+   /* eventRender: function (info) {
+      alert(1)
+    },
+*/
+    customButtons: {
+      expand: {
+        click: function (e) {
+          $('.fc-expand-button').removeClass('btn-primary').html($('<i/>').addClass('pe-7s-exapnd2').attr('style', 'font-size:24px;'))
+          $('.fc-closeModal-button').removeClass('btn-primary').html($('<i/>').addClass('pe-7s-close').attr('style', 'font-size:24px;'))
+          $('#calendar-modal').attr('style', 'display:block')
+        }
+      }
+    },
+    headerToolbar: {
+      left: 'title',
+      right: 'expand'
+    },
+    buttonIcons: {
+      close: 'fa-times',
+      prevYear: 'fa-angle-double-left',
+      nextYear: 'fa-angle-double-right'
+    },
+  };
+  calendarBigOptions: CalendarOptions = {
+    themeSystem: 'bootstrap',
+    // emphasizes business hours
+    businessHours: false,
+    // event dragging & resizing
+    editable: true,
+    dateClick: this.handleDateClick.bind(this), // bind is important!
+    eventClick: this.handleEventClick.bind(this), // bind is important!
+    locale: 'pt',
+    droppable: true,
+    customButtons: {
+      closeModal: {
+        click: function () {
+
+          $('#calendar-modal').attr('style', 'display:none')
+        }
+      }
+    },
+    headerToolbar: {
+      left: 'prev,today,next',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek,closeModal'
+    },
+
+    //editable: true,
+
+
+    // complete: function() {alert('complete');}, 
   };
 
   constructor(
@@ -30,32 +93,38 @@ export class CalendarComponent implements OnInit {
     public auth: AuthService,
     private taskService: TaskService,
     private toast: ToastService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private toDoService:TodoService
   ) { }
 
   ngOnInit() {
-    let lSunday, nSunday, oSunday, now;
-    lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
-    nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
-    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 7);
-    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
-    let sAnt, sAct, eAtr, dashBoard;
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
 
-      this.tasks.all = goals.map(goal => goal.tasks)
-      this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), []).map(t => { return { title: t.descriptions, date: t.dueDate } })
-      this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
-      this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
-      eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
-      sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
-      sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
-      //this.calendarOptions = 
+      this.tasks = goals.map(goal => goal.tasks)
+      this.tasks = this.tasks
+      .reduce((x, y) => x.concat(y), [])
+      .map(t => { return { color: '#ffab38', title: t.descriptions, date: t.dueDate, allDay: true  } })
+      this.toDoService.all({userId:this.auth.user.id}).subscribe(todos=>{
+        debugger
+        let t=todos.map(t => { return  { 
+          title:'Meeting' ,
+          description: t.descriptions,
+          date: t.date,
+          className: 'fc-bg-lightgreen',
+          icon : "suitcase"}} )
+          this.tasks=this.tasks.concat(t)
+        this.calendarOptions.events = this.calendarBigOptions.events = this.tasks
+      })
+
+     // this.calendarOptions.events = this.calendarBigOptions.events = this.tasks
+
+
     })
 
 
   }
 
- 
+
 
   updateState(task, state, list) {
 
@@ -106,6 +175,9 @@ export class CalendarComponent implements OnInit {
 
   handleDateClick(arg) {
     alert('date click! ' + arg.dateStr)
+  }
+  handleEventClick(arg) {
+    alert('event click! ' + JSON.stringify(arg.event))
   }
 
 

@@ -1,12 +1,27 @@
-<div class="card">
+<div class="card" >
     <div class="header">
         <h4 class="title"><b>Agendas e pendentes</b></h4>
     </div>
     <div class="card-body">
-        <div class="col-md-12">
-                
+
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <full-calendar [options]="calendarOptions" ></full-calendar>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-{{tasks.all|json}}
 
+
+
+
+<jw-modal id="calendar-modal" class="x-lg" style="display: table-column;">
+    <div class="row">
+        <div class="col-md-12" style="min-height: 90vh;">
+            <full-calendar [options]="calendarBigOptions"></full-calendar>
+        </div>
+    </div>
+
+</jw-modal>
