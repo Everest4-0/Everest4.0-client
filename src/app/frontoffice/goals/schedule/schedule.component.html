@@ -1,21 +1,27 @@
 <div class="card">
-    <div class="header">
+    <div class="header">        
         <h4 class="title"><b>Agendas e pendentes</b></h4>
+        <span>{{now|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM [de] YYYY" }}</span>
+        <br>
     </div>
     <div class="card-body">
         <div class="col-md-12">
             <div class="list-group">
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item {{(item.date|date:'H')==(now|date:'H') ? 'active' : ''}}" *ngFor="let item of todos; let i = index">
                     <div class="row">
                         <div class="col-xs-2 col-md-1">
                             <div class="checkbox">
-                                <input id="checkbox1" type="checkbox">
-                                <label for="checkbox1"></label>
+                                <input id="checkbox_{{i}}" type="checkbox" [checked]="item.done" (click)="updateToDoState(item)">
+                                <label for="checkbox_{{i}}"></label>
                             </div>
                         </div>
-                        <div class="col-xs-10">
-                            <h5 style="padding: 0;margin: 0; font-weight: 600;">10:30</h5>
-                            Sign contract for "What are conference organizers?"
+                        <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                            <h5 style="padding: 0;margin: 0; font-weight: 600;">
+                                {{item.date|amLocale:'pt'|  amDateFormat: "HH:MM" }}
+                            </h5>
+                            <span>{{item.descriptions}}</span> <i class="pe-7s-stopwatch pull-right"  *ngIf="(item.date|date:'H')==(now|date:'H')"></i><br>
+                            <span class="label label-{{['default','danger','warning','success','danger'][item.done]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.done]}}</span>
+                            <label class="pull-right"> {{item.createdAt|amLocale:'pt'| amTimeAgo}}</label>
                         </div>
                     </div>
                 </a>
@@ -86,3 +92,86 @@
         </div>
     </div>
 </div>
+
+
+<jw-modal id="task-detail-modal" class="lg">
+    <button class="btn pull-right" style="font-size: 50px; border:none;" (click)="closeModal('task-detail-modal')"><i
+            class="pe-7s-close"></i></button>
+    <h1>Detalhes</h1>
+
+    <hr>
+    <div class="col-md-12 details">
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Tarefa</h5>
+                <h3 style="font-weight: 900;">{{taskDetails.descriptions}}</h3>
+            </div>
+            <div class="row">
+                <h5>Receitas</h5>
+                <h4>{{taskDetails.revenue}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Curstos</h5>
+                <h4>{{taskDetails.expenses}} <span style="font-size: 14px;">KZs</span></h4>
+            </div>
+            <div class="row">
+                <h5>Estado</h5>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span
+                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por inicial','Em curso','Concluido'][taskDetails.state]}}
+                            <b class="caret" *ngIf="states(taskDetails.state).length>0"></b></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let state of states(taskDetails.state)">
+                            <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <h5>Data de criação</h5>
+                <h4>{{taskDetails.createdAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Último acesso</h5>
+                <h4>{{taskDetails.updatedAt|date}}</h4>
+            </div>
+            <div class="row">
+                <h5>Data de conclusão</h5>
+                <h4>{{taskDetails.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
+                        *ngIf="!inTime(taskDetails.dueDate)"></i></h4>
+            </div>
+            <div class="row bd-callout bd-callout-info">
+
+                <h5>Observações</h5>
+                <span>{{taskDetails.observations}}</span>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12" style="border:solid 1px #eee; background-color: #eee;">
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Objectivo</h5>
+                    <h4>{{taskDetails.goal.objectives}} - {{anualGoal(taskDetails.goal)}} por ano</h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <h5>Domínio</h5>
+                    <h4>{{taskDetails.goal.group}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center"><br>
+
+    </div>
+</jw-modal>
+

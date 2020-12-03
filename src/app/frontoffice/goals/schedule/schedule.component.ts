@@ -1,3 +1,7 @@
+import { TodoService } from './../../../services/todo.service';
+import { FormBuilder } from '@angular/forms';
+import { ToDoForm } from './../../../forms/todo.form';
+import { ToDo } from './../../../models/goal/todo';
 import { Goal } from './../../../models/goal/goal';
 import { ModalService } from 'app/components/modal';
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -14,16 +18,20 @@ import * as moment from 'moment';
 })
 export class ScheduleComponent implements OnInit {
 
-  
+
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
- 
+  public todos: Array<ToDo> = []
+  form = new ToDoForm(this.fb)
+  now: Date = new Date();
   constructor(
     private goalService: GoalService,
     public auth: AuthService,
     private taskService: TaskService,
     private toast: ToastService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private fb: FormBuilder,
+    private toDoService: TodoService
   ) { }
 
   ngOnInit() {
@@ -36,7 +44,7 @@ export class ScheduleComponent implements OnInit {
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
 
       this.tasks.all = goals.map(goal => goal.tasks)
-      this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), [])
+      this.tasks.all = this.tasks.all.sort((x, y) => x.createdAt > y.createdAt ? 1 : -1).reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
       this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
       eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
@@ -45,12 +53,15 @@ export class ScheduleComponent implements OnInit {
 
     })
 
+    this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
+      this.todos = todos.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.date).format('YYYY-MM-DD')).sort((x, y) => x.date > y.date ? 1 : -1)
+    })
+
 
   }
 
   updateState(task, state, list) {
 
-    
     task.state = state
     this.taskService.update(task).subscribe(task => {
       this.tasks[list].forEach((t, i) => {
@@ -64,14 +75,32 @@ export class ScheduleComponent implements OnInit {
       });
     })
   }
+  updateToDoState(todo: ToDo) {
 
+    todo.done = !todo.done
+    this.toDoService.update(todo).subscribe(todo => {
+      this.todos.forEach((t, i) => {
+        if (t.id === todo.id) {
+          todo = todo
+          this.toast.success('Actividade Marcado como ' + (todo.done ? '' : 'não ') + 'executado  com sucesso ', 'Sucesso', {
+            timeOut: 300000,
+            progressBar: true,
+          })
+        }
+      });
+    })
+  }
+
+  anualGoal(goal: Goal) {
+    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
+  };
   showTaskDetails(task) {
     this.taskDetails = task
     this.openModal('task-detail-modal')
   }
   //['Pendente','Por inicial','Em curso','Concluido']
   states(s) {
-    
+
     switch (parseInt(s)) {
       case 0:
         return [2, 3, 4]
@@ -84,10 +113,9 @@ export class ScheduleComponent implements OnInit {
     return []
   }
 
-  inTime(t){
+  inTime(t) {
     return new Date(t) > new Date()
   }
-
   openModal(id) {
     this.modalService.open(id);
   }
