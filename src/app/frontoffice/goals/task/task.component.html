@@ -1,7 +1,7 @@
 <div class="btn-group pull-right">
-    <button type="button" (click)="isCalendar=!isCalendar" class="btn active" style="border: none;font-size: 24px;"><i
+    <button type="button" (click)="isCalendar=!isCalendar" class=" tabs btn {{!isCalendar ? 'active' : '' }}" style="border: none;font-size: 24px;"><i
             class="pe-7s-menu"></i></button>
-    <button type="button" (click)="isCalendar=!isCalendar" class="btn" style="border: none;font-size: 24px;"><i
+    <button type="button" (click)="isCalendar=!isCalendar" class=" tabs btn {{isCalendar ? 'active' : '' }}" style="border: none;font-size: 24px;"><i
             class="pe-7s-date"></i></button>
     <button type="button" (click)="modalService.open('todo-modal')" class="btn" style="border: none;font-size: 24px;"><i
             class="pe-7s-plus"></i></button>

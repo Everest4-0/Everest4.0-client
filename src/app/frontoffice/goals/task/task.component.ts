@@ -33,15 +33,11 @@ export class TaskComponent implements OnInit {
     private fb: FormBuilder,
     private toDoService: TodoService
   ) { }
-  ngOnInit(): void {
-    debugger
-    let today = moment()
-    //startOf('day');
-  }
+  ngOnInit(): void { }
 
   saveToDo() {
-    debugger
-    this.todo.date=new Date(this.todo.date+'T'+this.todo.time+':00')
+
+    this.todo.date = new Date(this.todo.date + 'T' + this.todo.time + ':00')
     this.todo.user = this.auth.user
     this.toDoService.create(this.todo).subscribe(toDo => {
       this.toast.success('Evento registado com Sucesso', 'Sucesso')
