@@ -4,6 +4,7 @@ export class ToDo {
     code: string;
     descriptions: string;
     date: Date;
+    time: string;
     done: boolean;
     user: User = new User();
     isActive: boolean;

@@ -4,9 +4,9 @@ import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.compone
 import { ModalModule } from './components/modal/modal.module';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule,NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule} from '@angular/forms' 
+import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'ng-uikit-pro-standard';
@@ -97,7 +97,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-  ],exports:[
+  ], exports: [
     FirstloginComponent,
     DragAndDropDirective,
     ModalModule,
@@ -144,6 +144,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   ],
   bootstrap: [AppComponent],
 
-  schemas: [ NO_ERRORS_SCHEMA ]
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }
