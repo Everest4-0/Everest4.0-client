@@ -62,6 +62,10 @@ full-calendar{
  * Docs & License: https://fullcalendar.io/
  * (c) 2018 Adam Shaw
  */
+
+ .fc-timegrid-event .fc-event-main{
+  color:#000
+}
 .fc {
     direction: ltr;
     text-align: left; }
@@ -1406,7 +1410,6 @@ full-calendar{
   .fc-unthemed .fc-list-empty {
     /* theme will provide own background */
     background-color: #eee; }
-  
   
   .fc th.fc-day-header{
       padding: 11px 7px;

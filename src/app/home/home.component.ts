@@ -1,17 +1,13 @@
-import { NewsService } from './../services/news.service';
+
 import { ModalService } from 'app/components/modal';
 import { Goal } from './../models/goal/goal';
-import { Task } from './../models/goal/task';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { TaskService } from './../services/task.service';
-import { state } from '@angular/animations';
 import { AuthService } from './../services/auth.service';
 import { GoalService } from './../services/goal.service';
 import { Component, OnInit } from '@angular/core';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
-import { Enums, State } from 'app/models/enums';
 
 @Component({
   selector: 'app-home',
@@ -38,8 +34,6 @@ export class HomeComponent implements OnInit {
   public activityChartDataSeries: Array<any>;
   public emailChartDataSeries: Array<number> = []
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
-  bingNews:any
-  news: Array<any> = []
 
 
   constructor(
@@ -48,7 +42,6 @@ export class HomeComponent implements OnInit {
     private taskService: TaskService,
     private toast: ToastService,
     private modalService: ModalService,
-    private newsService: NewsService
   ) { }
 
   ngOnInit() {
@@ -58,8 +51,6 @@ export class HomeComponent implements OnInit {
     lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 7);
     nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
     let sAnt, sAct, eAtr, dashBoard;
-
-    this.newsService.all({}).subscribe(news => {this.bingNews=news;this.news = news.value.filter(x=>x.image!==undefined)})
 
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
 
@@ -161,13 +152,6 @@ export class HomeComponent implements OnInit {
     ];
 
 
-  }
-  getThumbnails(item: any) {
-    try {
-      return item.image.thumbnail.contentUrl
-    } catch (e) {
-      return '';
-    }
   }
   getEmailChartDataSeries() {
 

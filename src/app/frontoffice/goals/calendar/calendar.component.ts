@@ -64,7 +64,7 @@ export class CalendarComponent implements OnInit {
     businessHours: false,
     // event dragging & resizing
     editable: true,
-    dateClick: this.handleDateClick.bind(this), // bind is important!
+  //  dateClick: this.handleDateClick.bind(this), // bind is important!
     eventClick: this.handleEventClick.bind(this), // bind is important!
     locale: 'pt',
     droppable: true,

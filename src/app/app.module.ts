@@ -38,6 +38,7 @@ import { FormStepsComponent } from './components/form-steps/form-steps.component
 import { FormStepsTemplateComponent } from './components/form-steps-template/form-steps-template.component';
 import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
+import { NewsListComponent } from './frontoffice/news/news-list/news-list.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;

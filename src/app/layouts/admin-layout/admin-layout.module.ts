@@ -1,3 +1,4 @@
+import { NewsListComponent } from './../../frontoffice/news/news-list/news-list.component';
 import { TaskComponent } from './../../frontoffice/goals/task/task.component';
 
 import { MomentModule } from 'ngx-moment';
@@ -28,7 +29,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LbdModule } from '../../lbd/lbd.module';
-import { NguiMapModule} from '@ngui/map';
+import { NguiMapModule } from '@ngui/map';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
@@ -42,15 +43,29 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
-import  dayGridPlugin  from '@fullcalendar/daygrid';
-import  interactionPlugin  from '@fullcalendar/interaction';
-import  timeGridPlugin  from '@fullcalendar/timegrid';
-import  listPlugin  from '@fullcalendar/list';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-FullCalendarModule.registerPlugins([ 
+// SwiperOptions from 'swiper' could also be used here instead of SwiperConfigInterface
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  observer: true,
+  direction: 'horizontal',
+  threshold: 50,
+  spaceBetween: 5,
+  slidesPerView: 1,
+  centeredSlides: true
+};
+
+FullCalendarModule.registerPlugins([
   listPlugin,
   interactionPlugin,
   dayGridPlugin,
@@ -69,12 +84,15 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     MomentModule,
     FullCalendarModule,
-    TimeagoModule.forRoot({ intl: { provide: TimeagoIntl/*, useClass: MyIntl */},
+    SwiperModule,
+    FlexLayoutModule,
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl/*, useClass: MyIntl */ },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
     }),
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
+    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' })
   ],
-  declarations: [ 
+  declarations: [
     DiagnosticComponent,
     HomeComponent,
     UserComponent,
@@ -97,14 +115,20 @@ FullCalendarModule.registerPlugins([
     PlansComponent,
     BudgetsComponent,
     TaskComponent,
-
+    NewsListComponent,
 
     ScheduleComponent,
     CalendarComponent,
     GroupByPipe,
     ArrSumPipe,
     ArrFilterPipe
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ]
 })
 
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }

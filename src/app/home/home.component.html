@@ -20,28 +20,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <h3 class="title">Notícias</h3>
-                    <p class="category">Fonte: BING</p>
-                    <label style="font-size: 10px; color: #AAA; font-weight: normal;">{{bingNews.readLink}}</label>
-                </div>
-                <div class="col-md-3" *ngFor="let item of news">
-                    <a href="{{item.url}}" target="_blank">
-                        <div class="card">
-                            <div class="card-header">
-                                <img src="{{ getThumbnails(item)}}" class="img-responsive" style="width: 100%;" /></div>
-                            <div class="card-body" style="padding: 5px 15px; height: 90px;">
-                                <label class="pull-right">{{item.datePublished|amLocale:'pt'| amTimeAgo}}</label>
-                                <h5>{{ item.name }}</h5>
-                                <p style="display: none;">{{ item.description }}</p>
-                            </div>
-                            <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
-                                <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
-
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                <app-news-list></app-news-list>
             </div>
 
         </div>
