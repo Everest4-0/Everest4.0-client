@@ -112,6 +112,7 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
   signIn() {
+    debugger
     this.auth.authenticate(this.signInUser).subscribe((u: User) => {
       this.localUser = u;
       window.open('./', '_self')
