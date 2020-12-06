@@ -55,7 +55,7 @@ export class SelfEvaluationComponent implements OnInit {
     if (v.points > 0) {
       this.toast.warning('Já foi feita auto avaliação sobre ' + v.name + ' no Dominio ' + v.group + ' Aguarde próximo ciclo ou contacte o apoio ao cliente',
         'Atenção', {
-        timeOut: 300000,
+        timeOut: 50000,
       })
       return;
     };
@@ -84,7 +84,7 @@ export class SelfEvaluationComponent implements OnInit {
 
       this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
       this.toast.success('Auto avaliação sobre ' + this.currentEvaluation.evaluation.name + ' no Dominio ' + this.currentEvaluation.evaluation.group + ' feito com successo', 'Sucesso', {
-        timeOut: 300000,
+        timeOut: 50000,
         progressBar: true,
       })
       this.currentEvaluation = new UserEvaluation();
