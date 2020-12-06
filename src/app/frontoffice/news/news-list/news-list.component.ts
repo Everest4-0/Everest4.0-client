@@ -14,7 +14,7 @@ import { ScrollbarOptions } from 'swiper/types/components/scrollbar';
 })
 export class NewsListComponent implements OnInit {
 
-  bingNews:any;
+  bingNews:any={};
   news:any;
 
 
