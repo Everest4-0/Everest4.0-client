@@ -20,11 +20,24 @@ body.modal-open{
     //*{color: #FFF !important;}
     }
     nav.navbar{
-        .btn{
+        .col:hover, .col.active{
+            border-bottom-color: #FFF;
+        }
+        .col{
+            border-bottom: 10px solid rgba(0,0,0,0);
+            cursor: pointer;
+            white-space: none;
             text-align: left;
             border-color: transparent;
-            i.fa{
-                font-size: 36px;
+            color: rgb(0, 66, 110);
+            padding:15px;
+            i{
+                font-size: 60px;
+            }
+            p{
+                font-size: 11px;
+                color: #000000;
+                width: 100%;
             }
         }
     }

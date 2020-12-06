@@ -1,28 +1,31 @@
+
 <nav class="navbar navbar-dark bg-aqua">
   <div class="main-content">
     <div class="container-fluid">
       <div class="container-fluid">
-        <div class="col-md-4">
-          <h2>{{['Auto avaliação','FeedBack 360º','FeedBack request'][isTab-1]}}</h2>
+        <div class="col-lg-4 col-md-4">
+          <h2>{{['Auto avaliação','FeedBack 360º','Pedidos de FeedBack'][isTab-1]}}</h2>
         </div>
-        <div class="col-md-6 text-right" style="padding:0 15px;">
-          <div class="btn {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
-
-            <i class="pe-7s-refresh" style="font-size:24px"></i><br>
-            <h5>Auto avaliação</h5>
+        <div class="col-lg-6 col-md-8 text-right">
+            <div class="row">
+          <div class="col-xs-4 col {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
+            <i class="pe-7s-graph1"></i><br>
+            <h4>Auto avaliação</h4>
+            <p>Permite ao utilizar fazer um diagnóstico em termos de objectivos (Pessoais, Profissionais e Financeiros), especificando a situação actual</p>
           </div>
-          <div class="btn {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
-
-            <i class="pe-7s-repeat" style="font-size:24px"></i><br>
-            <h5>FeedBack 360º</h5>
+          <div class="col-xs-4 col {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
+            <i class="pe-7s-repeat"></i><br>
+            <h4>FeedBack 360º</h4>
+            <p>Permite ao utilizador solicitar e obter a avaliação de até 3 pessoas, comparando automaticamente os resultados</p>
           </div>
-          <div class="btn {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
-            <i class="pe-7s-mail-open-file" style="font-size:24px"></i>
-            <br>
-            <h5>Solicitações de Feedback </h5>
+          <div class="col-xs-4 col {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
+            <i class="pe-7s-users"></i><br>
+            <h4>Pedidos de FeedBack</h4>
+            <p>Permite visualizar e dar tratamento aos pedidos de avaliação recebidos pelo utilizador</p>
           </div>
+      </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-2">
         </div>
       </div>
     </div>
