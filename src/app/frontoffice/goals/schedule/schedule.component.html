@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="header">        
+    <div class="header">
         <h4 class="title"><b>Agendas e pendentes</b></h4>
         <span>{{now|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM [de] YYYY" }}</span>
         <br>
@@ -7,20 +7,25 @@
     <div class="card-body">
         <div class="col-md-12">
             <div class="list-group">
-                <a href="#" class="list-group-item {{(item.date|date:'H')==(now|date:'H') ? 'active' : ''}}" *ngFor="let item of todos; let i = index">
+                <a href="#" class="list-group-item {{((item.startDate|date)<(now|date) && (item.endDate|date)>(now|date)) ? 'active' : ''}}"
+                    *ngFor="let item of todos; let i = index">
                     <div class="row">
                         <div class="col-xs-2 col-md-1">
                             <div class="checkbox">
-                                <input id="checkbox_{{i}}" type="checkbox" [checked]="item.done" (click)="updateToDoState(item)">
+                                <input id="checkbox_{{i}}" type="checkbox" [checked]="item.done"
+                                    (click)="updateToDoState(item)">
                                 <label for="checkbox_{{i}}"></label>
                             </div>
                         </div>
                         <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
                             <h5 style="padding: 0;margin: 0; font-weight: 600;">
-                                {{item.date|amLocale:'pt'|  amDateFormat: "HH:MM" }}
+                                {{item.startDate|amLocale:'pt'|  amDateFormat: "HH:mm" }} - 
+                                {{item.endDate|amLocale:'pt'|  amDateFormat: "HH:mm" }}
                             </h5>
-                            <span>{{item.descriptions}}</span> <i class="pe-7s-stopwatch pull-right"  *ngIf="(item.date|date:'H')==(now|date:'H')"></i><br>
-                            <span class="label label-{{['default','danger','warning','success','danger'][item.done]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.done]}}</span>
+                            <span><b>{{item.subject}}</b> <br/> {{item.descriptions}}</span> <i class="pe-7s-stopwatch pull-right"
+                                *ngIf="((item.startDate|date)<(now|date) && (item.endDate|date)>(now|date))"></i><br>
+                            <span
+                                class="label label-{{['default','danger','warning','success','danger'][item.done]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][item.done]}}</span>
                             <label class="pull-right"> {{item.createdAt|amLocale:'pt'| amTimeAgo}}</label>
                         </div>
                     </div>
@@ -88,7 +93,7 @@
     <div class="card-footer">
         <hr>
         <div class="stats">
-            <i class="fa fa-history"></i> Updated 3 minutes ago
+            <i class="fa fa-history"></i> actualizado em 32 segundos
         </div>
     </div>
 </div>
@@ -174,4 +179,3 @@
 
     </div>
 </jw-modal>
-

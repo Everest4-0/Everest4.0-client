@@ -42,7 +42,7 @@ export class ScheduleComponent implements OnInit {
     nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
     let sAnt, sAct, eAtr, dashBoard;
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
-
+      goals.forEach(goal => goal.tasks.forEach(t => t.goal = goal))
       this.tasks.all = goals.map(goal => goal.tasks)
       this.tasks.all = this.tasks.all.sort((x, y) => x.createdAt > y.createdAt ? 1 : -1).reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
@@ -54,7 +54,9 @@ export class ScheduleComponent implements OnInit {
     })
 
     this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
-      this.todos = todos.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.date).format('YYYY-MM-DD')).sort((x, y) => x.date > y.date ? 1 : -1)
+      this.todos = todos
+        //.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
+        .sort((x, y) => x.startDate > y.startDate ? 1 : -1)
     })
 
 
@@ -68,7 +70,7 @@ export class ScheduleComponent implements OnInit {
         if (t.id === task.id) {
           this.tasks[list].splice(i, 1);
           this.toast.success('Auto avaliação sobre ', 'Sucesso', {
-            timeOut: 300000,
+            timeOut: 50000,
             progressBar: true,
           })
         }
@@ -83,7 +85,7 @@ export class ScheduleComponent implements OnInit {
         if (t.id === todo.id) {
           todo = todo
           this.toast.success('Actividade Marcado como ' + (todo.done ? '' : 'não ') + 'executado  com sucesso ', 'Sucesso', {
-            timeOut: 300000,
+            timeOut: 50000,
             progressBar: true,
           })
         }
