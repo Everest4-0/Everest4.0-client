@@ -6,9 +6,11 @@ export class ToDoForm {
 
     constructor(fb: FormBuilder) {
         return fb.group({
-            date: [''],
-            time: [''],
-            descriptions:[],
+            subject: [''],
+            startDate: [''],
+            startTime: [''],
+            endTime: [''],
+            descriptions: [],
         })
     }
 }
