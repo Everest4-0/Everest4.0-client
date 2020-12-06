@@ -8,7 +8,7 @@ import { GoalService } from './../services/goal.service';
 import { Component, OnInit } from '@angular/core';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   public activityChartResponsive: any[];
   public activityChartLegendItems: LegendItem[];
   public activityChartDataSeries: Array<any>;
-  public emailChartDataSeries: Array<number> = []
+  public emailChartDataSeries: Array<number> = [0,0]
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
 
 
@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    debugger
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
@@ -154,15 +155,15 @@ export class HomeComponent implements OnInit {
 
   }
   getEmailChartDataSeries() {
-
-    let now = new Date((new Date()).setHours(0, 0, 0, 0))
-    let done = this.tasks.all.filter(task => new Date(task.dueDate) > now).filter(task => task.state == '3').length,
-      toDo = this.tasks.all.filter(task => new Date(task.dueDate) > now).filter(task => task.state == '1').length
+    debugger
+    let now = moment()
+    let done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) >2).length,
+        toDo = this.tasks.all.filter(task => moment(task.dueDate) < now).filter(task => parseInt(task.state) < 3).length
 
     let f = {
       series: [
-        done / (done + toDo) * 100,
-        toDo / (done + toDo) * 100
+        (done / (done + toDo) * 100).toFixed(2),
+        (toDo / (done + toDo) * 100).toFixed(2)
 
       ]
     }
@@ -179,7 +180,7 @@ export class HomeComponent implements OnInit {
         if (t.id === task.id) {
           this.tasks[list].splice(i, 1);
           this.toast.success('Auto avaliação sobre ', 'Sucesso', {
-            timeOut: 300000,
+            timeOut: 50000,
             progressBar: true,
           })
         }
