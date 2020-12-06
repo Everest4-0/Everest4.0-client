@@ -2,9 +2,12 @@ import { User } from 'app/models/user';
 export class ToDo {
     id: string;
     code: string;
+    subject: string;
     descriptions: string;
-    date: Date;
-    time: string;
+    startDate: Date;
+    endDate: Date;
+    startTime: string;
+    endTime: string;
     done: boolean;
     user: User = new User();
     isActive: boolean;
