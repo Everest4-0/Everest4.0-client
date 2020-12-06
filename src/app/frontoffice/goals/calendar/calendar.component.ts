@@ -21,8 +21,8 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-
-  public tasks: Array<any>=[]
+  // taskDetails:any;
+  public tasks: Array<any> = []
   public taskDetails: Task = new Task()
   calendarOptions: CalendarOptions = {
     themeSystem: 'bootstrap',
@@ -34,16 +34,26 @@ export class CalendarComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this), // bind is important!
     eventClick: this.handleEventClick.bind(this), // bind is important!
     locale: 'pt',
+    dayMaxEventRows: 1,
     droppable: true,
-   /* eventRender: function (info) {
-      alert(1)
-    },
-*/
+    /* eventRender: function (info) {
+       alert(1)
+     },
+ */
     customButtons: {
       expand: {
         click: function (e) {
-          $('.fc-expand-button').removeClass('btn-primary').html($('<i/>').addClass('pe-7s-exapnd2').attr('style', 'font-size:24px;'))
-          $('.fc-closeModal-button').removeClass('btn-primary').html($('<i/>').addClass('pe-7s-close').attr('style', 'font-size:24px;'))
+
+          $('<i></i>').addClass('pe-7s-expand2').attr('style', 'font-size:24px;')
+            .appendTo(
+              $('.fc-expand-button').removeClass('btn-primary')
+                .html('')
+            )
+
+          $('<i></i>').addClass('pe-7s-close').attr('style', 'font-size:24px;')
+            .appendTo(
+              $('.fc-closeModal-button').removeClass('btn-primary')
+                .html(''))
           $('#calendar-modal').attr('style', 'display:block')
         }
       }
@@ -64,14 +74,14 @@ export class CalendarComponent implements OnInit {
     businessHours: false,
     // event dragging & resizing
     editable: true,
-  //  dateClick: this.handleDateClick.bind(this), // bind is important!
+    //  dateClick: this.handleDateClick.bind(this), // bind is important!
     eventClick: this.handleEventClick.bind(this), // bind is important!
     locale: 'pt',
     droppable: true,
+    dayMaxEventRows: 5,
     customButtons: {
       closeModal: {
         click: function () {
-
           $('#calendar-modal').attr('style', 'display:none')
         }
       }
@@ -82,10 +92,10 @@ export class CalendarComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek,closeModal'
     },
 
-    //editable: true,
+    // editable: true,
 
 
-    // complete: function() {alert('complete');}, 
+    // complete: function() {alert('complete');},
   };
 
   constructor(
@@ -94,7 +104,7 @@ export class CalendarComponent implements OnInit {
     private taskService: TaskService,
     private toast: ToastService,
     private modalService: ModalService,
-    private toDoService:TodoService
+    private toDoService: TodoService
   ) { }
 
   ngOnInit() {
@@ -102,21 +112,26 @@ export class CalendarComponent implements OnInit {
 
       this.tasks = goals.map(goal => goal.tasks)
       this.tasks = this.tasks
-      .reduce((x, y) => x.concat(y), [])
-      .map(t => { return { color: '#ffab38', title: t.descriptions, date: t.dueDate, allDay: true  } })
-      this.toDoService.all({userId:this.auth.user.id}).subscribe(todos=>{
+        .reduce((x, y) => x.concat(y), [])
+        .map(t => { return { task: t, color: '#ffab38', title: t.descriptions, date: t.dueDate, allDay: true } })
+      this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
         debugger
-        let t=todos.map(t => { return  { 
-          title:'Meeting' ,
-          description: t.descriptions,
-          date: t.date,
-          className: 'fc-bg-lightgreen',
-          icon : "suitcase"}} )
-          this.tasks=this.tasks.concat(t)
+        const t = todos.map(t => {
+          return {
+            task: t,
+            title: 'Meeting',
+            description: t.descriptions,
+            start: t.startDate,
+            end: t.endDate,
+            className: 'fc-bg-lightgreen',
+            icon: 'suitcase'
+          }
+        })
+        this.tasks = this.tasks.concat(t)
         this.calendarOptions.events = this.calendarBigOptions.events = this.tasks
       })
 
-     // this.calendarOptions.events = this.calendarBigOptions.events = this.tasks
+      // this.calendarOptions.events = this.calendarBigOptions.events = this.tasks
 
 
     })
@@ -135,7 +150,7 @@ export class CalendarComponent implements OnInit {
         if (t.id === task.id) {
           this.tasks[list].splice(i, 1);
           this.toast.success('Auto avaliação sobre ', 'Sucesso', {
-            timeOut: 300000,
+            timeOut: 50000,
             progressBar: true,
           })
         }
@@ -147,7 +162,7 @@ export class CalendarComponent implements OnInit {
     this.taskDetails = task
     this.openModal('task-detail-modal')
   }
-  //['Pendente','Por inicial','Em curso','Concluido']
+  // ['Pendente','Por inicial','Em curso','Concluido']
   states(s) {
 
     switch (parseInt(s)) {
@@ -177,8 +192,14 @@ export class CalendarComponent implements OnInit {
     alert('date click! ' + arg.dateStr)
   }
   handleEventClick(arg) {
+    debugger
+    this.taskDetails = arg.event.task
+    this.modalService.open('task-detail-modal')
     alert('event click! ' + JSON.stringify(arg.event))
   }
 
+  anualGoal(goal: Goal) {
+    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
+  };
 
 }
