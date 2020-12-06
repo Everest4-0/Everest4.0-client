@@ -37,11 +37,12 @@ export class TaskComponent implements OnInit {
 
   saveToDo() {
 
-    this.todo.date = new Date(this.todo.date + 'T' + this.todo.time + ':00')
+    this.todo.endDate = new Date(this.todo.startDate + 'T' + this.todo.endTime + ':00')
+    this.todo.startDate = new Date(this.todo.startDate + 'T' + this.todo.startTime + ':00')
     this.todo.user = this.auth.user
     this.toDoService.create(this.todo).subscribe(toDo => {
       this.toast.success('Evento registado com Sucesso', 'Sucesso')
-      if (moment(0, "HH").diff(toDo.date, "days") === 0) { this.child.todos.push(toDo) }
+      if (moment(0, "HH").diff(toDo.startDate, "days") === 0) { this.child.todos.push(toDo) }
       this.todo = new ToDo()
       this.modalService.close('todo-modal')
     })
