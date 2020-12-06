@@ -1,3 +1,4 @@
+import { ToastModule, ToastService } from 'ng-uikit-pro-standard';
 import { GroupByPipe } from './../../../pipes/group-by.pipe';
 import { UserEvaluation } from './../../../models/user-evaluation';
 import { UserEvaluationService } from './../../../services/user-evaluation.service';
@@ -22,8 +23,8 @@ export class ResultsComponent implements OnInit {
 
 
   public results = [
-    { code: 'S', name: 'Forças', evaluations: [], groups :[],class: 'bg-info', conditions: (x) => x == 4 },
-    { code: 'W', name: 'Fraquezas', evaluations: [], groups :[], class: "bg-danger", conditions: (x) => x < 3 }
+    { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x == 4 },
+    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => x < 3 }
     /*{ code: 'O', name: 'Oportunidades' },
     { code: 'T', name: 'Ameaças' },*/
   ]
@@ -37,19 +38,21 @@ export class ResultsComponent implements OnInit {
     private modalService: ModalService,
     private fb: FormBuilder,
     private evaluationService: UserEvaluationService,
-    private goalService: GoalService) { }
+    private goalService: GoalService,
+    private toast: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
-      
+
       this.evaluations = evaluations
       this.results.forEach(result => {
         result.evaluations = evaluations
           .filter(evaluation => result.conditions(evaluation.points));
 
-          result.groups = result.evaluations.map(x => x.evaluation.group)
+        result.groups = result.evaluations.map(x => x.evaluation.group)
           .filter((value, index, self) => {
             return self.indexOf(value) === index;
           }
@@ -74,15 +77,15 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
-    
+
     this.goalService.create(this.goal).subscribe(goal => {
       this.goal = new Goal()
       this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
-      Swal.fire(
-        'Sucesso!',
-        'Resultados esperado registado com sucesso',
-        'success'
-      )
+
+      this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
+        timeOut: 50000,
+        progressBar: true,
+      })
       this.modalService.close('result-modal')
     })
   }
