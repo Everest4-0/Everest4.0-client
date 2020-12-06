@@ -32,7 +32,7 @@ export class EvaluationRequestComponent implements OnInit {
     private evaluationRequestService: EvaluationRequestService,
     private userEvaluationService: UserEvaluationService,
     public auth: AuthService,
-    private toast:ToastService,
+    private toast: ToastService,
     intl: TimeagoIntl) {
     intl.strings = pt;
     intl.changes.next();
@@ -67,8 +67,8 @@ export class EvaluationRequestComponent implements OnInit {
         if (e.id == userEvaluation.evaluationId)
           return e.points = parseFloat(e.points) + (userEvaluation.points * 1)
       })
-      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para '+ this.userEvaluation.requester.fullName , 'Sucesso', {
-        timeOut: 300000,
+      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para ' + this.userEvaluation.requester.fullName, 'Sucesso', {
+        timeOut: 50000,
         progressBar: true,
       })
       this.closeModal('self-evaluation-modal')
