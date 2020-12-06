@@ -193,7 +193,7 @@ export class FeedbackEvaluationComponent implements OnInit {
       if (request.id) {
         this.toast.success('Solicitação de Feedback ao seu ' +
          this.evaluationRequest.relation + ' ' + this.evaluationRequest.requested.fullName + ' foi efectuado com suecceso', 'Sucesso', {
-          timeOut: 300000,
+          timeOut: 50000,
           progressBar: true,
         })
         this.evaluationRequest = new EvaluationRequest();
