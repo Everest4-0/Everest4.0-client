@@ -31,12 +31,12 @@ export class BudgetsComponent implements OnInit {
     private budgetService: BudgetService,
     private authService: AuthService,
     private modalService: ModalService,
-    private toast:ToastService) { }
+    private toast: ToastService) { }
 
   ngOnInit(): void {
 
     this.goalService.all({ userId: this.authService.user.id }).subscribe(goals => {
-
+      debugger
       goals.forEach(goal => {
         goal.tasks.forEach(task => {
           if (task.revenue > 0) {
@@ -86,21 +86,21 @@ export class BudgetsComponent implements OnInit {
     this.modalService.close(id);
   }
   valueToFix(task: Task, direction: boolean = true) {
-    let final = 0//task.budgets.reduce((x: number, y) => x + parseFloat(y.value), 0).toFixed(2)
+    let final = task.budgets.reduce((x: number, y) => x + parseFloat(y.value + ''), 0).toFixed(2)
 
     return final;
   }
   stateBudget(task: Task, direction: boolean) {
     debugger
     let total = (direction ? task.revenue : task.expenses)
-    let pago =  0//parseFloat(this.valueToFix(task, direction))
+    let pago = parseFloat(this.valueToFix(task, direction) + '')
     let resto = total - pago
     //
-    if (pago > total )
-    return 0
-    else if (pago > total -total * 10 / 100)
+    if (pago > total)
+      return 0
+    else if (pago > total - total * 10 / 100)
       return 1;
     else
-      return 2 
+      return 2
   }
 }
