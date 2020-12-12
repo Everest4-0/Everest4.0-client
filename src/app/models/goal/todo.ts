@@ -1,4 +1,4 @@
-import { User } from 'app/models/user';
+import { User } from 'app/models/main/user';
 export class ToDo {
     id: string;
     code: string;

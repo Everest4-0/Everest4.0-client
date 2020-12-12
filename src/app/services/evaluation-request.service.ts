@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IService } from './service.interface';
-import { EvaluationRequest } from './../models/evaluation-request';
+import { EvaluationRequest } from '../models/diagnostic/evaluation-request';
 import { AppService } from './app.service';
 import { Injectable } from '@angular/core';
 

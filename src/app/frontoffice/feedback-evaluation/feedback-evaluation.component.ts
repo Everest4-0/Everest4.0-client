@@ -4,16 +4,14 @@ import { EvaluationRequestService } from './../../services/evaluation-request.se
 import { ValidationService } from './../../services/validators/validation.service';
 import { EvaluationRequestForm } from './../../forms/evaluation-request.form';
 import { FormBuilder } from '@angular/forms';
-import { EvaluationRequest } from './../../models/evaluation-request';
+import { EvaluationRequest } from '../../models/diagnostic/evaluation-request';
 import { ChartType, LegendItem } from './../../lbd/lbd-chart/lbd-chart.component';
-import { Evaluation } from './../../models/evaluation';
+
 import { AuthService } from './../../services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';
 import { EvaluationService } from './../../services/evaluation.service';
 import { ModalService } from './../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
-
-import * as Chartist from 'chartist';
 
 @Component({
   selector: 'app-feedback-evaluation',
@@ -192,7 +190,9 @@ export class FeedbackEvaluationComponent implements OnInit {
       this.setActiveRelation()
       if (request.id) {
         this.toast.success('Solicitação de Feedback ao seu ' +
-         this.evaluationRequest.relation + ' ' + this.evaluationRequest.requested.fullName + ' foi efectuado com suecceso', 'Sucesso', {
+          this.evaluationRequest.relation + ' '
+          + this.evaluationRequest.requested.datas.fullName
+          + ' foi efectuado com suecceso', 'Sucesso', {
           timeOut: 50000,
           progressBar: true,
         })

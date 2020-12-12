@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title">Preferencias </h4>
+    </div>
+    <div class="content">
+
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Idioma</label>
+                        <select type="text" class="form-control" placeholder="Company">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Fuso horário</label>
+                        <select type="text" class="form-control" placeholder="Company">
+                        </select>
+                        <label>8-character minimum; case sensitive</label>
+                        <label>Uma palavra passe forte ajuda a prevenir o acesso não autorizado à sua conta.</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-fill btn-info btn-fill">Salvar</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card">
+    <div class="header">
+        <h4 class="title">Categorias de Notícias que me interesa </h4>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col col-md-6" *ngFor="let item of newscategories">
+                <input type="checkbox" class="" />{{item}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="header">
+        <h4 class="title">Notificações </h4>
+        <label class="pull-right">Pop, E-mail, SMS</label>
+    </div>
+    <div class="content">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of notifications">
+                {{item}}
+                <input type="checkbox" class="pull-right" />
+                <input type="checkbox" class="pull-right" />
+                <input type="checkbox" class="pull-right" />
+
+            </li>
+        </ul>
+    </div>
+</div>

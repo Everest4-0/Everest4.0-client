@@ -1,8 +1,8 @@
 import { UserEvaluationService } from './../../services/user-evaluation.service';
 import { AuthService } from 'app/services/auth.service';
-import { UserEvaluation } from './../../models/user-evaluation';
+import { UserEvaluation } from 'app/models/diagnostic/user-evaluation';
 import { EvaluationService } from '../../services/evaluation.service';
-import { Evaluation } from '../../models/evaluation';
+import { Evaluation } from 'app/models/diagnostic/evaluation';
 import { ModalService } from './../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2'

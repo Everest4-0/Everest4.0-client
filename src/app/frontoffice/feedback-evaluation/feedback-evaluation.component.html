@@ -4,7 +4,7 @@
 </div>
 <div>
     <div class="col-md-12" *ngFor="let item of evaluations">
-        <lbd-chart [title]="item[0]" [subtitle]="'All products including Taxes'" [chartType]="activityChartType"
+        <lbd-chart [title]="item[0]" [subtitle]="'...'" [chartType]="activityChartType"
             [chartData]="getActivityChartData(item[0])" chartClass="lite" [chartOptions]="activityChartOptions"
             [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems">
         </lbd-chart>

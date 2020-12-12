@@ -55,7 +55,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{auth.user.firstName}} {{auth.user.lastName}}
+                        {{auth.user.datas.firstName}} {{auth.user.datas.lastName}}
                         <b class="caret"></b>
                     </a>
                         <div class="card card-user dropdown-menu" style="width: 300px;">
@@ -67,7 +67,7 @@
                                 <div class="author" style="margin-top: -150px;">
                                     <img class="avatar border-gray" style="width: 200px; height: 200px;" src="{{auth.serverAdresss+auth.user.photoUrl}}" alt="..." />
         
-                                    <h4 class="title">{{auth.user.firstName}} {{auth.user.lastName}}<br />
+                                    <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
                                         <small>{{auth.user.email}}</small><br>
                                     </h4>
                                 </div>

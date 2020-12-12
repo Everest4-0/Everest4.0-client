@@ -1,11 +1,11 @@
 import { take } from 'rxjs/operators';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { Evaluation } from './../../models/evaluation';
+import { Evaluation } from 'app/models/diagnostic/evaluation';
 import { AuthService } from './../../services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';
 import { EvaluationService } from './../../services/evaluation.service';
 import { ModalService } from './../../components/modal/modal.service';
-import { UserEvaluation } from './../../models/user-evaluation';
+import { UserEvaluation } from 'app/models/diagnostic/user-evaluation';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
@@ -55,7 +55,7 @@ export class SelfEvaluationComponent implements OnInit {
     if (v.points > 0) {
       this.toast.warning('Já foi feita auto avaliação sobre ' + v.name + ' no Dominio ' + v.group + ' Aguarde próximo ciclo ou contacte o apoio ao cliente',
         'Atenção', {
-        timeOut: 50000,
+        timeOut: 5000,
       })
       return;
     };

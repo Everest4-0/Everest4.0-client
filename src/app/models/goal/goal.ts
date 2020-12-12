@@ -1,6 +1,6 @@
 import { Task } from './task';
 import { PartialGoal } from './partial-goal';
-import { User } from 'app/models/user';
+import { User } from 'app/models/main/user';
 export class Goal {
     id: string;
     code: string;

@@ -1,3 +1,5 @@
+import { UserSettingsComponent } from './../../frontoffice/user/user-settings/user-settings.component';
+import { UserSecurityComponent } from '../../frontoffice/user/user-security/user-security.component';
 import { NewsListComponent } from './../../frontoffice/news/news-list/news-list.component';
 import { TaskComponent } from './../../frontoffice/goals/task/task.component';
 
@@ -116,6 +118,8 @@ FullCalendarModule.registerPlugins([
     BudgetsComponent,
     TaskComponent,
     NewsListComponent,
+    UserSettingsComponent,
+    UserSecurityComponent,
 
     ScheduleComponent,
     CalendarComponent,

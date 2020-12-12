@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <lbd-chart [title]="'% Objectivos semanais'" *ngIf="tasks.all.length>0" [subtitle]="''"
+                    <lbd-chart [title]="'% Objectivos semanais'" [subtitle]="''"
                         [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType"
                         [chartData]="getEmailChartDataSeries()" [legendItems]="emailChartLegendItems" [withHr]="true"
                         [chartOptions]="chartOptions">
@@ -24,7 +24,7 @@
             </div>
 
         </div>
-        <div class="col-md-4" style=" min-height: ">
+        <div class="col-md-4" style=" min-height: 200px">
             <app-task></app-task>
         </div>
 

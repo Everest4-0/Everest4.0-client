@@ -1,4 +1,4 @@
-import { User } from 'app/models/user';
+import { User } from 'app/models/main/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,11 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomeComponent implements OnInit {
 
-  public isTab = 0;
+  public isTab = 1;
   public user: User = this.auth.user;
-  constructor(public auth: AuthService) { }
+  constructor(
+    public auth: AuthService
+  ) { }
 
   ngOnInit() {
+    this.auth.one(this.auth.user.id).subscribe(user => this.user = user)
   }
 
 

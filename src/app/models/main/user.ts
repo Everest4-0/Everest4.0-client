@@ -1,5 +1,7 @@
-import { EvaluationRequest } from './evaluation-request';
-import { Evaluation } from './evaluation';
+import { UserSetting } from './user_setting';
+import { UserData } from './user_data';
+import { EvaluationRequest } from '../diagnostic/evaluation-request';
+import { Evaluation } from '../diagnostic/evaluation';
 import { SocialUser } from 'angularx-social-login';
 import { Role } from './role';
 import { Account } from 'msal';
@@ -8,17 +10,11 @@ export class User {
     id: string;
     username: string;
     code: string;
-    firstName: string;
-    lastName: string;
-    othersName: string;
-    
-    get fullName(){
-        return this.firstName + ' ' + this.lastName
-    }
+
     email: string;
     telePhone: number;
-    apikey: string;
 
+    apikey: string;
     password: string;
 
     photoUrl: string;
@@ -31,19 +27,24 @@ export class User {
     evaluationRequestes: Array<EvaluationRequest> = []
     evaluationRequested: Array<EvaluationRequest> = []
 
+    datas: UserData = new UserData();
+    settings: UserSetting = new UserSetting();
+
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
 
 
 
-    /*constructor(description?: string) {
-        this.description = description;
-    }*/
+    constructor() {
+        this.datas = new UserData()
+        this.settings = new UserSetting()
+    }
     castSocialUser(user) {
+        this.datas = new UserData()
+        this.settings = new UserSetting()
         user = { 'GOOGLE': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
-        this.firstName = user.firstName
-        this.lastName = user.lastName
+        this.datas = user.datas
         this.email = user.email
         this.photoUrl = user.photoUrl
         this.apikey = user.apikey
@@ -52,9 +53,11 @@ export class User {
         //return { 'GOOGLE': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
     }
     castGoogleUser(user: SocialUser) {
+        this.datas = new UserData()
+        this.settings = new UserSetting()
         let fullName = user.name.split(' ')
-        this.firstName = fullName.shift()
-        this.lastName = fullName.join(' ');
+        this.datas.firstName = fullName.shift()
+        this.datas.lastName = fullName.join(' ');
         this.email = user.email
         this.photoUrl = user.photoUrl
         this.apikey = user.authToken
@@ -63,9 +66,12 @@ export class User {
         return this;
     }
     castMicrosoftUser(user: Account) {
+        
+        this.datas = new UserData()
+        this.settings = new UserSetting()
         let fullName = user.name.split(' ')
-        this.firstName = fullName.shift()
-        this.lastName = fullName.join(' ');
+        this.datas.firstName = fullName.shift()
+        this.datas.lastName = fullName.join(' ');
         this.email = user.userName
         //this.photoUrl = user.photoUrl
         this.apikey = user.homeAccountIdentifier
@@ -75,7 +81,7 @@ export class User {
     }
 
     get ownRole() {
-        debugger
+        
         return [{ name: this.roleId, icon: 'pe-7s-medal', color: 'bg-warning' },
         { name: this.roleId, icon: 'pe-7s-delete-user', color: 'bg-default' },][this.roleId == 'FREE' ? 0 : 1]
     }

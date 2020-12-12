@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Evaluation } from '../models/evaluation';
+import { Evaluation } from '../models/diagnostic/evaluation';
 import { HttpClient } from '@angular/common/http';
 import { IService } from './service.interface';
 import { AppService } from './app.service';

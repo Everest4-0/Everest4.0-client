@@ -31,7 +31,7 @@ export class ProgressBarComponent implements OnInit {
     return parseFloat(this.done).toFixed(2)
   }
   get label() {
-    return this.showLabel ? parseFloat(this.done).toFixed(2) + '-%' : ''
+    return this.showLabel ? parseFloat(this.done).toFixed(2) + ' %' : ''
   }
   constructor() { }
 

@@ -6,7 +6,7 @@
 </div>
 <div class="col-md-6" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
     <div class="card">
-        <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i}}.jpg)">
+        <div class="card-header" style="padding: 5px 15px; background-image:url(assets/img/sidebar-{{i+1}}.jpg)">
             <img src="" class="img-responsive" />
             <h4>{{item[0]}}</h4>
         </div>

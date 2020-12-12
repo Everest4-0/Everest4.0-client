@@ -1,14 +1,14 @@
 import { ToastService } from 'ng-uikit-pro-standard';
-import { UserEvaluation } from './../../models/user-evaluation';
+import { UserEvaluation } from 'app/models/diagnostic/user-evaluation';
 import { TimeagoIntl } from 'ngx-timeago';
-import { EvaluationRequest } from './../../models/evaluation-request';
+import { EvaluationRequest } from '../../models/diagnostic/evaluation-request';
 import { AuthService } from 'app/services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';
 import { EvaluationRequestService } from './../../services/evaluation-request.service';
 import { EvaluationService } from './../../services/evaluation.service';
 import { ModalService } from 'app/components/modal';
 import { Component, OnInit } from '@angular/core';
-import { Evaluation } from 'app/models/evaluation';
+import { Evaluation } from 'app/models/diagnostic/evaluation';
 
 import { strings as pt } from 'ngx-timeago/language-strings/pt-br';
 
@@ -67,7 +67,7 @@ export class EvaluationRequestComponent implements OnInit {
         if (e.id == userEvaluation.evaluationId)
           return e.points = parseFloat(e.points) + (userEvaluation.points * 1)
       })
-      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para ' + this.userEvaluation.requester.fullName, 'Sucesso', {
+      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para ' + this.userEvaluation.requester.datas.fullName, 'Sucesso', {
         timeOut: 50000,
         progressBar: true,
       })

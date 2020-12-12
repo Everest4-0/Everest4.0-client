@@ -1,16 +1,22 @@
 .cover{
-  background-size: 100%; padding:15px; background-size: 100%;
+  background-size: 100%;
+  padding:15px;
+  height: 350px;
+  width: 350px;
+  background-repeat: no-repeat;
 }
 .uploader:hover{
   opacity: 1;
-    background: rgba(255,255,255,0.7);}
+  background: rgba(255,255,255,0.7);
+  }
     .uploader {
-        text-align: center;
-        border: dashed 1px #ddd;
-        position: relative;
-        margin: 0 auto;
-        opacity: 0.3;
-        background: rgba(255,255,255,0.1);
+      text-align: center;
+      border: dashed 1px #181717;
+      position: relative;
+      margin: 15% auto;
+      opacity: 0.6;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
   padding: 15px;
     input {
       opacity: 0;
@@ -23,6 +29,9 @@
     }
   
     label {
+      background: #02748b;
+      color: #FFF;
+      border: #FFF;
     }
   
   }

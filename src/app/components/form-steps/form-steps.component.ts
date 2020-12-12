@@ -10,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FormStepsComponent implements OnInit {
 
-  @Input() count=3;
+  @Input() count=4;
   steps: Observable<StepModel[]>;
   currentStep: Observable<StepModel>;
 

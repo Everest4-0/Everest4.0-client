@@ -52,14 +52,14 @@
                                     <div class="form-group">
                                         <label>Primeiro nome</label>
                                         <input type="text" class="form-control" placeholder="Company"
-                                            value="{{auth.user.firstName}}">
+                                            value="{{auth.user.datas.firstName}}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Ultimo nome</label>
                                         <input type="text" class="form-control" placeholder="Last Name"
-                                            value="{{auth.user.lastName}}">
+                                            value="{{auth.user.datas.lastName}}">
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                         <div class="author">
                             <img class="avatar border-gray" src="{{auth.serverAdresss+auth.user.photoUrl}}" alt="..." />
 
-                            <h4 class="title">{{auth.user.firstName}} {{auth.user.lastName}}<br />
+                            <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
                                 <small>{{auth.user.code}}</small>
                             </h4>
                         </div>

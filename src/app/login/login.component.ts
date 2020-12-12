@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { UserForm } from './../forms/user.form';
-import { User } from './../models/user';
+import { User } from 'app/models/main//user';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -75,12 +75,10 @@ export class LoginComponent implements OnInit {
   login = (user) => {
     debugger
     this.localUser.castSocialUser(user);
-    this.auth.authenticate(this.localUser).subscribe((u: User) => {
-      this.localUser = u;
+    this.auth.authenticate(this.localUser, (user: User) => {
+      this.localUser = user;
       window.open('./', '_self')
     })
-    this.user = user;
-    this.loggedIn = (user != null);
   }
 
   checkoutAccount() {
@@ -112,16 +110,15 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
   signIn() {
-    debugger
-    this.auth.authenticate(this.signInUser).subscribe((u: User) => {
+    this.auth.authenticate(this.signInUser,(u: User) => {
       this.localUser = u;
       window.open('./', '_self')
-    },
-      error => this.signInErro = error)
-  }
+      //error => this.signInErro = error
+    })
+  };
   signOn() {
     this.auth.create({ email: this.signOnUser.email, password: this.signOnUser.password, provider: 'LOCAL' }).subscribe(user => {
-      this.auth.authenticate(user).subscribe((u: User) => {
+      this.auth.authenticate(user,(u: User) => {
         this.localUser = u;
         window.open('./', '_self')
       })

@@ -1,35 +1,37 @@
 <nav class="navbar navbar-dark bg-aqua">
     <div class="main-content">
+      <div class="container-fluid">
         <div class="container-fluid">
-            <div class="container-fluid">
-                <div class="col-md-4">
-                    <h2>{{auth.user.firstName}} {{auth.user.lastName}}</h2>
-                </div>
-                <div class="col-md-6 text-right" style="padding:0 15px;">
-                    <div class="btn {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
-
-                        <i class="pe-7s-user" style="font-size:24px"></i><br>
-                        <h5>Editar perfil</h5></div>
-                    <div class="btn {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
-
-                        <i class="pe-7s-bell" style="font-size:24px"></i><br>
-                        <h5>Notificações</h5></div>
-                    <div class="btn {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
-                        <i class="pe-7s-key" style="font-size:24px"></i>
-                        <br>
-                        <h5>Alterar a Palavra passe</h5></div>
-                    <div class="btn {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
-                        <i class="pe-7s-config" style="font-size:24px"></i>
-                        <br>
-                        <h5>Definições</h5>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                </div>
+          <div class="col-lg-4 col-md-4">
+            <h2>{{['Perfil','Segurança e privacidade','Definições'][isTab-1]}}</h2>
+            <h4>{{user.datas.firstName}} {{user.datas.lastName}}</h4>
+            <small>{{auth.user.code}}</small>
+          </div>
+          <div class="col-lg-6 col-md-8 text-right">
+              <div class="row">
+            <div class="col-xs-4 col {{isTab==1 ? 'active' : ''}}" (click)="switchtabTo(1)">
+              <i class="pe-7s-user"></i><br>
+              <h4>Perfil</h4>
+              <p>Permite ao utilizador efectuar a definição e o carregamento dos objectivos, indicadores (KPI) e metas (anuais, trimestrais e mensais)</p>
+            </div>
+            <div class="col-xs-4 col {{isTab==2 ? 'active' : ''}}" (click)="switchtabTo(2)">
+              <i class="pe-7s-shield"></i><br>
+              <h4>Segurança e privacidade</h4>
+              <p>Permite ao utilizador converter em efectivo as despesas e receitas registadas aquando do planeamento das tarefas. Permite também efectuar o controlo orçamental.</p>
+            </div>
+            <div class="col-xs-4 col {{isTab==3 ? 'active' : ''}}" (click)="switchtabTo(3)">
+              <i class="pe-7s-config"></i><br>
+              <h4>Definições</h4>
+              <p>Permite ao utilizador converter em efectivo as despesas e receitas registadas aquando do planeamento das tarefas. Permite também efectuar o controlo orçamental.</p>
             </div>
         </div>
+          </div>
+          <div class="col-lg-2">
+          </div>
+        </div>
+      </div>
     </div>
-</nav>
+  </nav>
 
 
 <div class="main-content">
@@ -47,7 +49,7 @@
                                 <img class="avatar border-gray" src="{{auth.serverAdresss+auth.user.photoUrl}}"
                                     alt="..." />
 
-                                <h4 class="title">{{auth.user.firstName}} {{auth.user.lastName}}<br />
+                                <h4 class="title">{{user.datas.firstName}} {{user.datas.lastName}}<br />
                                     <small>{{auth.user.code}}</small>
                                 </h4>
                             </div>
@@ -72,8 +74,9 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <app-user-details *ngIf="isTab==0"></app-user-details>
-                    <app-user-edit *ngIf="isTab==1"></app-user-edit>
+                    <app-user-details *ngIf="isTab==1" [user]="user"></app-user-details>
+                    <app-user-security *ngIf="isTab==2"></app-user-security>
+                    <app-user-settings *ngIf="isTab==3"></app-user-settings>
                 </div>
             </div>
 

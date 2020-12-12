@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   public activityChartResponsive: any[];
   public activityChartLegendItems: LegendItem[];
   public activityChartDataSeries: Array<any>;
-  public emailChartDataSeries: Array<number> = [0,0]
+  public emailChartDataSeries: Array<number> = [0, 0]
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
 
 
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger
+    
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
 
     this.emailChartType = ChartType.Pie;
     this.emailChartData = {
-      series: this.emailChartDataSeries
+      series: [2, 1]
     };
     this.chartOptions = {
       donut: true,
@@ -82,43 +82,6 @@ export class HomeComponent implements OnInit {
       { title: 'Por realizar', imageClass: 'fa fa-circle text-danger' }
     ];
 
-    this.hoursChartType = ChartType.Line;
-    this.hoursChartData = {
-      //labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-      series: [
-        [287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846, 944],
-        [67, 152, 143, 240, 287, 335, 435, 437, 539, 542, 544, 647],
-        [23, 113, 67, 108, 190, 239, 307, 308, 439, 410, 410, 509]
-      ]
-    };
-    this.hoursChartOptions = {
-      low: 0,
-      high: 800,
-      showArea: true,
-      height: '245px',
-      axisX: {
-        showGrid: false,
-      },
-      lineSmooth: Chartist.Interpolation.simple({
-        divisor: 3
-      }),
-      showLine: false,
-      showPoint: false,
-    };
-    this.hoursChartResponsive = [
-      ['screen and (max-width: 640px)', {
-        axisX: {
-          labelInterpolationFnc: function (value) {
-            return value[0];
-          }
-        }
-      }]
-    ];
-    this.hoursChartLegendItems = [
-      { title: 'Open', imageClass: 'fa fa-circle text-info' },
-      { title: 'Click', imageClass: 'fa fa-circle text-danger' },
-      { title: 'Click Second Time', imageClass: 'fa fa-circle text-warning' }
-    ];
 
     this.activityChartType = ChartType.Bar;
     this.activityChartData = {
@@ -155,10 +118,10 @@ export class HomeComponent implements OnInit {
 
   }
   getEmailChartDataSeries() {
-    debugger
+    
     let now = moment()
-    let done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) >2).length,
-        toDo = this.tasks.all.filter(task => moment(task.dueDate) < now).filter(task => parseInt(task.state) < 3).length
+    let done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) > 2).length,
+      toDo = this.tasks.all.filter(task => moment(task.dueDate) < now).filter(task => parseInt(task.state) < 3).length
 
     let f = {
       series: [

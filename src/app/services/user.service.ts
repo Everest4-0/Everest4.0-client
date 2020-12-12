@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { StorageServices } from './storage.service';
 import { IService } from './service.interface';
-import { User } from './../models/user';
+import { User } from './../models/main/user';
 import { AppService } from './app.service';
 import { Injectable } from '@angular/core';
 

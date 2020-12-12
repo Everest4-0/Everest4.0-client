@@ -1,76 +1,169 @@
-
-
 <div class="form-page-container">
     <app-form-steps count=4></app-form-steps>
+    <div class="step-page-container">
+        <div class="form-step">
+            <form [formGroup]="userForm">
+                <ng-container [ngSwitch]="(currentStep | async)?.stepIndex">
+                    <ng-container *ngSwitchCase="'1'">
+                        <app-form-steps-template [step]="(currentStep | async)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Primeiro nome:</label>
+                                        <input type="text" class="form-control" formControlName="firstName"
+                                            [(ngModel)]="user.datas.firstName" placeholder="Primeiro Nome">
+                                        <form-validator formControlKey="firstName" (valid)="formValid($event)"
+                                            [value]="user.datas.firstName" [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Último nome:</label>
+                                        <input type="text" class="form-control" placeholder="Enter your last name"
+                                            formControlName="lastName" [(ngModel)]="user.datas.lastName">
+                                        <form-validator formControlKey="lastName" (valid)="formValid($event)"
+                                            [value]="user.datas.lastName" [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Sexo:</label>
+                                        <select class="form-control" placeholder="Enter email" formControlName="sex"
+                                            [(ngModel)]="user.datas.sex">
+                                            <option *ngFor="let item of sexs" value="{{item.id}}">
+                                                {{item.name}}</option>
+                                        </select>
+                                        <form-validator formControlKey="sex" (valid)="formValid($event)"
+                                            [value]="user.datas.sex" [rules]="['required']"></form-validator>
 
-    
-  <div class="step-page-container">
-    <div class="form-step">
-        <form [formGroup]="userForm">
-            {{isvalid|json}}
-        <ng-container [ngSwitch]="(currentStep | async)?.stepIndex">
-            <ng-container *ngSwitchCase="'1'">
-                <app-form-steps-template [step]="(currentStep | async)">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" placeholder="Enter email" id="email" value="{{user.email}}" disabled>
-                                
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Data de nascimento</label>
+                                        <input type="date" class="form-control" formControlName="birthDate"
+                                            [(ngModel)]="user.datas.birthDate" placeholder="Primeiro Nome">
+                                        <form-validator formControlKey="birthDate" (valid)="formValid($event)"
+                                            [value]="user.datas.birthDate" [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Telefone:</label>
+                                        <input type="text" class="form-control" placeholder="Telefone"
+                                            formControlName="telephone" [(ngModel)]="user.telePhone">
+                                        <form-validator formControlKey="telePhone" (valid)="formValid($event)"
+                                            [value]="user.telePhone" [rules]="['number']"></form-validator>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Primeiro nome:</label>
-                                <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="user.firstName" placeholder="Primeiro Nome" >
-                                <form-validator formControlKey="firstName" (valid)="formValid($event)" [value]="user.firstName" [rules]="['required']"></form-validator>
+                        </app-form-steps-template>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'2'">
+                        <app-form-steps-template [step]="(currentStep | async)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Nível académico :</label>
+                                        <select type="text" class="form-control" placeholder="Enter your last name"
+                                            formControlName="academicLevel" [(ngModel)]="user.datas.academicLevel">
+                                            <option *ngFor="let item of academicLevels" value="{{item.id}}">
+                                                {{item.name}}</option>
+                                        </select>
+                                        <form-validator formControlKey="lastName" (valid)="formValid($event)"
+                                            [value]="user.datas.academicLevel" [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Situação laboral:</label>
+                                        <select type="text" class="form-control" placeholder="Telefone"
+                                            formControlName="workSituation" [(ngModel)]="user.datas.workSituation">
+                                            <option *ngFor="let item of workSituations" value="{{item.id}}">
+                                                {{item.name}}</option>
+                                        </select>
+                                        <form-validator formControlKey="datas.workSituation" (valid)="formValid($event)"
+                                            [value]="user.datas.workSituation" [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Experiência profissional:</label>
+                                        <select type="text" class="form-control" placeholder="Telefone"
+                                            formControlName="professionalExperience"
+                                            [(ngModel)]="user.datas.professionalExperience">
+                                            <option *ngFor="let item of professionalExperiences" value="{{item.id}}">
+                                                {{item.name}}</option>
+                                        </select>
+                                        <form-validator formControlKey="datas.professionalExperience"
+                                            (valid)="formValid($event)" [value]="user.datas.professionalExperience"
+                                            [rules]="['required']"></form-validator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Sector de actividade:</label>
+                                        <select type="text" class="form-control" placeholder="Telefone"
+                                            formControlName="activitySector" [(ngModel)]="user.datas.activitySector">
+                                            <option *ngFor="let item of activitySectors" value="{{item.id}}">
+                                                {{item.name}}</option>
+                                        </select>
+                                        <form-validator formControlKey="activitySector" (valid)="formValid($event)"
+                                            [value]="user.datas.activitySector" [rules]="['required']"></form-validator>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Salario(mês):</label>
+                                        <input type="number" class="form-control" formControlName="salary"
+                                            [(ngModel)]="user.datas.salary">
+                                        <form-validator formControlKey="salary" (valid)="formValid($event)"
+                                            [value]="user.datas.salary" [rules]="['number']"></form-validator>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Último nome:</label>
-                                <input type="text" class="form-control" placeholder="Enter your last name" formControlName="lastName" [(ngModel)]="user.lastName" >
-                                <form-validator formControlKey="lastName" (valid)="formValid($event)" [value]="user.lastName" [rules]="['required']"></form-validator>
+                        </app-form-steps-template>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'3'">
+                        <app-form-steps-template [step]="(currentStep | async)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src class="img img-responsive full-width">
+                                    <label for="email">Foto de perfil</label>
+                                    <div style="background-image: url({{file.imageUrl}});" class="cover">
+                                        <div class="uploader" appDragAndDrop (fileDropped)="onChange($event[0])">
+                                            <input type="file" #fileDropRef id="fileDropRef"
+                                                (change)="onChange(fileDropRef.files[0])" [(ngModel)]="user.photoUrl"
+                                                name="files" accept="jpg;png" />
+                                            <i class="now-ui-icons arrows-1_cloud-upload-94"
+                                                style="font-size:94px !important"></i>
+                                            <h3>Drag and drop your picture file here</h3>
+                                            <h3>or</h3>
+                                            <label for="fileDropRef" class="btn">Browse for file</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Telefone:</label>
-                                <input type="text" class="form-control" placeholder="Telefone"  formControlName="telephone" [(ngModel)]="user.telePhone" >
-                                <form-validator formControlKey="telePhone" (valid)="formValid($event)" [value]="user.telePhone" [rules]="['number']"></form-validator>
+                        </app-form-steps-template>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'4'">
+                        <app-form-steps-template [step]="(currentStep | async)">
+
+                            <div class="col-md-6">
+                                <br />
+                                <br />
+                                <i class="pe-7s-check" style="font-size: 100px;"></i>
+                                <br />
+                                <h2>Por favor clique em salvar para guardar os seus dados</h2>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
                             </div>
-                        </div>
-                    </div>
-                </app-form-steps-template>
-            </ng-container>
-            <ng-container *ngSwitchCase="'2'">
-              <app-form-steps-template [step]="(currentStep | async)">
-                  <div class="row">
-                      <div class="col-md-6">
-                        <label for="email">Foto de perfil</label>
-                        <div style="background-image: url({{file.imageUrl}});" class="cover">
-                            <div class="uploader" appDragAndDrop (fileDropped)="onChange($event[0])">
-                                <input type="file" #fileDropRef id="fileDropRef" 
-                                (change)="onChange(fileDropRef.files[0])"
-                                    [(ngModel)]="user.photoUrl" name="files" accept="jpg;png"/>
-                                <i class="now-ui-icons arrows-1_cloud-upload-94" style="font-size:94px !important"></i>
-                                <h3>Drag and drop your music file here</h3>
-                                <h3>or</h3>
-                                <label for="fileDropRef" class="btn">Browse for file</label>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-              </app-form-steps-template>
-            </ng-container>
-            <ng-container *ngSwitchCase="'3'">
-              <app-form-steps-template [step]="(currentStep | async)"></app-form-steps-template>
-            </ng-container>
-            <ng-container *ngSwitchCase="'4'">
-              <app-form-steps-template [step]="(currentStep | async)"></app-form-steps-template>
-            </ng-container>
-        </ng-container>
-    </form>
+                        </app-form-steps-template>
+                    </ng-container>
+                </ng-container>
+            </form>
+        </div>
     </div>
-  </div>
-  <button 
-    (click)="onNextStep()" [disabled]="!(currentStep | async)?.isComplete" class="btn form-continue-btn">
-    {{ showButtonLabel() }}
-  </button>
-<div class="row text-center"><span class="" (click)="close();">Deixar para depois</span></div>
-  
+    <div class="col-md-12">
+        <hr />
+        <div class="col-md-6">
+            <div class="row text-left"><span class="" (click)="close();">Deixar para depois</span></div>
+
+        </div>
+        <div class="col-md-6 text-right">
+            <button (click)="onNextStep()" [disabled]="!(currentStep | async)?.isComplete"
+                class="btn btn-fill btn-info">
+                {{ showButtonLabel() }}
+            </button>
+
+        </div>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 import { Goal } from './goal';
-import { User } from 'app/models/user';
+import { User } from 'app/models/main/user';
 export class PartialGoal {
     id: string;
     value: number;

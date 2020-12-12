@@ -1,24 +1,78 @@
 <div class="card">
     <div class="header">
-        <h4 class="title">Editar Perfil</h4>
+        <h4 class="title">. . . </h4>
     </div>
     <div class="content">
         <div class="row">
-            <div class="col-md-2 text-right"><i class="fa fa-user"></i></div>
-            <div class="col-md-10">
-                <h5>{{auth.user.email}}</h5>
+            <div class="col-md-3 text-right">E-mail</div>
+            <div class="col-md-9">
+                <h4>{{user.email}}</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 text-right"><i class="fa fa-calendar"></i></div>
-            <div class="col-md-10">
-                <h5>{{auth.user.createdAt}}</h5>
+            <div class="col-md-3 text-right">Telefone</div>
+            <div class="col-md-9">
+                <h4>{{user.telePhone }}</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 text-right"><i class="fa fa-telephone"></i></div>
-            <div class="col-md-10">
-                <h5>{{auth.user.telePhone}}</h5>
+            <div class="col-md-3 text-right">Data de nascimento</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                    <span>({{user.datas.birthDate|amLocale:'pt'| amTimeAgo}})</span></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Membro desde</div>
+            <div class="col-md-9">
+                <h4>
+                    {{user.datas.createdAt|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                    ({{user.createdAt|amLocale:'pt'| amTimeAgo}})</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Sexo</div>
+            <div class="col-md-9">
+                <h4>{{['Outro','Feminino','Masculino'][user.datas.sex]}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-3 text-right">Nível acadêmico</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.academicLevel.name}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Experiêcia profissional</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.professionalExperience.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Situação laboral</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.workSituation.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Salário</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.salary|number:'1.2-2'}} akz</h4>
+                <ul>
+                    <li>Dia: {{user.datas.salary/22| number:'1.2-2'}} kzs</li>
+                    <li>Hora: {{user.datas.salary/(22*8)| number:'1.2-2'}} kzs</li>
+                    <li>Minuto: {{user.datas.salary/(22*8*60)| number:'1.2-2'}} kzs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row hidden">
+            <div class="col-md-3 text-right">Situação laboral</div>
+            <div class="col-md-9">
+                <h4>{{user.datas.activitySector|json }}</h4>
             </div>
         </div>
     </div>

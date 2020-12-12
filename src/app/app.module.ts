@@ -39,6 +39,14 @@ import { FormStepsTemplateComponent } from './components/form-steps-template/for
 import { FormStepsCompleteComponent } from './components/form-steps-complete/form-steps-complete.component';
 import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
 
+// for HttpClient import:
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+
+// for Router import:
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+
+// for Core import:
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 @NgModule({
@@ -57,14 +65,25 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
+
+    
+    // for HttpClient use:
+    LoadingBarHttpClientModule,
+
+    // for Router use:
+    LoadingBarRouterModule,
+
+    // for Core use:
+    LoadingBarModule,
+
     ToastModule.forRoot({
-      timeOut: 10000
+      timeOut: 5000
     }),
     MsalModule.forRoot({
       auth: {
         clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
         authority: "https://login.microsoftonline.com/common/", // This is your tenant ID
-        redirectUri: 'https://everest40.azurewebsites.net'// This is your redirect URI
+        redirectUri: 'http://localhost:4200'//'https://everest40.azurewebsites.net'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',

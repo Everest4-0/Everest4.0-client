@@ -1,18 +1,15 @@
-import { ToastModule, ToastService } from 'ng-uikit-pro-standard';
-import { GroupByPipe } from './../../../pipes/group-by.pipe';
-import { UserEvaluation } from './../../../models/user-evaluation';
-import { UserEvaluationService } from './../../../services/user-evaluation.service';
-import { EvaluationService } from './../../../services/evaluation.service';
-import Swal from 'sweetalert2';
-import { AuthService } from './../../../services/auth.service';
-import { GoalService } from './../../../services/goal.service';
-import { Goal } from './../../../models/goal/goal';
+import { ToastService } from 'ng-uikit-pro-standard';
+
+import { UserEvaluation } from 'app/models/diagnostic/user-evaluation';
+import { UserEvaluationService } from 'app/services/user-evaluation.service';
+import { AuthService } from 'app/services/auth.service';
+import { GoalService } from 'app/services/goal.service';
+import { Goal } from 'app/models/goal/goal';
 import { FormBuilder } from '@angular/forms';
 import { GoalForm } from './../../../forms/goal.form';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
-import { Evaluation } from 'app/models/evaluation';
 
 @Component({
   selector: 'app-results',

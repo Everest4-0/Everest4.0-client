@@ -1,3 +1,4 @@
+import { Stored } from './../models/stored';
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 // key that is used to access the data in local storage
@@ -26,7 +27,7 @@ export class StorageServices {
     this.storage.set(STORAGE_KEY, storage);
     console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
   }
-  public get(key: string): any {
+  public get<T>(key: string): Stored<T> {
     // get array of tasks from local storage
     const storage = this.storage.get(STORAGE_KEY) || [];
     // push new task to array
