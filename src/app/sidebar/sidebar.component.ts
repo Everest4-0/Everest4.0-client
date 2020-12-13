@@ -12,15 +12,15 @@ declare interface RouteInfo {
   for: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Início', icon: 'pe-7s-home', class: '', for: '' },
-  { path: '/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', class: '', for: '' },
-  { path: '/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', class: '', for: '' },
-  { path: '/icons', title: 'Competência', icon: 'pe-7s-gym', class: 'disabled', for: '' },
-  { path: '/user', title: 'Cursos online ', icon: 'pe-7s-bookmarks', class: 'disabled', for: '' },
-  { path: '/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', for: '' },
-  { path: '/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', class: 'disabled', for: '' },
-  { path: '/user', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', class: 'disabled', for: '' },
-  { path: '/maps', title: 'Apoio ao cliente', icon: 'pe-7s-help1', class: '', for: '' },
+  { path: '/me/dashboard', title: 'Início', icon: 'pe-7s-home', class: '', for: '' },
+  { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', class: '', for: '' },
+  { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', class: '', for: '' },
+  { path: '/me/icons', title: 'Competência', icon: 'pe-7s-gym', class: 'disabled', for: '' },
+  { path: '/me/user', title: 'Cursos online ', icon: 'pe-7s-bookmarks', class: 'disabled', for: '' },
+  { path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', for: '' },
+  { path: '/me/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', class: 'disabled', for: '' },
+  { path: '/me/user', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', class: 'disabled', for: '' },
+  { path: '/me/maps', title: 'Apoio ao cliente', icon: 'pe-7s-help1', class: '', for: '' },
   /* { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
   /* { path: '/user', title: 'User Profile',  icon:'pe-7s-note2', class: '' },*/
   { path: '/upgrade', title: 'Mudar para Premium', icon: 'pe-7s-rocket', class: 'active-pro ', for: 'FREE' },

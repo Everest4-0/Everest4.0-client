@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 
 
 const backOfficeRoutes: Routes = [
-    { path: 'backoffice/users',                  component: UsersComponent },
+    { path: 'users',                  component: UsersComponent },
     { path: 'backoffice/users/create',           component: CreateUserComponent },
     { path: 'backoffice/users/update/:_id',      component: UpdateUserComponent },
     { path: 'backoffice/users/delete/:_id',      component: DeleteUserComponent }
