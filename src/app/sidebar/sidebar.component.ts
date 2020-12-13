@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/me/maps', title: 'Apoio ao cliente', icon: 'pe-7s-help1', class: '', for: '' },
   /* { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
   /* { path: '/user', title: 'User Profile',  icon:'pe-7s-note2', class: '' },*/
-  { path: '/upgrade', title: 'Mudar para Premium', icon: 'pe-7s-rocket', class: 'active-pro ', for: 'FREE' },
+  { path: '/me/upgrade', title: 'Mudar para Premium', icon: 'pe-7s-rocket', class: 'active-pro ', for: 'FREE' },
 ];
 
 @Component({
