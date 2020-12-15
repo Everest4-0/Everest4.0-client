@@ -150,7 +150,7 @@ export class CalendarComponent implements OnInit {
         if (t.id === task.id) {
           this.tasks[list].splice(i, 1);
           this.toast.success('Auto avaliação sobre ', 'Sucesso', {
-            timeOut: 50000,
+            timeOut: 5000,
             progressBar: true,
           })
         }

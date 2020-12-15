@@ -1,3 +1,4 @@
+import { BudgetCategory } from './../../../models/goal/budget-category';
 import { BudgetCategoryService } from './../../../services/goals/budget-category.service';
 import { ToastService } from 'ng-uikit-pro-standard';
 import Swal from 'sweetalert2';
@@ -23,6 +24,7 @@ export class BudgetsComponent implements OnInit {
   revenue: Array<Task> = []
   expenses: Array<Task> = []
   budget: Budget = new Budget();
+  budgetCategories: Array<BudgetCategory> = [];
   form = new BudgetForm(this.fb)
   public isTab = 1;
   public switchtabTo = (i) => this.isTab = i;
@@ -36,6 +38,9 @@ export class BudgetsComponent implements OnInit {
     private toast: ToastService) { }
 
   ngOnInit(): void {
+
+
+    this.budgetCategoryService.all({}).subscribe(categories => this.budgetCategories = categories)
 
     this.goalService.all({ userId: this.authService.user.id }).subscribe(goals => {
       goals.forEach(goal => {
@@ -53,7 +58,9 @@ export class BudgetsComponent implements OnInit {
 
   saveBudget() {
     this.budgetService.create(this.budget).subscribe(budget => {
+      debugger
       budget.task = this.budget.task;
+      budget.category = this.budget.category
       this.budget = new Budget();
       if (budget.direction) {
         this.revenue.forEach(task => {
@@ -66,11 +73,11 @@ export class BudgetsComponent implements OnInit {
             task.budgets.push(budget)
         })
       }
-      Swal.fire(
-        'Sucesso!',
-        'Orçamento registado com sucesso',
-        'success'
-      )
+      this.toast.success('Orçamento registado com sucesso', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+      
       this.closeModal('budget-modal')
     })
   }
@@ -92,7 +99,6 @@ export class BudgetsComponent implements OnInit {
     return final;
   }
   stateBudget(task: Task, direction: boolean) {
-    debugger
     let total = (direction ? task.revenue : task.expenses)
     let pago = parseFloat(this.valueToFix(task, direction) + '')
     let resto = total - pago
@@ -103,5 +109,25 @@ export class BudgetsComponent implements OnInit {
       return 1;
     else
       return 2
+  }
+
+  get getBudgetCategories() {
+    return this.budgetCategories.filter(z => z.direction === this.budget.direction)
+  }
+
+
+  accordion(that) {
+
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
+
+    var panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+
   }
 }
