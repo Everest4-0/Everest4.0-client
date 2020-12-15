@@ -64,20 +64,27 @@ export class EvaluationRequestComponent implements OnInit {
 
       this.request.evaluations.push(userEvaluation)
       this.evaluations.forEach(e => {
-        if (e.id == userEvaluation.evaluationId)
+        if (e.id == userEvaluation.evaluationId){
           return e.points = parseFloat(e.points) + (userEvaluation.points * 1)
+        }
       })
-      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para ' + this.userEvaluation.requester.datas.fullName, 'Sucesso', {
-        timeOut: 50000,
+      this.toast.success('Auto avaliação sobre ' + this.userEvaluation.evaluation.name 
+      + ' no Dominio ' + this.userEvaluation.evaluation.group + ' feito com successo para ' + this.userEvaluation.requester.datas.fullName, 'Sucesso', {
+        timeOut: 5000,
         progressBar: true,
       })
       this.closeModal('self-evaluation-modal')
     })
   }
 
-  saveEvaluationComent(){
-    this.userEvaluation.descriptions
-    this.closeModal('evaluation-modal')
+  saveEvaluationComent() {
+    this.evaluationRequestService.update(this.request).subscribe(e =>{
+      this.closeModal('evaluation-modal')
+      this.toast.success('Feedback actualizado com sucesso', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+    })
   }
   selectRequest(item: EvaluationRequest) {
     this.request = item;
@@ -109,5 +116,8 @@ export class EvaluationRequestComponent implements OnInit {
 
   getUserAvatar(s) {
     return s.includes('http') ? s : this.auth.serverAdresss + '/' + s
+  }
+  updateDescriptions(event) {
+    this.request.descriptions = event;
   }
 }

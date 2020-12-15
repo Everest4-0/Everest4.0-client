@@ -8,6 +8,7 @@ export class Task {
     descriptions: string;
     observations: string;
     state: number;
+    duration:number;
     dueDate: Date;
 
     budgets:Array<Budget>=[]

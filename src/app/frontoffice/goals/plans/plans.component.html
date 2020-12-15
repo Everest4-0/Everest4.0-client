@@ -83,7 +83,8 @@
     <div class="row">
         <form [formGroup]="form" (ngSubmit)="saveTask()">
             <div class="col-md-12">
-                <div class="form-group">
+                <div class="form-group  col-md-12">
+                    
                     <label for="exampleInputEmail1">Tarefa</label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="task.descriptions"
                         formControlName="descriptions" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -91,22 +92,27 @@
                         with anyone
                         else.</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Duração (minutos)</label>
+                    <input type="number" class="form-control form-control-lg" [(ngModel)]="task.duration"
+                        formControlName="duration">
+                </div>
+                <div class="form-group col-md-8">
                     <label for="exampleInputPassword1">Data de conclusão</label>
                     <input type="date" class="form-control form-control-lg" [(ngModel)]="task.dueDate"
                         formControlName="dueDate">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Receitas</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.revenue"
                         formControlName="revenue">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Curstos</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
                         formControlName="expenses">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Estado</label>
                     <div>
                     <div class="o-switch btn-group" data-toggle="buttons" role="group">
@@ -126,7 +132,7 @@
                     </div>
                 </div>
             
-                <div class="form-group">
+                <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Observações</label>
                     <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
                         formControlName="observations"></textarea>
@@ -188,6 +194,10 @@
                 <h5>Data de conclusão</h5>
                 <h4>{{taskDetails.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
                         *ngIf="!inTime(taskDetails.dueDate)"></i></h4>
+            </div>
+            <div class="row">
+                <h5>Duração</h5>
+                <h4>{{taskDetails.duration}} minutos</h4>
             </div>
             <div class="row bd-callout bd-callout-info">
 

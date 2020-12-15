@@ -9,6 +9,7 @@ export class TaskForm {
             revenue: [],
             expenses: [],
             state: [],
+            duration: [],
             dueDate: [],
             observations: [],
 

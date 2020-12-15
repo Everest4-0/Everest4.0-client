@@ -66,7 +66,7 @@
                 style="width: 100%;">
             <div class="card-body">
                 <app-progress-bar done="{{100*item.evaluations.length/12}}"></app-progress-bar>
-                <h5 class="card-title">{{item.requested.firstName}} {{item.requested.lastName}}</h5>
+                <h5 class="card-title">{{item.requested.datas.firstName}} {{item.requested.datas.lastName}}</h5>
             </div>
             <div class="card-footer">
             </div>
@@ -98,9 +98,10 @@
     <div class="row">
         <div class="col-md-12">
             <label>Comentários</label>
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control" #descriptions placeholder="(opcional)" (change)="updateDescriptions(descriptions.value)">{{request.descriptions}}</textarea>
         </div>
     </div>
+
     <div class="row text-center"><br>
         <button class="btn btn-success btn-fill" (click)="saveEvaluationComent()">Salvar</button>
     </div>

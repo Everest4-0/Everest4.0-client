@@ -95,6 +95,7 @@ export class PlansComponent implements OnInit {
     this.task.dueDate = new Date(dueDate)
     this.taskService.create(this.task).subscribe(task => {
       this.task = new Task()
+      task.goal=this.task.goal
       this.tasks.push(task)
       Swal.fire(
         'Sucesso!',
