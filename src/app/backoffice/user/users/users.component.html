@@ -1,1 +1,19 @@
-<p>users works!</p>
+<p>working</p>
+
+<div class="container-fluid">
+    <table  class="table table-hover">
+      <thead  class="thead-dark">
+        <tr>
+          <th>#</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>-</td>
+          <td>{{user.datas.firstName}} {{user.datas.lastName}}</td>
+          <td><a class="btn btn-xs btn-simple btn-round" routerLink="/backoffice/users/update/{{user._id}}"><i class="now-ui-icons gestures_tap-01"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
