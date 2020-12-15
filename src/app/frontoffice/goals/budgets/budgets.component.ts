@@ -1,3 +1,4 @@
+import { BudgetCategoryService } from './../../../services/goals/budget-category.service';
 import { ToastService } from 'ng-uikit-pro-standard';
 import Swal from 'sweetalert2';
 import { BudgetService } from './../../../services/budget.service';
@@ -31,12 +32,12 @@ export class BudgetsComponent implements OnInit {
     private budgetService: BudgetService,
     private authService: AuthService,
     private modalService: ModalService,
+    private budgetCategoryService: BudgetCategoryService,
     private toast: ToastService) { }
 
   ngOnInit(): void {
 
     this.goalService.all({ userId: this.authService.user.id }).subscribe(goals => {
-      debugger
       goals.forEach(goal => {
         goal.tasks.forEach(task => {
           if (task.revenue > 0) {
