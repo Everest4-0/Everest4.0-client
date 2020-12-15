@@ -75,6 +75,10 @@ export class EvaluationRequestComponent implements OnInit {
     })
   }
 
+  saveEvaluationComent(){
+    this.userEvaluation.descriptions
+    this.closeModal('evaluation-modal')
+  }
   selectRequest(item: EvaluationRequest) {
     this.request = item;
     this.openModal('evaluation-modal')

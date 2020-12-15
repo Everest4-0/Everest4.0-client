@@ -3,6 +3,7 @@ import { User } from '../main/user';
 export class EvaluationRequest {
     id: string;
     code: string;
+    descriptions: string;
     requester: User = new User();
     requested: User = new User();
     evaluations: Array<UserEvaluation> = [];
