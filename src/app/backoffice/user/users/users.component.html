@@ -1,19 +1,35 @@
-<p>working</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Striped Table with Hover</h4>
+                        <p class="category">Here is a subtitle for this table</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                          <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>User</th>
+                                        <td>E-mail</td>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{user.datas.firstName}} {{user.datas.lastName}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.isActive}}</td>
+                                    </tr>
+                                </tbody>
+                          </table>
 
-<div class="container-fluid">
-    <table  class="table table-hover">
-      <thead  class="thead-dark">
-        <tr>
-          <th>#</th>
-          <th>User</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>-</td>
-          <td>{{user.datas.firstName}} {{user.datas.lastName}}</td>
-          <td><a class="btn btn-xs btn-simple btn-round" routerLink="/backoffice/users/update/{{user._id}}"><i class="now-ui-icons gestures_tap-01"></i></a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
