@@ -15,15 +15,25 @@
 <jw-modal id="ask-evaluation-modal" class="sm" title="Solicitar Feedback">
     <hr>
     <form [formGroup]="evaluationRequestform">
-        <div class="form-group">
+        <div class="form-group" *ngIf="!evaluationRequest.requested.id">
             <label for="exampleFormControlSelect2">Utilizador</label>
-            <input type="text" class="form-control" formControlName="requested" placeholder="(Nome ou E-mail)"
+            <input type="text" class="form-control" formControlName="requested" placeholder="(Nome, E-mail ou Telefone)"
                 [(ngModel)]="evaluationRequest.requested.email" (keyup)="filterValues($event)">
             <div *ngIf='users.length>0' class="user-filter">
                 <span *ngFor="let item of users" (click)="selectRequested(item)">
-                    {{item.firstName}} {{item.lastName}}
+                    {{item.datas.firstName}} {{item.datas.lastName}}
                 </span>
             </div>
+        </div>
+        <div class="col-md-12 user-selected" *ngIf="evaluationRequest.requested.id">
+            <div class="col-sm-3">
+                <img src="{{auth.serverAddress}}{{evaluationRequest.requested.photoUrl}}" class="img-responsive img-thumbnail">
+            </div>
+            <div class="col-sm-8">
+                <h5><b>{{evaluationRequest.requested.datas.firstName}} {{evaluationRequest.requested.datas.lastName}}</b></h5>
+                {{evaluationRequest.requested.email}}
+            </div>
+            <div class="col-sm-1"><i class="fa fa-trash" (click)="evaluationRequest.requested={}"></i></div>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">Relação</label>

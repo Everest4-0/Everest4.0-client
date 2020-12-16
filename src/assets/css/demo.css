@@ -143,3 +143,8 @@ a {
 input[type="number"] {
     text-align: right;
 }
+
+
+.border-none{
+    border: none !important;
+}

@@ -1,3 +1,4 @@
+import { ChartType, LegendItem } from './../../../lbd/lbd-chart/lbd-chart.component';
 import { BudgetCategory } from './../../../models/goal/budget-category';
 import { BudgetCategoryService } from './../../../services/goals/budget-category.service';
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -12,7 +13,7 @@ import { Task } from './../../../models/goal/task';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
-
+import * as Chartist from 'chartist';
 @Component({
   selector: 'app-budgets',
   templateUrl: './budgets.component.html',
@@ -28,6 +29,15 @@ export class BudgetsComponent implements OnInit {
   form = new BudgetForm(this.fb)
   public isTab = 1;
   public switchtabTo = (i) => this.isTab = i;
+
+
+  public activityChartType: ChartType;
+  public activityChartData: Array<any> = [];
+  public activityChartOptions: any;
+  public activityChartResponsive: any[];
+  public activityChartLegendItems: LegendItem[];
+  public expensesCharData;
+  public revenueCharData;
   constructor(
     private fb: FormBuilder,
     private goalService: GoalService,
@@ -40,7 +50,25 @@ export class BudgetsComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.budgetCategoryService.all({}).subscribe(categories => this.budgetCategories = categories)
+    this.budgetCategoryService.all({}).subscribe(categories => {
+      this.budgetCategories = categories
+      let
+        getActivityChartData = (direction) => {
+          let categories = this.budgetCategories.filter(x => x.direction === direction).sort((t, u) => t.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) > u.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) ? -1 : 0)
+          let labels = categories.map(x => x.name)
+          debugger
+
+          let total = categories.reduce((x, y) => parseFloat(y.budgets.reduce((r, s) => parseFloat(s.value + '') + r, 0) + '') + x, 0)
+          let series = categories.map(x => parseFloat((100 * parseFloat(x.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) + '') / total).toFixed(2)));
+
+          return {
+            labels: labels,
+            series: [series]
+          }
+        }
+      this.expensesCharData = getActivityChartData(true)
+      this.revenueCharData = getActivityChartData(false)
+    })
 
     this.goalService.all({ userId: this.authService.user.id }).subscribe(goals => {
       goals.forEach(goal => {
@@ -54,6 +82,32 @@ export class BudgetsComponent implements OnInit {
         })
       })
     })
+
+
+    this.activityChartType = ChartType.Bar;
+    this.activityChartOptions = {
+      reverseData: true,
+      horizontalBars: true,
+      onlyInteger: true,
+      low: 0,
+      high: 100,
+      scaleMinSpace: 10,
+      axisY: {
+        offset: 120
+      },
+      lineSmooth: Chartist.Interpolation.cardinal({
+        tension: 10
+      })
+    };
+    this.activityChartResponsive = [
+      ['screen and (max-width: 640px)', {
+        axisY: {
+          labelInterpolationFnc: function (value) {
+            return value[0];
+          }
+        }
+      }]
+    ];
   }
 
   saveBudget() {
@@ -77,7 +131,7 @@ export class BudgetsComponent implements OnInit {
         timeOut: 5000,
         progressBar: true,
       })
-      
+
       this.closeModal('budget-modal')
     })
   }
@@ -130,4 +184,5 @@ export class BudgetsComponent implements OnInit {
 
 
   }
+
 }

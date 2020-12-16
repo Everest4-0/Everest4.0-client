@@ -6,20 +6,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CreateUserComponent } from './user/create-user/create-user.component';
-import { UsersComponent } from './user/users/users.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 import { DeleteUserComponent } from './user/delete-user/delete-user.component';
 import { BackofficeComponent } from './backoffice/backoffice.component';
+import { BackofficeNavbarComponent } from './components/backoffice-navbar/backoffice-navbar.component';
+import { ListUserComponent } from './user/list-user/list-user.component';
+import { DetailsUserComponent } from './user/details-user/details-user.component';
 
 
 
 @NgModule({
   declarations: [
     CreateUserComponent,
-    UsersComponent,
     UpdateUserComponent,
     DeleteUserComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    BackofficeNavbarComponent,
+    ListUserComponent,
+    DetailsUserComponent
   ],
   imports: [
     CommonModule,

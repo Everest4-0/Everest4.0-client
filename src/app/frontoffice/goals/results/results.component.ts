@@ -25,7 +25,8 @@ export class ResultsComponent implements OnInit {
     /*{ code: 'O', name: 'Oportunidades' },
     { code: 'T', name: 'Ameaças' },*/
   ]
-  public currentResults = [];
+  public currentResults: Array<any>= [];
+  public otherResults =['Pessoal','Profissional','Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
   form = new GoalForm(this.fb, this.goal)
@@ -52,8 +53,9 @@ export class ResultsComponent implements OnInit {
         result.groups = result.evaluations.map(x => x.evaluation.group)
           .filter((value, index, self) => {
             return self.indexOf(value) === index;
-          }
-          )
+          })
+
+          this.otherResults
       })
     })
   }
@@ -98,5 +100,6 @@ export class ResultsComponent implements OnInit {
 
   setResults(e) {
     this.currentResults = e
+    this.otherResults=['Pessoal','Profissional','Financeiro'].filter(x=>!e.groups.map(r=>r).includes(x))
   }
 }

@@ -1,0 +1,36 @@
+
+<app-backoffice-navbar [title]="'Utilizadores'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Active</th>
+                    <th>Role</th>
+                    <th>Telephone</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{user.datas.firstName}} {{user.datas.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.isActive}}</td>
+                    <td>{{user.roleId}}</td>
+                    <td>{{user.telePhone}}</td>
+                    <td><a title="Update" routerLink="/backoffice/users/update/{{user.id}}" class="text-decoration-none text-success title h4"><i class="pe-7s-pen"></i></a></td>
+                    <td><a title="Delete" routerLink="/backoffice/users/delete/{{user.id}}" class="text-decoration-none text-danger title h4"><i class="pe-7s-trash"></i></a></td>
+                </tr>
+            </tbody>
+      </table>
+
+    </div>
+</div>

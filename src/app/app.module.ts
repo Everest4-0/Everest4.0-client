@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ToastModule } from 'ng-uikit-pro-standard';
+import { ToastModule, TooltipModule } from 'ng-uikit-pro-standard';
 
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
@@ -67,7 +67,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormsModule,
     ReactiveFormsModule,
 
-    
+    TooltipModule,
     // for HttpClient use:
     LoadingBarHttpClientModule,
 
