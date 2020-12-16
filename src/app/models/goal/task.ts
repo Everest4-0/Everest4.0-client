@@ -7,11 +7,11 @@ export class Task {
 
     descriptions: string;
     observations: string;
-    state: number;
-    duration:number;
+    state: number = 1;
+    duration: number;
     dueDate: Date;
 
-    budgets:Array<Budget>=[]
+    budgets: Array<Budget> = []
 
     goal: Goal = new Goal();
     isActive: boolean;

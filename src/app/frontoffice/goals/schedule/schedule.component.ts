@@ -19,6 +19,8 @@ import * as moment from 'moment';
 export class ScheduleComponent implements OnInit {
 
 
+  public thisWeekLimit =5;
+  public overDueLimit =5;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
   public todos: Array<ToDo> = []
@@ -35,11 +37,12 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    debugger
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
-    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 7);
-    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
+    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 0);
+    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 7);
     let sAnt, sAct, eAtr, dashBoard;
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
       goals.forEach(goal => goal.tasks.forEach(t => t.goal = goal))
@@ -54,6 +57,7 @@ export class ScheduleComponent implements OnInit {
     })
 
     this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
+      debugger
       this.todos = todos
         //.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
         .sort((x, y) => x.startDate > y.startDate ? 1 : -1)

@@ -37,7 +37,7 @@
     </div>
 
     <div class="header">
-        <h4 class="title"><b>Tarefas em atraso</b></h4>
+        <h4 class="title"><b>Tarefas em atraso</b> <span class="badge badge-light pull-right">{{tasks.overDue.length}}</span></h4>
     </div>
 
     <div class="card-body">
@@ -61,17 +61,23 @@
                         </div>
                     </div>
                 </a>
+                <div class="col-md-12 text-center" style="padding: 15px;">
+                    <a *ngIf="tasks.overDue.length>5" (click)="overDueLimit=overDueLimit==100 ?5:100"
+                        class="btn btn-default btn-xs"> Ver
+                        {{overDueLimit==100 ?'menos':'mais ' + (tasks.overDue.length -5)}}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="header">
-        <h4 class="title"><b>Tarefas da semana</b></h4>
+        <h4 class="title"><b>Tarefas da semana</b> <span class="badge badge-light pull-right">{{tasks.thisWeek.length}}</span></h4>
     </div>
     <div class="card-body">
         <div class="col-md-12">
-            <div class="list-group">
-                <a class="list-group-item" *ngFor="let item of tasks.thisWeek|slice:0:5; let i = index">
+            <div class="list-group list-group-flush">
+                <a class="list-group-item" *ngFor="let item of tasks.thisWeek|slice:0:thisWeekLimit; let i = index">
                     <div class="row">
                         <div class="col-xs-2 col-md-1">
                             <div class="checkbox">
@@ -89,6 +95,12 @@
                         </div>
                     </div>
                 </a>
+                <div class="col-md-12 text-center" style="padding: 15px;">
+                    <a *ngIf="tasks.thisWeek.length>5" (click)="thisWeekLimit=thisWeekLimit==100 ?5:100"
+                        class="btn btn-default btn-xs"> Ver
+                        {{thisWeekLimit==100 ?'menos':'mais ' + (tasks.thisWeek.length -5)}}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
