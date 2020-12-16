@@ -18,7 +18,7 @@ export class BackofficeNavbarComponent implements OnInit {
     debugger
     this.url = '/' + this.router.url.split('/').splice(1, 2).join('/')
     this.id = this.route.snapshot.paramMap.get("id");
-    this.list=this.router.url.split('/').length!==3
+    this.list=this.router.url.split('/').length===3
   }
 
 }

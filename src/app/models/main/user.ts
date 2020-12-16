@@ -21,7 +21,8 @@ export class User {
     provider: string = 'LOCAL';
     roleId: string;
     role: Role = new Role();
-
+    roles: Array<string> = [];
+    
     evaluators: Array<Evaluation> = []
     evaluations: Array<Evaluation> = []
     evaluationRequestes: Array<EvaluationRequest> = []
@@ -66,7 +67,7 @@ export class User {
         return this;
     }
     castMicrosoftUser(user: Account) {
-        
+
         this.datas = new UserData()
         this.settings = new UserSetting()
         let fullName = user.name.split(' ')
@@ -81,7 +82,7 @@ export class User {
     }
 
     get ownRole() {
-        
+
         return [{ name: this.roleId, icon: 'pe-7s-medal', color: 'bg-warning' },
         { name: this.roleId, icon: 'pe-7s-delete-user', color: 'bg-default' },][this.roleId == 'FREE' ? 0 : 1]
     }
