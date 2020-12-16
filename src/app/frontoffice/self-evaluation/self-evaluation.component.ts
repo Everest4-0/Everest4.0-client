@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-self-evaluation',
   templateUrl: './self-evaluation.component.html',
-  styleUrls: ['./self-evaluation.component.css']
+  styleUrls: ['./self-evaluation.component.scss']
 })
 export class SelfEvaluationComponent implements OnInit {
 
