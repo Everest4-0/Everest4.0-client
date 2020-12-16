@@ -1,3 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
+import { User } from './../../../models/main/user';
+import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateUserComponent implements OnInit {
 
-  constructor() { }
+  user: User;
 
+  constructor(private userService: UserService,
+              private route: ActivatedRoute) { 
+              }
+  
   ngOnInit(): void {
+
+    let id = this.route.snapshot.params['id'];
+    //alert(id);
+
+    this.userService.one(id).subscribe(data => this.user=data);
+
   }
 
+
+  teste(){
+    //alert(this.id);
+    //alert(this.user.email);
+
+  }
 }
