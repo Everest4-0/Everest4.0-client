@@ -50,12 +50,13 @@ export class FeedbackEvaluationComponent implements OnInit {
 
   public relationLabel = ['Familiar', 'Colega de trabalho', 'Amigo'];
   constructor(
+    
     private fb: FormBuilder,
     private modalService: ModalService,
     private evaluationService: EvaluationService,
     private evaluationRequestService: EvaluationRequestService,
     private userEvaluationService: UserEvaluationService,
-    private auth: AuthService,
+    public auth: AuthService,
     private toast: ToastService) {
   }
 

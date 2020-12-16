@@ -17,3 +17,30 @@
     }
 
 }
+.user-selected{
+    border: solid 1px #99ceff;
+    box-shadow: 0 0 15px #ccc;
+    border-radius: 5px;
+    h4{
+        margin: 0;
+        padding: 0;
+    }
+    div{
+        padding: 15px 5px;
+    }
+    .col-sm-3{
+        padding: 0;
+    }
+    i{
+        color: #F00;
+        display: none;
+    }
+}
+.user-selected:hover {
+i{
+    display: block;
+}
+}
+.user-selected{
+    padding: 0;
+}
