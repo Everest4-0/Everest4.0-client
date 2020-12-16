@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-6">
 
     <h2>Receitas</h2>
     <div class="card">
@@ -83,10 +83,10 @@
                 <div class="row" *ngFor="let item of expenses; let i = index">
                     <div class="col-md-12">
                         <div class="col col-xs-6">
-                            
+
                             <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-expenses-{{i}}"
                                 (click)="accordion($event.target)"></button>
-                                {{item.descriptions}}
+                            {{item.descriptions}}
                             <span class="tin-text"></span>
                         </div>
                         <div class="col col-xs-3 text-right">
@@ -136,14 +136,18 @@
         <div class="card-footer">. . . </div>
     </div>
 </div>
-<div class="col-sm-4">
+<div class="col-sm-6">
     <h2>...</h2>
-    <div class="col-sm-12">
-        <a href="#" class="thumbnail">
-            <div class="frontpage_square">
-            </div>
-        </a>
-    </div>
+        
+        <lbd-chart *ngIf="expensesCharData" [title]="'Receitas'" [chartType]="activityChartType"
+            [chartData]="expensesCharData" [chartOptions]="activityChartOptions"
+            [chartResponsive]="activityChartResponsive">
+        </lbd-chart>
+        <hr>
+        <lbd-chart *ngIf="revenueCharData" [title]="'Despesas'" [chartType]="activityChartType"
+            [chartData]="revenueCharData" [chartOptions]="activityChartOptions"
+            [chartResponsive]="activityChartResponsive">
+        </lbd-chart>
 </div>
 
 
