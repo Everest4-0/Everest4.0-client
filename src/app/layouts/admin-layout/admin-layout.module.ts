@@ -1,4 +1,3 @@
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserSettingsComponent } from './../../frontoffice/user/user-settings/user-settings.component';
 import { UserSecurityComponent } from '../../frontoffice/user/user-security/user-security.component';
 import { NewsListComponent } from './../../frontoffice/news/news-list/news-list.component';
@@ -96,7 +95,6 @@ FullCalendarModule.registerPlugins([
     }),
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' }),
 
-    NgbModule
   ],
   declarations: [
     DiagnosticComponent,
