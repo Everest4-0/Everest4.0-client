@@ -27,7 +27,12 @@
                                 <li class="list-group-item" *ngIf="item.evaluation.group==group">
                                     {{item.evaluation.name}}</li>
                             </div>
-
+                        </ul>
+                        <ul class="list-group" *ngFor="let group of otherResults">
+                            <li (click)="registGoal(currentResults, group)"
+                                class="list-group-item list-group-item-action active">
+                                <h3>{{group}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i></h3>
+                            </li>
                         </ul>
                     </div>
                 </div>
