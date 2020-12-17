@@ -1,7 +1,10 @@
-import { ActivatedRoute } from '@angular/router';
+import { ToastService } from 'ng-uikit-pro-standard';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../../../models/main/user';
 import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { UserForm } from 'app/backoffice/forms/user.form';
 
 @Component({
   selector: 'app-update-user',
@@ -10,26 +13,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateUserComponent implements OnInit {
 
-  user: User;
+  public form = new UserForm(this.fb);
 
-  
-  constructor(private userService: UserService,
-              private route: ActivatedRoute) { 
-              }
-  
+  public user: User = new User();
+
+  constructor(
+              private userService: UserService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private toast: ToastService
+  ) { }
+
   ngOnInit(): void {
 
-    let id = this.route.snapshot.params['id'];
-    //alert(id);
-
-    this.userService.one(id).subscribe(data => this.user=data);
+    const id = this.route.snapshot.params['id'];
+    this.userService.one(id).subscribe(user => this.user = user);
 
   }
 
 
-  teste(){
-    //alert(this.id);
-    //alert(this.user.email);
+  saveForm(t={}) {
+    this.userService.update(this.user).subscribe(user => {
+
+      this.toast.success('Usuário actualizado com successo', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+
+      this.router.navigate(['/backoffice/users']);
+      
+      console.log(user);
+    })
 
   }
 }

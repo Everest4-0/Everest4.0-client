@@ -1,23 +1,23 @@
 <app-backoffice-navbar [title]="'Actualizar utlizador'"></app-backoffice-navbar>
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Usuário</h4>
+                        <h3 class="title">Usuário</h3>
                     </div>
                     <div class="content">
-                        <form >
+                        <form [formGroup]="form" (ngSubmit)="saveForm()">
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username"
-                                            value="{{user.userName}}">
+                                        <input type="text" class="form-control" formControlName="userName"
+                                            value="{{user.userName}}" [(ngModel)]="user.userName">
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control" placeholder="E-mail"
-                                            value="{{user.email}}">
+                                        <input type="email" class="form-control" formControlName="email"
+                                            value="{{user.email}}" [(ngModel)]="user.email">
                                     </div>
                                 </div>
                             </div>
@@ -25,50 +25,50 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Telephone</label>
-                                        <input type="text" class="form-control" placeholder="Telephone"
-                                            value="{{user.telePhone}}">
+                                        <input type="text" class="form-control" formControlName="telePhone"
+                                            value="{{user.telePhone}}" [(ngModel)]="user.telePhone">
                                     </div>
                                 </div>
                                 <div class="col-md-2 ">
                                     <div class="form-group">
                                         <label>Is active</label>
-                                        <input type="text" class="form-control" placeholder="Active"
-                                            value="{{user.isActive}}">
+                                        <input type="text" class="form-control" formControlName="isActive"
+                                            value="{{user.isActive}}" [(ngModel)]="user.isActive">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Roles</label>
-                                        <input type="text" class="form-control" placeholder="Roles"
-                                            value="{{user.roles}}">
+                                        <input type="text" class="form-control" formControlName="roles"
+                                            value="{{user.roles}}" [(ngModel)]="user.roles">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="header">
-                                    <h4 class="title">Dados pessoais</h4>
+                                    <h3 class="title">Dados pessoais</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="">Others Name</label>
-                                        <input type="text" class="form-control" placeholder="First name"
-                                            value="{{user.datas.fullName}}">
+                                        <input type="text" class="form-control" formControlName="othersName"
+                                            value="{{user.datas.othersName}}" [(ngModel)]="user.datas.othersName">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">First Name</label>
-                                        <input type="text" class="form-control" placeholder="Last name"
-                                            value="{{user.datas.firstName}}">
+                                        <input type="text" class="form-control" formControlName="firstName"
+                                            value="{{user.datas.firstName}}" [(ngModel)]="user.datas.firstName">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last name"
-                                            value="{{user.datas.lastName}}">
+                                        <input type="text" class="form-control" formControlName="lastName"
+                                            value="{{user.datas.lastName}}" [(ngModel)]="user.datas.lastName">
                                     </div>
                                 </div>
                             </div>
@@ -76,22 +76,22 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="">Academic Level</label>
-                                        <input type="text" class="form-control" placeholder="Academic Level"
-                                            value="{{user.datas.academicLevel}}">
+                                        <input type="text" class="form-control" formControlName="academicLevel"
+                                            value="{{user.datas.academicLevel}}" [(ngModel)]="user.datas.academicLevel">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Sex</label>
-                                        <input type="text" class="form-control" placeholder="Sex"
-                                            value="{{user.datas.sex}}">
+                                        <input type="text" class="form-control" formControlName="sex"
+                                            value="{{user.datas.sex}}" [(ngModel)]="user.datas.sex">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Birth Date</label>
-                                        <input type="text" class="form-control" placeholder="Birth Date"
-                                            value="{{user.datas.birthDate}}">
+                                        <input type="date" class="form-control" formControlName="birthDate"
+                                            value="{{user.datas.birthDate}}" [(ngModel)]="user.datas.birthDate">
                                     </div>
                                 </div>
                             </div>
@@ -100,57 +100,57 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Work Situation</label>
-                                        <input type="text" class="form-control" placeholder="Work Situation"
-                                            value="{{user.datas.workSituation}}">
+                                        <input type="text" class="form-control" formControlName="workSituation"
+                                            value="{{user.datas.workSituation}}" [(ngModel)]="user.datas.workSituation">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="">Professional Experience</label>
-                                        <input type="text" class="form-control" placeholder="Professional Experience"
-                                            value="{{user.datas.professionalExperience}}">
+                                        <input type="text" class="form-control" formControlName="professionalExperience"
+                                            value="{{user.datas.professionalExperience}}" [(ngModel)]="user.datas.professionalExperience">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Activity Sector</label>
-                                        <input type="text" class="form-control" placeholder="Activity Sector"
-                                            value="{{user.activitySector}}">
+                                        <input type="text" class="form-control" formControlName="activitySector"
+                                            value="{{user.activitySector}}" [(ngModel)]="user.datas.activitySector">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Salary</label>
-                                        <input type="text" class="form-control" placeholder="Salary"
-                                            value="{{user.datas.salary}}">
+                                        <input type="text" class="form-control" formControlName="salary"
+                                            value="{{user.datas.salary}}" [(ngModel)]="user.datas.salary">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="header">
-                                    <h4 class="title h1">Definições do usuário</h4>
+                                    <h3 class="title">Definições do usuário</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="">Work Situation</label>
-                                        <input type="text" class="form-control" placeholder="Work Situation"
-                                            value="{{user.datas.workSituation}}">
+                                        <label for="">News categories</label>
+                                        <input type="text" class="form-control" formControlName="newsCategory"
+                                            value="{{user.settings.newsCategory}}" [(ngModel)]="user.settings.newsCategory">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">i18n</label>
-                                        <input type="text" class="form-control" placeholder="i18n"
-                                            value="{{user.settings.i18n}}">
+                                        <input type="text" class="form-control" formControlName="i18n"
+                                            value="{{user.settings.i18n}}" [(ngModel)]="user.settings.i18n">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Time zone</label>
-                                        <input type="text" class="form-control" placeholder="Time Zone"
-                                            value="{{user.settings.timeZones}}">
+                                        <input type="text" class="form-control" formControlName="timeZones"
+                                            value="{{user.settings.timeZones}}" [(ngModel)]="user.settings.timeZones">
                                     </div>
                                 </div>
                             </div>
