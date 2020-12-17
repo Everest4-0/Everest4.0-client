@@ -4,15 +4,15 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <lbd-chart [title]="'% Objectivos semanais'" [subtitle]="''"
+                    <lbd-chart [title]="'% Objectivos semanais'" *ngIf="tasks.all.length>0" [subtitle]="''"
                         [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType"
-                        [chartData]="getEmailChartDataSeries()" [legendItems]="emailChartLegendItems" [withHr]="true"
+                        [chartData]="emailChartDataSeries" [legendItems]="emailChartLegendItems" [withHr]="true"
                         [chartOptions]="chartOptions">
                     </lbd-chart>
                 </div>
 
                 <div class="col-md-6">
-                    <lbd-chart [title]="'Dashboard executivo'" [subtitle]="''" [chartType]="activityChartType"
+                    <lbd-chart [title]="'Dashboard executivo'" *ngIf="tasks.all.length>0" [subtitle]="''" [chartType]="activityChartType"
                         [chartData]="activityChartData" [chartOptions]="activityChartOptions"
                         [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems"
                         [withHr]="true">
