@@ -9,7 +9,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Variavel</th>
+                    <th style="width: 200px;">Variavel</th>
                     <th>Domínio</th>
                     <th></th>
                     <th></th>
@@ -21,8 +21,14 @@
                     <td>{{i+1}}</td>
                     <td>{{evaluation.name}}</td>
                     <td>{{evaluation.group}}</td>
-                    <td>{{evaluation.descriptions}}</td>
-                    <td>{{evaluation.isActive}}</td>
+                    <td>
+                        {{evaluation.descriptions}}
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-fill btn-{{['success','danger'][evaluation.isActive ? 0 : 1]}}">
+                            {{['Activo','Inactivo'][evaluation.isActive ? 0 : 1]}}
+                        </button>
+                    </td>
                     <td><a title="Update" routerLink="/backoffice/evaluations/update/{{evaluation.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
                 </tr>
             </tbody>

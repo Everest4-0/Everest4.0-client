@@ -1,3 +1,4 @@
+import { Task } from './../models/goal/task';
 
 import { ModalService } from 'app/components/modal';
 import { Goal } from './../models/goal/goal';
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
   public activityChartResponsive: any[];
   public activityChartLegendItems: LegendItem[];
   public activityChartDataSeries: Array<any>;
-  public emailChartDataSeries: Array<number> = [0, 0]
+  public emailChartDataSeries = { series: ['0', '100'] }
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
 
 
@@ -45,12 +46,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
-    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 7);
-    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 14);
+    lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7));
+    nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 7);
     let sAnt, sAct, eAtr, dashBoard;
 
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
@@ -63,6 +64,31 @@ export class HomeComponent implements OnInit {
       sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
       sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
 
+      let done = sAct.filter((x: Task) => x.state > 2).length
+      let all = sAct.length;
+
+      this.emailChartDataSeries = {
+        series: [(100 * done / all).toFixed(2), (100 * (all - done) / all).toFixed(2)]
+      }
+      /*
+            'Pendente'
+            ,'Por inicial'
+            ,'Em curso'
+            ,'Concluido'
+            ,'Cancelado'*/
+      //sAct.
+      debugger
+      let fnToDo = (x: Array<Task>) =>  x.filter(r => r.state < 2).length ;
+      let fnDoing = (x: Array<Task>) =>  x.filter(r => r.state === 2).length ;
+      let fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length ;
+      this.activityChartData = {
+        labels: ['Por iniciar', 'Em curso', 'Concluido'],
+        series: [
+          [fnToDo(sAnt), fnDoing(sAnt), fnDone(sAnt)],
+          [fnToDo(sAct), fnDoing(sAct), fnDone(sAct)],
+          [fnToDo(eAtr), fnDoing(eAtr), fnDone(eAtr)]
+        ]
+      };
     })
 
 
@@ -87,8 +113,8 @@ export class HomeComponent implements OnInit {
     this.activityChartData = {
       labels: ['Por iniciar', 'Em curso', 'Concluido'],
       series: [
-        [5, 3, 4],
-        [3, 5, 2],
+        [5, 5, 5],
+        [3, 3, 3],
         [2, 3, 1]
       ]
     };
@@ -118,7 +144,7 @@ export class HomeComponent implements OnInit {
 
   }
   getEmailChartDataSeries() {
-    
+
     let now = moment()
     let done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) > 2).length,
       toDo = this.tasks.all.filter(task => moment(task.dueDate) < now).filter(task => parseInt(task.state) < 3).length
