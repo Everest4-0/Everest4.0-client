@@ -12,6 +12,7 @@ export class UpdateUserComponent implements OnInit {
 
   user: User;
 
+  
   constructor(private userService: UserService,
               private route: ActivatedRoute) { 
               }

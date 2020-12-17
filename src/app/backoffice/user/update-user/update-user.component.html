@@ -4,7 +4,7 @@
                         <h4 class="title">Usuário</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        <form >
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -22,31 +22,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label>Code</label>
-                                        <input type="text" class="form-control" placeholder="Code"
-                                            value="{{user.code}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Telephone</label>
                                         <input type="text" class="form-control" placeholder="Telephone"
                                             value="{{user.telePhone}}">
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-md-offset-2">
+                                <div class="col-md-2 ">
                                     <div class="form-group">
-                                        <label for="">Role Id</label>
-                                        <input type="text" class="form-control" placeholder="Role"
-                                            value="{{user.roleId}}">
+                                        <label>Is active</label>
+                                        <input type="text" class="form-control" placeholder="Active"
+                                            value="{{user.isActive}}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Roles</label>
-                                        <input type="text" class="form-control" placeholder="Update At"
+                                        <input type="text" class="form-control" placeholder="Roles"
                                             value="{{user.roles}}">
                                     </div>
                                 </div>
@@ -59,7 +52,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="">Full Name</label>
+                                        <label for="">Others Name</label>
                                         <input type="text" class="form-control" placeholder="First name"
                                             value="{{user.datas.fullName}}">
                                     </div>
@@ -71,7 +64,7 @@
                                             value="{{user.datas.firstName}}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Last Name</label>
                                         <input type="text" class="form-control" placeholder="Last name"
@@ -89,6 +82,23 @@
                                 </div>
                                 <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
+                                        <label for="">Sex</label>
+                                        <input type="text" class="form-control" placeholder="Sex"
+                                            value="{{user.datas.sex}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label for="">Birth Date</label>
+                                        <input type="text" class="form-control" placeholder="Birth Date"
+                                            value="{{user.datas.birthDate}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-md-3">
+                                    <div class="form-group">
                                         <label for="">Work Situation</label>
                                         <input type="text" class="form-control" placeholder="Work Situation"
                                             value="{{user.datas.workSituation}}">
@@ -101,69 +111,50 @@
                                             value="{{user.datas.professionalExperience}}">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="">Salary</label>
-                                        <input type="text" class="form-control" placeholder="Salary"
-                                            value="{{user.datas.salary}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Activity Sector</label>
                                         <input type="text" class="form-control" placeholder="Activity Sector"
                                             value="{{user.activitySector}}">
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="header">
-                                    <h4 class="title">Definições do usuário</h4>
+                                <div class="col-md-2 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label for="">Salary</label>
+                                        <input type="text" class="form-control" placeholder="Salary"
+                                            value="{{user.datas.salary}}">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="header">
+                                    <h4 class="title h1">Definições do usuário</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="">Work Situation</label>
+                                        <input type="text" class="form-control" placeholder="Work Situation"
+                                            value="{{user.datas.workSituation}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">i18n</label>
                                         <input type="text" class="form-control" placeholder="i18n"
                                             value="{{user.settings.i18n}}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-md-offset-1">
                                     <div class="form-group">
                                         <label for="">Time zone</label>
                                         <input type="text" class="form-control" placeholder="Time Zone"
                                             value="{{user.settings.timeZones}}">
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-md-offset-2">
-                                    <div class="form-group">
-                                        <label for="">Created at</label>
-                                        <input type="text" class="form-control" placeholder="Created At"
-                                            value="{{user.settings.createdAt}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="">Update at</label>
-                                        <input type="text" class="form-control" placeholder="Update At"
-                                            value="{{user.settings.upadateAt}}">
-                                    </div>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="">Is Active</label>
-                                        <input type="text" class="form-control" placeholder="Is active"
-                                            value="{{user.settings.isActive}}">
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
                             <div class="clearfix"></div>
                         </form>
