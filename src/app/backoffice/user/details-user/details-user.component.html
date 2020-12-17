@@ -1,10 +1,86 @@
-
 <app-backoffice-navbar [title]="'Detalhes de utilizador'"></app-backoffice-navbar>
-<div class="card">
-    <div class="header">
-        <p class="category">Here is a subtitle for this table</p>
+<div class="row">
+    <div class="col-md-3 col-md-offset-1">
+        <br>
+           <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                alt="img" class="img-thumbnail">
     </div>
-    <div class="content table-responsive table-full-width">
-        <p >details-user works!</p>   
+    <div class="col-md-7">
+            <br>
+            <div class="row">
+                <div class="col-md-3 ">E-mail</div>
+                <div class="col-md-3">
+                    <h4 class="h4">{{user.email}}</h4>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">Telefone</div>
+                <div class="col-md-3">
+                    <h4 class="h4">{{user.telePhone }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Data de nascimento</div>
+                <div class="col-md-3">
+                    <h4 class="h4">
+                        {{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                        <span>({{user.datas.birthDate|amLocale:'pt'| amTimeAgo}})</span></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Membro desde</div>
+                <div class="col-md-3">
+                    <h4 class="h4">
+                        {{user.datas.createdAt|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                        ({{user.createdAt|amLocale:'pt'| amTimeAgo}})</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Sexo</div>
+                <div class="col-md-3">
+                    <h4 class="h4">{{['Outro','Feminino','Masculino'][user.datas.sex]}}</h4>
+                </div>
+            </div>
+    </div>
+</div>
+<hr>
+<div class="card">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-3 text-right">Nível acadêmico</div>
+            <div class="col-md-9">
+                <h4 class="h4">{{user.datas.academicLevel.name}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Experiêcia profissional</div>
+            <div class="col-md-9">
+                <h4 class="h4">{{user.datas.professionalExperience.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Situação laboral</div>
+            <div class="col-md-9">
+                <h4 class="h4">{{user.datas.workSituation.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">Salário</div>
+            <div class="col-md-9">
+                <h4 class="h4">{{user.datas.salary|number:'1.2-2'}} akz</h4>
+                <ul>
+                    <li>Dia: {{user.datas.salary/22| number:'1.2-2'}} kzs</li>
+                    <li>Hora: {{user.datas.salary/(22*8)| number:'1.2-2'}} kzs</li>
+                    <li>Minuto: {{user.datas.salary/(22*8*60)| number:'1.2-2'}} kzs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row hidden">
+            <div class="col-md-3 text-right">Situação laboral</div>
+            <div class="col-md-9">
+                <h4 class="h4">{{user.datas.activitySector|json }}</h4>
+            </div>
+        </div>
     </div>
 </div>

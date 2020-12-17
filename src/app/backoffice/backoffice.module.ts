@@ -18,6 +18,7 @@ import { UpdateEvaluationComponent } from './evaluation/update-evaluation/update
 import { CreateEvaluationComponent } from './evaluation/create-evaluation/create-evaluation.component';
 
 
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreateEvaluationComponent } from './evaluation/create-evaluation/create
     BackOfficeRoutes,
     FormsModule,
     ReactiveFormsModule,
+    MomentModule
   ]
 })
 export class BackofficeModule { }
