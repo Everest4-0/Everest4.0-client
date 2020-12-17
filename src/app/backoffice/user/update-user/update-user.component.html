@@ -31,7 +31,7 @@
             </div>
             <div class="row">
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="">Perfil</label>
                         <select type="text" class="form-control" formControlName="roles" [(ngModel)]="user.roleId">
@@ -42,8 +42,12 @@
 
                 <div class="col-md-2 ">
                     <div class="form-group">
-                        <label>Is active</label>
-                        <input type="checkbox" formControlName="isActive" [(ngModel)]="user.isActive">
+                        <label>Estado</label>
+
+                        <label class="toggle-control">
+                            <input type="checkbox" formControlName="isActive" [(ngModel)]="user.isActive">
+                            <span class="control"></span>
+                          </label>
                     </div>
                 </div>
             </div>
