@@ -1,0 +1,53 @@
+<app-backoffice-navbar [title]="'registar nova variaveis de avalaição'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+{{evaluation|json}}
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Variavel</label>
+                        <input type="text" class="form-control" formControlName="name"
+                        [(ngModel)]="evaluation.name" placeholder="Variavel">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Domínio</label>
+                        <input type="text" class="form-control" formControlName="group"
+                        [(ngModel)]="evaluation.group">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                        [(ngModel)]="evaluation.descriptions" placeholder="Descrição" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="checkbox"formControlName="isActive"
+                        [(ngModel)]="evaluation.isActive">
+
+                        <label> Variale no estado activo</label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">registar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

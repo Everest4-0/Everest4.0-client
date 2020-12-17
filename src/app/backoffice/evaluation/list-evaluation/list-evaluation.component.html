@@ -1,0 +1,32 @@
+
+<app-backoffice-navbar [title]="'Variaveis de avalaição'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Variavel</th>
+                    <th>Domínio</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let evaluation of evaluations; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{evaluation.name}}</td>
+                    <td>{{evaluation.group}}</td>
+                    <td>{{evaluation.descriptions}}</td>
+                    <td>{{evaluation.isActive}}</td>
+                    <td><a title="Update" routerLink="/backoffice/evaluations/update/{{evaluation.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                </tr>
+            </tbody>
+      </table>
+
+    </div>
+</div>

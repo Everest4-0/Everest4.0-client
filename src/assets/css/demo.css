@@ -127,7 +127,20 @@ div#swal2-content {
 .text-violet {
     color: #9368E9;
 }
-
+.btn-light{
+    background-color: #FFF !important;
+}
+.h1{
+    font-size: 52px;
+}.h2{
+    
+}.h3{
+    
+}.h4{
+    
+}.h5{
+    
+}
 .vertical-center {
     margin: 0;
     position: absolute;

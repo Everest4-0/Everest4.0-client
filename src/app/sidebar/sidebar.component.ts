@@ -32,7 +32,8 @@ export const DEFAULT_ROUTES: RouteInfo[] = [
 export const BACKOFFICE_ROUTES: RouteInfo[] = [
 
   //BACKOFFICES Routes
-  { path: '/backoffice/users', title: 'Usuários', icon: 'pe-7s-users', class: '', roles: ['ADMIN'] }
+  { path: '/backoffice/users', title: 'Usuários', icon: 'pe-7s-users', class: '', roles: ['ADMIN'] },
+  { path: '/backoffice/evaluations', title: 'Variaveis de avaliação', icon: 'pe-7s-users', class: '', roles: ['ADMIN'] }
 ]
 @Component({
   selector: 'app-sidebar',

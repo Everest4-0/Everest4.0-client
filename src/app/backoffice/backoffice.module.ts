@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from './../sidebar/sidebar.module';
 import { FooterModule } from './../shared/footer/footer.module';
 import { NavbarModule } from './../shared/navbar/navbar.module';
@@ -12,6 +13,9 @@ import { BackofficeComponent } from './backoffice/backoffice.component';
 import { BackofficeNavbarComponent } from './components/backoffice-navbar/backoffice-navbar.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { DetailsUserComponent } from './user/details-user/details-user.component';
+import { ListEvaluationComponent } from './evaluation/list-evaluation/list-evaluation.component';
+import { UpdateEvaluationComponent } from './evaluation/update-evaluation/update-evaluation.component';
+import { CreateEvaluationComponent } from './evaluation/create-evaluation/create-evaluation.component';
 
 
 
@@ -23,14 +27,19 @@ import { DetailsUserComponent } from './user/details-user/details-user.component
     BackofficeComponent,
     BackofficeNavbarComponent,
     ListUserComponent,
-    DetailsUserComponent
+    DetailsUserComponent,
+    ListEvaluationComponent,
+    UpdateEvaluationComponent,
+    CreateEvaluationComponent
   ],
   imports: [
     CommonModule,
     NavbarModule,
     FooterModule,
     SidebarModule,
-    BackOfficeRoutes
+    BackOfficeRoutes,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class BackofficeModule { }

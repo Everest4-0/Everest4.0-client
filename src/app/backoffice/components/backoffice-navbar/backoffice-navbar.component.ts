@@ -1,5 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-backoffice-navbar',
@@ -12,13 +13,19 @@ export class BackofficeNavbarComponent implements OnInit {
   public url;
   public id;
   public list;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     debugger
     this.url = '/' + this.router.url.split('/').splice(1, 2).join('/')
     this.id = this.route.snapshot.paramMap.get("id");
-    this.list=this.router.url.split('/').length===3
+    this.list = this.router.url.split('/').length === 3
   }
 
+
+  goBack = () => this.location.back();
 }

@@ -82,8 +82,6 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     LbdModule,
     ModalModule,
-    FormsModule,
-    ReactiveFormsModule,
     MomentModule,
     FullCalendarModule,
     SwiperModule,

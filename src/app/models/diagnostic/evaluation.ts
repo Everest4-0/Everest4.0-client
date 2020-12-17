@@ -5,7 +5,7 @@ export class Evaluation {
     points: number;
     descriptions: string;
     group: string;
-    isActive: boolean;
+    isActive: boolean = true;
     createdAt: Date;
     updatedAt: Date;
 }

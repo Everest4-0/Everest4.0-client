@@ -111,7 +111,7 @@ export class FirstloginComponent implements OnInit {
 
 
   onChange(file: File) {
-    debugger
+    
     if (file) {
       this.file.fileName = file.name;
       this.file.file = file;
