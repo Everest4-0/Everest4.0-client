@@ -1,162 +1,193 @@
 <app-backoffice-navbar [title]="'Actualizar utlizador'"></app-backoffice-navbar>
-                <div class="card">
-                    <div class="header">
-                        <h3 class="title">Usuário</h3>
-                    </div>
-                    <div class="content">
-                        <form [formGroup]="form" (ngSubmit)="saveForm()">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" formControlName="userName"
-                                            value="{{user.userName}}" [(ngModel)]="user.userName">
-                                    </div>
-                                </div>
-                                <div class="col-md-5 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control" formControlName="email"
-                                            value="{{user.email}}" [(ngModel)]="user.email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Telephone</label>
-                                        <input type="text" class="form-control" formControlName="telePhone"
-                                            value="{{user.telePhone}}" [(ngModel)]="user.telePhone">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 ">
-                                    <div class="form-group">
-                                        <label>Is active</label>
-                                        <input type="text" class="form-control" formControlName="isActive"
-                                            value="{{user.isActive}}" [(ngModel)]="user.isActive">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Roles</label>
-                                        <input type="text" class="form-control" formControlName="roles"
-                                            value="{{user.roles}}" [(ngModel)]="user.roles">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="header">
-                                    <h3 class="title">Dados pessoais</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="">Others Name</label>
-                                        <input type="text" class="form-control" formControlName="othersName"
-                                            value="{{user.datas.othersName}}" [(ngModel)]="user.datas.othersName">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">First Name</label>
-                                        <input type="text" class="form-control" formControlName="firstName"
-                                            value="{{user.datas.firstName}}" [(ngModel)]="user.datas.firstName">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Last Name</label>
-                                        <input type="text" class="form-control" formControlName="lastName"
-                                            value="{{user.datas.lastName}}" [(ngModel)]="user.datas.lastName">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="">Academic Level</label>
-                                        <input type="text" class="form-control" formControlName="academicLevel"
-                                            value="{{user.datas.academicLevel}}" [(ngModel)]="user.datas.academicLevel">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Sex</label>
-                                        <input type="text" class="form-control" formControlName="sex"
-                                            value="{{user.datas.sex}}" [(ngModel)]="user.datas.sex">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Birth Date</label>
-                                        <input type="date" class="form-control" formControlName="birthDate"
-                                            value="{{user.datas.birthDate}}" [(ngModel)]="user.datas.birthDate">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="">Work Situation</label>
-                                        <input type="text" class="form-control" formControlName="workSituation"
-                                            value="{{user.datas.workSituation}}" [(ngModel)]="user.datas.workSituation">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="">Professional Experience</label>
-                                        <input type="text" class="form-control" formControlName="professionalExperience"
-                                            value="{{user.datas.professionalExperience}}" [(ngModel)]="user.datas.professionalExperience">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Activity Sector</label>
-                                        <input type="text" class="form-control" formControlName="activitySector"
-                                            value="{{user.activitySector}}" [(ngModel)]="user.datas.activitySector">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Salary</label>
-                                        <input type="text" class="form-control" formControlName="salary"
-                                            value="{{user.datas.salary}}" [(ngModel)]="user.datas.salary">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="header">
-                                    <h3 class="title">Definições do usuário</h3>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label for="">News categories</label>
-                                        <input type="text" class="form-control" formControlName="newsCategory"
-                                            value="{{user.settings.newsCategory}}" [(ngModel)]="user.settings.newsCategory">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">i18n</label>
-                                        <input type="text" class="form-control" formControlName="i18n"
-                                            value="{{user.settings.i18n}}" [(ngModel)]="user.settings.i18n">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="">Time zone</label>
-                                        <input type="text" class="form-control" formControlName="timeZones"
-                                            value="{{user.settings.timeZones}}" [(ngModel)]="user.settings.timeZones">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
-                            <div class="clearfix"></div>
-                        </form>
+<form [formGroup]="form" (ngSubmit)="saveForm()">
+    <div class="card col-md-9">
+        <div class="header">
+            <h3 class="title">Usuário</h3>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" formControlName="userName" [(ngModel)]="user.username">
                     </div>
                 </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">E-mail</label>
+                        <input type="email" class="form-control" formControlName="email" [(ngModel)]="user.email">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" formControlName="telePhone" value="{{user.telePhone}}"
+                            [(ngModel)]="user.telePhone">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Perfil</label>
+                        <select type="text" class="form-control" formControlName="roles" [(ngModel)]="user.roleId">
+                            <option *ngFor="let item of ['FREE','PREMIUM','PRO']">{{item}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2 ">
+                    <div class="form-group">
+                        <label>Is active</label>
+                        <input type="checkbox" formControlName="isActive" [(ngModel)]="user.isActive">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-9">
+        <div class="header">
+            <h3 class="title">Dados pessoais</h3>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Primeiro Nome</label>
+                        <input type="text" class="form-control" formControlName="firstName"
+                            value="{{user.datas.firstName}}" [(ngModel)]="user.datas.firstName">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Ultimo Name</label>
+                        <input type="text" class="form-control" formControlName="lastName"
+                            value="{{user.datas.lastName}}" [(ngModel)]="user.datas.lastName">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Others Name</label>
+                        <input type="text" class="form-control" formControlName="othersName"
+                            value="{{user.datas.othersName}}" [(ngModel)]="user.datas.othersName">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Sexo</label>
+                        <select type="text" class="form-control" formControlName="sex" [(ngModel)]="user.datas.sex">
+                            <option value="{{item.id}}" *ngFor="let item of sexs">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Data de Nascimento</label>
+                        <input type="date" class="form-control" formControlName="birthDate"
+                            value="{{user.datas.birthDate}}" [(ngModel)]="user.datas.birthDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Nivel academico</label>
+                        <select class="form-control" formControlName="academicLevel"
+                            [(ngModel)]="user.datas.academicLevel">
+                            <option value="{{item.id}}" *ngFor="let item of academicLevels">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Situation profissional</label>
+                        <select type="text" class="form-control" formControlName="workSituation"
+                            [(ngModel)]="user.datas.workSituation">
+                            <option value="{{item.id}}" *ngFor="let item of workSituations">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Experiencia professional</label>
+                        <select type="text" class="form-control" formControlName="professionalExperience"
+                            [(ngModel)]="user.datas.professionalExperience">
+                            <option value="{{item.id}}" *ngFor="let item of professionalExperiences">{{item.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Sector de actividades</label>
+                        <input type="text" class="form-control" formControlName="activitySector"
+                            [(ngModel)]="user.datas.activitySector">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Salario (mês)</label>
+                        <input type="text" class="form-control" formControlName="salary" value="{{user.datas.salary}}"
+                            [(ngModel)]="user.datas.salary">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-9">
+        <div class="header">
+            <h3 class="title">Definições do usuário</h3>
+        </div>
+
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="">Categorias de Notícias</label>
+                        <input type="text" class="form-control" formControlName="newsCategory"
+                            value="{{user.settings.newsCategories}}" [(ngModel)]="user.settings.newsCategories">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="">Lingua</label>
+                        <select type="text" class="form-control" formControlName="i18n"
+                            [(ngModel)]="user.settings.i18n">
+<option value="{{item.id}}" *ngFor="let item of i18n">{{item.name}}</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="">Fuso horário</label>
+                        <input type="text" class="form-control" formControlName="timeZones"
+                            value="{{user.settings.timeZones}}" [(ngModel)]="user.settings.timeZones">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card col-md-9">
+        <div class="footer">
+        <button type="submit" class="btn btn-info btn-fill">Update Profile</button>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+
+</form>

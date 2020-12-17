@@ -1,3 +1,6 @@
+import { AcademicLevelService } from './../../../services/data/academic-level.service';
+import { WorkSituationService } from './../../../services/data/work-situation.service';
+import { ProfessionalExperienceService } from './../../../services/data/professional-experience.service';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,24 +19,42 @@ export class UpdateUserComponent implements OnInit {
   public form = new UserForm(this.fb);
 
   public user: User = new User();
-
+  sexs: Array<any> = [{ id: 2, name: 'Masculino' }, { id: 1, name: 'Feminino' }, { id: 0, name: 'Outro' }]
+  i18n: Array<any> = [{ id: 'pt', name: 'Português' }, { id: 'en', name: 'Inglês' }, { id: 'fr', name: 'Francês' }]
+  public workSituations: Array<any> = []
+  public academicLevels: Array<any> = []
+  public professionalExperiences: Array<any> = []
   constructor(
-              private userService: UserService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private toast: ToastService
+    private userService: UserService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private toast: ToastService,
+
+
+    private academicLevelService: AcademicLevelService,
+    private workSituationService: WorkSituationService,
+    private professionalExperienceService: ProfessionalExperienceService
   ) { }
 
   ngOnInit(): void {
 
+
+    this.academicLevelService.all().subscribe(academicLevels => this.academicLevels = academicLevels)
+    this.workSituationService.all().subscribe(workSituations => this.workSituations = workSituations)
+    this.professionalExperienceService.all().subscribe(professionalExperiences=> this.professionalExperiences = professionalExperiences)
     const id = this.route.snapshot.params['id'];
-    this.userService.one(id).subscribe(user => this.user = user);
+    this.userService.one(id).subscribe(user => {
+      user.datas.workSituation=user.datas.workSituation.id
+      user.datas.professionalExperience=user.datas.professionalExperience.id
+      user.datas.academicLevel=user.datas.academicLevel.id
+      this.user = user
+    });
 
   }
 
 
-  saveForm(t={}) {
+  saveForm(t = {}) {
     this.userService.update(this.user).subscribe(user => {
 
       this.toast.success('Usuário actualizado com successo', 'Sucesso', {
@@ -42,7 +63,7 @@ export class UpdateUserComponent implements OnInit {
       })
 
       this.router.navigate(['/backoffice/users']);
-      
+
       console.log(user);
     })
 
