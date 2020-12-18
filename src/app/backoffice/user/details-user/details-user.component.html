@@ -9,6 +9,12 @@
             </div>
             <div class="col-md-3">
                 <div class="row">
+                    <div class="col-md-6">Nome completo</div>
+                    <div class="col-md-9">
+                        <h4>{{user.datas.fullName}}</h4>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">E-mail</div>
                     <div class="col-md-9">
                         <h4>{{user.email}}</h4>
@@ -60,8 +66,8 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="{{isTab==1 ?'active' : ''}}"><a (click)="isTab=1">Home</a></li>
-    <li class="{{isTab==2 ?'active' : ''}}"><a (click)="isTab=2">Definição</a></li>
-    <li class="{{isTab==3 ?'active' : ''}}"><a (click)="isTab=3">Mais dados</a></li>
+    <li class="{{isTab==2 ?'active' : ''}}"><a (click)="isTab=2">Mais dados</a></li>
+    <li class="{{isTab==3 ?'active' : ''}}"><a (click)="isTab=3">Definição</a></li>
     <li class="{{isTab==4 ?'active' : ''}}"><a (click)="isTab=4">Eventos</a></li>
 </ul>
 
@@ -76,7 +82,7 @@
 
 <div class="card" *ngIf="isTab==2">
     <div class="header">
-        Settings
+        
     </div>
     <div class="content">
 

@@ -19,18 +19,18 @@
                     <div>
                         <h2>{{currentResults.name}}</h2>
                         <ul class="list-group" *ngFor="let group of currentResults.groups">
-                            <li (click)="registGoal(currentResults, group)"
+                            <li (click)="registGoal(currentResults, group[0])"
                                 class="list-group-item list-group-item-action active">
-                                <h3>{{group}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i></h3>
+                                <h3>{{group[0]}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i></h3>
                             </li>
-                            <div *ngFor="let item of evaluations">
-                                <li class="list-group-item" *ngIf="item.evaluation.group==group">
-                                    {{item.evaluation.name}}</li>
+                            <div *ngFor="let item of group[1]">
+                                <li class="list-group-item">
+                                    {{item.name}}</li>
                             </div>
                         </ul>
                         <ul class="list-group" *ngFor="let group of otherResults">
                             <li (click)="registGoal(currentResults, group)"
-                                class="list-group-item list-group-item-action active">
+                                class="list-group-item list-group-item-action bg-info">
                                 <h3>{{group}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i></h3>
                             </li>
                         </ul>

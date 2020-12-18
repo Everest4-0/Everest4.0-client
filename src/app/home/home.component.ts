@@ -60,9 +60,9 @@ export class HomeComponent implements OnInit {
       this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
       this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
-      eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
-      sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
-      sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
+      eAtr = this.tasks.all.filter(task => new Date(task.dueDate) < now)
+      sAct = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday)
+      sAnt = this.tasks.all.filter(task => new Date(task.dueDate) < lSunday)
 
       let done = sAct.filter((x: Task) => x.state > 2).length
       let all = sAct.length;

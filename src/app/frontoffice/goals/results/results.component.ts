@@ -20,13 +20,13 @@ export class ResultsComponent implements OnInit {
 
 
   public results = [
-    { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x == 4 },
-    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => x < 3 }
+    { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
+    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
     /*{ code: 'O', name: 'Oportunidades' },
     { code: 'T', name: 'Ameaças' },*/
   ]
-  public currentResults: Array<any>= [];
-  public otherResults =['Pessoal','Profissional','Financeiro'];
+  public currentResults: Array<any> = [];
+  public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
   form = new GoalForm(this.fb, this.goal)
@@ -44,18 +44,33 @@ export class ResultsComponent implements OnInit {
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
-
+      debugger
+      let evs = []
+      let setEv = evaluations.forEach((ev) => {
+        if (!evs.map(x => x[0]).includes(ev.evaluation.name))
+          evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
+      })
+      evs.forEach(e => {
+        let mine = (e[1].filter(x => x.requestedId === x.userId)[0] || { points: 0 }).points
+        let their = e[1].filter(x => x.requestedId !== x.userId)
+        let points = ((their.reduce((r, s) => r + parseInt(s.points), 0) / their.length) / 2) + mine / 4
+        e.push(points > 2)
+      })
       this.evaluations = evaluations
+      let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)
       this.results.forEach(result => {
-        result.evaluations = evaluations
-          .filter(evaluation => result.conditions(evaluation.points));
 
-        result.groups = result.evaluations.map(x => x.evaluation.group)
+
+        result.evaluations = evs
+          .filter(evaluation => result.conditions(evaluation[2])).map(g => g[1][0].evaluation);
+
+        /* result.evaluations = evaluations
+           .filter(evaluation => result.conditions(evaluation.points) && evaluation.requested === null);*/
+        result.groups = this.groupBy(result.evaluations, 'group')/*result.evaluations.map(x => x.group)
           .filter((value, index, self) => {
             return self.indexOf(value) === index;
-          })
-
-          this.otherResults
+          })*/
+        result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
       })
     })
   }
@@ -99,7 +114,9 @@ export class ResultsComponent implements OnInit {
   }
 
   setResults(e) {
+    debugger
+    let u = this.results;
     this.currentResults = e
-    this.otherResults=['Pessoal','Profissional','Financeiro'].filter(x=>!e.groups.map(r=>r).includes(x))
+    this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
   }
 }

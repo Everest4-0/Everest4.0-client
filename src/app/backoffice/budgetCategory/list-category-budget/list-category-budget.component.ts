@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-list-category-budget',
   templateUrl: './list-category-budget.component.html',
-  styleUrls: ['./list-category-budget.component.css']
+  styleUrls: ['./list-category-budget.component.scss']
 })
 export class ListCategoryBudgetComponent implements OnInit {
 
