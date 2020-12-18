@@ -1,9 +1,10 @@
 <app-backoffice-navbar [title]="'Detalhes de utilizador'"></app-backoffice-navbar>
 <div class="row">
     <div class="row">
-        <br>
-           <img src="{{userService.serverAddress}}{{user.photoUrl}}"
-                alt="img" class="img-thumbnail">
+        <div class="col-md-3">
+            <img src="{{userService.serverAddress}}{{user.photoUrl}}" alt="img" class="img-thumbnail">
+        </div>
+
     </div>
     <div class="content">
         <div class="row">
@@ -21,7 +22,8 @@
         <div class="row">
             <div class="col-md-3 text-right">Data de nascimento</div>
             <div class="col-md-9">
-                <h4 class="h4">{{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                <h4 class="h4">
+                    {{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
                     <span>({{user.datas.birthDate|amLocale:'pt'| amTimeAgo}})</span></h4>
             </div>
         </div>
