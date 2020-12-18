@@ -1,0 +1,37 @@
+<app-backoffice-navbar [title]="'Categorias de orçamento'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th style="width: 200px;">Nome</th>
+                    <th>Direcção</th>
+                    <th>Descrição</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let budgetCategory of budgetCategories; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{budgetCategory.name}}</td>
+                    <td>{{budgetCategory.direction}}</td>
+                    <td>
+                        {{budgetCategory.descriptions}}
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-fill btn-{{['success','danger'][budgetCategory.isActive ? 0 : 1]}}">
+                            {{['Activo','Inactivo'][budgetCategory.isActive ? 0 : 1]}}
+                        </button>
+                    </td>
+                    <td><a title="Update" routerLink="/backoffice/budget_categories/update/{{budgetCategory.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                </tr>
+            </tbody>
+      </table>
+
+    </div>
+</div>

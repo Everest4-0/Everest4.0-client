@@ -1,3 +1,5 @@
+import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
+import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
 import { CreateEvaluationComponent } from './evaluation/create-evaluation/create-evaluation.component';
 import { UpdateEvaluationComponent } from './evaluation/update-evaluation/update-evaluation.component';
 import { ListEvaluationComponent } from './evaluation/list-evaluation/list-evaluation.component';
@@ -9,6 +11,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
 
 
 const backOfficeRoutes: Routes = [
@@ -18,7 +21,7 @@ const backOfficeRoutes: Routes = [
     { path: 'users/create',          component: CreateUserComponent },
     { path: 'users/update/:id',      component: UpdateUserComponent },
     { path: 'users/delete/:id',      component: DeleteUserComponent },
-    { path: 'users/details/:id',      component: DetailsUserComponent },
+    { path: 'users/details/:id',     component: DetailsUserComponent },
 
     { path: 'evaluations',            component: ListEvaluationComponent},
     { path: 'evaluations/create',     component: CreateEvaluationComponent },
@@ -26,7 +29,10 @@ const backOfficeRoutes: Routes = [
     { path: 'evaluations/delete/:id', component: DeleteUserComponent },
     { path: 'evaluations/details/:id',component: DetailsUserComponent },
 
-    
+    { path: 'budget_categories',            component: ListCategoryBudgetComponent},
+    { path: 'budget_categories/create',     component: CreateCategoryBudgetComponent },
+    { path: 'budget_categories/update/:id', component: UpdateCategoryBudgetComponent },
+
 
 ];
 

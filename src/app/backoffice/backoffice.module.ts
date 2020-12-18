@@ -20,6 +20,9 @@ import { CreateEvaluationComponent } from './evaluation/create-evaluation/create
 
 import { MomentModule } from 'ngx-moment';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
+import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
+import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailsUserComponent,
     ListEvaluationComponent,
     UpdateEvaluationComponent,
-    CreateEvaluationComponent
+    CreateEvaluationComponent,
+    ListCategoryBudgetComponent,
+    CreateCategoryBudgetComponent,
+    UpdateCategoryBudgetComponent
   ],
   imports: [
     CommonModule,

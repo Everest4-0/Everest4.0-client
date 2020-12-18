@@ -1,0 +1,57 @@
+<app-backoffice-navbar [title]="'Actualizar categoria'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" formControlName="name"
+                            [(ngModel)]="budgetCategory.name" value="{{budgetCategory.name}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Direção</label>
+                        <select class="form-control" formControlName="direction"
+                            [(ngModel)]="budgetCategory.direction">
+                            <option class="form-control">{{['true','false'][budgetCategory.direction ? 0 : 1]}}</option>
+                            <option class="form-control">{{['true','false'][!budgetCategory.direction ? 0 : 1]}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                            [(ngModel)]="budgetCategory.descriptions"
+                            value="{{budgetCategory.descriptions}}" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select class="form-control" formControlName="isActive"
+                            [(ngModel)]="budgetCategory.isActive">
+                            <option class="form-control">{{['true','false'][budgetCategory.isActive ? 0 : 1]}}</option>
+                            <option class="form-control">{{['true','false'][!budgetCategory.isActive ? 0 : 1]}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">Salvar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
