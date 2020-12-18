@@ -12,6 +12,13 @@ import { Injectable } from '@angular/core';
 export class UserService extends AppService<User> implements IService<User> {
 
   public user: User;
+
+
+  get photoUrl() {
+    let prefix = this.user.photoUrl.split('http').length > 0 ? '' : this.serverAddress
+    return prefix + this.user.photoUrl
+  }
+
   constructor(public http: HttpClient, private store: StorageServices) {
     super(http, 'users');
   }
