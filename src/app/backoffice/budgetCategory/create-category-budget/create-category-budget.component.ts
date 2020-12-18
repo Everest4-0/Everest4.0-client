@@ -15,11 +15,11 @@ export class CreateCategoryBudgetComponent implements OnInit {
 
   public form = new BudgetCategoryForm(this.fb)
 
-  public budgedCategory: BudgetCategory = new BudgetCategory();
+  public budgetCategory: BudgetCategory = new BudgetCategory();
 
   constructor(
     private fb: FormBuilder,
-    private budgedCategoryService: BudgetCategoryService,
+    private budgetCategoryService: BudgetCategoryService,
     private router: Router,
     private toast: ToastService
   ) { }
@@ -29,13 +29,15 @@ export class CreateCategoryBudgetComponent implements OnInit {
   }
 
   saveForm() {
-    this.budgedCategoryService.create(this.budgedCategory).subscribe(data => {
+    console.log(this.budgetCategory);
+    
+    this.budgetCategoryService.create(this.budgetCategory).subscribe(data => {
       this.toast.success('Categoria de orçamento criado com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })
       
-      this.router.navigate(['/backoffice/budged_categories']);
+      this.router.navigate(['/backoffice/budget_categories']);
     })
   }
 
