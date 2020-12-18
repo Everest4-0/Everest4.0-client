@@ -24,6 +24,7 @@ import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budg
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
 import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
 import { CreateAcademicLevelComponent } from './academic-level/create-academic-level/create-academic-level.component';
+import { ListAcademicLevelComponent } from './academic-level/list-academic-level/list-academic-level.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CreateAcademicLevelComponent } from './academic-level/create-academic-l
     ListCategoryBudgetComponent,
     CreateCategoryBudgetComponent,
     UpdateCategoryBudgetComponent,
-    CreateAcademicLevelComponent
+    CreateAcademicLevelComponent,
+    ListAcademicLevelComponent
   ],
   imports: [
     CommonModule,

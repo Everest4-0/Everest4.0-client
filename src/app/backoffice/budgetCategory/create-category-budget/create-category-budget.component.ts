@@ -29,7 +29,6 @@ export class CreateCategoryBudgetComponent implements OnInit {
   }
 
   saveForm() {
-    console.log(this.budgetCategory);
     
     this.budgetCategoryService.create(this.budgetCategory).subscribe(data => {
       this.toast.success('Categoria de orçamento criado com successo', 'Sucesso', {

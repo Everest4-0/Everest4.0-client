@@ -1,3 +1,4 @@
+import { ListAcademicLevelComponent } from './academic-level/list-academic-level/list-academic-level.component';
 import { CreateAcademicLevelComponent } from './academic-level/create-academic-level/create-academic-level.component';
 import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
 import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
@@ -34,7 +35,8 @@ const backOfficeRoutes: Routes = [
     { path: 'budget_categories/create',     component: CreateCategoryBudgetComponent },
     { path: 'budget_categories/update/:id', component: UpdateCategoryBudgetComponent },
 
-    { path: 'academic_levels/create',              component: CreateAcademicLevelComponent}
+    { path: 'academic_levels',              component: ListAcademicLevelComponent},
+    { path: 'academic_levels/create',       component: CreateAcademicLevelComponent}
 
 ];
 

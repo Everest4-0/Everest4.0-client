@@ -12,8 +12,6 @@ export class ListCategoryBudgetComponent implements OnInit {
   public budgetCategories: Array<BudgetCategory> = []
   constructor(private budgetCategoryService:BudgetCategoryService) { }
 
-
-
   ngOnInit(): void {
     this.budgetCategoryService.all({}).subscribe(datas => this.budgetCategories = datas);
   }

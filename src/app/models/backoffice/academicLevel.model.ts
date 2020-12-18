@@ -1,12 +1,10 @@
 export class AcademicLevel {
-    id: string;
 
+    id: string;
     name: string;
     descriptions: string;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
 
-    constructor() {
-    }
 }

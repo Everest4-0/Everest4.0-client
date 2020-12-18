@@ -19,15 +19,16 @@ export class CreateAcademicLevelComponent implements OnInit {
   
   constructor(private academicLevelService: AcademicLevelService,
               private fb:FormBuilder,
-              private route: ActivatedRoute,
               private router: Router,
               private toast: ToastService) { }
 
   ngOnInit(): void {
   }
-  
+
   saveForm() {
-    this.academicLevelService.create(this.academicLevel).subscribe(evaluation => {
+    console.log(this.academicLevel);
+
+    this.academicLevelService.create(this.academicLevel).subscribe(data => {
       this.toast.success('Nível académico criado com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
