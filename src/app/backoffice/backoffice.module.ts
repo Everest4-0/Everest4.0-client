@@ -23,6 +23,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
 import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
+import { CreateAcademicLevelComponent } from './academic-level/create-academic-level/create-academic-level.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-
     CreateEvaluationComponent,
     ListCategoryBudgetComponent,
     CreateCategoryBudgetComponent,
-    UpdateCategoryBudgetComponent
+    UpdateCategoryBudgetComponent,
+    CreateAcademicLevelComponent
   ],
   imports: [
     CommonModule,

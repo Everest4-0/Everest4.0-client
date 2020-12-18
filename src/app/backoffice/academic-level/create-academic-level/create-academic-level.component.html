@@ -1,0 +1,46 @@
+<app-backoffice-navbar [title]="'Registar um nível académico'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Nível académico</label>
+                        <input type="text" class="form-control" formControlName="name"
+                        [(ngModel)]="academicLevel.name" placeholder="Nome">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                        [(ngModel)]="academicLevel.descriptions" placeholder="Descrição" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Estado</label>
+                        <select class="form-control" formControlName="isActive"
+                            [(ngModel)]="academicLevel.isActive">
+                            <option class="form-control">true</option>
+                            <option class="form-control">false</option>
+                        </select>
+                </div>
+            </div>
+
+            
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">Registar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
