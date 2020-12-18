@@ -1,4 +1,4 @@
-<app-backoffice-navbar [title]="'Nível académico'"></app-backoffice-navbar>
+<app-backoffice-navbar [title]="'Situação de trabalho'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
         <p class="category">Here is a subtitle for this table</p>
@@ -8,26 +8,26 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th style="width: 200px;">Nível</th>
+                    <th style="width: 200px;">Situação</th>
                     <th>Descrição</th>
                     <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let academicLevel of academicLevels; let i=index">
+                <tr *ngFor="let workSituation of workSituations; let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{academicLevel.name}}</td>
+                    <td>{{workSituation.name}}</td>
                     <td>
-                        {{academicLevel.descriptions}}
+                        {{workSituation.descriptions}}
                     </td>
                     <td>
                         <button
-                            class="btn btn-sm btn-fill btn-{{['success','danger'][academicLevel.isActive ? 0 : 1]}}">
-                            {{['Activo','Inactivo'][academicLevel.isActive ? 0 : 1]}}
+                            class="btn btn-sm btn-fill btn-{{['success','danger'][workSituation.isActive ? 0 : 1]}}">
+                            {{['Activo','Inactivo'][workSituation.isActive ? 0 : 1]}}
                         </button>
                     </td>
-                    <td><a title="Update" routerLink="/backoffice/academic_levels/update/{{academicLevel.id}}"
+                    <td><a title="Update" routerLink="/backoffice/work_situations/update/{{workSituation.id}}"
                             class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
                 </tr>
             </tbody>
