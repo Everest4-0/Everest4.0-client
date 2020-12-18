@@ -20,6 +20,7 @@ import { CreateEvaluationComponent } from './evaluation/create-evaluation/create
 
 import { MomentModule } from 'ngx-moment';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DetailsUserComponent,
     ListEvaluationComponent,
     UpdateEvaluationComponent,
-    CreateEvaluationComponent
+    CreateEvaluationComponent,
+    ListCategoryBudgetComponent
   ],
   imports: [
     CommonModule,
