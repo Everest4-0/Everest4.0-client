@@ -22,6 +22,7 @@ import { MomentModule } from 'ngx-moment';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
+import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-
     UpdateEvaluationComponent,
     CreateEvaluationComponent,
     ListCategoryBudgetComponent,
-    CreateCategoryBudgetComponent
+    CreateCategoryBudgetComponent,
+    UpdateCategoryBudgetComponent
   ],
   imports: [
     CommonModule,

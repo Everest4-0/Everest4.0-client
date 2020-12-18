@@ -1,3 +1,4 @@
+import { UpdateCategoryBudgetComponent } from './budgetCategory/update-category-budget/update-category-budget.component';
 import { ListCategoryBudgetComponent } from './budgetCategory/list-category-budget/list-category-budget.component';
 import { CreateEvaluationComponent } from './evaluation/create-evaluation/create-evaluation.component';
 import { UpdateEvaluationComponent } from './evaluation/update-evaluation/update-evaluation.component';
@@ -30,6 +31,7 @@ const backOfficeRoutes: Routes = [
 
     { path: 'budget_categories',            component: ListCategoryBudgetComponent},
     { path: 'budget_categories/create',     component: CreateCategoryBudgetComponent },
+    { path: 'budget_categories/update/:id', component: UpdateCategoryBudgetComponent },
 
 
 ];
