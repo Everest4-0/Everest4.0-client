@@ -1,8 +1,7 @@
-<app-backoffice-navbar [title]="'Actualizar categoria'"></app-backoffice-navbar>
+<app-backoffice-navbar [title]="'Actualizar situação de trabalho'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
     </div>
-
     <div class="content">
         <form [formGroup]="form" (ngSubmit)="saveForm()">
             <div class="row">
@@ -10,39 +9,28 @@
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" class="form-control" formControlName="name"
-                            [(ngModel)]="budgetCategory.name" value="{{budgetCategory.name}}">
+                            [(ngModel)]="workSituation.name" value="{{workSituation.name}}">
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Tipo</label>
-                        <select class="form-control" formControlName="direction"
-                            [(ngModel)]="budgetCategory.direction">
-                            <option value="false">Despesas</option>
-                            <option value="true">Receitas</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Descrição</label>
                         <textarea type="text" class="form-control" formControlName="descriptions"
-                            [(ngModel)]="budgetCategory.descriptions"
-                             rows="5">{{budgetCategory.descriptions}}</textarea>
+                            [(ngModel)]="workSituation.descriptions"
+                            rows="5">{{workSituation.descriptions}}</textarea>
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Estado</label>
                         <select class="form-control" formControlName="isActive"
-                            [(ngModel)]="budgetCategory.isActive">
-                            
+                            [(ngModel)]="workSituation.isActive">
                             <option value="false">Inactivo</option>
                             <option value="true">Activo</option>
                         </select>

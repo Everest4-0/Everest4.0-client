@@ -7,7 +7,5 @@ export class WorkSituation{
 
     createdAt: Date;
     updatedAt: Date;
-
-    constructor() {
-    }
+    
 }

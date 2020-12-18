@@ -14,7 +14,16 @@ export class ListWorkSituationComponent implements OnInit {
   constructor(private workSituationService: WorkSituationService) { }
 
   ngOnInit(): void {
-    this.workSituationService.all({}).subscribe(datas=>this.workSituations=datas);
+
+    this.workSituationService.all({}).subscribe(data => {
+
+      this.workSituations = data
+
+      console.log(this.workSituations)
+
+    })
   }
+
+
 
 }
