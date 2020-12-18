@@ -11,23 +11,22 @@
                     <th>#</th>
                     <th>User</th>
                     <th>Email</th>
+                    <th>Telephone</th>
                     <th>Active</th>
                     <th>Role</th>
-                    <th>Telephone</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let user of users; let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{user.userName}}</td>
+                    <td>{{user.datas.fullName}}</td>
                     <td>{{user.email}}</td>
+                    <td>{{user.telePhone}}</td>
                     <td>{{user.isActive}}</td>
                     <td>{{user.roleId}}</td>
-                    <td>{{user.telePhone}}</td>
-                    <td><a title="Update" routerLink="/backoffice/users/update/{{user.id}}" class="text-decoration-none text-success title h4"><i class="pe-7s-pen"></i></a></td>
-                    <td><a title="Delete" routerLink="/backoffice/users/delete/{{user.id}}" class="text-decoration-none text-danger title h4"><i class="pe-7s-trash"></i></a></td>
+                    <td><a title="Detalhes" routerLink="/backoffice/users/details/{{user.id}}" class="text-decoration-none text-success title h4"><i class="pe-7s-angle-right"></i></a></td>
+                    
                 </tr>
             </tbody>
       </table>

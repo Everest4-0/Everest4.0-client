@@ -8,6 +8,8 @@ import { User } from './../../../models/main/user';
 import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { UserForm } from 'app/backoffice/forms/user.form';
+import * as moment from 'moment-timezone'
+import { games } from 'googleapis/build/src/apis/games';
 
 @Component({
   selector: 'app-update-user',
@@ -21,6 +23,28 @@ export class UpdateUserComponent implements OnInit {
   public user: User = new User();
   sexs: Array<any> = [{ id: 2, name: 'Masculino' }, { id: 1, name: 'Feminino' }, { id: 0, name: 'Outro' }]
   i18n: Array<any> = [{ id: 'pt', name: 'Português' }, { id: 'en', name: 'Inglês' }, { id: 'fr', name: 'Francês' }]
+
+  public newsCategories = ['Negócio',
+    'Finança',
+    'Economia',
+    'Computadores',
+    'Ciência',
+    'Tecnologia',
+    'Entretenimento',
+    'Arte',
+    'Cultura',
+    'Noticias gerais',
+    'Atualidades',
+    'Saúde',
+    'Remédio',
+    'Estilo de vida',
+    'Desporto',
+    'Videogames',
+    'Lazer',
+    'Comércio',
+    'Profissional'].sort((x, y) => x > y ? 1 : -1);
+
+  public timeZonesList = moment.tz.names()
   public workSituations: Array<any> = []
   public academicLevels: Array<any> = []
   public professionalExperiences: Array<any> = []
@@ -42,12 +66,12 @@ export class UpdateUserComponent implements OnInit {
 
     this.academicLevelService.all().subscribe(academicLevels => this.academicLevels = academicLevels)
     this.workSituationService.all().subscribe(workSituations => this.workSituations = workSituations)
-    this.professionalExperienceService.all().subscribe(professionalExperiences=> this.professionalExperiences = professionalExperiences)
+    this.professionalExperienceService.all().subscribe(professionalExperiences => this.professionalExperiences = professionalExperiences)
     const id = this.route.snapshot.params['id'];
     this.userService.one(id).subscribe(user => {
-      user.datas.workSituation=user.datas.workSituation.id
-      user.datas.professionalExperience=user.datas.professionalExperience.id
-      user.datas.academicLevel=user.datas.academicLevel.id
+      user.datas.workSituation = user.datas.workSituation.id
+      user.datas.professionalExperience = user.datas.professionalExperience.id
+      user.datas.academicLevel = user.datas.academicLevel.id
       this.user = user
     });
 

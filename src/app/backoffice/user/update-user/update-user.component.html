@@ -47,7 +47,7 @@
                         <label class="toggle-control">
                             <input type="checkbox" formControlName="isActive" [(ngModel)]="user.isActive">
                             <span class="control"></span>
-                          </label>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -159,8 +159,14 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="">Categorias de Notícias</label>
-                        <input type="text" class="form-control" formControlName="newsCategory"
-                            value="{{user.settings.newsCategories}}" [(ngModel)]="user.settings.newsCategories">
+                        <ng-select [multiple]="true" [items]="newsCategories" formControlName="newsCategories"
+                            [(ngModel)]="user.settings.newsCategories">
+                        </ng-select>
+                    </div>
+                    <div style="border: solid 1px #ddd; border-radius:5px">
+                        <ul>
+                            <li *ngFor="let item of user.settings.newsCategories">{{item}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -170,8 +176,8 @@
                         <label for="">Lingua</label>
                         <select type="text" class="form-control" formControlName="i18n"
                             [(ngModel)]="user.settings.i18n">
-<option value="{{item.id}}" *ngFor="let item of i18n">{{item.name}}</option>
-                            </select>
+                            <option value="{{item.id}}" *ngFor="let item of i18n">{{item.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -179,19 +185,21 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="">Fuso horário</label>
-                        <input type="text" class="form-control" formControlName="timeZones"
-                            value="{{user.settings.timeZones}}" [(ngModel)]="user.settings.timeZones">
+                        <!--Using items input-->
+                        <ng-select [items]="timeZonesList" formControlName="timeZones"
+                            [(ngModel)]="user.settings.timeZones">
+                        </ng-select>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-    <div class="card col-md-9">
+    <div class="card col-md-9 border-none">
         <div class="footer">
-        <button type="submit" class="btn btn-info btn-fill">Update Profile</button>
-        <div class="clearfix"></div>
-    </div>
+            <button type="submit" class="btn btn-info btn-fill">Actualizar dados</button>
+            <div class="clearfix"></div>
+        </div>
     </div>
 
 </form>

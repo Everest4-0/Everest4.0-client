@@ -5,9 +5,9 @@ export class UserSetting {
     descriptions: string;
 
     user: User;
-    newsCategories:Array<string>=[];
-    i18n:string;
-    timeZones:string;
+    newsCategories: Array<string> = [];
+    i18n: string;
+    timeZones: string;
 
     isActive: boolean;
     createdAt: Date;

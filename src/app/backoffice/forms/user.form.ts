@@ -20,7 +20,7 @@ export class UserForm {
             professionalExperience: [''],
             activitySector: [''],
             salary: [''],
-            newsCategory: [''],
+            newsCategories: [''],
             i18n: [''],
             timeZones: [''],
         })

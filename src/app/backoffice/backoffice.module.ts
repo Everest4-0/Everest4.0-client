@@ -19,6 +19,7 @@ import { CreateEvaluationComponent } from './evaluation/create-evaluation/create
 
 
 import { MomentModule } from 'ngx-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MomentModule } from 'ngx-moment';
     BackOfficeRoutes,
     FormsModule,
     ReactiveFormsModule,
-    MomentModule
+    MomentModule,
+    NgSelectModule
   ]
 })
 export class BackofficeModule { }

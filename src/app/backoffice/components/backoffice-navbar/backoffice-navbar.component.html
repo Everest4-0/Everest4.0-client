@@ -7,6 +7,7 @@
                 <li><h3 href="#">{{title}}</h3></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="font-size: 32px;">
+                <li><a routerLink="{{url}}/update/{{id}}"  *ngIf="id"><i class="pe-7s-note"></i></a></li>
                 <li><a routerLink="{{url}}/delete/{{id}}"  *ngIf="id"><i class="pe-7s-trash"></i></a></li>
             </ul>
         </div>
