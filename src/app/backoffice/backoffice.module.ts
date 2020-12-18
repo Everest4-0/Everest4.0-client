@@ -28,6 +28,7 @@ import { ListAcademicLevelComponent } from './academic-level/list-academic-level
 import { UpdateAcademicLevelComponent } from './academic-level/update-academic-level/update-academic-level.component';
 import { ListWorkSituationComponent } from './workSituation/list-work-situation/list-work-situation.component';
 import { UpdateWorkSituationComponent } from './workSituation/update-work-situation/update-work-situation.component';
+import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UpdateWorkSituationComponent } from './workSituation/update-work-situat
     ListAcademicLevelComponent,
     UpdateAcademicLevelComponent,
     ListWorkSituationComponent,
-    UpdateWorkSituationComponent
+    UpdateWorkSituationComponent,
+    CreateWorkSituationComponent
   ],
   imports: [
     CommonModule,

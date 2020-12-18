@@ -1,3 +1,4 @@
+import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
 import { UpdateWorkSituationComponent } from './workSituation/update-work-situation/update-work-situation.component';
 import { ListWorkSituationComponent } from './workSituation/list-work-situation/list-work-situation.component';
 import { UpdateAcademicLevelComponent } from './academic-level/update-academic-level/update-academic-level.component';
@@ -43,7 +44,7 @@ const backOfficeRoutes: Routes = [
     { path: 'academic_levels/update/:id',   component: UpdateAcademicLevelComponent},
 
     { path: 'work_situations',               component: ListWorkSituationComponent},
-    //{ path: 'academic_levels/create',     component: CreateAcademicLevelComponent},
+    { path: 'work_situations/create',        component: CreateWorkSituationComponent},
     { path: 'work_situations/update/:id',    component: UpdateWorkSituationComponent}
 
 ];

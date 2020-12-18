@@ -25,12 +25,14 @@ export class UpdateWorkSituationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const id = this.route.snapshot.params['id']
+    let id = this.route.snapshot.params['id']
 
     this.workSituationService.one(id).subscribe(data=>this.workSituation=data)
+
+    console.log(id)
   }
 
-  saveForm(t={}){
+  saveForm(){
     
     
     this.workSituationService.update(this.workSituation).subscribe(data=>{
