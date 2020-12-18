@@ -1,4 +1,4 @@
-<app-backoffice-navbar [title]="'Categorias de avaliação'"></app-backoffice-navbar>
+<app-backoffice-navbar [title]="'Categorias de orçamento'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
         <p class="category">Here is a subtitle for this table</p>
@@ -28,7 +28,7 @@
                             {{['Activo','Inactivo'][budgetCategory.isActive ? 0 : 1]}}
                         </button>
                     </td>
-                    <td><a title="Update" routerLink="/backoffice/budgetCategories/update/{{budgetCategory.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                    <td><a title="Update" routerLink="/backoffice/budget_categories/update/{{budgetCategory.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
                 </tr>
             </tbody>
       </table>

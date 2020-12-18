@@ -1,0 +1,53 @@
+<app-backoffice-navbar [title]="'Registar nova categoria'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <input type="text" class="form-control" formControlName="name"
+                        [(ngModel)]="budgedCategory.name" placeholder="Nome">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Direção</label>
+                        <input type="text" class="form-control" formControlName="direction"
+                        [(ngModel)]="budgedCategory.direction" placeholder="Direção">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                        [(ngModel)]="budgedCategory.descriptions" placeholder="Descrição" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="checkbox" formControlName="isActive"
+                        [(ngModel)]="budgedCategory.isActive">
+
+                        <label> Categoria no estado activo</label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">registar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
