@@ -1,8 +1,6 @@
 <app-backoffice-navbar [title]="'Actualizar categoria'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-        <h4 class="title">TESTE</h4>
-        <p class="category">Here is a subtitle for this table</p>
     </div>
 
     <div class="content">
@@ -19,11 +17,11 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label>Direção</label>
+                        <label>Tipo</label>
                         <select class="form-control" formControlName="direction"
                             [(ngModel)]="budgetCategory.direction">
-                            <option class="form-control">{{['true','false'][budgetCategory.direction ? 0 : 1]}}</option>
-                            <option class="form-control">{{['true','false'][!budgetCategory.direction ? 0 : 1]}}</option>
+                            <option value="false">Despesas</option>
+                            <option value="true">Receitas</option>
                         </select>
                     </div>
                 </div>
@@ -44,8 +42,9 @@
                         <label>Estado</label>
                         <select class="form-control" formControlName="isActive"
                             [(ngModel)]="budgetCategory.isActive">
-                            <option class="form-control">{{['true','false'][budgetCategory.isActive ? 0 : 1]}}</option>
-                            <option class="form-control">{{['true','false'][!budgetCategory.isActive ? 0 : 1]}}</option>
+                            
+                            <option value="false">Inactivo</option>
+                            <option value="true">Activo</option>
                         </select>
                     </div>
                 </div>

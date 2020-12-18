@@ -6,24 +6,26 @@
     </div>
 
     <div class="content">
-        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+        <form [formGroup]="form" (ngSubmit)="saveForm()">
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label>Categoria</label>
+                        <label>Nome</label>
                         <input type="text" class="form-control" formControlName="name"
-                        [(ngModel)]="budgetCategory.name" placeholder="Nome">
+                            [(ngModel)]="budgetCategory.name" value="{{budgetCategory.name}}">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
-                    <label>Direção</label>
+                    <div class="form-group">
+                        <label>Tipo</label>
                         <select class="form-control" formControlName="direction"
                             [(ngModel)]="budgetCategory.direction">
-                            <option class="form-control">true</option>
-                            <option class="form-control">false</option>
+                            <option value="false">Despesas</option>
+                            <option value="true">Receitas</option>
                         </select>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -31,23 +33,25 @@
                     <div class="form-group">
                         <label>Descrição</label>
                         <textarea type="text" class="form-control" formControlName="descriptions"
-                        [(ngModel)]="budgetCategory.descriptions" placeholder="Descrição" rows="5"></textarea>
+                            [(ngModel)]="budgetCategory.descriptions"
+                            value="{{budgetCategory.descriptions}}" rows="5"></textarea>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
-                    <label>Estado</label>
+                    <div class="form-group">
+                        <label>Estado</label>
                         <select class="form-control" formControlName="isActive"
                             [(ngModel)]="budgetCategory.isActive">
-                            <option class="form-control">true</option>
-                            <option class="form-control">false</option>
+                            
+                            <option value="false">Inactivo</option>
+                            <option value="true">Activo</option>
                         </select>
+                    </div>
                 </div>
             </div>
-
-            
-            <button type="submit" class="btn btn-success btn-fill pull-rightx">Registar</button>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">Salvar</button>
             <div class="clearfix"></div>
         </form>
     </div>
