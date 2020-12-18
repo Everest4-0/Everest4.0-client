@@ -12,15 +12,22 @@ import { Observable } from 'rxjs';
 export class AuthService extends AppService<User> implements IService<any> {
 
   public user: User = new User();
+
   constructor(public http: HttpClient, private store: StorageServices) {
     super(http, 'users');
-    this.user = store.get<User>('current_user').data;
+    debugger
+    let u = store.get<User>('current_user').data
+    if (u === undefined)
+      this.user = undefined
+    else
+      this.user = Object.assign(new User(), u);
   }
 
   authenticate(o: User, callback): Observable<any> {
     const service = this.http.post(this.url + '/authenticate', o);
     service.subscribe((u: User) => {
       this.one(u.id).subscribe((u: User) => {
+        u = Object.assign(new User(), u)
         this.store.remove('current_user')
         this.store.save('current_user', u)
       })

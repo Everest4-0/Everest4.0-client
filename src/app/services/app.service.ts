@@ -10,6 +10,7 @@ export class AppService<T> {
   protected url;
   public serverAdresss;
   public serverAddress = 'http://localhost:9800';
+  static serverAddress = 'http://localhost:9800';
  // private serverAddress = 'https://everest40-server.azurewebsites.net';
   constructor(public http: HttpClient, private service: string) {
     this.url = `${this.serverAddress}/api/v1/${service.split('.').join('/')}`;

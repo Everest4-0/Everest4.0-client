@@ -1,3 +1,4 @@
+import { AppService } from './../../services/app.service';
 import { UserSetting } from './user_setting';
 import { UserData } from './user_data';
 import { EvaluationRequest } from '../diagnostic/evaluation-request';
@@ -18,11 +19,17 @@ export class User {
     password: string;
 
     photoUrl: string;
+
+    get avatar():string {
+        debugger
+        let prefix = this.photoUrl.split('ttps://').length > 1 ? '' : AppService.serverAddress
+        return prefix + this.photoUrl
+    }
     provider: string = 'LOCAL';
     roleId: string;
     role: Role = new Role();
     roles: Array<string> = [];
-    
+
     evaluators: Array<Evaluation> = []
     evaluations: Array<Evaluation> = []
     evaluationRequestes: Array<EvaluationRequest> = []
@@ -90,7 +97,4 @@ export class User {
         this.password = p + '~'
     }
 
-    get avatar() {
-        return this.photoUrl
-    }
 }
