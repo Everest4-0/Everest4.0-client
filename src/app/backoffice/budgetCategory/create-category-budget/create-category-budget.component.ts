@@ -34,6 +34,7 @@ export class CreateCategoryBudgetComponent implements OnInit {
         timeOut: 5000,
         progressBar: true,
       })
+      
       this.router.navigate(['/backoffice/budged_categories']);
     })
   }
