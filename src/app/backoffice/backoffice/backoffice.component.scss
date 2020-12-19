@@ -6,3 +6,13 @@ div.container-fluid div.row div.col-md-12{box-shadow: 0 0 15px #ccc;
 table.table tr{
     cursor: pointer;
 }
+
+small{
+    display: block;
+    color: #777;
+}
+
+tr td:first-child,
+tr td:last-child {
+    width: 100px;
+}

@@ -53,13 +53,8 @@
                                     <small>{{auth.user.code}}</small>
                                 </h4>
                             </div>
-                            <button class="btn btn-outline-success btn-danger">
-                                <i *ngIf="auth.user.roleId!='FREE'" class="pe-7s-medal"
-                                    style="font-size: 33px; padding: 5px;"></i>
-                                <i *ngIf="auth.user.roleId=='FREE'" class="pe-7s-delete-user"
-                                    style="font-size: 33px; padding: 5px;"></i>
-                                <span style="padding: 5px 10px;font-size: 36px;">{{auth.user.roleId}}</span>
-                            </button>
+                            <button *ngFor="let role of auth.user.roles"
+                                  class="btn-fill btn-xs btn-{{role| lowercase}} btn" style="border: none; padding:5px">{{role}}</button>
                             <p class="description text-center hidden"> "Lamborghini Mercy <br>
                                 Your chick she so thirsty <br>
                                 I'm in that two seat Lambo"

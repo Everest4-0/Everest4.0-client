@@ -147,7 +147,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('561602290896109'),
+            provider: new FacebookLoginProvider('383525742912583'),
           },
           {
             id: AmazonLoginProvider.PROVIDER_ID,

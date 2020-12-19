@@ -8,19 +8,16 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th style="width: 200px;">Situação</th>
                     <th>Descrição</th>
-                    <th>Estado</th>
+                    <th style="width: 200px;">Estado</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let workSituation of workSituations; let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{workSituation.name}}</td>
-                    <td>
-                        {{workSituation.descriptions}}
-                    </td>
+                    <td>{{workSituation.name}}
+                        <small> {{workSituation.descriptions}}</small></td>
                     <td>
                         <button
                             class="btn btn-sm btn-fill btn-{{['success','danger'][workSituation.isActive ? 0 : 1]}}">

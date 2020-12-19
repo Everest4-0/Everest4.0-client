@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       this.w = queryParams.get("w");
       this.x = queryParams.get("x");
     })
-
     this.authService.authState.subscribe(this.login);
     this.broadcastService.subscribe('msal:loginSuccess', () => {
       this.login(this.msAuthService.getAccount())
@@ -113,7 +112,6 @@ export class LoginComponent implements OnInit {
     this.auth.authenticate(this.signInUser,(u: User) => {
       this.localUser = u;
       window.open('./', '_self')
-      //error => this.signInErro = error
     })
   };
   signOn() {

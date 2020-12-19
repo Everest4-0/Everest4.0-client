@@ -20,7 +20,7 @@ export class User {
 
     photoUrl: string;
 
-    get avatar():string {
+    get avatar(): string {
         debugger
         let prefix = this.photoUrl.split('ttps://').length > 1 ? '' : AppService.serverAddress
         return prefix + this.photoUrl
@@ -51,7 +51,7 @@ export class User {
     castSocialUser(user) {
         this.datas = new UserData()
         this.settings = new UserSetting()
-        user = { 'GOOGLE': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
+        user = { 'GOOGLE': this.castGoogleUser, 'FACEBOOK': this.castGoogleUser, 'MICROSOFT': this.castMicrosoftUser }[user.provider || 'MICROSOFT'](user);
         this.datas = user.datas
         this.email = user.email
         this.photoUrl = user.photoUrl
