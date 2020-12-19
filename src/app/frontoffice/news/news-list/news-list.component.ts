@@ -5,7 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import { SwiperOptions } from 'swiper';
 import { PaginationOptions } from 'swiper/types/components/pagination';
-import { ScrollbarOptions } from 'swiper/types/components/scrollbar'; 
+import { ScrollbarOptions } from 'swiper/types/components/scrollbar';
 
 @Component({
   selector: 'app-news-list',
@@ -14,8 +14,8 @@ import { ScrollbarOptions } from 'swiper/types/components/scrollbar';
 })
 export class NewsListComponent implements OnInit {
 
-  bingNews:any={};
-  news:any;
+  bingNews: any = {};
+  news: any;
 
 
   public show: boolean = true;
@@ -59,10 +59,13 @@ export class NewsListComponent implements OnInit {
   @ViewChild(SwiperComponent, { static: false }) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: false }) directiveRef?: SwiperDirective;
 
-  constructor(private newsService:NewsService) { }
+  constructor(private newsService: NewsService) { }
 
   ngOnInit(): void {
-    this.newsService.all({}).subscribe(news => {this.bingNews=news;this.news = news.value.filter(x=>x.image!==undefined)})
+    this.newsService.all({}).subscribe(news => {
+       this.bingNews = news;
+       this.news = news.articles//.value.filter(x => x.image !== undefined)
+       })
   }
 
   getThumbnails(item: any) {
