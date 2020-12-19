@@ -35,7 +35,7 @@ export class UpdateProfessionalExperienceComponent implements OnInit {
   saveForm(){
     this.professionalExperienceService.update(this.professionalExperience).subscribe(data=>{
 
-      this.toast.success('Situação de trabalho actualizado com successo', 'Sucesso', {
+      this.toast.success('Experiência profissional actualizado com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })

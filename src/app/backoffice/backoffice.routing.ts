@@ -1,3 +1,4 @@
+import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
 import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
@@ -49,7 +50,7 @@ const backOfficeRoutes: Routes = [
     { path: 'work-situations/update/:id',    component: UpdateWorkSituationComponent},
 
     { path: 'professional-experiencies',            component: ListProfessionalExperienceComponent},
-    //{ path: 'professional-experiencies',          component: CreateProfessionalExperienceComponent},
+    { path: 'professional-experiencies/create',     component: CreateProfessionalExperienceComponent},
     { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent}
 
 

@@ -31,6 +31,7 @@ import { UpdateWorkSituationComponent } from './workSituation/update-work-situat
 import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
+import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UpdateProfessionalExperienceComponent } from './professional-experience
     UpdateWorkSituationComponent,
     CreateWorkSituationComponent,
     ListProfessionalExperienceComponent,
-    UpdateProfessionalExperienceComponent
+    UpdateProfessionalExperienceComponent,
+    CreateProfessionalExperienceComponent
   ],
   imports: [
     CommonModule,
