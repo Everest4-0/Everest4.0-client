@@ -30,6 +30,7 @@ import { ListWorkSituationComponent } from './workSituation/list-work-situation/
 import { UpdateWorkSituationComponent } from './workSituation/update-work-situation/update-work-situation.component';
 import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
+import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ListProfessionalExperienceComponent } from './professional-experience/l
     ListWorkSituationComponent,
     UpdateWorkSituationComponent,
     CreateWorkSituationComponent,
-    ListProfessionalExperienceComponent
+    ListProfessionalExperienceComponent,
+    UpdateProfessionalExperienceComponent
   ],
   imports: [
     CommonModule,

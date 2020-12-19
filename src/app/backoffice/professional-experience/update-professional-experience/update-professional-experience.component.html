@@ -1,0 +1,44 @@
+<app-backoffice-navbar [title]="'Actualizar experiência profissional'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+    </div>
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" formControlName="name"
+                            [(ngModel)]="professionalExperience.name" value="{{professionalExperience.name}}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                            [(ngModel)]="professionalExperience.descriptions"
+                            rows="5">{{professionalExperience.descriptions}}</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select class="form-control" formControlName="isActive"
+                            [(ngModel)]="professionalExperience.isActive">
+                            <option value="false">Inactivo</option>
+                            <option value="true">Activo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">Salvar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
