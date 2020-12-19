@@ -5,7 +5,8 @@ export class ProfessionalExperienceForm{
         let fb = new FormBuilder();
 
         return fb.group({
-            name: [''],
+            from: [''],
+            to: [''],
             descriptions: [''],
             isActive: ['']
         })

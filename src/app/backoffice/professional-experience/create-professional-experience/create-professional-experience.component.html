@@ -10,9 +10,19 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" formControlName="name"
-                        [(ngModel)]="professionalExperience.name" placeholder="Nome">
+                        <label>From</label>
+                        <input type="number" class="form-control" formControlName="from"
+                        [(ngModel)]="professionalExperience.from" placeholder="From">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>To</label>
+                        <input type="number" class="form-control" formControlName="to"
+                        [(ngModel)]="professionalExperience.to" placeholder="To">
                     </div>
                 </div>
             </div>
