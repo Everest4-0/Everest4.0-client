@@ -1,3 +1,4 @@
+import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
 import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
 import { UpdateWorkSituationComponent } from './workSituation/update-work-situation/update-work-situation.component';
 import { ListWorkSituationComponent } from './workSituation/list-work-situation/list-work-situation.component';
@@ -35,17 +36,19 @@ const backOfficeRoutes: Routes = [
     { path: 'evaluations/delete/:id', component: DeleteUserComponent },
     { path: 'evaluations/details/:id',component: DetailsUserComponent },
 
-    { path: 'budget_categories',            component: ListCategoryBudgetComponent},
-    { path: 'budget_categories/create',     component: CreateCategoryBudgetComponent },
-    { path: 'budget_categories/update/:id', component: UpdateCategoryBudgetComponent },
+    { path: 'budget-categories',            component: ListCategoryBudgetComponent},
+    { path: 'budget-categories/create',     component: CreateCategoryBudgetComponent },
+    { path: 'budget-categories/update/:id', component: UpdateCategoryBudgetComponent },
+    { path: 'academic-levels',              component: ListAcademicLevelComponent},
+    { path: 'academic-levels/create',       component: CreateAcademicLevelComponent},
+    { path: 'academic-levels/update/:id',   component: UpdateAcademicLevelComponent},
 
-    { path: 'academic_levels',              component: ListAcademicLevelComponent},
-    { path: 'academic_levels/create',       component: CreateAcademicLevelComponent},
-    { path: 'academic_levels/update/:id',   component: UpdateAcademicLevelComponent},
+    { path: 'work-situations',               component: ListWorkSituationComponent},
+    { path: 'work-situations/create',        component: CreateWorkSituationComponent},
+    { path: 'work-situations/update/:id',    component: UpdateWorkSituationComponent},
 
-    { path: 'work_situations',               component: ListWorkSituationComponent},
-    { path: 'work_situations/create',        component: CreateWorkSituationComponent},
-    { path: 'work_situations/update/:id',    component: UpdateWorkSituationComponent}
+    { path: 'professional-experiencies',      component: ListProfessionalExperienceComponent},
+
 
 ];
 

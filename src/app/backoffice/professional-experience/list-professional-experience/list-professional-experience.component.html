@@ -1,0 +1,37 @@
+<app-backoffice-navbar [title]="'Experiências profissionais'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th style="width: 200px;">Situação</th>
+                    <th>Descrição</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let professionalExperience of professionalExperiencies; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{professionalExperience.name}}</td>
+                    <td>
+                        {{professionalExperience.descriptions}}
+                    </td>
+                    <td>
+                        <button
+                            class="btn btn-sm btn-fill btn-{{['success','danger'][professionalExperience.isActive ? 0 : 1]}}">
+                            {{['Activo','Inactivo'][professionalExperience.isActive ? 0 : 1]}}
+                        </button>
+                    </td>
+                    <td><a title="Update" routerLink="/backoffice/professional-experiencies/update/{{professionalExperience.id}}"
+                            class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
