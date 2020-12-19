@@ -34,9 +34,9 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="">Perfil</label>
-                        <select type="text" class="form-control" formControlName="roles" [(ngModel)]="user.roleId">
-                            <option *ngFor="let item of ['FREE','PREMIUM','PRO']">{{item}}</option>
-                        </select>
+                        <ng-select [multiple]="true" [items]="['FREE', 'PRO','PREMIUM','ADMIN']" formControlName="roles"
+                            [(ngModel)]="user.roles">
+                        </ng-select>
                     </div>
                 </div>
 
