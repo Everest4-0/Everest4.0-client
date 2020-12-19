@@ -1,0 +1,9 @@
+small{
+    display: block;
+    color: #777;
+}
+
+tr td:first-child,
+tr td:last-child {
+    width: 100px;
+}

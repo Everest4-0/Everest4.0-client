@@ -13,7 +13,6 @@ export class EvaluationRequest {
     updatedAt: Date;
 
     get relation() {
-        alert(['Familiar', 'Colega de trabalho', 'Amigo'][this.relationId - 1])
         return ['Familiar', 'Colega de trabalho', 'Amigo'][this.relationId - 1];
     }
 }
