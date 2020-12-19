@@ -55,8 +55,9 @@
                         <h4>
                             <button
                                 class="btn-fill btn-{{['success','danger'][user.isActive?0:1]}} btn">{{['Activo','Inactivo'][user.isActive?0:1]}}</button>
-                            <button
-                                class="btn-fill btn-{{['info','danger'][user.isActive?0:1]}} btn">{{user.roleId}}</button>
+                                <hr>
+                            <button *ngFor="let role of user.roles"
+                                class="btn-fill btn-{{role| lowercase}} btn" style="border: none; margin:5px">{{role}}</button>
                         </h4>
                     </div>
                 </div>

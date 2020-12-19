@@ -20,7 +20,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="auth.user.roleId=='FREE'">
-                    <a class="btn btn-primary" [routerLink]="['/me/upgrade']" routerLinkActive="router-link-active">
+                    <a class="btn btn-primary" [routerLink]="['/me/upgrade']"  *ngIf="auth.user.roles.includes('FREE')" routerLinkActive="router-link-active">
                         <span class="hidden-sm">Mudar para PREMIUM</span>
                     </a>
                 </li>
@@ -30,7 +30,7 @@
                     </button>
                 </li>
                 <li>
-                    <a [routerLink]="['/backoffice']"  class="btn btn-danger">
+                    <a [routerLink]="['/backoffice']" *ngIf="auth.user.roles.includes('ADMIN')" class="btn btn-danger">
                         <span class="hidden-sm">backoffice</span>
                     </a>
                 </li>
