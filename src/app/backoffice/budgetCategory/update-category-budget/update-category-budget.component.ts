@@ -36,7 +36,7 @@ export class UpdateCategoryBudgetComponent implements OnInit {
         timeOut: 5000,
         progressBar: true,
       })
-      this.router.navigate(['/backoffice/budget_categories']);
+      this.router.navigate(['/backoffice/budget-categories']);
     })
   }
 
