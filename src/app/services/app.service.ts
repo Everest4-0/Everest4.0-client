@@ -1,21 +1,19 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { isDevMode } from '@angular/core';
 
+const serverAddress = isDevMode()  ? 'http://localhost:9800' : 'https://everest40-server.azurewebsites.net'
 @Injectable({
   providedIn: 'root'
 })
 export class AppService<T> {
 
   protected url;
-  public serverAdresss;
-  public serverAddress = 'http://localhost:9800';
-  static serverAddress = 'http://localhost:9800';
- // private serverAddress = 'https://everest40-server.azurewebsites.net';
+  public serverAddress = serverAddress;
+  static serverAddress = serverAddress;
   constructor(public http: HttpClient, private service: string) {
     this.url = `${this.serverAddress}/api/v1/${service.split('.').join('/')}`;
-
-    this.serverAdresss = this.serverAddress;
   }
 
   protected getOne(s: string): Observable<any> {

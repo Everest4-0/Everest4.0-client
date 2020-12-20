@@ -1,7 +1,7 @@
 <div class="card">
     <div class="header">
         <h4 class="title">Feedbacks</h4>
-        <p class="category">Backend development</p>
+        <p class="category">...</p>
     </div>
     <div class="content">
         <div class="table-full-width">
@@ -16,15 +16,15 @@
                 <tbody>
                     <tr *ngFor="let item of requests; let y=index">
                         <td>
-                            <div class="checkbox" *ngIf="item.evaluations.length>11">
+                            <div class="checkbox" *ngIf="item.evaluations.length>=evaluations.length">
                                 <input id="checkbox{{y}}" type="checkbox" checked="false">
-                                <label for="checkbox{{y}}_">
+                                <label for="checkbox{{y}}">
 
                                 </label>
                             </div>
                         </td>
                         <td style="width: 100px;">
-                            <img src="{{auth.serverAdresss+'/'+item.requester.photoUrl}}"
+                            <img src="{{getUserAvatar(item.requester.photoUrl)}}"
                                 class="img-thumbnail pull-left" style="width:100px">
                         </td>
                         <td>
@@ -38,7 +38,7 @@
                             </h4><br>
 
                             {{item.createdAt|date}}
-                            <app-progress-bar done="{{100*item.evaluations.length/12}}"></app-progress-bar>
+                            <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}"></app-progress-bar>
 
                             <button type="button" rel="tooltip" title="Edit Task"
                                 class="btn btn-info btn-simple btn-xs pull-right" (click)="selectRequest(item)">
@@ -52,7 +52,7 @@
         </div>
         <div class="footer">
             <div class="stats">
-                <i class="fa fa-history"></i> Updated 3 minutes ago
+                <i class="fa fa-history"></i> ...
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
             <img class="card-img-top img img-responsive full-width" src="{{getUserAvatar(item.requested.photoUrl)}}"
                 style="width: 100%;">
             <div class="card-body">
-                <app-progress-bar done="{{100*item.evaluations.length/12}}"></app-progress-bar>
+                <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}"></app-progress-bar>
                 <h5 class="card-title">{{item.requested.datas.firstName}} {{item.requested.datas.lastName}}</h5>
             </div>
             <div class="card-footer">

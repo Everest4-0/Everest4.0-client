@@ -203,9 +203,11 @@ export class FeedbackEvaluationComponent implements OnInit {
       }
     })
   }
+
+  getUserAvatar(s) {
+    return s.split('ttps://').length > 1 ? s :this.auth.serverAddress + s
+  }
   openModal(id: string) {
-    //this.currentEvaluation.evaluation = v
-    //this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
   closeModal(id: string) {

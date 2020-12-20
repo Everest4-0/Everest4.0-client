@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-12 user-selected" *ngIf="evaluationRequest.requested.id">
             <div class="col-sm-3">
-                <img src="{{auth.serverAddress}}{{evaluationRequest.requested.photoUrl}}" class="img-responsive img-thumbnail">
+                <img src="{{getUserAvatar(evaluationRequest.requested.photoUrl)}}" class="img-responsive img-thumbnail">
             </div>
             <div class="col-sm-8">
                 <h5><b>{{evaluationRequest.requested.datas.firstName}} {{evaluationRequest.requested.datas.lastName}}</b></h5>

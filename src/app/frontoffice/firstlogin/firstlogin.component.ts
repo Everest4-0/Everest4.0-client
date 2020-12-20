@@ -68,7 +68,7 @@ export class FirstloginComponent implements OnInit {
     this.workSituationService.all().subscribe(x => this.workSituations = x)
     this.professionalExperienceService.all().subscribe(x => this.professionalExperiences = x)
 
-    this.file.imageUrl = this.auth.serverAdresss + this.auth.user.photoUrl
+    this.file.imageUrl = this.auth.user.avatar
     this.currentStep = this.stepsService.getCurrentStep();
   }
   formValid(e) {

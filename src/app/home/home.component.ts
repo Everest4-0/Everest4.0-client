@@ -16,6 +16,8 @@ import * as moment from 'moment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  public dataLoaded=false;
   public emailChartType: ChartType;
   public emailChartData: any;
   public chartOptions: any;
@@ -89,6 +91,7 @@ export class HomeComponent implements OnInit {
           [fnToDo(eAtr), fnDoing(eAtr), fnDone(eAtr)]
         ]
       };
+      this.dataLoaded=true;
     })
 
 

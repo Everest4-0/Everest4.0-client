@@ -115,7 +115,7 @@ export class EvaluationRequestComponent implements OnInit {
   }
 
   getUserAvatar(s) {
-    return s.includes('http') ? s : this.auth.serverAdresss + '/' + s
+    return s.split('ttps://').length > 1 ? s :this.auth.serverAddress + s
   }
   updateDescriptions(event) {
     this.request.descriptions = event;
