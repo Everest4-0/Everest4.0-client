@@ -36,7 +36,7 @@ export class UpdateAcademicLevelComponent implements OnInit {
         timeOut: 5000,
         progressBar: true,
       })
-      this.router.navigate(['/backoffice/academic_levels']);
+      this.router.navigate(['/backoffice/academic-levels']);
     })
   }
 

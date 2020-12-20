@@ -36,7 +36,7 @@ export class CreateCategoryBudgetComponent implements OnInit {
         progressBar: true,
       })
       
-      this.router.navigate(['/backoffice/budget_categories']);
+      this.router.navigate(['/backoffice/budget-categories']);
     })
   }
 

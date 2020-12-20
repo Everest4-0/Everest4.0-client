@@ -1,11 +1,12 @@
 import { FormBuilder } from '@angular/forms';
 
-export class WorkSituationForm{
+export class ProfessionalExperienceForm{
     constructor(fbx:FormBuilder){
         let fb = new FormBuilder();
 
         return fb.group({
-            name: [''],
+            from: [''],
+            to: [''],
             descriptions: [''],
             isActive: ['']
         })

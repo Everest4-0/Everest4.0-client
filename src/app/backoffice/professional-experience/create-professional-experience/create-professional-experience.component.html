@@ -1,0 +1,54 @@
+<app-backoffice-navbar [title]="'Registar uma experiência profissional'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+
+    <div class="content">
+        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>From</label>
+                        <input type="number" class="form-control" formControlName="from"
+                        [(ngModel)]="professionalExperience.from" placeholder="From">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>To</label>
+                        <input type="number" class="form-control" formControlName="to"
+                        [(ngModel)]="professionalExperience.to" placeholder="To">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea type="text" class="form-control" formControlName="descriptions"
+                        [(ngModel)]="professionalExperience.descriptions" placeholder="Descrição" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Estado</label>
+                        <select class="form-control" formControlName="isActive"
+                            [(ngModel)]="professionalExperience.isActive">
+                            <option class="form-control" value="true"> Activo</option>
+                            <option class="form-control" value="false">Inativo</option>
+                        </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx">Registar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

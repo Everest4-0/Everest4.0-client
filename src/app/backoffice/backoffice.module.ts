@@ -29,6 +29,9 @@ import { UpdateAcademicLevelComponent } from './academic-level/update-academic-l
 import { ListWorkSituationComponent } from './workSituation/list-work-situation/list-work-situation.component';
 import { UpdateWorkSituationComponent } from './workSituation/update-work-situation/update-work-situation.component';
 import { CreateWorkSituationComponent } from './workSituation/create-work-situation/create-work-situation.component';
+import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
+import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
+import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { CreateWorkSituationComponent } from './workSituation/create-work-situat
     UpdateAcademicLevelComponent,
     ListWorkSituationComponent,
     UpdateWorkSituationComponent,
-    CreateWorkSituationComponent
+    CreateWorkSituationComponent,
+    ListProfessionalExperienceComponent,
+    UpdateProfessionalExperienceComponent,
+    CreateProfessionalExperienceComponent
   ],
   imports: [
     CommonModule,

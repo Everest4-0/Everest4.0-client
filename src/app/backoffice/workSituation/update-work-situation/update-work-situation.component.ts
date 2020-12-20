@@ -25,16 +25,14 @@ export class UpdateWorkSituationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let id = this.route.snapshot.params['id']
+    const id = this.route.snapshot.params['id']
 
     this.workSituationService.one(id).subscribe(data=>this.workSituation=data)
 
-    console.log(id)
+    console.log(this.form)
   }
 
   saveForm(){
-    
-    
     this.workSituationService.update(this.workSituation).subscribe(data=>{
 
       this.toast.success('Situação de trabalho actualizado com successo', 'Sucesso', {
