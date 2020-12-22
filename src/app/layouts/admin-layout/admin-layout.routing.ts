@@ -1,3 +1,4 @@
+import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
 import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
 import { UserDetailsComponent } from './../../frontoffice/user/user-details/user-details.component';
@@ -18,6 +19,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
     { path: 'diagnostic',     component: DiagnosticComponent },
+    { path: 'quizes',         component: QuizComponent },
     { path: 'goals',          component: GoalsComponent },
     { path: 'user',           component: UserHomeComponent },
     { path: 'table',          component: TablesComponent },

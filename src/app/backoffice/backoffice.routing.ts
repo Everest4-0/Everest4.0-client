@@ -1,3 +1,4 @@
+import { QuizComponent } from './../frontoffice/quiz/quiz.component';
 import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
@@ -51,7 +52,10 @@ const backOfficeRoutes: Routes = [
 
     { path: 'professional-experiencies',            component: ListProfessionalExperienceComponent},
     { path: 'professional-experiencies/create',     component: CreateProfessionalExperienceComponent},
-    { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent}
+    { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent},
+
+    { path: 'quizes',                               component: QuizComponent}
+
 
 
 ];

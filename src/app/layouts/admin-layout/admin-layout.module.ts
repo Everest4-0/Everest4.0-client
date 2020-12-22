@@ -1,3 +1,4 @@
+import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { UserSettingsComponent } from './../../frontoffice/user/user-settings/user-settings.component';
 import { UserSecurityComponent } from '../../frontoffice/user/user-security/user-security.component';
 import { NewsListComponent } from './../../frontoffice/news/news-list/news-list.component';
@@ -120,6 +121,8 @@ FullCalendarModule.registerPlugins([
     NewsListComponent,
     UserSettingsComponent,
     UserSecurityComponent,
+
+    //QuizComponent,
 
     ScheduleComponent,
     CalendarComponent,
