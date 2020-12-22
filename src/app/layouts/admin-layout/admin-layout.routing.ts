@@ -1,3 +1,4 @@
+import { ListQuizComponent } from './../../frontoffice/quiz/quiz/list-quiz/list-quiz.component';
 import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
 import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
@@ -19,7 +20,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
     { path: 'diagnostic',     component: DiagnosticComponent },
-    { path: 'quizes',         component: QuizComponent },
+    { path: 'quiz',           component: QuizComponent },
     { path: 'goals',          component: GoalsComponent },
     { path: 'user',           component: UserHomeComponent },
     { path: 'table',          component: TablesComponent },
@@ -28,6 +29,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'quiz/quizes',    component: ListQuizComponent},
+
 
     {
         path: 'form',
