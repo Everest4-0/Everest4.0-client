@@ -16,9 +16,9 @@ export const DEFAULT_ROUTES: RouteInfo[] = [
   { path: '/me/dashboard', title: 'Início', icon: 'pe-7s-home', class: '', roles: ['FREE', 'PREMIUM'] },
 
   { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', class: '', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', class: '', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', class: '', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
+  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', class: '', roles: ['FREE', 'PREMIUM'] },
+  //{ path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Cursos online ', icon: 'pe-7s-bookmarks', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
