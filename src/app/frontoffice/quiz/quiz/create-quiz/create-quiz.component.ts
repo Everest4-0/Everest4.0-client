@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../services/auth.service';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { QuizService } from './../../../../services/quiz.service';
@@ -18,12 +19,15 @@ export class CreateQuizComponent implements OnInit {
   public quiz: Quiz = new Quiz();
 
   constructor(private fb: FormBuilder,
+    private auth: AuthService,
     private quizService: QuizService,
     private route: ActivatedRoute,
     private toast: ToastService,
     private router: Router) { }
 
   ngOnInit(): void {
+
+    this.quiz.user = this.auth.user;
 
   }
 
@@ -34,14 +38,7 @@ export class CreateQuizComponent implements OnInit {
         progressBar: true,
       })
 
-      this.router.events.filter((event: any) => event instanceof NavigationEnd)
-      .subscribe(event => {
-        let url = event.url+"";
-  
-        if (url.includes('/backoffice'))
-          this.router.navigate(['/backoffice/quiz/quizes'])
-      })
-     
+      this.router.navigate(['/me/quiz/quizes']);
     })
   }
 

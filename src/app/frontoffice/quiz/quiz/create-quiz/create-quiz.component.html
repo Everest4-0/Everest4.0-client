@@ -14,7 +14,7 @@
                                 <div class="form-group">
                                     <label>Texto</label>
                                     <input type="text" class="form-control" formControlName="text"
-                                        [(ngModel)]="quiz.text" placeholder="text">
+                                        [(ngModel)]="quiz.text" placeholder="text" required>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label>Descrição</label>
                                     <textarea type="text" class="form-control" formControlName="descriptions"
-                                        [(ngModel)]="quiz.descriptions" placeholder="Descrição" rows="5"></textarea>
+                                        [(ngModel)]="quiz.descriptions" placeholder="Descrição" rows="5" required></textarea>
                                 </div>
                             </div>
                         </div>

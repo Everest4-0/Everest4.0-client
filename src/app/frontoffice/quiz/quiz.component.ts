@@ -13,7 +13,8 @@ export class QuizComponent implements OnInit {
  constructor(private quizService:QuizService) { }
 
   ngOnInit(): void {
-    this.quizService.all({}).subscribe(quizes=>this.desafios=quizes.length-1)
+    this.quizService.all({}).subscribe(quizes=>{
+      this.desafios = (quizes.length>1)? quizes.length-1:quizes.length})
   }
 
 }

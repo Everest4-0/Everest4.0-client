@@ -56,12 +56,6 @@ const backOfficeRoutes: Routes = [
     { path: 'professional-experiencies/create',     component: CreateProfessionalExperienceComponent},
     { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent},
 
-    { path: 'quiz',                                 component: QuizComponent},
-    { path: 'quiz/quizes',                          component: ListQuizComponent},
-    { path: 'quiz/quizes/create',                   component: CreateQuizComponent}
-
-
-
 ];
 
 @NgModule({
