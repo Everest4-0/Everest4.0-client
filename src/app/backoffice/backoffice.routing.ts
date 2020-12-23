@@ -1,3 +1,7 @@
+import { UpdateCourseComponent } from './courses/update-course/update-course.component';
+import { DetailsCourseComponent } from './courses/details-course/details-course.component';
+import { CreateCourseComponent } from './courses/create-course/create-course.component';
+import { ListCourseComponent } from './courses/list-course/list-course.component';
 import { ListQuizComponent } from './../frontoffice/quiz/quiz/list-quiz/list-quiz.component';
 import { QuizComponent } from './../frontoffice/quiz/quiz.component';
 import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
@@ -43,6 +47,7 @@ const backOfficeRoutes: Routes = [
     { path: 'budget-categories',            component: ListCategoryBudgetComponent},
     { path: 'budget-categories/create',     component: CreateCategoryBudgetComponent },
     { path: 'budget-categories/update/:id', component: UpdateCategoryBudgetComponent },
+
     { path: 'academic-levels',              component: ListAcademicLevelComponent},
     { path: 'academic-levels/create',       component: CreateAcademicLevelComponent},
     { path: 'academic-levels/update/:id',   component: UpdateAcademicLevelComponent},
@@ -56,7 +61,13 @@ const backOfficeRoutes: Routes = [
     { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent},
 
     { path: 'quiz',                                 component: QuizComponent},
-    { path: 'quiz/quizes',                          component: ListQuizComponent}
+    { path: 'quiz/quizes',                          component: ListQuizComponent},
+
+    { path: 'courses',            component: ListCourseComponent},
+    { path: 'courses/create',     component: CreateCourseComponent },
+    { path: 'courses/update/:id', component: UpdateCourseComponent },
+    { path: 'courses/delete/:id', component: DeleteUserComponent },
+    { path: 'courses/details/:id',component: DetailsCourseComponent },
 
 
 

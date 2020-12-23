@@ -39,7 +39,8 @@ export const BACKOFFICE_ROUTES: RouteInfo[] = [
   { path: '/backoffice/academic-levels', title: 'Níveis académico', icon: 'pe-7s-study', class: '', roles: ['ADMIN'] },
   { path: '/backoffice/professional-experiencies', title: 'Experiências profissionais', icon: 'pe-7s-graph3', class: '', roles: ['ADMIN'] },
   { path: '/backoffice/work-situations', title: 'Situações de trabalho', icon: 'pe-7s-portfolio', class: '', roles: ['ADMIN'] },
-  { path: '/backoffice/budget-categories', title: 'Categorias de orçamento', icon: 'pe-7s-cash', class: '', roles: ['ADMIN'] }
+  { path: '/backoffice/budget-categories', title: 'Categorias de orçamento', icon: 'pe-7s-cash', class: '', roles: ['ADMIN'] },
+  { path: '/backoffice/courses', title: 'Cursos on-line', icon: 'pe-7s-umbrella', class: '', roles: ['ADMIN'] }
 ]
 @Component({
   selector: 'app-sidebar',

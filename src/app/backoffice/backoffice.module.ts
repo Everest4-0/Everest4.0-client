@@ -5,6 +5,7 @@ import { NavbarModule } from './../shared/navbar/navbar.module';
 import { BackOfficeRoutes } from './backoffice.routing';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
@@ -32,6 +33,10 @@ import { CreateWorkSituationComponent } from './workSituation/create-work-situat
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
 import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
+import { ListCourseComponent } from './courses/list-course/list-course.component';
+import { CreateCourseComponent } from './courses/create-course/create-course.component';
+import { DetailsCourseComponent } from './courses/details-course/details-course.component';
+import { UpdateCourseComponent } from './courses/update-course/update-course.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,11 @@ import { CreateProfessionalExperienceComponent } from './professional-experience
     CreateWorkSituationComponent,
     ListProfessionalExperienceComponent,
     UpdateProfessionalExperienceComponent,
-    CreateProfessionalExperienceComponent
+    CreateProfessionalExperienceComponent,
+    ListCourseComponent,
+    CreateCourseComponent,
+    DetailsCourseComponent,
+    UpdateCourseComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +76,8 @@ import { CreateProfessionalExperienceComponent } from './professional-experience
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
-    NgSelectModule
+    NgSelectModule,
+    DragDropModule
   ]
 })
 export class BackofficeModule { }

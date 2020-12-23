@@ -1,0 +1,124 @@
+<app-backoffice-navbar [title]="'Cursos'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <h4 class="title">TESTE</h4>
+        <p class="category">{{course|json}}</p>
+    </div>
+
+    <div class="content">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-md-8 col-lg-8 col-sm-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Título</label>
+                            <input type="email" class="form-control form-control-lg" [(ngModel)]="course.title"
+                                formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                placeholder="Title">
+                            <small id="emailHelp" class="form-text formContro text-muted">We'll never share your email
+                                with anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputEmail1">Competências</label>
+                            <ng-select [multiple]="true" [items]="evaluations" formControlName="evaluations"
+                                [(ngModel)]="course.evaluations" bindLabel="name">
+                            </ng-select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputEmail1">Nivel de dificuldade</label>
+                            <select class="form-control form-control-lg" [(ngModel)]="course.level"
+                                formControlName="level">
+                                <option value="{{level.id}}" *ngFor="let level of levels">{{level.text}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="exampleInputEmail1">Língua</label>
+                            <select class="form-control form-control-lg" [(ngModel)]="course.language"
+                                formControlName="language">
+                                <option *ngFor="let item of ['PT','EN','FR','ES']">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Descrição</label>
+                            <textarea type="email" class="form-control form-control-lg" formControlName="descriptions"
+                                [(ngModel)]="course.descriptions" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                rows="8" placeholder="Enter email">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2>Módulos</h2>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-primary" (click)="addModule()">
+                                <i class="pe-7s-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <blockquote cdkDropList #partsList="cdkDropList" [cdkDropListData]="course.modules"
+                            (cdkDropListDropped)="onDrop($event)">
+                            <div @list class="list-container">
+                                <div class="box blockquote blockquote-primary" style="border-top: solid;"
+                                    *ngFor="let module of course.modules; let i=index" cdkDrag>
+                                    <div class="col-md-12">Módulo {{i+1}}
+
+                                        <button type="button" class="btn btn-danger btn-sm  pull-right"
+                                            (click)="removeModule(i)">
+                                            <i class="pe-7s-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Título</label>
+                                        <input type="email" class="form-control form-control-lg"
+                                            [(ngModel)]="module.title" [ngModelOptions]="{standalone: true}"
+                                            placeholder="Title">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Descrição</label>
+                                        <textarea class="form-control" rows="6" cols="80"
+                                            placeholder="You can write your text here..."
+                                            [(ngModel)]="module.descriptions" name="text_{{i}}"
+                                            [ngModelOptions]="{standalone: true}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-primary" (click)="addModule()">
+                                <i class="pe-7s-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-lg-4 col-sm-12 text-center">
+
+                    <label for="exampleInputEmail1">Imagem de capa</label><br>
+                    <label for="fileUploader" class="btn btn-primary text-center" style="padding: 0 40px">
+                        <i class="pe-7s-cloud-upload" style="font-size: 35px;"></i>
+                        <br> Upload
+                    </label>
+                    <input #fileUploader id='fileUploader' class="hidden" type="file"
+                        (change)="onFileSelect($event.target)">
+                    <img src="{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" (click)="saveForm()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
