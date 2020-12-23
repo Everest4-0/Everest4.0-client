@@ -18,7 +18,8 @@ export class DetailsUserComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public userService: UserService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];

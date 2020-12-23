@@ -15,7 +15,6 @@ export class AuthService extends AppService<User> implements IService<any> {
 
   constructor(public http: HttpClient, private store: StorageServices) {
     super(http, 'users');
-    debugger
     let u = store.get<User>('current_user').data
     if (u === undefined)
       this.user = undefined

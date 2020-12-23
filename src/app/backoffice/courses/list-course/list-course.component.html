@@ -1,0 +1,40 @@
+<app-backoffice-navbar [title]="'Cursos'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+        <p class="category">Here is a subtitle for this table</p>
+    </div>
+
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titulo</th>
+                    <th>Descrição</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courses; let i=index">
+                    <td>{{i+1}}</td>
+                    <td><img scr="course.cover" class="img-thumbnail"></td>
+                    <td>
+                        <h5><b>{{course.title}}</b></h5>
+                        <small>{{course.descriptions.substring(0, 100)}}</small>
+                    </td>
+                    <td>
+                        <button class="btn-fill btn-xs btn-{{['success','danger'][course.isActive?0:1]}} btn">{{['Activo','Inactivo'][course.isActive?0:1]}}</button>
+                    </td>
+                    <td>
+                        <a title="Detalhes" routerLink="/backoffice/courses/details/{{course.id}}" class="text-decoration-none text-success title h4">
+                            <i class="pe-7s-angle-right"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
