@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">TESTE</h4>
+                    <p class="category">Here is a subtitle for this table</p>
+                </div>
+
+                <div class="content">
+                    <form [formGroup]="form" (ngSubmit)="saveForm()">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Texto</label>
+                                    <input type="text" class="form-control" formControlName="text"
+                                        [(ngModel)]="quiz.text" placeholder="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Descrição</label>
+                                    <textarea type="text" class="form-control" formControlName="descriptions"
+                                        [(ngModel)]="quiz.descriptions" placeholder="Descrição" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-fill pull-rightx">Desafiar</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

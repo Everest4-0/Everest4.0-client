@@ -23,6 +23,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
+import { CreateQuizComponent } from 'app/frontoffice/quiz/quiz/create-quiz/create-quiz.component';
 
 
 const backOfficeRoutes: Routes = [
@@ -56,7 +57,8 @@ const backOfficeRoutes: Routes = [
     { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent},
 
     { path: 'quiz',                                 component: QuizComponent},
-    { path: 'quiz/quizes',                          component: ListQuizComponent}
+    { path: 'quiz/quizes',                          component: ListQuizComponent},
+    { path: 'quiz/quizes/create',                   component: CreateQuizComponent}
 
 
 

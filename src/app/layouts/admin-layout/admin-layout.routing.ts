@@ -1,3 +1,4 @@
+import { CreateQuizComponent } from './../../frontoffice/quiz/quiz/create-quiz/create-quiz.component';
 import { ListQuizComponent } from './../../frontoffice/quiz/quiz/list-quiz/list-quiz.component';
 import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
@@ -18,18 +19,19 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: HomeComponent },
-    { path: 'diagnostic',     component: DiagnosticComponent },
-    { path: 'quiz',           component: QuizComponent },
-    { path: 'goals',          component: GoalsComponent },
-    { path: 'user',           component: UserHomeComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'quiz/quizes',    component: ListQuizComponent},
+    { path: 'dashboard',             component: HomeComponent },
+    { path: 'diagnostic',            component: DiagnosticComponent },
+    { path: 'quiz',                  component: QuizComponent },
+    { path: 'goals',                 component: GoalsComponent },
+    { path: 'user',                  component: UserHomeComponent },
+    { path: 'table',                 component: TablesComponent },
+    { path: 'typography',            component: TypographyComponent },
+    { path: 'icons',                 component: IconsComponent },
+    { path: 'maps',                  component: MapsComponent },
+    { path: 'notifications',         component: NotificationsComponent },
+    { path: 'upgrade',               component: UpgradeComponent },
+    { path: 'quiz/quizes',           component: ListQuizComponent},
+    { path: 'quiz/quizes/create',    component: CreateQuizComponent},
 
 
     {

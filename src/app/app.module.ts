@@ -50,6 +50,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
 import { QuizComponent } from './frontoffice/quiz/quiz.component';
 import { ListQuizComponent } from './frontoffice/quiz/quiz/list-quiz/list-quiz.component';
+import { CreateQuizComponent } from './frontoffice/quiz/quiz/create-quiz/create-quiz.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 @NgModule({
@@ -124,6 +125,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormValidatorComponent,
     QuizComponent,
     ListQuizComponent,
+    CreateQuizComponent,
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,
