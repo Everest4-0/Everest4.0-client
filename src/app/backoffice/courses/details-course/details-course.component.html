@@ -29,8 +29,7 @@
                                 <h5><b>{{module.title}}</b></h5>
                             </div>
                             <div class="col-md-3 text-right">
-                                <button class="accordion btn btn-xs pe-7s-plus"
-                                    (click)="accordion($event.target)"></button>
+                                <button class="accordion btn btn-xs pe-7s-plus" (click)="addActivity(module)"></button>
                                 <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-expenses-{{i}}"
                                     (click)="accordion($event.target)"></button>
                             </div>
@@ -40,9 +39,7 @@
 
                         <div class="panel" id="panel-expenses-{{i}}">
                             <ul class="list-group">
-                                <li class="list-group-item">Active item</li>
-                                <li class="list-group-item">Second item</li>
-                                <li class="list-group-item">Third item</li>
+                                <li class="list-group-item" *ngFor="let activity of module.activities">{{activity.title}}</li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +73,8 @@
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Competências:</div>
-                        <div class="col-md-6"><span class="badge badge-primary" title="{{item.descriptions}}" *ngFor="let item of course.evaluations">{{item.name}}</span></div>
+                        <div class="col-md-6"><span class="badge badge-primary" title="{{item.descriptions}}"
+                                *ngFor="let item of course.evaluations">{{item.name}}</span></div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Data de Criação:</div>
@@ -121,3 +119,41 @@
         </div>
     </div>
 </div>
+
+
+
+<jw-modal id="form-activity-modal" class="lg" title="Avaliação">
+    <h4></h4>
+    <hr>
+    <div class="row text-center">
+        <form [formGroup]="activityForm">
+            <div class="col-md-12">
+                <div class="form-group col-md-9">
+                    <label for="exampleInputEmail1">Título</label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="activity.title"
+                        formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Title">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="exampleInputEmail1">Duração</label>
+                    <input type="number" class="form-control form-control-lg" [(ngModel)]="activity.duration"
+                        formControlName="duration">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="exampleInputEmail1">Descrição</label>
+                    <textarea class="form-control form-control-lg" [(ngModel)]="activity.descriptions"
+                        formControlName="descriptions" rows="15">
+                        </textarea>
+                    <small id="emailHelp" class="form-text formContro text-muted">We'll never share your email
+                        with anyone
+                        else.</small>
+                </div>
+            </div>
+            <div class="row text-center"><br>
+                <button class="btn btn-success bg-success" (click)="saveActivity()">Salvar</button>
+            </div>
+        </form>
+
+
+    </div>
+</jw-modal>

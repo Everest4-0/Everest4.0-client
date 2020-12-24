@@ -43,9 +43,7 @@
 
                                     <div class="panel" id="panel-expenses-{{i}}">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Active item</li>
-                                            <li class="list-group-item">Second item</li>
-                                            <li class="list-group-item">Third item</li>
+                                            <li class="list-group-item" *ngFor="let item of module.activities">{{item.title}}</li>
                                         </ul>
                                     </div>
                                 </div>

@@ -1,3 +1,4 @@
+import { ModalModule } from './../components/modal/modal.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from './../sidebar/sidebar.module';
 import { FooterModule } from './../shared/footer/footer.module';
@@ -77,7 +78,8 @@ import { UpdateCourseComponent } from './courses/update-course/update-course.com
     ReactiveFormsModule,
     MomentModule,
     NgSelectModule,
-    DragDropModule
+    DragDropModule,
+    ModalModule
   ]
 })
 export class BackofficeModule { }

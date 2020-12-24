@@ -8,6 +8,7 @@ export class Enrollment {
 
     course: Course;
     user: User;
+    userId: string;
 
     isActive: boolean;
     createdAt: Date;
