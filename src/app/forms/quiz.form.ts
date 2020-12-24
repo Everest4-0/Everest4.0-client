@@ -1,11 +1,12 @@
-import { FormBuilder} from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 
 export class QuizForm {
 
-    constructor(fb: FormBuilder) {
+    constructor(fbx: FormBuilder) {
+        let fb = new FormBuilder();
         return fb.group({
             text: [''],
-            description:[''],
+            descriptions: [''],
             userId: ['']
         })
     }
