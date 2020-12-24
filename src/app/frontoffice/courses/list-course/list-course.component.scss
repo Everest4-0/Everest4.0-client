@@ -1,0 +1,64 @@
+.cover{
+    padding: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.card-body{
+    padding: 15px;
+    min-height: 165px;
+    h4{
+        margin:0;
+        font-weight: 400;
+    }
+}
+
+.card-footer{
+    border-top: solid 1px #ddd;
+    padding: 15px;
+
+    .btn.pin i{
+        color: #ddd;
+    }
+
+    .btn.pined i{
+        color: rgb(0, 135, 212);
+    }
+}
+
+
+.list-card{
+    background: #FFF;
+    border: solid 1px #ddd;
+    min-height: 133px;
+    
+    
+    
+    .cover{
+        margin: 0;
+        padding: 0;
+
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-height: 133px;
+    }
+    .body{
+        padding: 15px;
+        h4{
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+form{
+    button{
+        position: absolute;
+        margin: auto;
+        right: 0px;
+        font-size: 20px;
+        margin: 5px;
+        padding: 2px 10px;
+    }
+}

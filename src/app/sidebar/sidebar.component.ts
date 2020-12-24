@@ -19,7 +19,7 @@ export const DEFAULT_ROUTES: RouteInfo[] = [
   { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', class: '', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', class: '', roles: ['FREE', 'PREMIUM'] },
   //{ path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/user', title: 'Cursos online ', icon: 'pe-7s-bookmarks', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
+  { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', class: '', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/user', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', class: 'disabled', roles: ['FREE', 'PREMIUM'] },

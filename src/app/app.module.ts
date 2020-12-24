@@ -123,7 +123,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsCompleteComponent,
     FormValidatorComponent,
     QuizComponent,
-    ListQuizComponent,
+    ListQuizComponent
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,

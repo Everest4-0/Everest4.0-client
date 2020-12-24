@@ -1,8 +1,11 @@
+import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
+import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
 import { ListQuizComponent } from './../../frontoffice/quiz/quiz/list-quiz/list-quiz.component';
 import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
 import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
-import { UserDetailsComponent } from './../../frontoffice/user/user-details/user-details.component';
+
+
 import { FormStepsCompleteComponent } from './../../components/form-steps-complete/form-steps-complete.component';
 import { FormStepsComponent } from './../../components/form-steps/form-steps.component';
 import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
@@ -30,6 +33,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'quiz/quizes',    component: ListQuizComponent},
+
+    { path: 'courses',  component: ListCourseComponent},
+    { path: 'courses/details/:id',  component: DetailsCourseComponent},
 
 
     {

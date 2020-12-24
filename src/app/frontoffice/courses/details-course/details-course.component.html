@@ -1,0 +1,106 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-lg-9 col-md-12">
+            <div class="card" style="background-image: url({{serverAddress}}{{course.cover}});">
+                <div class="content" style="background-color: rgba(0,0,0,.5);">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3><b>Título</b></h3>
+                            <p></p>
+                            <h1><b style="color: #FFF;">{{course.title}}</b></h1>
+                            <p>----</p>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div *ngIf="course.enrollments.length>0"> {{course.enrollments.length}} já se Inscreveram</div>
+                    <button class="btn btn-info btn-fill" (click)="enroll()" *ngIf="!enrolled">Inscrever-se</button>
+                    <button class="btn btn-success btn-fill" *ngIf="enrolled"><i class="fa fa-check"></i> Já
+                        inscrito</button>
+                    <button class="btn pin border-none"><i class="fa fa-2x fa-star"></i></button>
+                </div>
+            </div>
+            <div class="card col-md-8">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><b>Sobre o Curso</b></h3>
+                            <h5>{{course.descriptions}}</h5>
+                            <h3><b>Módulos</b></h3>
+                            <div class="col-md-12">
+                                <div class="row" *ngFor="let module of course.modules; let i=index">
+                                    <div class="row" style="background: #eee;">
+                                        <div class="col-md-12">
+                                            <small>Módulo {{i+1}}</small>
+                                            <h5><b>{{module.title}}</b></h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel" id="panel-expenses-{{i}}">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Active item</li>
+                                            <li class="list-group-item">Second item</li>
+                                            <li class="list-group-item">Third item</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-md-4">
+                <div class="content">
+                    <div class="row">
+
+                        <h3><b>Sobre o Curso</b></h3>
+                        <div class="col-md-12">
+                            <ul class="list-group">
+                                <li class="list-group-item row">
+                                    <div class="col-md-6">Duração:</div>
+                                    <div class="col-md-6">50 minutos</div>
+                                </li>
+                                <li class="list-group-item row">
+                                    <div class="col-md-6">Língua:</div>
+                                    <div class="col-md-6">{{course.language}}</div>
+                                </li>
+                                <li class="list-group-item row">
+                                    <div class="col-md-6">Nível:</div>
+                                    <div class="col-md-6">{{['Iniciante','Intermediario','Avançado'][course.level]}}
+                                    </div>
+                                </li>
+                                <li class="list-group-item row">
+                                    <div class="col-md-6">Competências:</div>
+                                    <div class="col-md-6"><span class="badge badge-primary"
+                                            title="{{item.descriptions}}"
+                                            *ngFor="let item of course.evaluations">{{item.name}}</span></div>
+                                </li>
+                                <li class="list-group-item row">
+                                    <div class="col-md-6">Data de Criação:</div>
+                                    <div class="col-md-6">{{course.createdAt|date}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="" *ngIf="relatedCourses.length>0"><b>Cursos Relacionados</b></h3>
+                        <div class="col-md-12">
+                            <ul class="list-group">
+                                <a class="list-group-item row" *ngFor="let item of relatedCourses.slice(0,6)"
+                                    (click)="loadCourse(item.id)">
+                                    <div class="col-md-12">
+                                        <div class="row">{{item.title}}</div>
+                                    </div>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

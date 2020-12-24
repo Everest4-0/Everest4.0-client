@@ -1,3 +1,5 @@
+import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
+import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
 import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { UserSettingsComponent } from './../../frontoffice/user/user-settings/user-settings.component';
 import { UserSecurityComponent } from '../../frontoffice/user/user-security/user-security.component';
@@ -126,6 +128,10 @@ FullCalendarModule.registerPlugins([
 
     ScheduleComponent,
     CalendarComponent,
+
+
+    ListCourseComponent,
+    DetailsCourseComponent,
     GroupByPipe,
     ArrSumPipe,
     ArrFilterPipe

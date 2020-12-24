@@ -1,0 +1,83 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-md-9">
+            <h3>Meus Cursos</h3>
+            <a [routerLink]="['/me/courses/details/'+enrollment.course.id]" class="col-md-3"
+                *ngFor="let enrollment of enrollments.slice(0, 4)">
+                <div class="cover"
+                    style="max-height: 100px; padding:0px;  background-image: url({{courseService.serverAddress}}{{enrollment.course.cover}});">
+                    <div style="background-color: rgba(0,0,0,.7); height: 100px; padding:5px; ">
+                        <h4 style="color: #FFF; padding:0; margin:0">{{enrollment.course.title}}</h4>
+                    </div>
+                    <app-progress-bar [done]=0 [noLabel]=true></app-progress-bar>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-9">
+            <div class="col-md-12">
+                <div class="col-md-12" style="margin: 20px auto; padding:5px; background-color: #EEE;">
+                    <form class="form-inline text-right" action="/action_page.php">
+                        <input class="form-control mr-sm-6" (keyup)="search($event.target.value)" type="text" placeholder="Pesquisa">
+                        <button class="btn btn-success border-none"><i class="pe-7s-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" *ngIf="searchFor">
+            <div class="col-md-12">
+                <div class="col-md-6 list-card" *ngFor="let course of searchResult">
+
+                    <a [routerLink]="['/me/courses/details/'+course.id]">
+                        <div class="col-md-4 cover"
+                            style="background-image: url({{courseService.serverAddress}}{{course.cover}});">
+                        </div>
+                        <div class="col-md-8 body">
+                            <h4>{{course.title}}</h4>
+                            <small>{{course.createdAt|date}}</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" *ngIf="!searchFor">
+            <div class="col-md-3" *ngFor="let course of courses.slice(0, 4)">
+                <a [routerLink]="['/me/courses/details/'+course.id]">
+                    <div class="card">
+                        <div class="cover"
+                            style="background-image: url({{courseService.serverAddress}}{{course.cover}});">
+                        </div>
+                        <div class="card-body">
+                            <h4>{{course.title}}</h4>
+                            <span class="badge badge-info"
+                                *ngFor="let evaluation of course.evaluations">{{evaluation.name}}</span>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success">Inscrever-se</button>
+                            <button class="btn pin border-none pull-right"><i class="fa fa-2x fa-star"></i></button>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-9" *ngIf="!searchFor">
+            <div class="col-md-12">
+                <h2>Mais cursos</h2>
+                <div class="col-md-6 list-card" *ngFor="let course of courses.slice(2, 100)">
+
+                    <a [routerLink]="['/me/courses/details/'+course.id]">
+                        <div class="col-md-4 cover"
+                            style="background-image: url({{courseService.serverAddress}}{{course.cover}});">
+                        </div>
+                        <div class="col-md-8 body">
+                            <h4>{{course.title}}</h4>
+                            <small>{{course.createdAt|date}}</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

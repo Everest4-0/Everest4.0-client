@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProgressBarComponent implements OnInit {
   @Input() done;
   @Input() showLabel: boolean = false;
+  @Input() noLabel: boolean = false;
   get pbColor() {
     let pbColor;
     if (this.done < 50) {
@@ -31,6 +32,10 @@ export class ProgressBarComponent implements OnInit {
     return parseFloat(this.done).toFixed(2)
   }
   get label() {
+    if(this.noLabel) {
+      this.showLabel=true;
+      return;
+    }
     return this.showLabel ? parseFloat(this.done).toFixed(2) + ' %' : ''
   }
   constructor() { }

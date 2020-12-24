@@ -13,9 +13,7 @@ export class CourseService extends AppService<Course> implements IService<Course
   public course: Course;
 
   constructor(public http: HttpClient) {
-    
-    super(http, 'courses.course');
-    debugger
+    super(http, 'courses.courses');
   }
 
   one(id: string): Observable<Course> {
