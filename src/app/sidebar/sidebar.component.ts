@@ -14,17 +14,17 @@ declare interface RouteInfo {
   roles: Array<string>;
 }
 export const FRONTOFFICE_ROUTES: RouteInfo[] = [
-  { path: '/me/dashboard', title: 'Início', icon: 'pe-7s-home', roles: ['FREE', 'PRO'] },
+  { path: '/me/dashboard', title: 'Início', icon: 'pe-7s-home', roles: ['PRO', 'BASIC', 'FREE'] },
 
-  { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', roles: ['FREE', 'PREMIUM'] },
+  { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', roles: ['PRO', 'BASIC', 'FREE'] },
   //{ path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', roles: ['FREE'] },
-  { path: '/me/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/user', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
-  { path: '/me/maps', title: 'Apoio ao cliente', icon: 'pe-7s-help1', roles: ['FREE'] },
+  { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['PRO', 'BASIC'] },
+  //{ path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', roles: ['FREE'] },
+  { path: '/me/user', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', roles: ['PRO', 'BASIC'] },
+  { path: '/me/user', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', roles: ['PRO', 'BASIC'] },
+  { path: '/me/maps', title: 'Apoio ao cliente', icon: 'pe-7s-help1', roles: ['PRO', 'BASIC', 'FREE'] },
   { path: '/me/upgrade', title: 'Mudar para Premium', icon: 'pe-7s-rocket', class: 'active-pro', roles: ['FREE'] },
 
 
@@ -44,7 +44,7 @@ export const BACKOFFICE_ROUTES: RouteInfo[] = [
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls:['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
@@ -59,8 +59,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
     this.frontofficeMenuItems.forEach(menuItem => {
-       if (this.auth.user.roles.filter(r => menuItem.roles.includes(r)).length === 0)
-          menuItem.class+=' disabled'
+      if (this.auth.user.roles.filter(r => menuItem.roles.includes(r)).length === 0)
+        menuItem.class += ' disabled'
     });
   }
   isMobileMenu() {

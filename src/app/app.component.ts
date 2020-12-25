@@ -11,7 +11,6 @@ import { ToastService } from 'ng-uikit-pro-standard';
 })
 export class AppComponent implements OnInit {
   isLogedin = false;
-  roles = this.auth.user.roles
   constructor(public location: Location,
     public auth: AuthService,
     private toast: ToastService,
@@ -20,7 +19,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.permissionsService.loadPermissions(this.auth.user.roles);
+    if (this.auth.user) {
+      this.permissionsService.loadPermissions(this.auth.user.roles);
+    }
   }
 
   isMap(path) {

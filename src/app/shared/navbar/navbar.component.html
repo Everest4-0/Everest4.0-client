@@ -19,21 +19,27 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="auth.user.roleId=='FREE'">
-                    <a class="btn btn-primary" [routerLink]="['/me/upgrade']"  *ngIf="auth.user.roles.includes('FREE')" routerLinkActive="router-link-active">
-                        <span class="hidden-sm">Mudar para PREMIUM</span>
-                    </a>
-                </li>
+                <ng-template [ngxPermissionsOnly]="['FREE']">
+                    <li>
+                        <a class="btn btn-primary" [routerLink]="['/me/upgrade']"
+                            *ngIf="auth.user.roles.includes('FREE')" routerLinkActive="router-link-active">
+                            <span class="hidden-sm">Mudar para PREMIUM</span>
+                        </a>
+                    </li>
+                </ng-template>
                 <li>
                     <button class="btn btn-info">
                         <span class="hidden-sm">Partilhar</span>
                     </button>
                 </li>
-                <li>
-                    <a [routerLink]="['/backoffice']" *ngIf="auth.user.roles.includes('ADMIN')" class="btn btn-danger">
-                        <span class="hidden-sm">backoffice</span>
-                    </a>
-                </li>
+                <ng-template [ngxPermissionsOnly]="['ADMIN']">
+                    <li>
+                        <a [routerLink]="['/backoffice']" *ngIf="auth.user.roles.includes('ADMIN')"
+                            class="btn btn-danger">
+                            <span class="hidden-sm">backoffice</span>
+                        </a>
+                    </li>
+                </ng-template>
                 <li>
                     <a href="#">
                         <i class="fa fa-search"></i>
@@ -63,34 +69,41 @@
                         {{auth.user.datas.firstName}} {{auth.user.datas.lastName}}
                         <b class="caret"></b>
                     </a>
-                        <div class="card card-user dropdown-menu" style="width: 300px;">
-                            <div class="image" style="height: 260px;">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                                    alt="..." />
-                            </div>
-                            <div class="content text-center">
-                                <div class="author" style="margin-top: -150px;">
-                                    <img class="avatar border-gray" style="width: 200px; height: 200px;" src="{{auth.user.avatar}}" alt="..." />
-                                    <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
-                                        <small>{{auth.user.email}}</small><br>
-                                    </h4>
-                                </div>
-                                <button class="btn btn-outline-success btn-warning">
-                                    <i *ngIf="auth.user.roleId!='FREE'" class="pe-7s-medal" style="font-size: 33px; padding: 5px;"></i><br>
-                                    <i *ngIf="auth.user.roleId=='FREE'" class="pe-7s-delete-user" style="font-size: 33px; padding: 5px;"></i><br>
-                                    {{auth.user.roleId}}
-                                </button>
-                                <p class="description text-center hidden"> "Lamborghini Mercy <br>
-                                    Your chick she so thirsty <br>
-                                    I'm in that two seat Lambo"
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="text-center">
-                                <a routerLink="/me/user"><h6>Ver Perfil</h6></a>
-                                <a (click)="signOut()"><h6>Sair</h6></a>
-                            </div>
+                    <div class="card card-user dropdown-menu" style="width: 300px;">
+                        <div class="image" style="height: 260px;">
+                            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+                                alt="..." />
                         </div>
+                        <div class="content text-center">
+                            <div class="author" style="margin-top: -150px;">
+                                <img class="avatar border-gray" style="width: 200px; height: 200px;"
+                                    src="{{auth.user.avatar}}" alt="..." />
+                                <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
+                                    <small>{{auth.user.email}}</small><br>
+                                </h4>
+                            </div>
+                            <button class="btn btn-outline-success btn-warning">
+                                <i *ngIf="auth.user.roleId!='FREE'" class="pe-7s-medal"
+                                    style="font-size: 33px; padding: 5px;"></i><br>
+                                <i *ngIf="auth.user.roleId=='FREE'" class="pe-7s-delete-user"
+                                    style="font-size: 33px; padding: 5px;"></i><br>
+                                {{auth.user.roleId}}
+                            </button>
+                            <p class="description text-center hidden"> "Lamborghini Mercy <br>
+                                Your chick she so thirsty <br>
+                                I'm in that two seat Lambo"
+                            </p>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <a routerLink="/me/user">
+                                <h6>Ver Perfil</h6>
+                            </a>
+                            <a (click)="signOut()">
+                                <h6>Sair</h6>
+                            </a>
+                        </div>
+                    </div>
                 </li>
                 <li class="separator hidden-lg hidden-md"></li>
             </ul>

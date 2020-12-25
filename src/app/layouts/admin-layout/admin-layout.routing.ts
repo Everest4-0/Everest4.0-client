@@ -31,7 +31,7 @@ export const AdminLayoutRoutes: Routes =
 
     {
       path: 'dashboard', component: HomeComponent,
-      canActivate: [NgxPermissionsGuard],
+      // canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
           only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],

@@ -1,3 +1,4 @@
+import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 import { StorageServices } from './storage.service';
 
 import { User } from 'app/models/main/user';
@@ -13,7 +14,10 @@ export class AuthService extends AppService<User> implements IService<any> {
 
   public user: User = new User();
 
-  constructor(public http: HttpClient, private store: StorageServices) {
+  constructor(
+    public http: HttpClient,
+    private store: StorageServices,
+    private permissionsService: NgxPermissionsService) {
     super(http, 'users');
     let u = store.get<User>('current_user').data
     if (u === undefined)
@@ -36,7 +40,7 @@ export class AuthService extends AppService<User> implements IService<any> {
   }
 
   signOut(): void {
-    this.store.remove('current_user')
+    this.store.remove('current_user');
   }
 
   one(id: string): Observable<User> {

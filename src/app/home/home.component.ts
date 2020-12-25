@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
 import * as moment from 'moment';
+import { NgLocalization } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,7 +18,7 @@ import * as moment from 'moment';
 })
 export class HomeComponent implements OnInit {
 
-  public dataLoaded=false;
+  public dataLoaded = false;
   public emailChartType: ChartType;
   public emailChartData: any;
   public chartOptions: any;
@@ -37,7 +38,6 @@ export class HomeComponent implements OnInit {
   public activityChartDataSeries: Array<any>;
   public emailChartDataSeries = { series: ['0', '100'] }
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
-
 
   constructor(
     private goalService: GoalService,
@@ -79,10 +79,10 @@ export class HomeComponent implements OnInit {
             ,'Concluido'
             ,'Cancelado'*/
       //sAct.
-      
-      let fnToDo = (x: Array<Task>) =>  x.filter(r => r.state < 2).length ;
-      let fnDoing = (x: Array<Task>) =>  x.filter(r => r.state === 2).length ;
-      let fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length ;
+
+      let fnToDo = (x: Array<Task>) => x.filter(r => r.state < 2).length;
+      let fnDoing = (x: Array<Task>) => x.filter(r => r.state === 2).length;
+      let fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length;
       this.activityChartData = {
         labels: ['Por iniciar', 'Em curso', 'Concluido'],
         series: [
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
           [fnToDo(eAtr), fnDoing(eAtr), fnDone(eAtr)]
         ]
       };
-      this.dataLoaded=true;
+      this.dataLoaded = true;
     })
 
 
