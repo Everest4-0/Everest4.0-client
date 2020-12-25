@@ -31,11 +31,24 @@
             </a>
         </li>
         <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+
+        <li routerLinkActive="active" title="" *ngFor="let menuItem of frontofficeMenuItems" class="{{menuItem.class}}">
             <a [routerLink]="[menuItem.path]">
                 <i class="{{menuItem.icon}}"></i>
-                <p>{{menuItem.title}}</p>
+                <p>{{menuItem.title}}
+                    <span class="badge pull-right hidden">PRO</span>
+                </p>
             </a>
+        </li>
+
+        <li routerLinkActive="active" *ngFor="let menuItem of backofficeMenuItems" class="{{menuItem.class}}">
+
+            <ng-template [ngxPermissionsOnly]="menuItem.roles">
+                <a [routerLink]="[menuItem.path]">
+                    <i class="{{menuItem.icon}}"></i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </ng-template>
         </li>
     </ul>
 </div>

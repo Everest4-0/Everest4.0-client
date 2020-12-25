@@ -29,7 +29,7 @@ export class DetailsCourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger
+    
     const id = this.route.snapshot.params['id'];
     this.loadCourse(id)
   }

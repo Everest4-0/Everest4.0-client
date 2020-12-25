@@ -1,3 +1,5 @@
+import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
 import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
 import { CreateQuizComponent } from './../../frontoffice/quiz/quiz/create-quiz/create-quiz.component';
@@ -21,36 +23,164 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
-export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',             component: HomeComponent },
-    { path: 'diagnostic',            component: DiagnosticComponent },
-    { path: 'quiz',                  component: QuizComponent },
-    { path: 'goals',                 component: GoalsComponent },
-    { path: 'user',                  component: UserHomeComponent },
-    { path: 'table',                 component: TablesComponent },
-    { path: 'typography',            component: TypographyComponent },
-    { path: 'icons',                 component: IconsComponent },
-    { path: 'maps',                  component: MapsComponent },
-    { path: 'notifications',         component: NotificationsComponent },
-    { path: 'upgrade',               component: UpgradeComponent },
-    { path: 'quiz/quizes',           component: ListQuizComponent},
-    { path: 'quiz/quizes/create',    component: CreateQuizComponent},
+export const AdminLayoutRoutes: Routes =
+  [
+    {
+      path: '403', component: ForbidenComponent
+    },
 
-    { path: 'courses',  component: ListCourseComponent},
-    { path: 'courses/details/:id',  component: DetailsCourseComponent},
+    {
+      path: 'dashboard', component: HomeComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'diagnostic', component: DiagnosticComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'goals', component: GoalsComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'user', component: UserHomeComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'table', component: TablesComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'typography', component: TypographyComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'icons', component: IconsComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'maps', component: MapsComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'notifications', component: NotificationsComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'upgrade', component: UpgradeComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'quiz', component: QuizComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'quiz/quizes', component: ListQuizComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'quiz/quizes/create', component: CreateQuizComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    },
+
+    {
+      path: 'courses', component: ListCourseComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    },
+    {
+      path: 'courses/details/:id', component: DetailsCourseComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    },
 
 
     {
-        path: 'form',
-        component: FormStepsComponent
-      },
-      {
-        path: 'complete',
-        component: FormStepsCompleteComponent
-      },
-      {
-        path: '',
-        redirectTo: '/form',
-        pathMatch: 'full'
-      }
-];
+      path: 'form',
+      component: FormStepsComponent
+    },
+    {
+      path: 'complete',
+      component: FormStepsCompleteComponent
+    },
+    {
+      path: '',
+      redirectTo: '/form',
+      pathMatch: 'full'
+    }
+  ];

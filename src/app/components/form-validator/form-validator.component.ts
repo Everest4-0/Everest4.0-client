@@ -30,7 +30,7 @@ export class FormValidatorComponent implements OnInit {
 
   validate() {
     this.messages = []
-    debugger
+    
     for (let r of this.rules) {
       this.isValid = ValidationService.validate()[r](this.v) 
       if (!this.isValid) {

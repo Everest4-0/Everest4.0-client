@@ -27,9 +27,9 @@ export class ListCourseComponent implements OnInit {
     this.courseService.all({}).subscribe(courses => {
       this.courses = courses
     })
-    debugger
+    
     this.enrollmentService.all({ userId: this.auth.user.id }).subscribe(enrollments => { 
-      debugger
+      
       this.enrollments = enrollments
      })
   }

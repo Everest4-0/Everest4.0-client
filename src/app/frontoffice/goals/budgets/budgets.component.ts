@@ -56,7 +56,7 @@ export class BudgetsComponent implements OnInit {
         getActivityChartData = (direction) => {
           let categories = this.budgetCategories.filter(x => x.direction === direction).sort((t, u) => t.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) > u.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) ? -1 : 0)
           let labels = categories.map(x => x.name)
-          debugger
+          
 
           let total = categories.reduce((x, y) => parseFloat(y.budgets.reduce((r, s) => parseFloat(s.value + '') + r, 0) + '') + x, 0)
           let series = categories.map(x => parseFloat((100 * parseFloat(x.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) + '') / total).toFixed(2)));
@@ -112,7 +112,7 @@ export class BudgetsComponent implements OnInit {
 
   saveBudget() {
     this.budgetService.create(this.budget).subscribe(budget => {
-      debugger
+      
       budget.task = this.budget.task;
       budget.category = this.budget.category
       this.budget = new Budget();

@@ -44,7 +44,7 @@ export class ResultsComponent implements OnInit {
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
-      debugger
+      
       let evs = []
       let setEv = evaluations.forEach((ev) => {
         if (!evs.map(x => x[0]).includes(ev.evaluation.name))
@@ -114,7 +114,7 @@ export class ResultsComponent implements OnInit {
   }
 
   setResults(e) {
-    debugger
+    
     let u = this.results;
     this.currentResults = e
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))

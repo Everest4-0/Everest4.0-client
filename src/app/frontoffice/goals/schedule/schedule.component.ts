@@ -37,7 +37,7 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger
+    
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
@@ -57,7 +57,7 @@ export class ScheduleComponent implements OnInit {
     })
 
     this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
-      debugger
+      
       this.todos = todos
         //.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
         .sort((x, y) => x.startDate > y.startDate ? 1 : -1)

@@ -1,3 +1,4 @@
+import { NgxPermissionsModule } from 'ngx-permissions';
 import { FormValidatorComponent } from './components/form-validator/form-validator.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.component';
@@ -109,6 +110,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       ],
       extraQueryParameters: {}
     })
+  , NgxPermissionsModule.forRoot()
   ],
   declarations: [
     FirstloginComponent,
@@ -136,7 +138,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsComponent,
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
-    ToastModule
+    ToastModule,
+    NgxPermissionsModule
   ],
   providers: [
     StorageServices,

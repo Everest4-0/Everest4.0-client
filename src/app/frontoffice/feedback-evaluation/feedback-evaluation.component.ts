@@ -125,7 +125,7 @@ export class FeedbackEvaluationComponent implements OnInit {
     let filter = this.evaluationRequest.requested.email;
     if (filter.length > 3)
       this.auth.all({ $filter: filter }).subscribe(users => {
-        debugger
+        
         this.users = users//.filter(x=>x.id!==this.auth.user.id)
         if (ValidationService.emailValidator({ value: filter }) == null) {
           this.users.push({ firstName: filter, email: filter })
@@ -186,7 +186,7 @@ export class FeedbackEvaluationComponent implements OnInit {
   }
   askEvaluation() {
     this.evaluationRequestService.create(this.evaluationRequest).subscribe(request => {
-      debugger
+      
       this.requests.push(request)
       this.setActiveRelation()
       if (request.id) {

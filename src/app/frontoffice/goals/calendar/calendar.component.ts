@@ -115,7 +115,7 @@ export class CalendarComponent implements OnInit {
         .reduce((x, y) => x.concat(y), [])
         .map(t => { return { task: t, color: '#ffab38', title: t.descriptions, date: t.dueDate, allDay: true } })
       this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
-        debugger
+        
         const t = todos.map(t => {
           return {
             task: t,
@@ -192,7 +192,7 @@ export class CalendarComponent implements OnInit {
     alert('date click! ' + arg.dateStr)
   }
   handleEventClick(arg) {
-    debugger
+    
     this.taskDetails = arg.event.task
     this.modalService.open('task-detail-modal')
     alert('event click! ' + JSON.stringify(arg.event))

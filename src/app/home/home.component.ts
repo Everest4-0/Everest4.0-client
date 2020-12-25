@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
             ,'Concluido'
             ,'Cancelado'*/
       //sAct.
-      debugger
+      
       let fnToDo = (x: Array<Task>) =>  x.filter(r => r.state < 2).length ;
       let fnDoing = (x: Array<Task>) =>  x.filter(r => r.state === 2).length ;
       let fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length ;

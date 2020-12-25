@@ -1,3 +1,4 @@
+import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
 import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
 import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
 import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
@@ -124,6 +125,7 @@ FullCalendarModule.registerPlugins([
     UserSettingsComponent,
     UserSecurityComponent,
 
+    ForbidenComponent,
     //QuizComponent,
 
     ScheduleComponent,

@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
   }
 
   login = (user) => {
-    debugger
+    
     this.localUser.castSocialUser(user);
     this.auth.authenticate(this.localUser, (user: User) => {
       this.localUser = user;

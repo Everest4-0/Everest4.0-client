@@ -1,7 +1,7 @@
-import { AppComponent } from './../../app.component';
+
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { DEFAULT_ROUTES, BACKOFFICE_ROUTES } from '../../sidebar/sidebar.component';
+import { BACKOFFICE_ROUTES, FRONTOFFICE_ROUTES  } from '../../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.listTitles = DEFAULT_ROUTES.concat(BACKOFFICE_ROUTES).filter(listTitle => listTitle);
+        this.listTitles = FRONTOFFICE_ROUTES.concat(BACKOFFICE_ROUTES).filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     }
