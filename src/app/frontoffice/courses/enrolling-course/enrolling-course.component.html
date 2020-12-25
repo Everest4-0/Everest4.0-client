@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="card" style="background-image: url({{serverAddress}}{{course.cover}});">
+        <div class="content" style="background-color: rgba(0,0,0,.5);">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><b style="color: #FFF;">{{course.title}}</b></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card col-md-3">
+        <div class="content">
+            <div class="row" *ngFor="let module of course.modules; let i=index">
+                <div class="row" style="background: #eee;">
+                    <div class="col-md-12">
+                        <small>Módulo {{i+1}}</small>
+                        <h5><b>{{module.title}}</b></h5>
+                    </div>
+                </div>
+
+                <div class="panel" id="panel-expenses-{{i}}">
+                    <ul class="list-group">
+                        <li class="list-group-item" (click)="selectActivity(item)" *ngFor="let item of module.activities">{{item.title}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="col-md-12 text-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="pe-7s-angle-left"></i></button>
+                <button type="button" class="btn btn-primary border-none">
+                    <b>{{currentActivity.title}}. </b>
+                </button>
+                <button type="button" class="btn btn-primary"><i class="pe-7s-angle-right"></i></button>
+            </div>
+            <hr/>
+        </div>
+
+        <app-activity-course [activity]="currentActivity"></app-activity-course>
+    </div>
+</div>

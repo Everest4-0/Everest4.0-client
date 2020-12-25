@@ -1,3 +1,5 @@
+import { ActivityCourseComponent } from './../../frontoffice/courses/activity-course/activity-course.component';
+import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-course/enrolling-course.component';
 import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
 import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
 import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
@@ -125,6 +127,9 @@ FullCalendarModule.registerPlugins([
     UserSettingsComponent,
     UserSecurityComponent,
 
+    EnrollingCourseComponent,
+    ActivityCourseComponent,
+   
     ForbidenComponent,
     //QuizComponent,
 

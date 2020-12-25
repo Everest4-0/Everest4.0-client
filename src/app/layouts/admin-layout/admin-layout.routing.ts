@@ -1,3 +1,4 @@
+import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-course/enrolling-course.component';
 import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
@@ -160,6 +161,16 @@ export const AdminLayoutRoutes: Routes =
     },
     {
       path: 'courses/details/:id', component: DetailsCourseComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    },
+    {
+      path: 'courses/enrolling/:id', component: EnrollingCourseComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
