@@ -7,6 +7,7 @@ export class Activity {
     title: string;
     descriptions: string;
     duration:number;
+    order:number;
     module: Module;
 
     isActive: boolean;
