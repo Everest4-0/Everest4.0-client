@@ -1,8 +1,37 @@
 <div class="card ">
     <div class="content-data" [innerHTML]="activity.descriptions"></div>
-    <div class="content-data text-center">
-        <iframe width="620" height="400" *ngIf="activity.attachment" [src]="activity.attachment" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+    <div class="content-data text-center" *ngIf="attachmentType=='pdf'">
+        <div *ngIf="isLoaded" style="text-align: center;">
+            <button class="btn btn-xs btn-default btn-fill" (click)="prevPage()" [disabled]="page === 1">Proxima Página</button>
+            <span>{{ page }} / {{ totalPages }}</span>
+            <button class="btn btn-xs btn-default btn-fill" (click)="nextPage()" [disabled]="page === totalPages">Págian Anterior</button>
+          </div>
+          <pdf-viewer src="{{serverAddress}}{{activity.attachment}}"
+                      [show-all]="true"
+                      [page]="page"
+                      (after-load-complete)="afterLoadComplete($event)"
+          ></pdf-viewer>
+    </div>
+    <div class="content-data text-center" *ngIf="attachmentType=='youtube'" style="background-color: #000;">
+        <youtube-player
+          [videoId]="videoId"
+          (ready)="savePlayer($event)"
+          (change)="onStateChange($event)"
+          [height]="480"
+          [width]="700"
+          [playerVars]="playerVars">
+        </youtube-player><br>
+        <button *ngIf="ytEvent !== 1"
+      type="button"
+      class="btn btn-primary"
+      (click)="playVideo()">
+      Play
+    </button>
+    <button *ngIf="ytEvent === 1"
+      type="button"
+      class="btn btn-danger"
+      (click)="pauseVideo()">
+      Pause
+    </button>
     </div>
 </div>

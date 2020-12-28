@@ -7,11 +7,12 @@ export class Activity {
     title: string;
     descriptions: string;
     duration: number;
-    order: number;
+    orderNo: number;
     module: Module;
 
     attachment: string;
 
+    status: number = 0;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;

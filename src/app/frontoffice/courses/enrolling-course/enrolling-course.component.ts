@@ -8,6 +8,7 @@ import { AuthService } from 'app/services/auth.service';
 import { Enrollment } from './../../../models/course/enrollment';
 import { Course } from './../../../models/course/course';
 import { Component, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-enrolling-course',
@@ -16,6 +17,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EnrollingCourseComponent implements OnInit {
 
+  public canActivate: boolean = false;
   public course: Course = new Course();
   public relatedCourses: Array<Course> = [];
   public enrollment: Enrollment = new Enrollment();
@@ -32,34 +34,47 @@ export class EnrollingCourseComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     const id = this.route.snapshot.params['id'];
-    this.loadCourse(id)
+    debugger
+    this.enrollmentService.one(id).subscribe(enrollment => this.loadCourse(enrollment.courseId))
   }
   selectActivity(item) {
-    this.currentActivity = item;
+    if(item.status===0) {
+      return;
+    }
+    this.enrollment.lastActivity = item;
+    const numbers = timer(this.enrollment.lastActivity.duration * 1000);
+    numbers.subscribe(x => this.canActivate = true);
   }
 
-  nextActivity(){
-    
+  nextActivity() {
   }
-  prevActivity(){
-    
+  prevActivity() {
+
   }
   loadCourse(id: string): void {
-    this.relatedCourses = [];
+
     this.courseService.one(id).subscribe(course => {
+      course.modules.forEach(m => {
+        m.activities = m.activities.sort((x, y) => x.orderNo > y.orderNo ? 1 : -1)
+        m.activities.forEach(a => {
+          if (this.enrollment.lastActivity.id === undefined) {
+            this.enrollment.lastActivity = a;
+          }
+          if (a.id === this.enrollment.lastActivity.id) {
+            a.status = 1;
+            this.enrollment.lastActivity.status = 1;
+          } else if (this.enrollment.lastActivity.status !== 1) {
+            a.status = 2;
+          }else{
+            a.status = 0;
+          }
+        })
+      })
       this.course = course;
       this.enrollment.course = this.course;
       this.enrollment.user = this.auth.user;
-      this.course.evaluations.forEach(e => {
-        this.evaluationService.one(e.id).subscribe(ev => {
-          ev.courses.forEach(c => {
-            if (this.relatedCourses.filter(r => r.id === c.id).length === 0 && c.id !== id) {
-              this.relatedCourses.push(c);
-            }
-          })
-        })
-      })
     })
   }
   get enrolled() {
