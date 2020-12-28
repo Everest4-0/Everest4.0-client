@@ -1,3 +1,4 @@
+import { Answer } from 'app/models/quiz/answer';
 import { AuthService } from './../../../../services/auth.service';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -14,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateQuizComponent implements OnInit {
 
-  public form = new QuizForm(this.fb)
+  public form = new QuizForm()
 
   public quiz: Quiz = new Quiz();
 
@@ -26,11 +27,20 @@ export class CreateQuizComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-
+    this.quiz.answers=[new Answer(),new Answer()]
     this.quiz.user = this.auth.user;
 
   }
-
+  addAnswer(){
+    this.quiz.answers.push(new Answer())
+  }
+  removeAnswer(index) {
+    if (this.quiz.answers.length === 2) {
+      return;
+    }
+    this.quiz.answers
+    .splice(index, 1);
+  }
   saveForm() {
     this.quizService.create(this.quiz).subscribe(data => {
       this.toast.success('Desafio criado com sucesso', 'Sucesso', {

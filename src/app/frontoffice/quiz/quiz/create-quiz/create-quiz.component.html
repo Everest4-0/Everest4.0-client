@@ -4,7 +4,6 @@
             <div class="card">
                 <div class="header">
                     <h4 class="title">TESTE</h4>
-                    <p class="category">Here is a subtitle for this table</p>
                 </div>
 
                 <div class="content">
@@ -12,23 +11,41 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label>Texto</label>
-                                    <input type="text" class="form-control" formControlName="text"
-                                        [(ngModel)]="quiz.text" placeholder="text" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
                                     <label>Descrição</label>
-                                    <textarea type="text" class="form-control" formControlName="descriptions"
-                                        [(ngModel)]="quiz.descriptions" placeholder="Descrição" rows="5" required></textarea>
+                                    <textarea type="text" class="form-control" formControlName="text"
+                                        [(ngModel)]="quiz.text" placeholder="Descrição" rows="5" required></textarea>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success btn-fill pull-rightx">Desafiar</button>
+
+                        <div class="col-md-9">
+                            <div class="col-md-9">Opcoes</div>
+                            <div class="col-md-3 text-right"><button type="button" (click)="addAnswer()"
+                                    class="btn btn-primary"> <i class="fa fa-plus"></i></button></div>
+                            <blockquote>
+
+                                <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
+                                    <label>Opcao {{i+1}}</label>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <input type="radio" [(ngModel)]="answer.correct" name="correct" required />
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control"
+                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.text"
+                                                placeholder="text" rows="5" required />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        </div>
                         <div class="clearfix"></div>
+                        <button class="btn btn-success btn-fill pull-rightx">Desafiar</button>
                     </form>
                 </div>
             </div>
