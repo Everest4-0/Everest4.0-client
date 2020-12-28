@@ -1,1 +1,8 @@
-<div  class="card content-data" [innerHTML]="activity.descriptions"></div>
+<div class="card ">
+    <div class="content-data" [innerHTML]="activity.descriptions"></div>
+    <div class="content-data text-center">
+        <iframe width="620" height="400" *ngIf="activity.attachment" [src]="activity.attachment" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+</div>

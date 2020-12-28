@@ -1,6 +1,4 @@
 .content-data{
-    min-height: 400px;
-    max-height: 400px;
     overflow-y: auto;
     padding: 30px;
     background:#FFF
