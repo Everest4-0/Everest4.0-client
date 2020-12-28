@@ -17,6 +17,8 @@ export class Activity {
     createdAt: Date;
     updatedAt: Date;
 
+
+    i: number;
     constructor() {
     }
 }

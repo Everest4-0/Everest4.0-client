@@ -15,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsCourseComponent implements OnInit {
 
+  public duration=0;
   public course: Course = new Course();
   public relatedCourses: Array<Course> = [];
   public enrollment: Enrollment = new Enrollment();
@@ -34,10 +35,16 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   loadCourse(id: string): void {
-    this.relatedCourses=[];
+    this.relatedCourses = [];
     this.courseService.one(id).subscribe(course => {
       this.course = course;
-      this.enrollment=course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id)[0]
+      this.course.modules.forEach(m => {
+        m.activities = m.activities.sort((x, y) => x.orderNo > y.orderNo ? 1 : -1)
+        m.activities.forEach(a => {
+          this.duration+=a.duration
+        })
+      })
+      this.enrollment = course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id)[0]
       this.enrollment.course = this.course;
       this.enrollment.user = this.auth.user;
       this.course.evaluations.forEach(e => {
@@ -64,4 +71,8 @@ export class DetailsCourseComponent implements OnInit {
     })
 
   }
+
+  get courseDuration() {
+    return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0     );
+    }
 }
