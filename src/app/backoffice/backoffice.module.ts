@@ -64,6 +64,7 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
 import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
+import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
     UpdateCourseComponent,
     ListQuizComponent,
     DetailsQuizComponent,
-    DeleteQuizComponent
+    DeleteQuizComponent,
+    UpdateQuizComponent
   ],
   imports: [
     CommonModule,

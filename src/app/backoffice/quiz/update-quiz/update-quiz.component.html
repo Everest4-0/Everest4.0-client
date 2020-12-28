@@ -1,0 +1,46 @@
+<app-backoffice-navbar [title]="'Actualizar desafio'"></app-backoffice-navbar>
+<div class="card">
+    <div class="body">
+        <div class="content">
+            <form [formGroup]="form" (ngSubmit)="saveForm()">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea type="text" class="form-control" formControlName="text" [(ngModel)]="quiz.text"
+                                rows="5" required>{{quiz.text}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-9">Opções</div>
+                    <div class="col-md-3 text-right"><button type="button" (click)="addAnswer()"
+                            class="btn btn-primary"> <i class="fa fa-plus"></i></button></div>
+                    <blockquote>
+
+                        <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
+                            <label>Opcao {{i+1}}</label>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <input type="radio" [(ngModel)]="answer.correct" name="correct" value="true"
+                                        required />
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="answer.text" value="{{answer.text}}" rows="5" required />
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </blockquote>
+                </div>
+                <div class="clearfix"></div>
+                <button class="btn btn-success btn-fill pull-rightx">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsQuizComponent implements OnInit {
 
-  public quiz: Quiz
+  public quiz: Quiz = new Quiz()
 
   constructor(private route: ActivatedRoute,
     private quizService: QuizService,
