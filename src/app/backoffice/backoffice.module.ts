@@ -65,6 +65,7 @@ import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
 import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
+import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
     ListQuizComponent,
     DetailsQuizComponent,
     DeleteQuizComponent,
-    UpdateQuizComponent
+    UpdateQuizComponent,
+    CreateQuizComponent
   ],
   imports: [
     CommonModule,
