@@ -1,3 +1,4 @@
+import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { UpdateCourseComponent } from './courses/update-course/update-course.component';
@@ -61,6 +62,8 @@ const backOfficeRoutes: Routes = [
     { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent},
 
     { path: 'quizes',                          component: ListQuizComponent},
+    { path: 'quizes/delete/:id',               component: DeleteQuizComponent},
+    //{ path: 'quizes/details/:id',              component: DetailsQuizComponent},
     { path: 'quizes/details/:id',              component: DetailsQuizComponent},
 
     { path: 'courses',            component: ListCourseComponent},

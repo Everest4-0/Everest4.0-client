@@ -63,6 +63,7 @@ import { CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
+import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component
     DetailsCourseComponent,
     UpdateCourseComponent,
     ListQuizComponent,
-    DetailsQuizComponent
+    DetailsQuizComponent,
+    DeleteQuizComponent
   ],
   imports: [
     CommonModule,
