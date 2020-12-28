@@ -35,6 +35,7 @@ export const FRONTOFFICE_ROUTES: RouteInfo[] = [
 export const BACKOFFICE_ROUTES: RouteInfo[] = [
   { path: '/backoffice/users', title: 'Usuários', icon: 'pe-7s-users', roles: ['ADMIN'] },
   { path: '/backoffice/evaluations', title: 'Variaveis de avaliação', icon: 'pe-7s-star', roles: ['ADMIN'] },
+  { path: '/backoffice/quizes', title: 'Desafios', icon: 'pe-7s-timer', roles: ['ADMIN'] },
   { path: '/backoffice/academic-levels', title: 'Níveis académico', icon: 'pe-7s-study', roles: ['ADMIN'] },
   { path: '/backoffice/professional-experiencies', title: 'Experiências profissionais', icon: 'pe-7s-graph3', roles: ['ADMIN'] },
   { path: '/backoffice/work-situations', title: 'Situações de trabalho', icon: 'pe-7s-portfolio', roles: ['ADMIN'] },

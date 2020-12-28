@@ -61,6 +61,11 @@ import { RadioButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
+import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
+import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
+import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
+import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
 
 
 @NgModule({
@@ -90,7 +95,12 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
     ListCourseComponent,
     CreateCourseComponent,
     DetailsCourseComponent,
-    UpdateCourseComponent
+    UpdateCourseComponent,
+    ListQuizComponent,
+    DetailsQuizComponent,
+    DeleteQuizComponent,
+    UpdateQuizComponent,
+    CreateQuizComponent
   ],
   imports: [
     CommonModule,
