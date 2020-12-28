@@ -630,3 +630,21 @@
 .pe-7s-airplay:before {
 	content: "\e67f";
 }
+
+
+ul[role='menu'] {
+    background: #FFF;
+    box-shadow: 0 0 5px #ddd;
+    padding: 15px 20px;
+    list-style-position: none;
+    list-style-type: none;
+}
+ul[role='menu'] 
+li.e-item {
+    padding: 5px;
+    border-bottom: solid 1px #eee;
+}
+ul[role='menu'] 
+li.e-item:hover{
+    background:#EEE
+}

@@ -9,8 +9,7 @@
         text-align: center;
         width: 30px;
     }
-    
-    .active, .accordion:hover {
+     .accordion:hover {
         background-color: #ccc;
     }
     
@@ -40,4 +39,17 @@
 
     .form-group{
       text-align: left;
+    }
+
+
+    #property.property-panel-table div {
+      padding-left: 0;
+    }
+    
+    .sb-content.e-view.hide-header {
+        top: 0 !important;
+    }
+    
+    .sb-header.e-view.hide-header {
+        display: none;
     }
