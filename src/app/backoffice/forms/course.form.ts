@@ -12,6 +12,7 @@ export class CourseForm {
             evaluations: [''],
             level: [''],
             language: [''],
+            roles: [''],
 
             isActive: [''],
             cover: [''],

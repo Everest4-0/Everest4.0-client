@@ -73,6 +73,6 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   get courseDuration() {
-    return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0     );
+    return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0);
     }
 }
