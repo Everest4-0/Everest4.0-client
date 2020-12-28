@@ -1,3 +1,6 @@
+import { QuizService } from './../../../services/quiz.service';
+import { ActivatedRoute } from '@angular/router';
+import { Quiz } from './../../../models/quiz/quiz';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsQuizComponent implements OnInit {
 
-  constructor() { }
+  public quiz: Quiz
+
+  constructor(private route: ActivatedRoute,
+    private quizService: QuizService,
+  ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.params['id']
+
+    this.quizService.one(id).subscribe(datas => this.quiz = datas)
+
   }
 
 }

@@ -1,1 +1,28 @@
-<p>details-quiz works!</p>
+<app-backoffice-navbar [title]="'Detalhe do desafio'"></app-backoffice-navbar>
+<div class="card">
+    <div class="header">
+                <h4 class="title">{{quiz.text}}</h4>
+    </div>
+    <div class="content table-responsive table-full-width">
+        
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Opções</th>
+                    <th>Corretas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let answer of quiz.answers; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{answer.text}}</td>
+                    <td>
+                        {{answer.correct}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
