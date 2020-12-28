@@ -2,7 +2,7 @@ import { UpdateCourseComponent } from './courses/update-course/update-course.com
 import { DetailsCourseComponent } from './courses/details-course/details-course.component';
 import { CreateCourseComponent } from './courses/create-course/create-course.component';
 import { ListCourseComponent } from './courses/list-course/list-course.component';
-import { ListQuizComponent } from './../frontoffice/quiz/quiz/list-quiz/list-quiz.component';
+import { ListQuizComponent } from '../frontoffice/quiz/list-quiz/list-quiz.component';
 import { QuizComponent } from './../frontoffice/quiz/quiz.component';
 import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
@@ -27,7 +27,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
-import { CreateQuizComponent } from 'app/frontoffice/quiz/quiz/create-quiz/create-quiz.component';
+import { CreateQuizComponent } from 'app/frontoffice/quiz/create-quiz/create-quiz.component';
 
 
 const backOfficeRoutes: Routes = [

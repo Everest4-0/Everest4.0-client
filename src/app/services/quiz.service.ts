@@ -32,4 +32,8 @@ export class QuizService extends AppService<Quiz> implements IService<Quiz>{
   create(o: any): Observable<Quiz> {
     return this.createOne(o)
   }
+
+  delete(o:any):Observable<Quiz>{
+    return this.deleteOne(o)
+  }
 }

@@ -1,19 +1,19 @@
-import { Answer } from 'app/models/quiz/answer';
-import { AuthService } from './../../../../services/auth.service';
+import { Answer } from './../../../models/quiz/answer';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { QuizService } from './../../../../services/quiz.service';
-import { Quiz } from './../../../../models/quiz/quiz';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuizService } from './../../../services/quiz.service';
+import { AuthService } from './../../../services/auth.service';
 import { FormBuilder } from '@angular/forms';
-import { QuizForm } from './../../../../forms/quiz.form';
+import { QuizForm } from './../../../forms/quiz.form';
+import { Quiz } from './../../../models/quiz/quiz';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-create-quiz',
-  templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.css']
+  selector: 'app-update-quiz',
+  templateUrl: './update-quiz.component.html',
+  styleUrls: ['./update-quiz.component.css']
 })
-export class CreateQuizComponent implements OnInit {
+export class UpdateQuizComponent implements OnInit {
 
   public form = new QuizForm()
 
@@ -27,9 +27,10 @@ export class CreateQuizComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.quiz.answers=[new Answer(),new Answer()]
-    this.quiz.user = this.auth.user;
+    const id = this.route.snapshot.params['id']
 
+    this.quizService.one(id).subscribe(datas=>this.quiz=datas)
+    
   }
   addAnswer(){
     this.quiz.answers.push(new Answer())
@@ -42,7 +43,7 @@ export class CreateQuizComponent implements OnInit {
     .splice(index, 1);
   }
   saveForm() {
-    this.quizService.create(this.quiz).subscribe(data => {
+    this.quizService.update(this.quiz).subscribe(data => {
       this.toast.success('Desafio criado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
@@ -51,5 +52,6 @@ export class CreateQuizComponent implements OnInit {
       this.router.navigate(['/me/quiz/quizes']);
     })
   }
+
 
 }
