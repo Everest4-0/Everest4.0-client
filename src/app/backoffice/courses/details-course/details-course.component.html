@@ -18,7 +18,7 @@
     <div class="content">
         <div class="row">
             <div class="col-md-8">
-                <h3><b>Sobre o Curso</b></h3>
+                <h3><b>Descrição</b></h3>
                 <h5>{{course.descriptions}}</h5>
                 <h3><b>Módulos</b></h3>
                 <div class="col-md-12">
@@ -39,7 +39,8 @@
 
                         <div class="panel" id="panel-expenses-{{i}}">
                             <ul class="list-group">
-                                <li class="list-group-item" *ngFor="let activity of module.activities">{{activity.title}}</li>
+                                <li class="list-group-item" *ngFor="let activity of module.activities">
+                                    {{activity.title}}</li>
                             </ul>
                         </div>
                     </div>
@@ -141,16 +142,19 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="exampleInputEmail1">Descrição</label>
-                    <textarea class="form-control form-control-lg" [(ngModel)]="activity.descriptions"
-                        formControlName="descriptions" rows="15">
-                        </textarea>
-                    <small id="emailHelp" class="form-text formContro text-muted">We'll never share your email
-                        with anyone
-                        else.</small>
+
+                    <div class="text-editor">
+                        <ejs-richtexteditor [(ngModel)]="activity.descriptions" formControlName="descriptions"
+                            id='typeRTE' #typeRTE [toolbarSettings]='tools' (actionBegin)='handleFullScreen($event)'
+                            (actionComplete)='actionCompleteHandler()'>
+
+                        </ejs-richtexteditor>
+                    </div>
                 </div>
             </div>
             <div class="row text-center"><br>
-                <button class="btn btn-success bg-success" (click)="saveActivity()">Salvar</button>
+                <button class="btn btn-success btn-fill" (click)="saveActivity()">Salvar</button>
+                <button class="btn btn-default" (click)="modalService.close('form-activity-modal')">Fechar</button>
             </div>
         </form>
 
