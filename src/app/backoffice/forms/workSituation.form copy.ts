@@ -7,6 +7,7 @@ export class ActivityForm{
         return fb.group({
             title: [''],
             descriptions: [''],
+            attachment:[''],
             duration: ['']
         })
     }

@@ -1,5 +1,5 @@
 import { Activity } from './../../../models/course/activity';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-activity-course',
@@ -8,11 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ActivityCourseComponent implements OnInit {
 
-  @Input() public  activity:Activity;
+  @Input() public activity: Activity;
 
-  constructor() { }
+  public youtube;
+  constructor(
+    private hostElement: ElementRef) { }
 
   ngOnInit(): void {
+    debugger
+    if (this.activity.attachment && this.activity.attachment.split('you').length > 1) {
+      this.youtube=true;
+      const iframe = this.hostElement.nativeElement.querySelector('iframe');
+      iframe.src = this.activity.attachment + '?controls=0';
+      
+    }
   }
 
 }

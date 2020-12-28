@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivityService } from './../../../services/courses/activity.service';
 import { ActivityForm } from './../../forms/workSituation.form copy';
 import { Activity } from './../../../models/course/activity';
@@ -16,12 +17,13 @@ import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 @Component({
   selector: 'app-details-course',
   templateUrl: './details-course.component.html',
-  styleUrls: ['./details-course.component.scss','./materialize.lite.scss'],
+  styleUrls: ['./details-course.component.scss', './materialize.lite.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService]
 })
 export class DetailsCourseComponent implements OnInit {
 
+  public attType = 0;
   public activity: Activity = new Activity()
   public course: Course = new Course();
   public serverAddress = this.courseService.serverAddress;
@@ -32,13 +34,13 @@ export class DetailsCourseComponent implements OnInit {
   @ViewChild('float') rteFloatObj: CheckBoxComponent;
   @ViewChild('typeRTE') rteObj: RichTextEditorComponent;
   public tools: ToolbarModule = {
-      items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
-          'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
-          'LowerCase', 'UpperCase', '|',
-          'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
-          'Outdent', 'Indent', '|',
-          'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
-          'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
+    items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
+      'LowerCase', 'UpperCase', '|',
+      'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
+      'Outdent', 'Indent', '|',
+      'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
+      'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
   };
   // Mapping DropDownList dataSource property
   public dataSource: { [key: string]: Object }[] = [{ text: 'Expand', value: 1 }, { text: 'MultiRow', value: 2 }];
@@ -49,49 +51,49 @@ export class DetailsCourseComponent implements OnInit {
   public typeValue: number = 1;
   // Change event funtion for DropDownList component
   public typeChange(): void {
-      switch (this.ddlObj.value as number) {
-          case 1:
-              this.rteObj.toolbarSettings.type = ToolbarType.Expand;
-              this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
-              break;
-          case 2:
-              this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
-              this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
-              break;
-      }
+    switch (this.ddlObj.value as number) {
+      case 1:
+        this.rteObj.toolbarSettings.type = ToolbarType.Expand;
+        this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
+        break;
+      case 2:
+        this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
+        this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
+        break;
+    }
   }
   public onChangeFloat(): void {
-      this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
+    this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
   }
   public handleFullScreen(e: any): void {
-      const sbCntEle: HTMLElement = document.querySelector('.sb-content.e-view');
-      const sbHdrEle: HTMLElement = document.querySelector('.sb-header.e-view');
-      const leftBar: HTMLElement = document.querySelector('#left-sidebar');
-      if (e.targetItem === 'Maximize') {
-          if (Browser.isDevice && Browser.isIos) {
-              addClass([sbCntEle, sbHdrEle], ['hide-header']);
-          }
-          addClass([leftBar], ['e-close']);
-          removeClass([leftBar], ['e-open']);
-      } else if (e.targetItem === 'Minimize') {
-          if (Browser.isDevice && Browser.isIos) {
-              removeClass([sbCntEle, sbHdrEle], ['hide-header']);
-          }
-          removeClass([leftBar], ['e-close']);
-          if (!Browser.isDevice) {
-              addClass([leftBar], ['e-open']);
-          }
+    const sbCntEle: HTMLElement = document.querySelector('.sb-content.e-view');
+    const sbHdrEle: HTMLElement = document.querySelector('.sb-header.e-view');
+    const leftBar: HTMLElement = document.querySelector('#left-sidebar');
+    if (e.targetItem === 'Maximize') {
+      if (Browser.isDevice && Browser.isIos) {
+        addClass([sbCntEle, sbHdrEle], ['hide-header']);
       }
+      addClass([leftBar], ['e-close']);
+      removeClass([leftBar], ['e-open']);
+    } else if (e.targetItem === 'Minimize') {
+      if (Browser.isDevice && Browser.isIos) {
+        removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+      }
+      removeClass([leftBar], ['e-close']);
+      if (!Browser.isDevice) {
+        addClass([leftBar], ['e-open']);
+      }
+    }
   }
   public actionCompleteHandler(): void {
-      setTimeout(() => { 
-        this.rteObj.toolbarModule.refreshToolbarOverflow();
-      
+    setTimeout(() => {
+      this.rteObj.toolbarModule.refreshToolbarOverflow();
 
-        this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
-        this.rteObj.toolbarSettings.enableFloating = true;
-        
-      }, 400);
+
+      this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
+      this.rteObj.toolbarSettings.enableFloating = true;
+
+    }, 400);
   }
 
   constructor(
@@ -140,7 +142,38 @@ export class DetailsCourseComponent implements OnInit {
 
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
+
+    this.activity = new Activity();
     this.activity.module = module;
     this.modalService.open('form-activity-modal');
+  }
+
+  updateActivity(activity) {
+    this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
+    this.rteObj.toolbarSettings.enableFloating = true;
+    this.activity = activity
+    this.modalService.open('form-activity-modal');
+  }
+
+
+  onDrop(event: CdkDragDrop<string[]>) {
+    /*this.course.modules[event.previousIndex].order = event.currentIndex;
+    moveItemInArray(
+      this.course.modules,
+      event.previousIndex,
+      event.currentIndex
+    )
+    this.course.modules[event.previousIndex].order = event.currentIndex;
+    */
+  }
+
+  onFileSelect(input) {
+
+    let reader = new FileReader();
+    reader.onload = (e: any) => {
+      let data = e.target.result;
+      this.activity.attachment = e.target.result;
+    }
+    reader.readAsDataURL(input.files[0]);
   }
 }

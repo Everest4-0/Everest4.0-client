@@ -43,9 +43,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="panel" id="panel-expenses-{{i}}">
+                                    <div class="panel hidden" id="panel-expenses-{{i}}">
                                         <ul class="list-group">
-                                            <li class="list-group-item" *ngFor="let item of module.activities">{{item.title}}</li>
+                                            <li class="list-group-item" *ngFor="let item of module.activities|arrSort:'orderNo'">{{item.title}}</li>
                                         </ul>
                                     </div>
                                 </div>

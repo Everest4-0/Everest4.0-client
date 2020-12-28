@@ -1,3 +1,5 @@
+import { PipesModule } from './../pipes/pipes.module';
+import { ArrSortPipe } from './../pipes/arr-sort.pipe';
 import { ModalModule } from './../components/modal/modal.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from './../sidebar/sidebar.module';
@@ -103,10 +105,9 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
     DragDropModule,
     ModalModule,
 
-
     /*********************** */
 
-   // BrowserModule,
+    // BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     TabModule,
@@ -118,7 +119,8 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
     SwitchModule,
     RadioButtonModule,
     TextBoxModule,
-    DropDownListModule
+    DropDownListModule,
+    PipesModule,
   ]
 })
 export class BackofficeModule { }

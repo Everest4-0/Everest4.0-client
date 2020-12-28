@@ -50,6 +50,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
 import { QuizComponent } from './frontoffice/quiz/quiz.component';
+import { ArrSortPipe } from './pipes/arr-sort.pipe';
+
 import { ListQuizComponent } from './frontoffice/quiz/list-quiz/list-quiz.component';
 import { CreateQuizComponent } from './frontoffice/quiz/create-quiz/create-quiz.component';
 import { DeleteQuizComponent } from './frontoffice/quiz/delete-quiz/delete-quiz.component';
@@ -113,7 +115,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       ],
       extraQueryParameters: {}
     })
-  , NgxPermissionsModule.forRoot()
+    , NgxPermissionsModule.forRoot()
   ],
   declarations: [
     FirstloginComponent,

@@ -1,3 +1,5 @@
+import { PipesModule } from './../../pipes/pipes.module';
+import { ArrSortPipe } from './../../pipes/arr-sort.pipe';
 import { ActivityCourseComponent } from './../../frontoffice/courses/activity-course/activity-course.component';
 import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-course/enrolling-course.component';
 import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
@@ -92,7 +94,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     SwiperModule,
     FlexLayoutModule,
-    
+    PipesModule,
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl/*, useClass: MyIntl */ },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
@@ -138,10 +140,9 @@ FullCalendarModule.registerPlugins([
 
 
     ListCourseComponent,
-    DetailsCourseComponent,
-    GroupByPipe,
-    ArrSumPipe,
-    ArrFilterPipe
+    DetailsCourseComponent
+  ],
+  exports:[
   ],
   providers: [
     {

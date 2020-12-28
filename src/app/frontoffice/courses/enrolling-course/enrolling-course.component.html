@@ -20,7 +20,7 @@
 
                 <div class="panel" id="panel-expenses-{{i}}">
                     <ul class="list-group">
-                        <li class="list-group-item" (click)="selectActivity(item)" *ngFor="let item of module.activities">{{item.title}}</li>
+                        <li class="list-group-item" (click)="selectActivity(item)" *ngFor="let item of module.activities|arrSort:'orderNo'">{{item.title}}</li>
                     </ul>
                 </div>
             </div>
@@ -39,5 +39,6 @@
         </div>
 
         <app-activity-course [activity]="currentActivity"></app-activity-course>
+        
     </div>
 </div>
