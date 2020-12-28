@@ -126,16 +126,19 @@ export class DetailsCourseComponent implements OnInit {
 
 
   saveActivity() {
-    this.activityService.create(this.activity).subscribe(activity => {
-      this.course.modules.forEach(module => {
-        if (module.id === this.activity.module.id) {
-          module.activities.push(activity)
+    (this.activity.id ? 
+      this.activityService.update(this.activity) :
+      this.activityService.create(this.activity))
+      .subscribe(activity => {
+        this.course.modules.forEach(module => {
+          if (module.id === this.activity.module.id) {
+            module.activities.push(activity)
+          }
         }
-      }
 
-      )
-      this.modalService.close('form-activity-modal');
-    })
+        )
+        this.modalService.close('form-activity-modal');
+      })
   }
 
   addActivity(module: Module) {

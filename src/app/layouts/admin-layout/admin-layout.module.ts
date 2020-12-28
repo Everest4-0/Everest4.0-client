@@ -1,3 +1,7 @@
+
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+
+
 import { PipesModule } from './../../pipes/pipes.module';
 import { ArrSortPipe } from './../../pipes/arr-sort.pipe';
 import { ActivityCourseComponent } from './../../frontoffice/courses/activity-course/activity-course.component';
@@ -64,6 +68,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // SwiperOptions from 'swiper' could also be used here instead of SwiperConfigInterface
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -100,7 +105,9 @@ FullCalendarModule.registerPlugins([
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
     }),
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' }),
+    NgxYoutubePlayerModule.forRoot(),
 
+    PdfViewerModule
   ],
   declarations: [
     DiagnosticComponent,

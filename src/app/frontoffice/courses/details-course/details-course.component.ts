@@ -29,7 +29,6 @@ export class DetailsCourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
     const id = this.route.snapshot.params['id'];
     this.loadCourse(id)
   }
@@ -38,6 +37,7 @@ export class DetailsCourseComponent implements OnInit {
     this.relatedCourses=[];
     this.courseService.one(id).subscribe(course => {
       this.course = course;
+      this.enrollment=course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id)[0]
       this.enrollment.course = this.course;
       this.enrollment.user = this.auth.user;
       this.course.evaluations.forEach(e => {
