@@ -1,5 +1,12 @@
 <div class="card ">
     <div class="content-data" [innerHTML]="activity.descriptions"></div>
+
+    
+    <div class="content-data text-center" *ngIf="attachmentType=='video'">
+      <video height="480" width="700" controls>
+        <source src="{{serverAddress}}{{activity.attachment}}" type="video/mp4">
+      </video>
+    </div>
     <div class="content-data text-center" *ngIf="attachmentType=='pdf'">
         <div *ngIf="isLoaded" style="text-align: center;">
             <button class="btn btn-xs btn-default btn-fill" (click)="prevPage()" [disabled]="page === 1">Proxima Página</button>

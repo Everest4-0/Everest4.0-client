@@ -1,13 +1,36 @@
 <div class="main-content">
     <div class="container-fluid ">
+        <div class="row hidden">
+            <div class="col-md-2">
+                <div class="card">
+                    <h5>Total</h5>
+                    <h1>34</h1>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <h5>Correctas</h5>
+                    <h1>34</h1>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card">
+                    <h5>Erradas</h5>
+                    <h1>34</h1>
+                </div>
+            </div>
+            <div class=" card col-md-6">
+                4
+            </div>
+        </div>
         <div class="row">
             <div class="card col-md-12">
                 <div class="header">
                     <div class="row">
                         <div class="col-md-12">
                             <h2 class="title">
-                                <button class="btn btn-default border-none" (click)="createQuiz()"><i
-                                        class="pe-7s-plus" style="font-size: 24px;"></i></button>
+                                <button class="btn btn-default border-none" (click)="createQuiz()"><i class="pe-7s-plus"
+                                        style="font-size: 24px;"></i></button>
                                 Meus desafios
                             </h2>
                         </div>
@@ -46,7 +69,8 @@
                                     <tr *ngFor="let item of quiz.answers; let i=index">
                                         <td style="width: 50px;">{{i+1}}º</td>
                                         <td>{{item.text}}
-                                            <button class="btn btn-success btn-fill btn-xs" *ngIf="item.correct">Correcta</button>
+                                            <button class="btn btn-success btn-fill btn-xs"
+                                                *ngIf="item.correct">Correcta</button>
                                         </td>
                                         <td style="width: 50px;">
                                             {{item.users.length}}

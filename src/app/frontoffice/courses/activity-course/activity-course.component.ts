@@ -40,6 +40,8 @@ export class ActivityCourseComponent implements OnInit {
       return 'youtube'
     } else if (this.activity.attachment.split('.pdf').length > 1) {
       return 'pdf'
+    } else if (this.activity.attachment.split('.mp4').length > 1) {
+      return 'video'
     }
     return '';
   }
