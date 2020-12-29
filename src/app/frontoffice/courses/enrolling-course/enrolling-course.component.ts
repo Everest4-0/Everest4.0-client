@@ -47,7 +47,7 @@ export class EnrollingCourseComponent implements OnInit {
     this.canActivate = false
     this.enrollment.lastActivity = item;
 
-    const numbers = timer(this.enrollment.lastActivity.duration * 1000);
+    const numbers = timer(this.enrollment.lastActivity.duration * 60*1000);
     numbers.subscribe(x => this.canActivate = true);
 
   }
