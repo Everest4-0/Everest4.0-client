@@ -5,40 +5,141 @@
                 <div class="header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 class="title"> 
-                                <a routerLink="/me/quiz"><i class="pe-7s-angle-left"></i></a>
-                                    Meus desafios 
-                                <a routerLink="./create" class="link" ><i class="pe-7s-plus"></i></a>
+                            <h2 class="title">
+                                <button class="btn btn-default border-none" (click)="createQuiz()"><i
+                                        class="pe-7s-plus" style="font-size: 24px;"></i></button>
+                                Meus desafios
                             </h2>
                         </div>
                     </div>
                 </div>
-                <div class="content table-responsive table-full-width">
+                <div class="content table-responsive table-full-width col-md-4">
                     <table class="table table-hover table-striped">
                         <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
-                                <th style="width: 200px;">Desafio</th>
-                                <th>De</th>
-                                <th></th>
+                                <th colspan=3>Desafios</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let quiz of quizes; let i=index">
-                                <td>{{i+1}}</td>
-                                <td>{{quiz.text}}</td>
-                                <td>
-                                    {{quiz.user.datas.fullName}}
-                                </td>
-                                <td><a routerLink="./details/{{quiz.id}}"
-                                       class="btn btn-xs border-none title h2">
-                                       <h4 class="title"><i class="pe-7s-angle-right"></i></h4></a>
+                            <tr *ngFor="let item of quizes; let i=index">
+                                <td style="width: 50px;">{{i+1}}</td>
+                                <td>{{item.text}}</td>
+                                <td style="width: 50px;"><button (click)="quiz=item"
+                                        class="btn btn-xs border-none title h2">
+                                        <h4 class="title"><i class="pe-7s-angle-right"></i></h4>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
+
+                <div class="content col-md-8">
+                    <div class="col-md-12 card" *ngIf="quiz.text">
+                        <h3>{{quiz.text}} <button (click)="updateQuiz(quiz)"
+                                class="btn btn-default pull-right border-none" style="font-size: 24px;"><i
+                                    class="pe-7s-note"></i></button></h3>
+                        <hr>
+                        <div class="col-md-6">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr *ngFor="let item of quiz.answers; let i=index">
+                                        <td style="width: 50px;">{{i+1}}º</td>
+                                        <td>{{item.text}}
+                                            <button class="btn btn-success btn-fill btn-xs" *ngIf="item.correct">Correcta</button>
+                                        </td>
+                                        <td style="width: 50px;">
+                                            {{item.users.length}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="col-sm-4">
+                                <h3>Tentativas</h3>
+                                <a href="#" class="thumbnail">
+                                    <div class="frontpage_square  text-center">
+                                        <img src="" class="img img-responsive full-width" />
+                                        <h1>{{correct}}</h1>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <h3>Correctas</h3>
+                                <a href="#" class="thumbnail bg-success">
+                                    <div class="frontpage_square text-center bg-success">
+                                        <img src="" class="img img-responsive full-width" />
+                                        <h1>{{correct}}</h1>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <h3>Erradas</h3>
+                                <a href="#" class="thumbnail bg-danger">
+                                    <div class="frontpage_square text-center bg-danger">
+                                        <img src="" class="img img-responsive full-width" />
+                                        <h1>{{wrong}}</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<jw-modal id="quiz-modal" class="md" title="Desafios {{quiz.id ? 'Actualizar' : 'Registar nova'}}">
+    <h4>... </h4>
+    <hr>
+    <div class="row">
+        <form [formGroup]="form" (ngSubmit)="saveForm()" class="col-md-12">
+            <div class="col-md-12">
+                <label>Descrição</label>
+                <textarea type="text" class="form-control" formControlName="text" [(ngModel)]="quiz.text" rows="5"
+                    required>{{quiz.text}}</textarea>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>Opções</h3>
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <button type="button" (click)="addAnswer()" class="btn btn-primary"> <i
+                                class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <blockquote>
+                    <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
+                        <label>Opcao {{i+1}}</label>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input type="radio" [checked]="answer.correct" [ngModelOptions]="{standalone: true}"
+                                    name="correct" (change)="changeCorrect(answer.text)" required />
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="answer.text" value="{{answer.text}}" rows="5" required />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 text-right">
+                <button class="btn btn-success btn-fill pull-rightx">Salvar</button>
+            </div>
+        </form>
+    </div>
+</jw-modal>

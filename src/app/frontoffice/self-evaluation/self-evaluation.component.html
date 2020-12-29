@@ -7,7 +7,8 @@
 <div class="col-md-4" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
     <div class="card">
         <div class="card-header ">
-            <h3>{{item[0]}}</h3>
+            <h3 class="pull-left">{{item[0]}}</h3>
+            <button class="btn border-none pull-right"><h3><i class="pe-7s-close"></i></h3></button>
             <img src="assets/img/sidebar-{{i+1}}.jpg">
         </div>
         <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">

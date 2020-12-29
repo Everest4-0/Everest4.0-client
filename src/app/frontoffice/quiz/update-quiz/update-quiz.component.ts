@@ -29,10 +29,10 @@ export class UpdateQuizComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id']
 
-    this.quizService.one(id).subscribe(datas=>this.quiz=datas)
-    
+    this.quizService.one(id).subscribe(datas => this.quiz = datas)
+
   }
-  addAnswer(){
+  addAnswer() {
     this.quiz.answers.push(new Answer())
   }
   removeAnswer(index) {
@@ -40,7 +40,10 @@ export class UpdateQuizComponent implements OnInit {
       return;
     }
     this.quiz.answers
-    .splice(index, 1);
+      .splice(index, 1);
+  }
+  changeCorrect(id) {
+    this.quiz.answers.forEach(x => x.correct = x.text === id)
   }
   saveForm() {
     this.quizService.update(this.quiz).subscribe(data => {

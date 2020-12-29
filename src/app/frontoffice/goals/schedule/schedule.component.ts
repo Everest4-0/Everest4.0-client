@@ -59,7 +59,7 @@ export class ScheduleComponent implements OnInit {
     this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
       
       this.todos = todos
-        //.filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
+        .filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
         .sort((x, y) => x.startDate > y.startDate ? 1 : -1)
     })
 
@@ -67,8 +67,9 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateState(task, state, list) {
-
+debugger
     task.state = state
+    task.goal = null
     this.taskService.update(task).subscribe(task => {
       this.tasks[list].forEach((t, i) => {
         if (t.id === task.id) {

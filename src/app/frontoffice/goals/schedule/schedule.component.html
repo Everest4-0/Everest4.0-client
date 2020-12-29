@@ -32,6 +32,9 @@
                         </div>
                     </div>
                 </a>
+                <li *ngIf="todos.length==0" class="list-group-item text-center">
+                    Não existe agendas e pendentes para hoje
+                </li>
             </div>
         </div>
     </div>
@@ -43,7 +46,7 @@
     <div class="card-body">
         <div class="col-md-12">
             <div class="list-group">
-                <a class="list-group-item" *ngFor="let item of tasks.overDue| slice:0:5 let i = index">
+                <a class="list-group-item" *ngFor="let item of tasks.overDue| slice:0:overDueLimit let i = index">
                     <div class="row">
                         <div class="col-xs-2 col-md-1">
                             <div class="checkbox">

@@ -27,7 +27,7 @@ export class CreateQuizComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.quiz.answers=[new Answer(),new Answer()]
+    this.quiz.answers=[new Answer(true),new Answer()]
     this.quiz.user = this.auth.user;
 
   }
@@ -40,6 +40,10 @@ export class CreateQuizComponent implements OnInit {
     }
     this.quiz.answers
     .splice(index, 1);
+  }
+
+  changeCorrect(id) {
+    this.quiz.answers.forEach(x => x.correct = x.text === id)
   }
   saveForm() {
     this.quizService.create(this.quiz).subscribe(data => {

@@ -3,41 +3,43 @@
         <div class="row">
             <div class="card">
                 <div class="header">
-                    <h2 class="title"> 
+                    <h2 class="title">
                         <a routerLink="/me/quiz"><i class="pe-7s-angle-left"></i></a>
-                            Actualizar desafio 
+                        Actualizar desafio
                     </h2>
                 </div>
 
                 <div class="content">
                     <form [formGroup]="form" (ngSubmit)="saveForm()">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label>Descrição</label>
-                                    <textarea type="text" class="form-control" formControlName="text"
-                                        [(ngModel)]="quiz.text" rows="5" required>{{quiz.text}}</textarea>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label>Descrição</label>
+                                <textarea type="text" class="form-control" formControlName="text"
+                                    [(ngModel)]="quiz.text" rows="5" required>{{quiz.text}}</textarea>
                             </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="col-md-9">Opções</div>
-                            <div class="col-md-3 text-right"><button type="button" (click)="addAnswer()"
-                                    class="btn btn-primary"> <i class="fa fa-plus"></i></button></div>
-                            <blockquote>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h3>Opções</h3>
+                                </div>
+                                <div class="col-md-3 text-right"><button type="button" (click)="addAnswer()"
+                                        class="btn btn-primary"> <i class="fa fa-plus"></i></button></div>
+                            </div>
 
+                            <blockquote>
                                 <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
                                     <label>Opcao {{i+1}}</label>
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <input type="radio"
-                                                   [(ngModel)]="answer.correct" 
-                                                   name="correct" value="true" required/>
+                                            <input type="radio" [checked]="answer.correct"
+                                                [ngModelOptions]="{standalone: true}" name="correct"
+                                                (change)="changeCorrect(answer.text)" required />
                                         </div>
                                         <div class="col-md-9">
                                             <input type="text" class="form-control"
-                                                   [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.text"
-                                                   value="{{answer.text}}" rows="5" required />
+                                                [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.text"
+                                                value="{{answer.text}}" rows="5" required />
                                         </div>
                                         <div class="col-md-2">
                                             <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
@@ -49,7 +51,7 @@
                             </blockquote>
                         </div>
                         <div class="clearfix"></div>
-                        <button class="btn btn-success btn-fill pull-rightx">Desafiar</button>
+                        <button class="btn btn-success btn-fill pull-rightx">Salvar</button>
                     </form>
                 </div>
             </div>

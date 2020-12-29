@@ -75,6 +75,12 @@ export class SelfEvaluationComponent implements OnInit {
   onChange(e) {
     this.currentEvaluation.points = e
   }
+
+  cleanEvaluation(){
+    this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
+
+    })
+  }
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
       this.evaluations.forEach(x => {
