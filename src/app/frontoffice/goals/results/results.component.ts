@@ -45,16 +45,27 @@ export class ResultsComponent implements OnInit {
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
       
+      
+      let fin=[]
       let evs = []
       let setEv = evaluations.forEach((ev) => {
         if (!evs.map(x => x[0]).includes(ev.evaluation.name))
           evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
       })
-      evs.forEach(e => {
-        let mine = (e[1].filter(x => x.requestedId === x.userId)[0] || { points: 0 }).points
-        let their = e[1].filter(x => x.requestedId !== x.userId)
-        let points = ((their.reduce((r, s) => r + parseInt(s.points), 0) / their.length) / 2) + mine / 4
-        e.push(points > 2)
+      evs.forEach((e,k) => {
+        debugger
+        let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length) 
+        if(points ===4)
+        {
+          e.push(true)
+        }
+        else if(points <3)
+        {
+          e.push(false)
+        }else{
+          evs.splice(k, 1);
+        }
+        
       })
       this.evaluations = evaluations
       let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)

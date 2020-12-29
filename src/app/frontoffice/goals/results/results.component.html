@@ -21,7 +21,7 @@
                         <ul class="list-group" *ngFor="let group of currentResults.groups">
                             <li (click)="registGoal(currentResults, group[0])"
                                 class="list-group-item list-group-item-action active">
-                                <h3>{{group[0]}}<i class="pe-7s-plus  pull-right" style="color: #FFF;"></i> Registar objecto</h3>
+                                <h3>{{group[0]}}<button class="btn btn-default pull-right btn-sm" (click)="registGoal(currentResults, group[0])" style="color: #FFF;"> <i class="pe-7s-plus" style="color: #FFF;"></i> Registar objecto</button></h3>
                             </li>
                             <div *ngFor="let item of group[1]">
                                 <li class="list-group-item">
@@ -29,9 +29,9 @@
                             </div>
                         </ul>
                         <ul class="list-group" *ngFor="let group of otherResults">
-                            <li (click)="registGoal(currentResults, group)"
+                            <li 
                                 class="list-group-item list-group-item-action bg-info">
-                                <h3>{{group}}<i class="pe-7s-plus  pull-right" style="color: #000;"></i> Registar objecto</h3>
+                                <h3>{{group}}<button class="btn btn-default pull-right btn-sm" (click)="registGoal(currentResults, group)"> <i class="pe-7s-plus" style="color: #000;"></i> Registar objecto</button></h3>
                             </li>
                         </ul>
                     </div>
