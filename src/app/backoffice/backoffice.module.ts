@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from './../pipes/pipes.module';
 import { ArrSortPipe } from './../pipes/arr-sort.pipe';
 import { ModalModule } from './../components/modal/modal.module';

@@ -20,7 +20,7 @@
 
                 <div class="panel" id="panel-expenses-{{i}}">
                     <ul class="list-group">
-                        <li class="list-group-item {{item.status==0 ? 'disabled' : ''}}" (click)="selectActivity(item)" *ngFor="let item of module.activities">{{item.orderNo}} - {{item.title}}
+                        <li class="list-group-item {{item.status==0 ? 'disabled' : ''}}" (click)="selectActivity(item)" *ngFor="let item of module.activities">{{item.orderNo+1}} - {{item.title}}
                             
                             <i class="{{['pe-7s-lock','pe-7s-play','pe-7s-check'][item.status]}} pull-right"></i></li>
                     </ul>

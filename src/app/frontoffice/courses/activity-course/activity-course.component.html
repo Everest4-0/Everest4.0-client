@@ -1,44 +1,72 @@
 <div class="card ">
-    <div class="content-data" [innerHTML]="activity.descriptions"></div>
+  <div class="content-data" [innerHTML]="activity.descriptions"></div>
 
-    
-    <div class="content-data text-center" *ngIf="attachmentType=='video'">
-      <video height="480" width="700" controls>
-        <source src="{{serverAddress}}{{activity.attachment}}" type="video/mp4">
-      </video>
+  <div class="content-data text-center" *ngIf="attachmentType=='video'">
+    <video height="480" width="700" controls>
+      <source src="{{serverAddress}}{{activity.attachment}}" type="video/mp4">
+    </video>
+  </div>
+  <div class="content-data text-center" *ngIf="attachmentType=='pdf'">
+    <div *ngIf="isLoaded" style="text-align: center;">
+      <button class="btn btn-xs btn-default btn-fill" (click)="prevPage()" [disabled]="page === 1">Proxima
+        Página</button>
+      <span>{{ page }} / {{ totalPages }}</span>
+      <button class="btn btn-xs btn-default btn-fill" (click)="nextPage()" [disabled]="page === totalPages">Págian
+        Anterior</button>
     </div>
-    <div class="content-data text-center" *ngIf="attachmentType=='pdf'">
-        <div *ngIf="isLoaded" style="text-align: center;">
-            <button class="btn btn-xs btn-default btn-fill" (click)="prevPage()" [disabled]="page === 1">Proxima Página</button>
-            <span>{{ page }} / {{ totalPages }}</span>
-            <button class="btn btn-xs btn-default btn-fill" (click)="nextPage()" [disabled]="page === totalPages">Págian Anterior</button>
-          </div>
-          <pdf-viewer src="{{serverAddress}}{{activity.attachment}}"
-                      [show-all]="true"
-                      [page]="page"
-                      (after-load-complete)="afterLoadComplete($event)"
-          ></pdf-viewer>
-    </div>
-    <div class="content-data text-center" *ngIf="attachmentType=='youtube'" style="background-color: #000;">
-        <youtube-player
-          [videoId]="videoId"
-          (ready)="savePlayer($event)"
-          (change)="onStateChange($event)"
-          [height]="480"
-          [width]="700"
-          [playerVars]="playerVars">
-        </youtube-player><br>
-        <button *ngIf="ytEvent !== 1"
-      type="button"
-      class="btn btn-primary"
-      (click)="playVideo()">
+    <pdf-viewer src="{{serverAddress}}{{activity.attachment}}" [show-all]="true" [page]="page"
+      (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
+  </div>
+  <div class="content-data text-center" *ngIf="attachmentType=='youtube'" style="background-color: #000;">
+    <youtube-player [videoId]="videoId" (ready)="savePlayer($event)" (change)="onStateChange($event)" [height]="480"
+      [width]="700" [playerVars]="playerVars">
+    </youtube-player><br>
+    <button *ngIf="ytEvent !== 1" type="button" class="btn btn-primary" (click)="playVideo()">
       Play
     </button>
-    <button *ngIf="ytEvent === 1"
-      type="button"
-      class="btn btn-danger"
-      (click)="pauseVideo()">
+    <button *ngIf="ytEvent === 1" type="button" class="btn btn-danger" (click)="pauseVideo()">
       Pause
     </button>
+  </div>
+
+
+  <div class="container-fluid bg-info" *ngIf="attachmentType=='quiz'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><span class="label label-warning" id="qid">{{taskIndex+1}}</span> {{task.text}}</h3>
+        </div>
+        <div class="modal-body">
+          <div class="col-xs-3 col-xs-offset-5">
+            <div id="loadbar" style="display: none;">
+              <div class="blockG" id="rotateG_01"></div>
+              <div class="blockG" id="rotateG_02"></div>
+              <div class="blockG" id="rotateG_03"></div>
+              <div class="blockG" id="rotateG_04"></div>
+              <div class="blockG" id="rotateG_05"></div>
+              <div class="blockG" id="rotateG_06"></div>
+              <div class="blockG" id="rotateG_07"></div>
+              <div class="blockG" id="rotateG_08"></div>
+            </div>
+          </div>
+
+          <div class="quiz" id="quiz" data-toggle="buttons">
+            <label class="element-animation1 btn btn-lg btn-primary btn-block"
+              *ngFor="let answer of task.answers; let i =index">
+              <span class="btn-label">
+                <i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">
+              <h3>{{answer.text}}</h3>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer text-muted">
+          <span id="answer">
+            <button class="btn btn-primary btn-fill" *ngIf="taskIndex<activity.tasks.length-1"
+              (click)="taskIndex=taskIndex+1"> Próxima questão</button>
+            <button class="btn btn-success btn-fill" *ngIf="taskIndex==activity.tasks.length-1" (click)="alert(1)">
+              Finalizar</button>
+          </span>
+        </div>
+      </div>
     </div>
-</div>
+  </div>

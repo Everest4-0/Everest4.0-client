@@ -1,3 +1,4 @@
+import { ActivityTask } from './activity_task';
 import { Module } from './module';
 
 export class Activity {
@@ -8,10 +9,12 @@ export class Activity {
     descriptions: string;
     duration: number;
     orderNo: number;
-    module: Module;
+    module: Module = new Module();
 
     attachment: string;
+    tasks: Array<ActivityTask> = [];
 
+    attType: number = 0;
     status: number = 0;
     isActive: boolean;
     createdAt: Date;

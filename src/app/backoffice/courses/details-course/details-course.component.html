@@ -37,13 +37,17 @@
 
                         </div>
 
-                        <div class="panel" id="panel-expenses-{{i}}">
-                            <ul class="list-group">
-                                <li class="list-group-item"
-                                    *ngFor="let activity of module.activities|arrSort:'orderNo'">
+                        <div class="panel" id="panel-expenses-{{i}}" cdkDropList #partsList="cdkDropList"
+                            [cdkDropListData]="activity.tasks" (cdkDropListDropped)="onDrop(module,$event)">
+                            <ul @list class="list-group">
+                                <li class="list-group-item" *ngFor="let activity of module.activities|arrSort:'orderNo'"
+                                    cdkDrag>
+                                    <button class="btn btn-sm border-none">
+                                        :: {{activity.orderNo+1}}
+                                    </button>
                                     {{activity.title}}
                                     <button class="btn btn-xs pull-right border-none"
-                                        (click)="updateActivity(activity)">
+                                        (click)="updateActivity(activity, module)">
                                         <i class="pe-7s-note"></i>
                                     </button>
                                 </li>
@@ -128,25 +132,36 @@
 </div>
 
 
-
-<jw-modal id="form-activity-modal" class="lg" title="Avaliação">
-    <h4></h4>
+<jw-modal id="form-activity-modal" class="lg" title="Actividade">
+    <h4 *ngIf="false">{{activity.id===null? 'Actualizar':'Registar'}} actividade nº {{activity.orderNo}} > Módulo
+        {{activity.module.title}}
+    </h4>
     <hr>
     <div class="row text-center">
         <form [formGroup]="activityForm">
             <div class="col-md-12">
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-8">
                     <label for="exampleInputEmail1">Título</label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="activity.title"
                         formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp"
                         placeholder="Title">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="exampleInputEmail1">Duração</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="activity.duration"
                         formControlName="duration">
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-2">
+                    <label for="exampleInputEmail1">Tipo</label>
+                    <select class="form-control form-control-lg" [(ngModel)]="activity.attType"
+                        [ngModelOptions]="{standalone: true}">
+                        <option value=0>Texto</option>
+                        <option value=1>Ficheiro</option>
+                        <option value=2>URL</option>
+                        <option value=3>Exercício</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12" *ngIf="activity.attType==0">
                     <label for="exampleInputEmail1">Descrição</label>
                     <div class="text-editor">
                         <ejs-richtexteditor [(ngModel)]="activity.descriptions" formControlName="descriptions"
@@ -155,22 +170,80 @@
                         </ejs-richtexteditor>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Anexo</label>
-                    <select class="form-control form-control-lg" [(ngModel)]="attType" [ngModelOptions]="{standalone: true}">
-                        <option value=0>Ficheiro</option>
-                        <option value=1>URL</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6" *ngIf="attType==0">
+                <div class="form-group col-md-6" *ngIf="activity.attType==1">
                     <label for="exampleInputEmail1">Anexo</label>
                     <input type="file" class="form-control form-control-lg" [(ngModel)]="activity.attachment"
                         formControlName="attachment" (change)="onFileSelect($event.target)">
                 </div>
-                <div class="form-group col-md-6" *ngIf="attType==1">
+                <div class="form-group col-md-6" *ngIf="activity.attType==2">
                     <label for="exampleInputEmail1">URL</label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="activity.attachment"
                         formControlName="attachment">
+                </div>
+                <div class="form-group col-md-12" *ngIf="activity.attType==3">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>Exercicio</h3>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-primary" (click)="addTask(activity)">
+                                <i class="pe-7s-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <blockquote cdkDropList #partsList="cdkDropList" [cdkDropListData]="activity.tasks"
+                            (cdkDropListDropped)="onDrop($event)">
+                            <div @list class="list-container">
+                                <div class="box blockquote blockquote-primary"
+                                    *ngFor="let task of activity.tasks; let i=index" cdkDrag>
+                                    <div class="col-md-12" style="border-top: solid;">Exercício {{i+1}}
+                                        <button type="button" class="btn btn-danger btn-sm  pull-right"
+                                            (click)="removeTask(i)">
+                                            <i class="pe-7s-trash"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary pull-right"
+                                            (click)="addItem(task.answers)">
+                                            <i class="pe-7s-plus"></i> Adicionar opção
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="6" cols="80"
+                                                placeholder="You can write your text here..." [(ngModel)]="task.text"
+                                                name="text_{{i}}" [ngModelOptions]="{standalone: true}"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" *ngFor="let answer of task.answers; let j=index">
+                                            <small>Opção {{j+1}}</small>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <input type="radio" [checked]="answer.correct"
+                                                        [ngModelOptions]="{standalone: true}" name="correct_{{i}}"
+                                                        (change)="changeCorrect(task.answers,answer.text)" required />
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control input-sm"
+                                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.text"
+                                                        value="{{answer.text}}" rows="5" required />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" *ngIf="task.answers.length>2"
+                                                        class="btn btn-xs btn-danger"
+                                                        (click)="removeItem(task.answers,j)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+
                 </div>
             </div>
             <div class="row text-center"><br>

@@ -1,3 +1,4 @@
+import { ActivityTask } from 'app/models/course/activity_task';
 import { AppService } from './../../../services/app.service';
 import { Activity } from './../../../models/course/activity';
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
@@ -6,7 +7,7 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
 @Component({
   selector: 'app-activity-course',
   templateUrl: './activity-course.component.html',
-  styleUrls: ['./activity-course.component.css']
+  styleUrls: ['./activity-course.component.scss']
 })
 export class ActivityCourseComponent implements OnInit {
 
@@ -27,6 +28,9 @@ export class ActivityCourseComponent implements OnInit {
   totalPages: number;
   isLoaded: boolean = false;
 
+
+  public task=new ActivityTask()
+  public taskIndex=0
   constructor() {
     ///this.version = NGYTPackage['dependencies']['ngx-youtube-player'].replace('^', '');
   }
@@ -34,7 +38,11 @@ export class ActivityCourseComponent implements OnInit {
     //throw new Error('Method not implemented.');
   }
   get attachmentType() {
-    if (!this.activity.attachment) {
+    if (this.activity.attType === 3) {
+      this.task=this.activity.tasks[this.taskIndex];
+      return 'quiz';
+    }
+    else if (!this.activity.attachment) {
       return ''
     } else if (this.activity.attachment.split('youtube').length > 1) {
       return 'youtube'

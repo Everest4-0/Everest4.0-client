@@ -1,3 +1,5 @@
+import { ModuleService } from './../../../services/courses/module.service';
+import { TaskAnswer } from './../../../models/course/task_answer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivityService } from './../../../services/courses/activity.service';
 import { ActivityForm } from './../../forms/workSituation.form copy';
@@ -14,6 +16,7 @@ import { DropDownListComponent, FieldSettingsModel } from '@syncfusion/ej2-angul
 import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
 import { RichTextEditorComponent, HtmlEditorService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { ActivityTask } from 'app/models/course/activity_task';
 @Component({
   selector: 'app-details-course',
   templateUrl: './details-course.component.html',
@@ -23,7 +26,7 @@ import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 })
 export class DetailsCourseComponent implements OnInit {
 
-  public attType = 0;
+  public attType: number = 0;
   public activity: Activity = new Activity()
   public course: Course = new Course();
   public serverAddress = this.courseService.serverAddress;
@@ -97,6 +100,7 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   constructor(
+    private moduleService: ModuleService,
     private activityService: ActivityService,
     private courseService: CourseService,
     private route: ActivatedRoute,
@@ -126,40 +130,46 @@ export class DetailsCourseComponent implements OnInit {
 
 
   saveActivity() {
-    (this.activity.id ? 
+    (this.activity.id ?
       this.activityService.update(this.activity) :
       this.activityService.create(this.activity))
       .subscribe(activity => {
-        this.course.modules.forEach(module => {
-          if (module.id === this.activity.module.id) {
-            module.activities.push(activity)
-          }
-        }
-
-        )
         this.modalService.close('form-activity-modal');
+        this.course.modules.forEach(module => {
+          debugger
+          if (module.id === this.activity.module.id) {
+            if (this.activity.id) {
+              module.activities.filter(a => a.id === this.activity.id)[0] = activity
+            } else {
+              module.activities.push(activity)
+            }
+          }
+        })
       })
   }
 
   addActivity(module: Module) {
-
+    this.attType = 0;
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
 
     this.activity = new Activity();
+    this.activity.orderNo = module.activities.length;
     this.activity.module = module;
     this.modalService.open('form-activity-modal');
   }
 
-  updateActivity(activity) {
+  updateActivity(activity, module: Module = new Module()) {
+    this.attType = 0;
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
     this.activity = activity
+    this.activity.module = module
     this.modalService.open('form-activity-modal');
   }
 
 
-  onDrop(event: CdkDragDrop<string[]>) {
+  /*onDrop(event: CdkDragDrop<string[]>) {
     /*this.course.modules[event.previousIndex].order = event.currentIndex;
     moveItemInArray(
       this.course.modules,
@@ -167,9 +177,9 @@ export class DetailsCourseComponent implements OnInit {
       event.currentIndex
     )
     this.course.modules[event.previousIndex].order = event.currentIndex;
-    */
+   
   }
-
+ */
   onFileSelect(input) {
 
     let reader = new FileReader();
@@ -178,5 +188,45 @@ export class DetailsCourseComponent implements OnInit {
       this.activity.attachment = e.target.result;
     }
     reader.readAsDataURL(input.files[0]);
+  }
+
+
+  addItem(source) {
+    source.push(new TaskAnswer())
+  }
+
+  changeCorrect(source, id) {
+    source.forEach(x => x.correct = x.text === id)
+  }
+
+  addTask() {
+    let task = new ActivityTask()
+    task.answers = [new TaskAnswer(true), new TaskAnswer()]
+    this.activity.tasks.push(task)
+  }
+
+  removeTask(index) {
+
+    if (this.activity.tasks.length === 1) {
+      return;
+    }
+    this.activity.tasks.splice(index, 1);
+  }
+
+  removeItem(source, index) {
+    if (source.length < 3) {
+      return;
+    }
+    source.splice(index, 1);
+  }
+
+  onDrop(source, event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      source.activities,
+      event.previousIndex,
+      event.currentIndex
+    )
+    source.activities.forEach((a, i) => a.orderNo = i)
+    this.moduleService.update(source).subscribe(module => { })
   }
 }
