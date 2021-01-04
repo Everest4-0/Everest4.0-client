@@ -1,4 +1,6 @@
 <app-backoffice-navbar [title]="'Actualizar desafio'"></app-backoffice-navbar>
+
+{{quiz|json}}
 <div class="card">
     <div class="body">
         <div class="content">
@@ -22,8 +24,8 @@
                             <label>Opcao {{i+1}}</label>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <input type="radio" [(ngModel)]="answer.correct" name="correct" value="true"
-                                        required />
+                                    <input type="radio"  name="correct" [value]="answer"
+                                        required (change)="checkCorrect($event.target)"/>
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"

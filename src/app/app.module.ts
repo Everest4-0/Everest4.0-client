@@ -49,7 +49,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
-import { QuizComponent } from './frontoffice/quiz/quiz.component';
 import { ArrSortPipe } from './pipes/arr-sort.pipe';
 
 import { ListQuizComponent } from './frontoffice/quiz/list-quiz/list-quiz.component';
@@ -130,7 +129,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-    QuizComponent,
     ListQuizComponent,
     CreateQuizComponent,
     DeleteQuizComponent,

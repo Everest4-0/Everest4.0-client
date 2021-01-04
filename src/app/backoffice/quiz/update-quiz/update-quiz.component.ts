@@ -40,6 +40,13 @@ export class UpdateQuizComponent implements OnInit {
     this.quiz.answers
     .splice(index, 1);
   }
+  //TODO: GAMBIARA
+checkCorrect(c){
+  debugger
+  this.quiz.answers.forEach(a=>a.correct=a.id===c.value)
+}
+
+
   saveForm() {
     this.quizService.update(this.quiz).subscribe(data => {
       this.toast.success('Desafio actualizado com sucesso', 'Sucesso', {

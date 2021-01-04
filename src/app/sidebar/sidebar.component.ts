@@ -18,7 +18,7 @@ export const FRONTOFFICE_ROUTES: RouteInfo[] = [
 
   { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['PRO', 'BASIC', 'FREE'] },
   { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
-  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/quiz/quizes', title: 'Desafios', icon: 'pe-7s-stopwatch', roles: ['PRO', 'BASIC', 'FREE'] },
   //{ path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['PRO', 'BASIC'] },
   //{ path: '/me/user', title: 'Coaching online', icon: 'pe-7s-umbrella', class: 'disabled', roles: ['FREE'] },
