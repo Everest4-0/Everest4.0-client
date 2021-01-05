@@ -12,10 +12,10 @@
                 </div>
 
                 <div class="col-md-6">
-                    <lbd-chart [title]="'Dashboard executivo'" *ngIf="dataLoaded" [subtitle]="''" [chartType]="activityChartType"
-                        [chartData]="activityChartData" [chartOptions]="activityChartOptions"
-                        [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems"
-                        [withHr]="true">
+                    <lbd-chart [title]="'Dashboard executivo'" *ngIf="dataLoaded" [subtitle]="''"
+                        [chartType]="activityChartType" [chartData]="activityChartData"
+                        [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive"
+                        [legendItems]="activityChartLegendItems" [withHr]="true">
                     </lbd-chart>
                 </div>
             </div>
@@ -25,6 +25,13 @@
 
         </div>
         <div class="col-md-4" style=" min-height: 200px">
+            <div class="card">
+                <ng-template [ngxPermissionsOnly]="['PRO','ADMIN', 'BASIC', 'FREE']">
+                    <a routerLink="['/me/quiz']" class="btn btn-success btn-lg">
+                        Desafios
+                    </a>
+                </ng-template>
+            </div>
             <app-task></app-task>
         </div>
 
