@@ -37,15 +37,21 @@
                             <div class="col-md-12">
                                 <div class="row" *ngFor="let module of course.modules; let i=index">
                                     <div class="row" style="background: #eee;">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <small>Módulo {{i+1}}</small>
                                             <h5><b>{{module.title}}</b></h5>
                                         </div>
+
+                            <div class="col-md-2 text-right">
+                                
+                                <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-expenses-{{i}}"
+                                    (click)="accordion($event.target)"></button>
+                            </div>
                                     </div>
 
-                                    <div class="panel hidden" id="panel-expenses-{{i}}">
+                                    <div class="panel" id="panel-expenses-{{i}}">
                                         <ul class="list-group">
-                                            <li class="list-group-item" *ngFor="let item of module.activities|arrSort:'orderNo'">{{item.title}}</li>
+                                            <li class="list-group-item" *ngFor="let item of module.activities|arrSort:'orderNo'; let j=index">{{j+1}} - {{item.title}}</li>
                                         </ul>
                                     </div>
                                 </div>

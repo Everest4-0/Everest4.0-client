@@ -1,0 +1,53 @@
+<div class="container-fluid bg-info">
+    <h1 class="text-center">
+      <ng-container [counter]="activity.duration*60" [times]="1" (value)="value = $event===0 ? nextQuiz() : $event">
+        {{ value }}
+      </ng-container>
+    </h1>
+  <div class="modal-dialog" style="margin: 5% auto;">
+    <div class="modal-content" *ngFor="let task of this.activity.tasks;let taskIndex=index ">
+      <div class="modal-header">
+        <h3 class="text-center"><span class="label label-warning" id="qid">{{taskIndex+1}}</span> {{task.text}}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="col-xs-3 col-xs-offset-5">
+          <div id="loadbar" style="display: none;">
+            <div class="blockG" id="rotateG_01"></div>
+            <div class="blockG" id="rotateG_02"></div>
+            <div class="blockG" id="rotateG_03"></div>
+            <div class="blockG" id="rotateG_04"></div>
+            <div class="blockG" id="rotateG_05"></div>
+            <div class="blockG" id="rotateG_06"></div>
+            <div class="blockG" id="rotateG_07"></div>
+            <div class="blockG" id="rotateG_08"></div>
+          </div>
+        </div>
+
+        <div class="quiz" id="quiz" data-toggle="buttons">
+          <label class="element-animation1 btn btn-lg btn-primary btn-block"
+            *ngFor="let answer of task.answers; let i =index">
+            <span class="btn-label">
+              <i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">
+            <h3>{{answer.text}}</h3>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer text-muted">
+          <button class="btn btn-default border-none pull-left">
+            {{taskIndex}}/{{activity.tasks.length}}
+          </button>
+        <span id="answer" *ngIf="false">
+          <button class="btn btn-default border-none">
+            
+          </button>
+          <button class="btn btn-primary btn-fill" *ngIf="taskIndex<activity.tasks.length" (click)="nextQuiz()">
+            Próxima questão</button>
+          <button class="btn btn-success btn-fill" *ngIf="taskIndex==activity.tasks.length">
+            Finalizar
+          </button>
+        </span>
+      </div>
+    </div>
+    
+  </div>
+</div>

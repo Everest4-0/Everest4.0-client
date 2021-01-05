@@ -41,4 +41,22 @@ export class ListCourseComponent implements OnInit {
       })
     }
   }
+  courseEvolution(e:Enrollment){
+    let i=25;
+    let n=50;
+    let done=false;
+    /*
+    e.course.modules.forEach(m=>{
+      m.activities.forEach(a=>{
+        ++n;
+        if(!done){
+        ++i;
+        }
+        if(e.lastActivity.id===a.id){
+            done=true
+        }
+      })
+    })*/
+    return (n/i)*100;
+  }
 }

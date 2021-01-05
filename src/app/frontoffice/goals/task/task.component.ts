@@ -22,7 +22,7 @@ export class TaskComponent implements OnInit {
   public taskDetails: Task = new Task()
   public todo: ToDo = new ToDo()
   form = new ToDoForm(this.fb)
-  isCalendar: false;
+  isCalendar: boolean=false;
   dpConfig = {
     mode: 'daytime'
   }
