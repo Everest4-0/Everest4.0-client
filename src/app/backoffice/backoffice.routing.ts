@@ -75,8 +75,6 @@ const backOfficeRoutes: Routes = [
     { path: 'courses/delete/:id',              component: DeleteUserComponent },
     { path: 'courses/details/:id',             component: DetailsCourseComponent },
 
-
-
 ];
 
 @NgModule({

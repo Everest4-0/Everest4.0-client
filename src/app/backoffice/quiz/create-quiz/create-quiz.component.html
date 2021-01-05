@@ -23,7 +23,9 @@
                         <label>Opcao {{i+1}}</label>
                         <div class="row">
                             <div class="col-md-1">
-                                <input type="radio" [(ngModel)]="answer.correct" name="correct" required />
+                                <input type="radio" 
+                                 [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.correct" 
+                                 name="correct" required />
                             </div>
                             <div class="col-md-9">
                                 <input type="text" class="form-control"

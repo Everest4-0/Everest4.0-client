@@ -59,6 +59,7 @@ export class ListQuizComponent implements OnInit {
       .subscribe(quiz => {
         if (this.quiz.id) {
           this.quizes.filter(q => q.id === quiz.id)[0] = quiz
+          
         } else {
           this.quizes.push(quiz)
         }
@@ -66,8 +67,8 @@ export class ListQuizComponent implements OnInit {
           timeOut: 5000,
           progressBar: true,
         })
-
         this.modalService.close('quiz-modal');
+
       })
   }
   createQuiz() {
