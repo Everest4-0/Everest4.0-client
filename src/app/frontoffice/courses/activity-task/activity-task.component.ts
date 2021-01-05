@@ -1,4 +1,4 @@
-import { TimerService } from './../../../services/system/timer.service';
+
 import { ActivityService } from './../../../services/courses/activity.service';
 import { ActivityTask } from 'app/models/course/activity_task';
 import { Activity } from './../../../models/course/activity';
@@ -19,8 +19,7 @@ export class ActivityTaskComponent implements OnInit {
   counter = 10;
   public task: ActivityTask = new ActivityTask();
   constructor(
-    private activityService: ActivityService,
-    public timer: TimerService
+    private activityService: ActivityService
   ) { }
 
   ngOnInit(): void {

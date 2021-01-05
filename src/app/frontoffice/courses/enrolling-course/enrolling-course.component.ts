@@ -1,4 +1,4 @@
-import { TimerService } from './../../../services/system/timer.service';
+
 import { Activity } from './../../../models/course/activity';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { EvaluationService } from './../../../services/evaluation.service';
