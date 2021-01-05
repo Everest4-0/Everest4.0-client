@@ -1,14 +1,13 @@
-import { Task } from './../models/goal/task';
+import { Task } from '../../models/goal/task';
 
 import { ModalService } from 'app/components/modal';
-import { Goal } from './../models/goal/goal';
+import { Goal } from '../../models/goal/goal';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { TaskService } from './../services/task.service';
-import { AuthService } from './../services/auth.service';
-import { GoalService } from './../services/goal.service';
+import { TaskService } from '../../services/task.service';
+import { AuthService } from '../../services/auth.service';
+import { GoalService } from '../../services/goal.service';
 import { Component, OnInit } from '@angular/core';
-import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
-import * as Chartist from 'chartist';
+import { LegendItem, ChartType } from './../../components/lbd/lbd-chart/lbd-chart.component';
 import * as moment from 'moment';
 import { NgLocalization } from '@angular/common';
 @Component({

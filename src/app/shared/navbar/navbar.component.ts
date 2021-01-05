@@ -1,7 +1,7 @@
 
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { BACKOFFICE_ROUTES, FRONTOFFICE_ROUTES  } from '../../sidebar/sidebar.component';
+import { BACKOFFICE_ROUTES, FRONTOFFICE_ROUTES  } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 

@@ -1,3 +1,4 @@
+import { FrontofficeComponent } from './frontoffice/frontoffice/frontoffice.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { FormValidatorComponent } from './components/form-validator/form-validator.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -25,7 +26,7 @@ import {
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
-import { SidebarModule } from './sidebar/sidebar.module';
+import { SidebarModule } from './shared/sidebar/sidebar.module';
 
 import { AppComponent } from './app.component';
 
@@ -115,6 +116,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FirstloginComponent,
     AppComponent,
     AdminLayoutComponent,
+    FrontofficeComponent,
     LoginComponent,
     MessageComponent,
     ImageUploaderComponent,

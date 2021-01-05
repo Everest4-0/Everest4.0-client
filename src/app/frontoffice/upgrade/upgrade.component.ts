@@ -1,7 +1,7 @@
 import { ToastService } from 'ng-uikit-pro-standard';
-import { User } from './../models/main/user';
-import { UserService } from './../services/user.service';
-import { AuthService } from './../services/auth.service';
+import { User } from '../../models/main/user';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

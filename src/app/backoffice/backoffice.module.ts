@@ -3,7 +3,7 @@ import { PipesModule } from './../pipes/pipes.module';
 import { ArrSortPipe } from './../pipes/arr-sort.pipe';
 import { ModalModule } from './../components/modal/modal.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SidebarModule } from './../sidebar/sidebar.module';
+import { SidebarModule } from '../shared/sidebar/sidebar.module';
 import { FooterModule } from './../shared/footer/footer.module';
 import { NavbarModule } from './../shared/navbar/navbar.module';
 import { BackOfficeRoutes } from './backoffice.routing';

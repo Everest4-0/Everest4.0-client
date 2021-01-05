@@ -48,19 +48,19 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LbdModule } from '../../lbd/lbd.module';
+import { LbdModule } from '../../components/lbd/lbd.module';
 import { NguiMapModule } from '@ngui/map';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
-import { HomeComponent } from '../../home/home.component';
+import { HomeComponent } from '../../frontoffice/home/home.component';
 import { UserComponent } from '../../user/user.component';
-import { TablesComponent } from '../../tables/tables.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { TablesComponent } from '../../frontoffice/tables/tables.component';
+import { TypographyComponent } from '../../frontoffice/typography/typography.component';
+import { IconsComponent } from '../../frontoffice/icons/icons.component';
+import { MapsComponent } from '../../frontoffice/maps/maps.component';
+import { NotificationsComponent } from '../../frontoffice/notifications/notifications.component';
+import { UpgradeComponent } from '../../frontoffice/upgrade/upgrade.component';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -85,7 +85,6 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
     LbdModule,

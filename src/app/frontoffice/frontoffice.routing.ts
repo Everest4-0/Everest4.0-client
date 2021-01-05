@@ -1,35 +1,35 @@
-import { HelpdeskComponent } from './../../frontoffice/helpdesk/helpdesk.component';
-import { MonitoringComponent } from './../../frontoffice/monitoring/monitoring.component';
-import { VacantJobComponent } from './../../frontoffice/vacant-job/vacant-job.component';
-import { CoachingComponent } from './../../frontoffice/coaching/coaching.component';
-import { DetailsQuizComponent } from './../../frontoffice/quiz/details-quiz/details-quiz.component';
-import { UpdateQuizComponent } from './../../frontoffice/quiz/update-quiz/update-quiz.component';
-import { DeleteQuizComponent } from './../../frontoffice/quiz/delete-quiz/delete-quiz.component';
-import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-course/enrolling-course.component';
-import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
+import { HelpdeskComponent } from './helpdesk/helpdesk.component';
+import { MonitoringComponent } from './monitoring/monitoring.component';
+import { VacantJobComponent } from './vacant-job/vacant-job.component';
+import { CoachingComponent } from './coaching/coaching.component';
+import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
+import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
+import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
+import { EnrollingCourseComponent } from './courses/enrolling-course/enrolling-course.component';
+import { ForbidenComponent } from './costum/forbiden/forbiden.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
-import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
-import { CreateQuizComponent } from '../../frontoffice/quiz/create-quiz/create-quiz.component';
-import { ListQuizComponent } from '../../frontoffice/quiz/list-quiz/list-quiz.component';
-import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
-import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
+import { DetailsCourseComponent } from './courses/details-course/details-course.component';
+import { ListCourseComponent } from './courses/list-course/list-course.component';
+import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
+import { GoalsComponent } from './goals/goals/goals.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
 
 
-import { FormStepsCompleteComponent } from './../../components/form-steps-complete/form-steps-complete.component';
-import { FormStepsComponent } from './../../components/form-steps/form-steps.component';
-import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
+import { FormStepsCompleteComponent } from './../components/form-steps-complete/form-steps-complete.component';
+import { FormStepsComponent } from './../components/form-steps/form-steps.component';
+import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from '../../home/home.component';
-import { TablesComponent } from '../../tables/tables.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { HomeComponent } from './home/home.component';
+import { TablesComponent } from './tables/tables.component';
+import { TypographyComponent } from './typography/typography.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
 
-export const AdminLayoutRoutes: Routes =
+export const FrontOfficeRoutes: Routes =
   [
     {
       path: '403', component: ForbidenComponent
