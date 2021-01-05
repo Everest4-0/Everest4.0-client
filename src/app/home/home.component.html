@@ -26,10 +26,10 @@
         </div>
         <div class="col-md-4" style=" min-height: 200px">
             <div class="card">
-                <ng-template [ngxPermissionsOnly]="['PRO','ADMIN', 'BASIC', 'FREE']">
-                    <a routerLink="['/me/quiz']" class="btn btn-success btn-lg">
+                    <a routerLink="/me/quizes" class="btn btn-success btn-lg">
                         Desafios
                     </a>
+                <ng-template>
                 </ng-template>
             </div>
             <app-task></app-task>

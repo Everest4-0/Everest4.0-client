@@ -162,7 +162,7 @@ export const AdminLayoutRoutes: Routes =
         }
       }
     },{
-      path: 'quiz/quizes', component: ListQuizComponent,
+      path: 'quizes', component: ListQuizComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
