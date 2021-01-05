@@ -1,3 +1,4 @@
+import { ToastService } from 'ng-uikit-pro-standard';
 import { ModuleService } from './../../../services/courses/module.service';
 import { TaskAnswer } from './../../../models/course/task_answer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -65,6 +66,10 @@ export class DetailsCourseComponent implements OnInit {
         break;
     }
   }
+
+  get duration(){
+    return this.course.modules.reduce((x,y)=>x+y.activities.reduce((a,b)=>a+b.duration,0),0);
+  }
   public onChangeFloat(): void {
     this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
   }
@@ -104,7 +109,8 @@ export class DetailsCourseComponent implements OnInit {
     private activityService: ActivityService,
     private courseService: CourseService,
     private route: ActivatedRoute,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -130,10 +136,16 @@ export class DetailsCourseComponent implements OnInit {
 
 
   saveActivity() {
+    let activity = this.activity;
+    activity.module.activities = null;
     (this.activity.id ?
-      this.activityService.update(this.activity) :
-      this.activityService.create(this.activity))
+      this.activityService.update(activity) :
+      this.activityService.create(activity))
       .subscribe(activity => {
+        this.toast.success('Actividade actualizada com sucesso', 'Sucesso', {
+          timeOut: 5000,
+          progressBar: true,
+        })
         this.modalService.close('form-activity-modal');
         this.course.modules.forEach(module => {
           debugger
@@ -145,6 +157,7 @@ export class DetailsCourseComponent implements OnInit {
             }
           }
         })
+        this.activity = new Activity()
       })
   }
 
@@ -160,6 +173,7 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   updateActivity(activity, module: Module = new Module()) {
+    this.activity = new Activity()
     this.attType = 0;
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
