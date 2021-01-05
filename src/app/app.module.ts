@@ -49,11 +49,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
-<<<<<<< HEAD
-import { QuizComponent } from './frontoffice/quiz/quiz.component';
-=======
-import { ArrSortPipe } from './pipes/arr-sort.pipe';
->>>>>>> 1852364105789724b050176f7d41079d076a4879
 
 import { ListQuizComponent } from './frontoffice/quiz/list-quiz/list-quiz.component';
 import { CreateQuizComponent } from './frontoffice/quiz/create-quiz/create-quiz.component';
