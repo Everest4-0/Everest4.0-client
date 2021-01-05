@@ -30,7 +30,7 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
 import { LoginComponent } from './login/login.component';
 import { MessageComponent } from './components/message/message.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
@@ -115,7 +115,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   declarations: [
     FirstloginComponent,
     AppComponent,
-    AdminLayoutComponent,
     FrontofficeComponent,
     LoginComponent,
     MessageComponent,

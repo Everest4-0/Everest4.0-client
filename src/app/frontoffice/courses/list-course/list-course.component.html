@@ -8,6 +8,7 @@
                     style="max-height: 100px; padding:0px;  background-image: url({{courseService.serverAddress}}{{enrollment.course.cover}});">
                     <div style="background-color: rgba(0,0,0,.7); height: 100px; padding:5px; ">
                         <h4 style="color: #FFF; padding:0; margin:0">{{enrollment.course.title}}</h4>
+
                     </div>
                     <app-progress-bar [done]=courseEvolution(enrollment) [noLabel]=true></app-progress-bar>
                 </div>
