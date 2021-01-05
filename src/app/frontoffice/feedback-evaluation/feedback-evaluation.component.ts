@@ -5,7 +5,7 @@ import { ValidationService } from './../../services/validators/validation.servic
 import { EvaluationRequestForm } from './../../forms/evaluation-request.form';
 import { FormBuilder } from '@angular/forms';
 import { EvaluationRequest } from '../../models/diagnostic/evaluation-request';
-import { ChartType, LegendItem } from './../../lbd/lbd-chart/lbd-chart.component';
+import { ChartType, LegendItem } from '../../components/lbd/lbd-chart/lbd-chart.component';
 
 import { AuthService } from './../../services/auth.service';
 import { UserEvaluationService } from './../../services/user-evaluation.service';

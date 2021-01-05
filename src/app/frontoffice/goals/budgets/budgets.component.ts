@@ -1,4 +1,4 @@
-import { ChartType, LegendItem } from './../../../lbd/lbd-chart/lbd-chart.component';
+import { ChartType, LegendItem } from '../../../components/lbd/lbd-chart/lbd-chart.component';
 import { BudgetCategory } from './../../../models/goal/budget-category';
 import { BudgetCategoryService } from './../../../services/goals/budget-category.service';
 import { ToastService } from 'ng-uikit-pro-standard';

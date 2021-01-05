@@ -1,11 +1,10 @@
+import { FrontofficeComponent } from './frontoffice/frontoffice/frontoffice.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { BackofficeComponent } from './backoffice/backoffice/backoffice.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
@@ -14,11 +13,11 @@ const routes: Routes = [
     pathMatch: 'full',
   }, {
     path: 'me',
-    component: AdminLayoutComponent,
+    component: FrontofficeComponent,
     children: [
       {
         path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: './frontoffice/frontoffice.module#FrontofficeModule'
       }]
   }, {
     path: 'backoffice',

@@ -1,3 +1,4 @@
+import { FrontofficeComponent } from './frontoffice/frontoffice/frontoffice.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { FormValidatorComponent } from './components/form-validator/form-validator.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -25,11 +26,11 @@ import {
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
-import { SidebarModule } from './sidebar/sidebar.module';
+import { SidebarModule } from './shared/sidebar/sidebar.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
 import { LoginComponent } from './login/login.component';
 import { MessageComponent } from './components/message/message.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
@@ -49,13 +50,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // for Core import:
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
-import { ArrSortPipe } from './pipes/arr-sort.pipe';
 
-import { ListQuizComponent } from './frontoffice/quiz/list-quiz/list-quiz.component';
-import { CreateQuizComponent } from './frontoffice/quiz/create-quiz/create-quiz.component';
-import { DeleteQuizComponent } from './frontoffice/quiz/delete-quiz/delete-quiz.component';
-import { UpdateQuizComponent } from './frontoffice/quiz/update-quiz/update-quiz.component';
-import { DetailsQuizComponent } from './frontoffice/quiz/details-quiz/details-quiz.component';
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 @NgModule({
@@ -119,7 +115,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   declarations: [
     FirstloginComponent,
     AppComponent,
-    AdminLayoutComponent,
+    FrontofficeComponent,
     LoginComponent,
     MessageComponent,
     ImageUploaderComponent,
@@ -129,11 +125,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-    ListQuizComponent,
-    CreateQuizComponent,
-    DeleteQuizComponent,
-    UpdateQuizComponent,
-    DetailsQuizComponent,
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,

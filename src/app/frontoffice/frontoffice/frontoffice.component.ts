@@ -10,11 +10,13 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss']
+  selector: 'app-frontoffice',
+  templateUrl: './frontoffice.component.html',
+  styleUrls: ['./frontoffice.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class FrontofficeComponent implements OnInit {
+
+  
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];

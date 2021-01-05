@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCourseComponent implements OnInit {
 
+  public serverAddress = this.courseService.serverAddress;
   public courses: Array<Course> = []
   constructor(
     private courseService: CourseService

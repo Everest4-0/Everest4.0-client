@@ -1,3 +1,4 @@
+
 import { Activity } from './../../../models/course/activity';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { EvaluationService } from './../../../services/evaluation.service';
@@ -9,6 +10,8 @@ import { Enrollment } from './../../../models/course/enrollment';
 import { Course } from './../../../models/course/course';
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
+
+import Swal from 'sweetalert2'
 const BreakException = {};
 @Component({
   selector: 'app-enrolling-course',
@@ -39,26 +42,35 @@ export class EnrollingCourseComponent implements OnInit {
       this.enrollment = enrollment;
       this.loadCourse(enrollment.courseId)
     })
+
   }
   selectActivity(item) {
     if (item.status === 0) {
-      return;
+      return this.forbiden();
     }
     this.canActivate = false
     this.enrollment.lastActivity = item;
 
-    const numbers = timer(this.enrollment.lastActivity.duration *1000);
+    const numbers = timer(/*this.enrollment.lastActivity.duration*/ 1 * 10 * 1000);
     numbers.subscribe(x => this.canActivate = true);
 
   }
 
+  forbiden(){
+    Swal.fire(
+      'Atenção!',
+      'Para ter acesso a esse conteudo deve concluir a actividade anterior',
+      'error'
+    )
+  }
   nextActivity() {
     debugger
     try {
       this.course.modules.forEach(m => {
+        m.activities.filter(x => x.i === this.enrollment.lastActivity.i)[0].status = 0
+        m.activities.filter(x => x.i === this.enrollment.lastActivity.i + 1)[0].status = 1
         m.activities.forEach(a => {
           if (a.i === this.enrollment.lastActivity.i + 1) {
-            a.status = 1
             this.selectActivity(a)
             throw BreakException;
           }
@@ -66,9 +78,7 @@ export class EnrollingCourseComponent implements OnInit {
       })
     } catch (e) {
       if (e !== BreakException) throw e;
-
     }
-
 
     this.enrollmentService.update(this.enrollment).subscribe(enrollment => {
       debugger

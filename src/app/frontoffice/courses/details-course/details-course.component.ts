@@ -72,6 +72,20 @@ export class DetailsCourseComponent implements OnInit {
 
   }
 
+
+
+  accordion(that) {
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
+
+    var panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+  
   get courseDuration() {
     return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0);
     }

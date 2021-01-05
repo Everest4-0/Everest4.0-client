@@ -13,6 +13,7 @@ export class Enrollment {
     userId: string;
 
     lastActivity: Activity = new Activity();
+    activityId:string;
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;

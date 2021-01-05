@@ -27,18 +27,35 @@ export class ListCourseComponent implements OnInit {
     this.courseService.all({}).subscribe(courses => {
       this.courses = courses
     })
-    
-    this.enrollmentService.all({ userId: this.auth.user.id }).subscribe(enrollments => { 
-      
+
+    this.enrollmentService.all({ userId: this.auth.user.id }).subscribe(enrollments => {
+
       this.enrollments = enrollments
-     })
+    })
   }
   search(value) {
     this.searchFor = value
     if (this.searchFor.length > 3) {
-      this.courseService.all({$filter:this.searchFor}).subscribe(courses => {
+      this.courseService.all({ $filter: this.searchFor }).subscribe(courses => {
         this.searchResult = courses
       })
     }
+  }
+  courseEvolution(e: Enrollment) {
+    let i;
+    let n = 0;
+    let done = false;
+
+    e.course.modules.forEach(m => {
+      m.activities.forEach(a => {
+        n++;
+        if (e.activityId === a.id) {
+          i = n
+        }
+      })
+    })
+
+    let f = (i ?? 1 ) * 100/ n ;
+    return f === Infinity ? 0 : f;
   }
 }

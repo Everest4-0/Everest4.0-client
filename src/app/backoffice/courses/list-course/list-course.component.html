@@ -9,15 +9,14 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Titulo</th>
-                    <th>Descrição</th>
+                    <th colspan=2 >Descrição</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let course of courses; let i=index">
                     <td>{{i+1}}</td>
-                    <td><img scr="course.cover" class="img-thumbnail"></td>
+                    <td style="width: 100px;"><img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail"></td>
                     <td>
                         <h5><b>{{course.title}}</b></h5>
                         <small>{{course.descriptions.substring(0, 100)}}</small>

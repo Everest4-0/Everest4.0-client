@@ -25,7 +25,7 @@ export class ResultsComponent implements OnInit {
     /*{ code: 'O', name: 'Oportunidades' },
     { code: 'T', name: 'Ameaças' },*/
   ]
-  public currentResults: Array<any> = [];
+  public currentResults= [];
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();

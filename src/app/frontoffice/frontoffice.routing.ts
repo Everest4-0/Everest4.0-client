@@ -1,32 +1,35 @@
-import { DetailsQuizComponent } from './../../frontoffice/quiz/details-quiz/details-quiz.component';
-import { UpdateQuizComponent } from './../../frontoffice/quiz/update-quiz/update-quiz.component';
-import { DeleteQuizComponent } from './../../frontoffice/quiz/delete-quiz/delete-quiz.component';
-import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-course/enrolling-course.component';
-import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
+import { HelpdeskComponent } from './helpdesk/helpdesk.component';
+import { MonitoringComponent } from './monitoring/monitoring.component';
+import { VacantJobComponent } from './vacant-job/vacant-job.component';
+import { CoachingComponent } from './coaching/coaching.component';
+import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
+import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
+import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
+import { EnrollingCourseComponent } from './courses/enrolling-course/enrolling-course.component';
+import { ForbidenComponent } from './costum/forbiden/forbiden.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
-import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
-import { CreateQuizComponent } from '../../frontoffice/quiz/create-quiz/create-quiz.component';
-import { ListQuizComponent } from '../../frontoffice/quiz/list-quiz/list-quiz.component';
-import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
-import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
+import { DetailsCourseComponent } from './courses/details-course/details-course.component';
+import { ListCourseComponent } from './courses/list-course/list-course.component';
+import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
+import { GoalsComponent } from './goals/goals/goals.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
 
 
-import { FormStepsCompleteComponent } from './../../components/form-steps-complete/form-steps-complete.component';
-import { FormStepsComponent } from './../../components/form-steps/form-steps.component';
-import { DiagnosticComponent } from './../../frontoffice/diagnostic/diagnostic.component';
+import { FormStepsCompleteComponent } from './../components/form-steps-complete/form-steps-complete.component';
+import { FormStepsComponent } from './../components/form-steps/form-steps.component';
+import { DiagnosticComponent } from './diagnostic/diagnostic.component';
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from '../../home/home.component';
-import { UserComponent } from '../../user/user.component';
-import { TablesComponent } from '../../tables/tables.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { HomeComponent } from './home/home.component';
+import { TablesComponent } from './tables/tables.component';
+import { TypographyComponent } from './typography/typography.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
 
-export const AdminLayoutRoutes: Routes =
+export const FrontOfficeRoutes: Routes =
   [
     {
       path: '403', component: ForbidenComponent
@@ -56,6 +59,42 @@ export const AdminLayoutRoutes: Routes =
       data: {
         permissions: {
           only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'coaching', component: CoachingComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'vacant-n-jobs', component: VacantJobComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'helpdesk', component: HelpdeskComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO','BASIC','FREE'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'monitoring', component: MonitoringComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO','BASIC'],
           redirectTo: '/me/403'
         }
       }
@@ -123,7 +162,7 @@ export const AdminLayoutRoutes: Routes =
         }
       }
     },{
-      path: 'quiz/quizes', component: ListQuizComponent,
+      path: 'quizes', component: ListQuizComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
@@ -177,7 +216,7 @@ export const AdminLayoutRoutes: Routes =
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['BASIC', 'PRO', 'ADMIN'],
+          only: ['FREE','BASIC', 'PRO'],
           redirectTo: '/me/403'
         }
       }

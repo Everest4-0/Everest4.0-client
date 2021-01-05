@@ -15,7 +15,7 @@ import { Answer } from 'app/models/quiz/answer';
 export class ListQuizComponent implements OnInit {
 
   public form = new QuizForm()
-  public quizes: Array<Quiz> = [];
+  public quizzes: Array<Quiz> = [new Quiz()];
   public quiz: Quiz = new Quiz();
 
   constructor(
@@ -26,7 +26,7 @@ export class ListQuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.quizService.all({ userId: this.auth.user.id }).subscribe(quizes => this.quizes = quizes)
+    this.quizService.all({ userId: this.auth.user.id }).subscribe(quizzes => this.quizzes = quizzes)
   }
 
   get correct() {
@@ -58,10 +58,9 @@ export class ListQuizComponent implements OnInit {
       this.quizService.create(this.quiz))
       .subscribe(quiz => {
         if (this.quiz.id) {
-          this.quizes.filter(q => q.id === quiz.id)[0] = quiz
-          
+          this.quizzes.filter(q => q.id === quiz.id)[0] = quiz
         } else {
-          this.quizes.push(quiz)
+          this.quizzes.push(quiz)
         }
         this.toast.success('Desafio ' + (this.quiz.id ? 'Actualizado' : 'criado') + ' com sucesso', 'Sucesso', {
           timeOut: 5000,

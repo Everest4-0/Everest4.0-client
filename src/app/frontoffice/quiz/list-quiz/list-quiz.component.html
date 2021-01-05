@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container-fluid ">
-        <div class="row">
+        <div class="row hidden">
             <div class="col-md-2">
                 <div class="card">
                     <h5>Total</h5>
@@ -43,7 +43,7 @@
                                 <th colspan=3>Desafios</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of quizes; let i=index">
+                            <tr *ngFor="let item of quizzes; let i=index">
                                 <td style="width: 50px;">{{i+1}}</td>
                                 <td>{{item.text}}</td>
                                 <td style="width: 50px;"><button (click)="quiz=item"

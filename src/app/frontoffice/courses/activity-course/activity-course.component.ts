@@ -1,7 +1,8 @@
 import { ActivityTask } from 'app/models/course/activity_task';
 import { AppService } from './../../../services/app.service';
 import { Activity } from './../../../models/course/activity';
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { CountdownComponent } from 'ngx-countdown';
 //import * as NGYTPackage from './../../../../package.json';
 
 @Component({
@@ -12,7 +13,6 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
 export class ActivityCourseComponent implements OnInit {
 
   @Input() public activity: Activity;
-
   playerVars = {
     cc_lang_pref: 'pt',
     controls: 0,
@@ -27,19 +27,18 @@ export class ActivityCourseComponent implements OnInit {
   page: number = 1;
   totalPages: number;
   isLoaded: boolean = false;
-
-
-  public task=new ActivityTask()
-  public taskIndex=0
+  public task = new ActivityTask()
+  public taskIndex = 0
   constructor() {
     ///this.version = NGYTPackage['dependencies']['ngx-youtube-player'].replace('^', '');
   }
   ngOnInit(): void {
-    //throw new Error('Method not implemented.');
+    
+
   }
+ 
   get attachmentType() {
     if (this.activity.attType === 3) {
-      this.task=this.activity.tasks[this.taskIndex];
       return 'quiz';
     }
     else if (!this.activity.attachment) {
