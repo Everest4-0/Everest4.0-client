@@ -1,3 +1,7 @@
+import { HelpdeskComponent } from './../../frontoffice/helpdesk/helpdesk.component';
+import { MonitoringComponent } from './../../frontoffice/monitoring/monitoring.component';
+import { VacantJobComponent } from './../../frontoffice/vacant-job/vacant-job.component';
+import { CoachingComponent } from './../../frontoffice/coaching/coaching.component';
 import { DetailsQuizComponent } from './../../frontoffice/quiz/details-quiz/details-quiz.component';
 import { UpdateQuizComponent } from './../../frontoffice/quiz/update-quiz/update-quiz.component';
 import { DeleteQuizComponent } from './../../frontoffice/quiz/delete-quiz/delete-quiz.component';
@@ -57,6 +61,42 @@ export const AdminLayoutRoutes: Routes =
       data: {
         permissions: {
           only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'coaching', component: CoachingComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'vacant-n-jobs', component: VacantJobComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'helpdesk', component: HelpdeskComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO','BASIC','FREE'],
+          redirectTo: '/me/403'
+        }
+      }
+    }, {
+      path: 'monitoring', component: MonitoringComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['PRO','BASIC'],
           redirectTo: '/me/403'
         }
       }
@@ -187,7 +227,7 @@ export const AdminLayoutRoutes: Routes =
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['BASIC', 'PRO', 'ADMIN'],
+          only: ['FREE','BASIC', 'PRO'],
           redirectTo: '/me/403'
         }
       }

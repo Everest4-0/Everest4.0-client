@@ -1,3 +1,10 @@
+import { HelpdeskComponent } from './../../frontoffice/helpdesk/helpdesk.component';
+import { MonitoringComponent } from './../../frontoffice/monitoring/monitoring.component';
+import { VacantJobComponent } from './../../frontoffice/vacant-job/vacant-job.component';
+import { CoachingComponent } from './../../frontoffice/coaching/coaching.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { CounterDirective } from './../../directive/counter.directive';
+import { ActivityTaskComponent } from './../../frontoffice/courses/activity-task/activity-task.component';
 
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 
@@ -57,10 +64,6 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 
-import { SwiperModule } from 'ngx-swiper-wrapper';
-import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -70,15 +73,8 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-// SwiperOptions from 'swiper' could also be used here instead of SwiperConfigInterface
-const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  observer: true,
-  direction: 'horizontal',
-  threshold: 50,
-  spaceBetween: 5,
-  slidesPerView: 1,
-  centeredSlides: true
-};
+import { CountdownModule } from 'ngx-countdown';
+
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -97,9 +93,9 @@ FullCalendarModule.registerPlugins([
     ModalModule,
     MomentModule,
     FullCalendarModule,
-    SwiperModule,
     FlexLayoutModule,
     PipesModule,
+    CountdownModule,
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl/*, useClass: MyIntl */ },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
@@ -107,9 +103,12 @@ FullCalendarModule.registerPlugins([
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' }),
     NgxYoutubePlayerModule.forRoot(),
 
-    PdfViewerModule
+    PdfViewerModule,
+
+    //NgxPermissionsModule.forRoot(),
   ],
   declarations: [
+    CounterDirective,
     DiagnosticComponent,
     HomeComponent,
     UserComponent,
@@ -139,6 +138,7 @@ FullCalendarModule.registerPlugins([
     EnrollingCourseComponent,
     ActivityCourseComponent,
    
+    ActivityTaskComponent,
     ForbidenComponent,
     //QuizComponent,
 
@@ -147,15 +147,17 @@ FullCalendarModule.registerPlugins([
 
 
     ListCourseComponent,
-    DetailsCourseComponent
+    DetailsCourseComponent,
+
+
+    CoachingComponent,
+    VacantJobComponent,
+    HelpdeskComponent,
+    MonitoringComponent
   ],
   exports:[
   ],
   providers: [
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
   ]
 })
 
