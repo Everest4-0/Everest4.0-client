@@ -12,7 +12,6 @@ import { DetailsCourseComponent } from './../../frontoffice/courses/details-cour
 import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
 import { CreateQuizComponent } from '../../frontoffice/quiz/create-quiz/create-quiz.component';
 import { ListQuizComponent } from '../../frontoffice/quiz/list-quiz/list-quiz.component';
-import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { GoalsComponent } from './../../frontoffice/goals/goals/goals.component';
 import { UserHomeComponent } from './../../frontoffice/user/user-home/user-home.component';
 
@@ -163,16 +162,7 @@ export const AdminLayoutRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    }, {
-      path: 'quiz', component: QuizComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
-        }
-      }
-    }, {
+    },{
       path: 'quiz/quizes', component: ListQuizComponent,
       canActivate: [NgxPermissionsGuard],
       data: {

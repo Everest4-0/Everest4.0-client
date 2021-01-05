@@ -16,7 +16,6 @@ import { EnrollingCourseComponent } from './../../frontoffice/courses/enrolling-
 import { ForbidenComponent } from './../../frontoffice/costum/forbiden/forbiden.component';
 import { DetailsCourseComponent } from './../../frontoffice/courses/details-course/details-course.component';
 import { ListCourseComponent } from './../../frontoffice/courses/list-course/list-course.component';
-import { QuizComponent } from './../../frontoffice/quiz/quiz.component';
 import { UserSettingsComponent } from './../../frontoffice/user/user-settings/user-settings.component';
 import { UserSecurityComponent } from '../../frontoffice/user/user-security/user-security.component';
 import { NewsListComponent } from './../../frontoffice/news/news-list/news-list.component';
@@ -140,11 +139,9 @@ FullCalendarModule.registerPlugins([
    
     ActivityTaskComponent,
     ForbidenComponent,
-    //QuizComponent,
 
     ScheduleComponent,
     CalendarComponent,
-
 
     ListCourseComponent,
     DetailsCourseComponent,
