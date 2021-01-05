@@ -50,11 +50,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
 
-import { ListQuizComponent } from './frontoffice/quiz/list-quiz/list-quiz.component';
-import { CreateQuizComponent } from './frontoffice/quiz/create-quiz/create-quiz.component';
-import { DeleteQuizComponent } from './frontoffice/quiz/delete-quiz/delete-quiz.component';
-import { UpdateQuizComponent } from './frontoffice/quiz/update-quiz/update-quiz.component';
-import { DetailsQuizComponent } from './frontoffice/quiz/details-quiz/details-quiz.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -129,11 +124,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-    ListQuizComponent,
-    CreateQuizComponent,
-    DeleteQuizComponent,
-    UpdateQuizComponent,
-    DetailsQuizComponent
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,
