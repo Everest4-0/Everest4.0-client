@@ -143,7 +143,6 @@ export class HomeComponent implements OnInit {
       { title: 'Em atraso', imageClass: 'fa fa-circle text-warning' }
     ];
 
-
   }
   getEmailChartDataSeries() {
 

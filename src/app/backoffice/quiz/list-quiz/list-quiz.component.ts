@@ -16,9 +16,11 @@ export class ListQuizComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.quizService.all({}).subscribe(quizes =>
+    this.quizService.all({userId:this.auth.user.id}).subscribe(quizes =>{
       this.quizes = quizes
-    )
+
+      console.log(quizes)
+    })
   }
 
 }

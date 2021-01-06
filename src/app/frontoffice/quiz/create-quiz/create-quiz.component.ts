@@ -55,5 +55,4 @@ export class CreateQuizComponent implements OnInit {
       this.router.navigate(['/me/quiz/quizes']);
     })
   }
-
 }

@@ -74,6 +74,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { CountdownModule } from 'ngx-countdown';
 import { FrontofficeComponent } from './frontoffice/frontoffice.component';
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -151,7 +152,10 @@ FullCalendarModule.registerPlugins([
     CoachingComponent,
     VacantJobComponent,
     HelpdeskComponent,
-    MonitoringComponent
+    MonitoringComponent,
+
+
+    ListQuizComponent
   ],
   exports: [
   ],
