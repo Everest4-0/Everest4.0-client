@@ -17,6 +17,7 @@ import { NgLocalization } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
+  public quizSolved = false;
   public dataLoaded = false;
   public emailChartType: ChartType;
   public emailChartData: any;
@@ -90,6 +91,10 @@ export class HomeComponent implements OnInit {
           [fnToDo(eAtr), fnDoing(eAtr), fnDone(eAtr)]
         ]
       };
+
+      if (!this.quizSolved)
+        this.openQuiz()
+
       this.dataLoaded = true;
     })
 
@@ -143,7 +148,24 @@ export class HomeComponent implements OnInit {
       { title: 'Em atraso', imageClass: 'fa fa-circle text-warning' }
     ];
 
+
+
   }
+
+  solveQuiz(){
+    this.toast.success('Teste', 'teste', {
+      progressBar:true,
+      timeOut:5000
+    })
+  }
+  openQuiz() {
+    this.modalService.open('quiz-teste')
+  }
+  closeQuiz() {
+    this.quizSolved=true;
+    this.modalService.close('quiz-teste')
+  }
+
   getEmailChartDataSeries() {
 
     let now = moment()

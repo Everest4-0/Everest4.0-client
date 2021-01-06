@@ -26,9 +26,10 @@
         </div>
         <div class="col-md-4" style=" min-height: 200px">
             <div class="card">
-                    <a [routerLink]="['/me/quizes']" class="btn btn-success btn-lg">
-                        Desafios
-                    </a>
+                <a [routerLink]="['/me/quizes']" class="btn btn-success btn-lg">
+                    Desafios
+                </a>
+
                 <ng-template>
                 </ng-template>
             </div>
@@ -36,4 +37,46 @@
         </div>
 
     </div>
+    <jw-modal id="quiz-teste" class="md" title="Desafio 1 de 5">
+        <h4>... </h4>
+        <hr>
+        <div class="row">
+            <form class="col-md-12">
+
+                <blockquote>
+                    <div class="col-md-12">
+                        <h5 class="text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus esse qui ducimus
+                            ratione nostrum! Reprehenderit laborum maxime vitae enim beatae, <br> distinctio velit
+                            nesciunt ipsam dicta voluptatibus eveniet possimus, doloribus quas.
+                        </h5>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <input type="radio" name="teste"><label for="teste" class="text"> Option1</label>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="radio" name="teste"><label for="teste" class="text"> Option2</label>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="radio" name="teste"><label for="teste" class="text"> Option3</label>
+                        </div>
+                    </div>
+                    <br>
+                </blockquote>
+                <div class="col-md-6">
+                    <div class="text">
+                        <button type="button" class="btn border-none" (click)='closeQuiz()'>
+                            Deixar para depois</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success btn-fill" (click)='solveQuiz()'>
+                            Resolver</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </jw-modal>
 </div>
