@@ -1,7 +1,7 @@
 <div class="container-fluid bg-info">
     <h1 class="text-center">
-      <ng-container [counter]="activity.duration*60" [times]="1" (value)="value = $event===0 ? nextQuiz() : $event">
-        {{ value }}
+      <ng-container [counter]="activity.duration*60" [times]="1" (value)="value = $event===0 ? nextQuiz() : $event ">
+        {{ (value*1000)|amDateFormat: "mm:ss" }}
       </ng-container>
     </h1>
   <div class="modal-dialog" style="margin: 5% auto;">
