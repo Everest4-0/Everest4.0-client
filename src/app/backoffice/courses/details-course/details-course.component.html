@@ -7,6 +7,7 @@
             <div class="col-md-9">
                 <h3><b>Titulo</b></h3>
                 <h1><b style="color: #FFF;">{{course.title}}</b></h1>
+                <h1 style="color: #FFF;">#{{course.code}} </h1>
             </div>
             <div class="col-md-3">
                 <img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail">
@@ -22,10 +23,10 @@
                 <h5>{{course.descriptions}}</h5>
                 <h3><b>Módulos</b></h3>
                 <div class="col-md-12">
-                    <div class="row" *ngFor="let module of course.modules; let i=index">
-                        <div class="row" style="background: #eee;">
+                    <div class="row" *ngFor="let module of course.modules|arrSort:'orderNo'; let i=index">
+                        <div class="row {{module.orderNo>-1 && module.orderNo<100 ? '' : 'standard-module'}}" style="background: #eee;">
                             <div class="col-md-9">
-                                <small>Módulo {{i+1}}</small>
+                                <small>Módulo {{i}}</small>
                                 <h5><b>{{module.title}}</b></h5>
                             </div>
                             <div class="col-md-3 text-right">
@@ -33,20 +34,18 @@
                                 <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-expenses-{{i}}"
                                     (click)="accordion($event.target)"></button>
                             </div>
-
-
                         </div>
 
                         <div class="panel" id="panel-expenses-{{i}}" cdkDropList #partsList="cdkDropList"
                             [cdkDropListData]="activity.tasks" (cdkDropListDropped)="onDrop(module,$event)">
                             <ul @list class="list-group">
-                                <li class="list-group-item" *ngFor="let activity of module.activities|arrSort:'orderNo'"
+                                <li class="list-group-item" *ngFor="let activity of module.activities|arrSort:'orderNo'; let j=index"
                                     cdkDrag>
                                     <button class="btn btn-sm border-none">
-                                        :: {{activity.orderNo+1}}
+                                        :: {{j+1}}
                                     </button>
                                     {{activity.title}}
-                                    <button class="btn btn-xs pull-right border-none"
+                                    <button class="btn btn-xs pull-right border-none" *ngIf="activity.orderNo!=99"
                                         (click)="updateActivity(activity, module)">
                                         <i class="pe-7s-note"></i>
                                     </button>
@@ -66,7 +65,17 @@
 <div class="card col-md-4">
     <div class="content">
         <div class="row">
+            <div class="col-md-12 card">
 
+                <div class="table-responsive table-full-width">
+                    <table class="table table-hover table-striped">
+                        <tr><td>Insrcitos</td></tr>
+                        <tr *ngFor="let item of course.enrollments">
+                            <td>{{item.user.datas.fullName}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <h3><b>Sobre o Curso</b></h3>
             <div class="col-md-12">
                 <ul class="list-group">
@@ -81,6 +90,10 @@
                     <li class="list-group-item row">
                         <div class="col-md-6">Nível:</div>
                         <div class="col-md-6">{{['Iniciante','Intermediario','Avançado'][course.level]}}</div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-6">Perfil:</div>
+                        <div class="col-md-6"><span class="badge badge-primary" *ngFor="let role of course.roles">{{role}}</span></div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Competências:</div>
@@ -113,37 +126,38 @@
                         <div class="col-md-6">Inscritos:</div>
                         <div class="col-md-6">{{course.enrollments.length}}</div>
                     </li>
-                    <li class="list-group-item row">
+                    <li class="list-group-item row hidden">
                         <div class="col-md-6">Inscritos neste Ano:</div>
                         <div class="col-md-6"></div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Certificados:</div>
-                        <div class="col-md-6">50 minutos</div>
+                        <div class="col-md-6">5 minutos</div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Em curso:</div>
-                        <div class="col-md-6">50 minutos</div>
+                        <div class="col-md-6">{{course.enrollments.length}}</div>
                     </li>
                 </ul>
             </div>
+           
         </div>
     </div>
 </div>
 
 
-<jw-modal id="form-activity-modal" class="lg" title="Actividade">
-    <h4 *ngIf="false">{{activity.id===null? 'Actualizar':'Registar'}} actividade nº {{activity.orderNo}} > Módulo
+<jw-modal id="form-activity-modal" class="lg" title="Actividade #{{activity.code}}">
+    <h4 >{{activity.id ? 'Actualizar':'Registar nova'}} actividade nº {{activity.orderNo}} > Módulo
         {{activity.module.title}}
     </h4>
     <hr>
     <div class="row text-center">
-        <form [formGroup]="activityForm">
+        <form [formGroup]="activityForm" (ngSubmit)="saveActivity()" #form="ngForm">
             <div class="col-md-12">
                 <div class="form-group col-md-8">
-                    <label for="exampleInputEmail1">Título</label>
+                    <label for="exampleInputEmail1">Título {{activity.orderNo}}</label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="activity.title"
-                        formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        formControlName="title" id="exampleInputEmail1" [readonly]="activity.module.orderNo<0 || activity.module.orderNo>90" [disabled]="true" aria-describedby="emailHelp"
                         placeholder="Title">
                 </div>
                 <div class="form-group col-md-2">
@@ -151,7 +165,7 @@
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="activity.duration"
                         formControlName="duration">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" *ngIf="!(activity.module.orderNo<0 || activity.module.orderNo>90)">
                     <label for="exampleInputEmail1">Tipo</label>
                     <select class="form-control form-control-lg" [(ngModel)]="activity.attType"
                         [ngModelOptions]="{standalone: true}">
@@ -216,7 +230,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group" *ngFor="let answer of task.answers; let j=index">
+                                        <div class="form-group" *ngFor="let answer of task.answers|arrSort:createdAt; let j=index">
                                             <small>Opção {{j+1}}</small>
                                             <div class="row">
                                                 <div class="col-md-1">
@@ -247,8 +261,8 @@
                 </div>
             </div>
             <div class="row text-center"><br>
-                <button class="btn btn-success btn-fill" (click)="saveActivity()">Salvar</button>
-                <button class="btn btn-default" (click)="modalService.close('form-activity-modal')">Fechar</button>
+                <button class="btn btn-success btn-fill" type="submit" >Salvar</button>
+                <button class="btn btn-default" type="button" (click)="modalService.close('form-activity-modal')">Fechar</button>
             </div>
         </form>
 

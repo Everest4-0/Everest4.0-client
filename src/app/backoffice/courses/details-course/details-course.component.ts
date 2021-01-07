@@ -67,8 +67,8 @@ export class DetailsCourseComponent implements OnInit {
     }
   }
 
-  get duration(){
-    return this.course.modules.reduce((x,y)=>x+y.activities.reduce((a,b)=>a+b.duration,0),0);
+  get duration() {
+    return this.course.modules.reduce((x, y) => x + y.activities.reduce((a, b) => a + b.duration, 0), 0);
   }
   public onChangeFloat(): void {
     this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
@@ -162,12 +162,13 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   addActivity(module: Module) {
+    debugger
+    this.activity = new Activity();
     this.attType = 0;
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
 
-    this.activity = new Activity();
-    this.activity.orderNo = module.activities.length;
+    this.activity.orderNo = module.activities.length+1;
     this.activity.module = module;
     this.modalService.open('form-activity-modal');
   }
@@ -235,6 +236,7 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   onDrop(source, event: CdkDragDrop<string[]>) {
+    if (source.orderNo < 0 || source.orderNo > 90) { return; }
     moveItemInArray(
       source.activities,
       event.previousIndex,
