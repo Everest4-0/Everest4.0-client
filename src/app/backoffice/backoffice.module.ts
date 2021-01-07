@@ -104,6 +104,7 @@ import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
     CreateQuizComponent
   ],
   imports: [
+    
     CommonModule,
     NavbarModule,
     FooterModule,
