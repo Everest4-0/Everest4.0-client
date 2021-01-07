@@ -1,3 +1,4 @@
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { UserSecurityComponent } from './user/user-security/user-security.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { HelpdeskComponent } from './helpdesk/helpdesk.component';
@@ -151,7 +152,9 @@ FullCalendarModule.registerPlugins([
     CoachingComponent,
     VacantJobComponent,
     HelpdeskComponent,
-    MonitoringComponent
+    MonitoringComponent,
+
+    ListQuizComponent
   ],
   exports: [
   ],

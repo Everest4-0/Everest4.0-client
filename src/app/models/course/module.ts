@@ -3,7 +3,7 @@ import { Course } from './course';
 
 export class Module {
     id: string;
-    order: number;
+    orderNo: number;
     title: string;
     descriptions: boolean;
     course: Course;
