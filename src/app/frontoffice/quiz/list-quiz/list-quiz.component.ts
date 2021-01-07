@@ -66,11 +66,12 @@ export class ListQuizComponent implements OnInit {
           timeOut: 5000,
           progressBar: true,
         })
+        this.modalService.close('quiz-modal');
 
-        this.modalService.close('form-quiz-modal');
       })
   }
   createQuiz() {
+    debugger
     this.quiz = new Quiz()
     this.quiz.answers = [new Answer(true), new Answer()]
     this.quiz.user = this.auth.user

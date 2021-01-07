@@ -10,19 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListQuizComponent implements OnInit {
 
-  public quizes: Array<Quiz>=[];
-  
-  constructor(private quizService:QuizService,
-              private auth: AuthService) { }
+  public quizes: Array<Quiz> = [];
+
+  constructor(private quizService: QuizService,
+    private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.quizService.all({}).subscribe(quizes=>
-      {
-        quizes.forEach(quiz => {
-          if(quiz.user.id==this.auth.user.id)
-            this.quizes.push(quiz); 
-        })
-      })
+    this.quizService.all({userId:this.auth.user.id}).subscribe(quizes =>{
+      this.quizes = quizes
+
+      console.log(quizes)
+    })
   }
 
 }

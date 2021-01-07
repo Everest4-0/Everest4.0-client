@@ -74,7 +74,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { CountdownModule } from 'ngx-countdown';
-import { FrontofficeComponent } from './frontoffice/frontoffice.component';
 
 
 FullCalendarModule.registerPlugins([

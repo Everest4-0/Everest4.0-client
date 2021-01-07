@@ -40,13 +40,16 @@ export class CreateQuizComponent implements OnInit {
     this.quiz.answers
     .splice(index, 1);
   }
+  changeCorrect(id) {
+    this.quiz.answers.forEach(x => x.correct = x.text === id)
+  }
   saveForm() {
+    console.log(this.quiz)
     this.quizService.create(this.quiz).subscribe(data => {
       this.toast.success('Desafio criado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })
-
       this.router.navigate(['backoffice/quizes']);
     })
   }
