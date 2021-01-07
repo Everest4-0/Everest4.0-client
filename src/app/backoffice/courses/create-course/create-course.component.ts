@@ -59,13 +59,12 @@ export class CreateCourseComponent implements OnInit {
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
-    this.course.modules[event.previousIndex].order = event.currentIndex;
     moveItemInArray(
       this.course.modules,
       event.previousIndex,
       event.currentIndex
     )
-    this.course.modules[event.previousIndex].order = event.currentIndex;
+    this.course.modules.forEach((m, i) => m.orderNo = i)
   }
 
   onFileSelect(input) {
