@@ -67,17 +67,17 @@ export class ListQuizComponent implements OnInit {
           progressBar: true,
         })
 
-        this.modalService.close('quiz-modal');
+        this.modalService.close('form-quiz-modal');
       })
   }
   createQuiz() {
     this.quiz = new Quiz()
     this.quiz.answers = [new Answer(true), new Answer()]
     this.quiz.user = this.auth.user
-    this.modalService.open('quiz-modal');
+    this.modalService.open('form-quiz-modal');
   }
   updateQuiz(quiz: Quiz) {
     this.quiz = quiz
-    this.modalService.open('quiz-modal');
+    this.modalService.open('form-quiz-modal');
   }
 }
