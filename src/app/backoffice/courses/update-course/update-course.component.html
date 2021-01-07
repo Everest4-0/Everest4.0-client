@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="">Perfil</label>
-                            <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PROFESSIONAL']" formControlName="roles"
+                            <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PRO']" formControlName="roles"
                                 [(ngModel)]="course.roles">
                             </ng-select>
                         </div>
@@ -118,7 +118,7 @@
                     </label>
                     <input #fileUploader id='fileUploader' class="hidden" type="file"
                         (change)="onFileSelect($event.target)">
-                    <img src="{{auth.serverAddress}}{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
+                    <img src="{{course.cover.length>200 ? '' : auth.serverAddress}}{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary" (click)="saveForm()">Submit</button>

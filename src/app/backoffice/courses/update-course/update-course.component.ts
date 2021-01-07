@@ -13,7 +13,7 @@ import { Module } from 'app/models/course/module';
 @Component({
   selector: 'app-update-course',
   templateUrl: './update-course.component.html',
-  styleUrls: ['./update-course.component.css']
+  styleUrls: ['./update-course.component.scss']
 })
 export class UpdateCourseComponent implements OnInit {
 
@@ -34,6 +34,7 @@ export class UpdateCourseComponent implements OnInit {
 
     const id = this.route.snapshot.params['id'];
     this.courseService.one(id).subscribe(course => {
+      course.modules = course.modules.filter(x => x.orderNo > -1 && x.orderNo < 100)
       this.course = course
     })
     this.evaluationService.all().subscribe(evaluations => this.evaluations = evaluations)
@@ -47,7 +48,7 @@ export class UpdateCourseComponent implements OnInit {
         progressBar: true,
       })
 
-      this.router.navigate(['/backoffice/courses']);
+      this.router.navigate(['/backoffice/courses/details/' + course.id]);
     })
   }
 
@@ -63,13 +64,12 @@ export class UpdateCourseComponent implements OnInit {
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
-    this.course.modules[event.previousIndex].order = event.currentIndex;
     moveItemInArray(
       this.course.modules,
       event.previousIndex,
       event.currentIndex
     )
-    this.course.modules[event.previousIndex].order = event.currentIndex;
+    this.course.modules.forEach((m, i) => m.orderNo = i)
   }
 
   onFileSelect(input) {
