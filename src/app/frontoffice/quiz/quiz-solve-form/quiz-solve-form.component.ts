@@ -1,3 +1,4 @@
+import { AnsweredQuiz } from './../../../models/quiz/answeredQuiz';
 import { StorageService } from 'ngx-webstorage-service';
 import { Quiz } from './../../../models/quiz/quiz';
 import { QuizService } from './../../../services/quiz.service';
@@ -14,6 +15,9 @@ import Swal from 'sweetalert2'
 export class QuizSolveFormComponent implements OnInit {
 
   public quizes: Array<Quiz> = [];
+  public answeredQuiz: AnsweredQuiz = new AnsweredQuiz()
+  public answeredQuizes: Array<AnsweredQuiz> = [];
+
   public quiz: Quiz = new Quiz();
   public quizIndex = 0
   public counter = 31
@@ -33,10 +37,20 @@ export class QuizSolveFormComponent implements OnInit {
   }
 
   verifyCorrect(answer) {
-      (answer)? this.quizSuccess() :
-                this.quizError()
+    (answer) ? this.quizSuccess() :
+      this.quizError()
   }
 
+  addAnswersQuiz(correct: boolean) {
+    this.answeredQuiz = { quiz: this.quiz, isCorrect: correct }
+    this.answeredQuizes.unshift(this.answeredQuiz)
+  }
+  verificateAnswerQuiz(quiz) {
+    let text = ''
+    quiz.answers.forEach(ans => (ans.correct) ? text=ans.text:'')
+
+    return text
+  }
   quizSuccess() {
     Swal.fire({
       icon: 'success',
@@ -44,7 +58,9 @@ export class QuizSolveFormComponent implements OnInit {
       showConfirmButton: false,
       timer: 999
     })
-    
+
+    this.addAnswersQuiz(true)
+
     this.nextQuiz()
   }
 
@@ -55,6 +71,9 @@ export class QuizSolveFormComponent implements OnInit {
       showConfirmButton: false,
       timer: 999
     })
+
+    this.addAnswersQuiz(false)
+
     this.nextQuiz()
   }
 
@@ -80,8 +99,11 @@ export class QuizSolveFormComponent implements OnInit {
 
       this.getQuiz()
 
+      this.quizIndex++
+
       return this.counter
-    }
+    } else if (this.quizIndex == 5)
+      this.quizIndex++
 
     return this.counter = 0
   }
@@ -92,9 +114,6 @@ export class QuizSolveFormComponent implements OnInit {
     this.quiz = this.quizes[index]
 
     this.quizes.splice(index, 1)
-
-    this.quizIndex++
-
   }
 
   discard() {

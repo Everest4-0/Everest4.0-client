@@ -22,14 +22,15 @@
 </jw-modal>
 
 <jw-modal id="solve-quiz-form" class="md">
-    <div class="container-fluid bg-info">
-        <h1 class="text-center">
-            <ng-container [counter]="counter" [times]="" (value)="value = $event===0 ? nextQuiz() : $event ">
-                {{ (value*1000)|amDateFormat: "mm:ss" }}
-            </ng-container>
-        </h1>
-    </div>
-    <div>
+    <div *ngIf="quizIndex<=5">
+        <div class="container-fluid bg-info">
+            <h1 class="text-center">
+                <ng-container [counter]="counter" [times]="6-quizIndex"
+                    (value)="value = $event===0 ? nextQuiz() : $event ">
+                    {{ (value*1000)|amDateFormat: "mm:ss" }}
+                </ng-container>
+            </h1>
+        </div>
         <div class="modal-header">
             <h3 class="text-center"><span class="label label-warning" id="qid">{{quizIndex}}</span> {{quiz.text}}
             </h3>
@@ -49,8 +50,7 @@
             </div>
             <div class="quiz" id="quiz" data-toggle="buttons">
                 <label class="element-animation1 btn btn-lg btn-primary btn-block"
-                       *ngFor="let answer of quiz.answers; let i = index"
-                       (click)="verifyCorrect(answer.correct)">
+                    *ngFor="let answer of quiz.answers; let i = index" (click)="verifyCorrect(answer.correct)">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-chevron-right"></i>
                     </span>
@@ -65,12 +65,48 @@
             </button>
             <span id="answer">
                 <button class="btn btn-default border-none">
+                </button>
 
-                </button>
-                <button class="btn btn-success btn-fill" *ngIf="quizIndex==5">
-                    Finalizar
-                </button>
             </span>
         </div>
+    </div>
+    <div *ngIf="quizIndex>5">
+        <h1 class="title h1">RESUMO</h1>
+
+        <hr>
+
+        <table class="table table-responsive">
+            <thead class="thead">
+                <th>#</th>
+                <th>Desafio</th>
+                <th>Resposta certa</th>
+                <th>Acertou</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let answerQuiz of answeredQuizes; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{answerQuiz.quiz.text}}</td>
+                    <td>
+                        {{this.verificateAnswerQuiz(answerQuiz.quiz)}}
+                    </td>
+                    <td class="text-success" *ngIf="answerQuiz.isCorrect">
+                        Acertou
+                    </td>
+                    <td class="text-danger" *ngIf="!answerQuiz.isCorrect">
+                        Errou
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <button class="btn btn-success btn-fill pull-right" (click)="discard()">
+                            Finalizar
+                        </button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
     </div>
 </jw-modal>
