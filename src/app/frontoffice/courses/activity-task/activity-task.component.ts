@@ -1,4 +1,3 @@
-
 import { ActivityService } from './../../../services/courses/activity.service';
 import { ActivityTask } from 'app/models/course/activity_task';
 import { Activity } from './../../../models/course/activity';
@@ -10,8 +9,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./activity-task.component.scss']
 })
 export class ActivityTaskComponent implements OnInit {
-
-
 
   @Input() act: Activity;
   public activity: Activity = new Activity();

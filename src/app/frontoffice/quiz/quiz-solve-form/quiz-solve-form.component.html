@@ -1,0 +1,76 @@
+<jw-modal id="solve-quiz" class="md" title="Resolver desafios">
+    <h4 class="title h4">Deseja testar a sua capacidade com desafios?</h4>
+    <hr>
+    <div class="row">
+        <form class="col-md-12">
+            <div class="col-md-6">
+                <div class="text">
+                    <button type="button" class="btn border-none" (click)='discard()'>
+                        Deixar para depois
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-success btn-fill" (click)='solveQuizForm()'>
+                        Resolver
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</jw-modal>
+
+<jw-modal id="solve-quiz-form" class="md">
+    <div class="container-fluid bg-info">
+        <h1 class="text-center">
+            <ng-container [counter]="counter" [times]="" (value)="value = $event===0 ? nextQuiz() : $event ">
+                {{ (value*1000)|amDateFormat: "mm:ss" }}
+            </ng-container>
+        </h1>
+    </div>
+    <div>
+        <div class="modal-header">
+            <h3 class="text-center"><span class="label label-warning" id="qid">{{quizIndex}}</span> {{quiz.text}}
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="col-xs-3 col-xs-offset-5">
+                <div id="loadbar" style="display: none;">
+                    <div class="blockG" id="rotateG_01"></div>
+                    <div class="blockG" id="rotateG_02"></div>
+                    <div class="blockG" id="rotateG_03"></div>
+                    <div class="blockG" id="rotateG_04"></div>
+                    <div class="blockG" id="rotateG_05"></div>
+                    <div class="blockG" id="rotateG_06"></div>
+                    <div class="blockG" id="rotateG_07"></div>
+                    <div class="blockG" id="rotateG_08"></div>
+                </div>
+            </div>
+            <div class="quiz" id="quiz" data-toggle="buttons">
+                <label class="element-animation1 btn btn-lg btn-primary btn-block"
+                       *ngFor="let answer of quiz.answers; let i = index"
+                       (click)="verifyCorrect(answer.correct)">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </span>
+                    <input type="radio" name="q_answer">
+                    <h3>{{answer.text}}</h3>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default border-none pull-left">
+                {{quizIndex}}/5
+            </button>
+            <span id="answer">
+                <button class="btn btn-default border-none">
+
+                </button>
+                <button class="btn btn-success btn-fill" *ngIf="quizIndex==5">
+                    Finalizar
+                </button>
+            </span>
+        </div>
+    </div>
+</jw-modal>

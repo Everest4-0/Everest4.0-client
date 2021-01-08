@@ -1,3 +1,4 @@
+import { QuizSolveFormComponent } from './quiz/quiz-solve-form/quiz-solve-form.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { UserSecurityComponent } from './user/user-security/user-security.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
@@ -153,7 +154,8 @@ FullCalendarModule.registerPlugins([
     HelpdeskComponent,
     MonitoringComponent,
 
-    ListQuizComponent
+    ListQuizComponent,
+    QuizSolveFormComponent
   ],
   exports: [
   ],
