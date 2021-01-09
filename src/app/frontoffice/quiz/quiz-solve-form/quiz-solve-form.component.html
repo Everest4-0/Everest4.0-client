@@ -21,7 +21,7 @@
     </div>
 </jw-modal>
 
-<jw-modal id="solve-quiz-form" class="md">
+<jw-modal id="solve-quiz-form" class="md" title="{{quizIndex>5 ? 'Resumo':''}}">
     <div *ngIf="quizIndex<=5">
         <div class="container-fluid bg-info">
             <h1 class="text-center">
@@ -71,29 +71,32 @@
         </div>
     </div>
     <div *ngIf="quizIndex>5">
-        <h1 class="title h1">RESUMO</h1>
+        <h1 class="title h1"></h1>
 
         <hr>
 
         <table class="table table-responsive">
             <thead class="thead">
-                <th>#</th>
-                <th>Desafio</th>
-                <th>Resposta certa</th>
-                <th>Acertou</th>
+                <th class="text-center">#</th>
+                <th class="text-center">Desafio</th>
+                <th class="text-center">Resposta certa</th>
+                <th class="text-center">Acertou</th>
             </thead>
             <tbody>
                 <tr *ngFor="let answerQuiz of answeredQuizes; let i=index">
                     <td>{{i+1}}</td>
                     <td>{{answerQuiz.quiz.text}}</td>
-                    <td>
+                    <td class="text-center">
                         {{this.verificateAnswerQuiz(answerQuiz.quiz)}}
                     </td>
-                    <td class="text-success" *ngIf="answerQuiz.isCorrect">
+                    <td class="text-center text-success" *ngIf="answerQuiz.isCorrect">
                         Sim
                     </td>
-                    <td class="text-danger" *ngIf="!answerQuiz.isCorrect">
+                    <td class="text-center text-danger" *ngIf="answerQuiz.isCorrect==false">
                         Não
+                    </td>
+                    <td class="text-center" *ngIf="answerQuiz.isCorrect===undefined">
+                        Tempo excedido
                     </td>
                 </tr>
             </tbody>

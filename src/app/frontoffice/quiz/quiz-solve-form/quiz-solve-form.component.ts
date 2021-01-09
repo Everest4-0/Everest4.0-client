@@ -14,13 +14,15 @@ import Swal from 'sweetalert2'
 })
 export class QuizSolveFormComponent implements OnInit {
 
+  public value;
   public quizes: Array<Quiz> = [];
   public answeredQuiz: AnsweredQuiz = new AnsweredQuiz()
   public answeredQuizes: Array<AnsweredQuiz> = [];
 
   public quiz: Quiz = new Quiz();
-  public quizIndex = 0
-  public counter = 31
+  public quizIndex = 0;
+  public quizStart = false;
+  public counter = 31;
 
   constructor(private modalService: ModalService,
     private toast: ToastService,
@@ -53,10 +55,16 @@ export class QuizSolveFormComponent implements OnInit {
 
     this.nextQuiz()
 
+    this.quizStart=true;
+
     this.quizIndex = 1
   }
 
   nextQuiz() {
+    
+    if(this.value==1&&this.quizStart)
+      this.addAnswersQuiz(undefined)
+
     if (this.quizIndex < 5) {
 
       this.getQuiz()
