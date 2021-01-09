@@ -31,4 +31,21 @@ export class ActivityService  extends AppService<Activity> implements IService<A
   create(o: any): Observable<Activity> {
     return this.createOne(o)
   }
+
+  addUserAnswer(o:any): Observable<any> {
+    debugger
+    return this.http.post(this.url+'/add_user_answer', o)
+  }
+  getUserAnswer(a:any): Observable<any> {
+    let str = '';
+debugger
+    for (var key in a) {
+      if (str != '') {
+        str += "&";
+      }
+      str += key + "=" + encodeURIComponent(a[key]);
+    }
+    return this.http.get(this.url+'/user_answer' + '?' + str)
+  }
+//  add_user_answer
 }

@@ -1,8 +1,11 @@
+import { TaskAnswer } from './../../../models/course/task_answer';
+import { User } from 'app/models/main/user';
+import { AuthService } from 'app/services/auth.service';
 
 import { ActivityService } from './../../../services/courses/activity.service';
 import { ActivityTask } from 'app/models/course/activity_task';
 import { Activity } from './../../../models/course/activity';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-activity-task',
@@ -12,29 +15,75 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ActivityTaskComponent implements OnInit {
 
 
-
+  @Output() nextTask=new EventEmitter<string>()
   @Input() act: Activity;
   public activity: Activity = new Activity();
   taskIndex = 0;
   counter = 10;
+  done: boolean = false;
+  taskAnswers: Array<TaskAnswer> = []
+
+  public user: User = this.auth.user;
   public task: ActivityTask = new ActivityTask();
   constructor(
+    public auth: AuthService,
     private activityService: ActivityService
   ) { }
 
   ngOnInit(): void {
     this.activityService.one(this.act.id).subscribe(activity => {
       this.activity = activity;
+
+      this.task = this.activity.tasks[this.taskIndex];
+      this.activityService.getUserAnswer({ userId: this.auth.user.id, activityId: this.activity.id }).subscribe(d => {
+        if (d.length === this.activity.tasks.length) {
+          this.taskAnswers = d
+          this.done = true
+        }
+      })
     })
   }
 
   nextQuiz() {
-    if (this.taskIndex < this.activity.tasks.length) {
-      this.task = this.activity.tasks[this.taskIndex];
-      this.taskIndex++
-      return  this.counter =0;
+    if (this.taskIndex < this.activity.tasks.length - 1) {
+      this.task = this.activity.tasks[++this.taskIndex];
     }
-    return this.counter = 1 + (this.activity.duration / this.activity.tasks.length) * 60
+    else {
+      this.done = true
+    }
+    if (this.user.taskAnswers[0] === undefined) {
+      this.user.taskAnswers[0] = this.task.answers.filter(x => !x.correct)[0]
+      this.taskAnswers.push(this.task.answers.filter(x => !x.correct)[0])
+    }
+    this.activityService.addUserAnswer(this.user).subscribe(data => {
+      debugger
+      let u = data;
+      this.user.taskAnswers[0] = undefined
+    })
   }
 
+  addAnswer(answer, i) {
+    this.user.taskAnswers[0] = answer
+    this.taskAnswers.push(answer)
+  }
+  get corrects() {
+    debugger
+    return [
+      this.taskAnswers.filter(t => t.correct).reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points), 0),
+      this.taskAnswers.filter(t => t.correct).length
+    ]
+  }
+  get wrongs() {
+    debugger
+    return [
+      this.taskAnswers.filter(t => !t.correct).reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points), 0),
+      this.taskAnswers.filter(t => !t.correct).length
+    ]
+  }
+  submit() {
+    this.nextQuiz()
+  }
+  finishQuiz(){
+    this.nextTask.emit('ola mundo')
+  }
 }

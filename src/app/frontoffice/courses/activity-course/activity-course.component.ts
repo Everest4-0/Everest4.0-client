@@ -1,7 +1,7 @@
 import { ActivityTask } from 'app/models/course/activity_task';
 import { AppService } from './../../../services/app.service';
 import { Activity } from './../../../models/course/activity';
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
 import { CountdownComponent } from 'ngx-countdown';
 //import * as NGYTPackage from './../../../../package.json';
 
@@ -12,6 +12,8 @@ import { CountdownComponent } from 'ngx-countdown';
 })
 export class ActivityCourseComponent implements OnInit {
 
+
+  @Output() nextTask=new EventEmitter<string>()
   @Input() public activity: Activity;
   playerVars = {
     cc_lang_pref: 'pt',
@@ -32,11 +34,15 @@ export class ActivityCourseComponent implements OnInit {
   constructor() {
     ///this.version = NGYTPackage['dependencies']['ngx-youtube-player'].replace('^', '');
   }
+
   ngOnInit(): void {
-    
 
   }
- 
+
+  toNextTask(e) {
+    this.nextTask.emit(e)
+    
+  }
   get attachmentType() {
     if (this.activity.attType === 3) {
       return 'quiz';

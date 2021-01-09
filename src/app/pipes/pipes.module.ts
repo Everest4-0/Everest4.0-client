@@ -4,6 +4,7 @@ import { ArrFilterPipe } from './arr-filter.pipe';
 import { ArrSortPipe } from './arr-sort.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
     GroupByPipe,
     ArrSumPipe,
     ArrFilterPipe,
-    ArrSortPipe
+    ArrSortPipe,
+    SecondsToTimePipe
   ],
   exports: [
     GroupByPipe,

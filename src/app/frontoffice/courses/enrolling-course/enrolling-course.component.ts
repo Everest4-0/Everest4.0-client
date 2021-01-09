@@ -21,6 +21,7 @@ const BreakException = {};
 export class EnrollingCourseComponent implements OnInit {
 
   public i = 0;
+  public countDown: number;
   public canActivate: boolean = false;
   public course: Course = new Course();
   public relatedCourses: Array<Course> = [];
@@ -50,36 +51,55 @@ export class EnrollingCourseComponent implements OnInit {
     }
     this.canActivate = false
     this.enrollment.lastActivity = item;
-
-    const numbers = timer(/*this.enrollment.lastActivity.duration*/ 1 * 10 * 1000);
-    numbers.subscribe(x => this.canActivate = true);
+    debugger
+    if (this.enrollment.lastActivity.status === 2) {
+      this.canActivate = true
+    } else if (this.enrollment.lastActivity.attType === 3) {
+      this.canActivate = false
+    } else {
+      const numbers = timer(this.enrollment.lastActivity.duration * 60 * 1000);
+      numbers.subscribe(x => this.canActivate = true);
+    }
 
   }
 
-  forbiden(){
+  forbiden() {
     Swal.fire(
       'Atenção!',
       'Para ter acesso a esse conteudo deve concluir a actividade anterior',
       'error'
     )
   }
-  nextActivity() {
+  nextActivity(e = null) {
+    if (e !== null) {
+      this.canActivate = true
+    }
     debugger
     try {
       this.course.modules.forEach(m => {
-        m.activities.filter(x => x.i === this.enrollment.lastActivity.i)[0].status = 0
-        m.activities.filter(x => x.i === this.enrollment.lastActivity.i + 1)[0].status = 1
+        if (m.activities.filter(x => x.i === this.enrollment.lastActivity.i)[0]) {
+          m.activities.filter(x => x.i === this.enrollment.lastActivity.i)[0].status = 2
+        }
+
+        if (m.activities.filter(x => x.i === this.enrollment.lastActivity.i + 1)[0]) {
+          m.activities.filter(x => x.i === this.enrollment.lastActivity.i + 1)[0].status = 1
+        }
+        //m.activities.filter(x => x.i === this.enrollment.lastActivity.i + 1)[0].status = 1
         m.activities.forEach(a => {
           if (a.i === this.enrollment.lastActivity.i + 1) {
             this.selectActivity(a)
             throw BreakException;
           }
         })
+
       })
     } catch (e) {
       if (e !== BreakException) throw e;
     }
 
+    if (this.enrollment.lastActivity.status === 2) {
+      return;
+    }
     this.enrollmentService.update(this.enrollment).subscribe(enrollment => {
       debugger
       this.toast.success('Actividade ' + (this.enrollment.lastActivity.i + 1) + ' -  ' + this.enrollment.lastActivity.title, 'Sucesso', {

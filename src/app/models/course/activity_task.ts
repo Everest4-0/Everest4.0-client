@@ -9,6 +9,7 @@ export class ActivityTask {
     user: User = new User();
     answers: Array<TaskAnswer> = [];
     activity: Activity = new Activity();
+    points: number = 1;
     createdAt: Date;
     updatedAt: Date;
 
