@@ -8,6 +8,7 @@ export class TaskAnswer {
     correct: boolean = false;
     users: Array<User> = []
     task: ActivityTask = new ActivityTask()
+    taskId: string;
     enrollments: Array<Enrollment> = [];
     createdAt: Date;
     updatedAt: Date;

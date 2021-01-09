@@ -15,7 +15,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ActivityTaskComponent implements OnInit {
 
 
-  @Output() nextTask=new EventEmitter<string>()
+  @Output() nextTask = new EventEmitter<string>()
   @Input() act: Activity;
   public activity: Activity = new Activity();
   taskIndex = 0;
@@ -66,24 +66,26 @@ export class ActivityTaskComponent implements OnInit {
     this.user.taskAnswers[0] = answer
     this.taskAnswers.push(answer)
   }
+  
   get corrects() {
-    debugger
     return [
-      this.taskAnswers.filter(t => t.correct).reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points), 0),
+      this.taskAnswers.filter(t => t.correct)
+      .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points+''), 0),
       this.taskAnswers.filter(t => t.correct).length
     ]
   }
   get wrongs() {
-    debugger
+
     return [
-      this.taskAnswers.filter(t => !t.correct).reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points), 0),
+      this.taskAnswers.filter(t => !t.correct)
+      .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points+''), 0),
       this.taskAnswers.filter(t => !t.correct).length
     ]
   }
   submit() {
     this.nextQuiz()
   }
-  finishQuiz(){
+  finishQuiz() {
     this.nextTask.emit('ola mundo')
   }
 }
