@@ -33,7 +33,7 @@ export class QuizSolveFormComponent implements OnInit {
     this.quizService.all({}).subscribe(quizes => {
       this.quizes = quizes
 
-      if (solve.data===undefined)
+      if (solve.data === undefined)
         this.openQuiz()
     })
   }
@@ -84,7 +84,11 @@ export class QuizSolveFormComponent implements OnInit {
 
   addAnswersQuiz(correct: boolean) {
     this.answeredQuiz = { quiz: this.quiz, isCorrect: correct }
-    this.answeredQuizes.unshift(this.answeredQuiz)
+    let lenth = this.answeredQuizes.push(this.answeredQuiz)
+
+    if (lenth == 5)
+      this.storageService.save('solve_quiz', true);
+
   }
   verificateAnswerQuiz(quiz) {
     let text = ''
