@@ -92,8 +92,7 @@ export class HomeComponent implements OnInit {
         ]
       };
 
-      if (!this.quizSolved)
-        this.openQuiz()
+     
 
       this.dataLoaded = true;
     })
@@ -152,19 +151,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  solveQuiz(){
-    this.toast.success('Teste', 'teste', {
-      progressBar:true,
-      timeOut:5000
-    })
-  }
-  openQuiz() {
-    this.modalService.open('quiz-teste')
-  }
-  closeQuiz() {
-    this.quizSolved=true;
-    this.modalService.close('quiz-teste')
-  }
+ 
 
   getEmailChartDataSeries() {
 

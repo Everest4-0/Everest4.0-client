@@ -1,0 +1,112 @@
+<jw-modal id="solve-quiz" class="md" title="Resolver desafios">
+    <h4 class="title h4">Deseja testar a sua capacidade com desafios?</h4>
+    <hr>
+    <div class="row">
+        <form class="col-md-12">
+            <div class="col-md-6">
+                <div class="text">
+                    <button type="button" class="btn border-none" (click)='discard()'>
+                        Deixar para depois
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-success btn-fill" (click)='solveQuizForm()'>
+                        Resolver
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</jw-modal>
+
+<jw-modal id="solve-quiz-form" class="md">
+    <div *ngIf="quizIndex<=5">
+        <div class="container-fluid bg-info">
+            <h1 class="text-center">
+                <ng-container [counter]="counter" [times]="6-quizIndex"
+                    (value)="value = $event===0 ? nextQuiz() : $event ">
+                    {{ (value*1000)|amDateFormat: "mm:ss" }}
+                </ng-container>
+            </h1>
+        </div>
+        <div class="modal-header">
+            <h3 class="text-center"><span class="label label-warning" id="qid">{{quizIndex}}</span> {{quiz.text}}
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="col-xs-3 col-xs-offset-5">
+                <div id="loadbar" style="display: none;">
+                    <div class="blockG" id="rotateG_01"></div>
+                    <div class="blockG" id="rotateG_02"></div>
+                    <div class="blockG" id="rotateG_03"></div>
+                    <div class="blockG" id="rotateG_04"></div>
+                    <div class="blockG" id="rotateG_05"></div>
+                    <div class="blockG" id="rotateG_06"></div>
+                    <div class="blockG" id="rotateG_07"></div>
+                    <div class="blockG" id="rotateG_08"></div>
+                </div>
+            </div>
+            <div class="quiz" id="quiz" data-toggle="buttons">
+                <label class="element-animation1 btn btn-lg btn-primary btn-block"
+                    *ngFor="let answer of quiz.answers; let i = index" (click)="verifyCorrect(answer.correct)">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </span>
+                    <input type="radio" name="q_answer">
+                    <h3>{{answer.text}}</h3>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default border-none pull-left">
+                {{quizIndex}}/5
+            </button>
+            <span id="answer">
+                <button class="btn btn-default border-none">
+                </button>
+
+            </span>
+        </div>
+    </div>
+    <div *ngIf="quizIndex>5">
+        <h1 class="title h1">RESUMO</h1>
+
+        <hr>
+
+        <table class="table table-responsive">
+            <thead class="thead">
+                <th>#</th>
+                <th>Desafio</th>
+                <th>Resposta certa</th>
+                <th>Acertou</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let answerQuiz of answeredQuizes; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{answerQuiz.quiz.text}}</td>
+                    <td>
+                        {{this.verificateAnswerQuiz(answerQuiz.quiz)}}
+                    </td>
+                    <td class="text-success" *ngIf="answerQuiz.isCorrect">
+                        Sim
+                    </td>
+                    <td class="text-danger" *ngIf="!answerQuiz.isCorrect">
+                        Não
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <button class="btn btn-success btn-fill pull-right" (click)="discard()">
+                            Finalizar
+                        </button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</jw-modal>

@@ -6,7 +6,7 @@ export class Answer {
     text: string;
     correct: boolean = false;
     createdAt: Date;
-    updatedAt: Date;
+    updatedAt: Date;               
     users: Array<User> = []
     quiz: Quiz = new Quiz();
 
