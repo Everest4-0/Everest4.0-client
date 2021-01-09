@@ -41,6 +41,7 @@ export class AuthService extends AppService<User> implements IService<any> {
 
   signOut(): void {
     this.store.remove('current_user');
+    this.store.remove('solve_quiz');
   }
 
   one(id: string): Observable<User> {

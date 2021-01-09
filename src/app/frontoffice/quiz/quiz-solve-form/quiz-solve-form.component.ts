@@ -1,5 +1,5 @@
+import { StorageServices } from './../../../services/storage.service';
 import { AnsweredQuiz } from './../../../models/quiz/answeredQuiz';
-import { StorageService } from 'ngx-webstorage-service';
 import { Quiz } from './../../../models/quiz/quiz';
 import { QuizService } from './../../../services/quiz.service';
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -25,15 +25,56 @@ export class QuizSolveFormComponent implements OnInit {
   constructor(private modalService: ModalService,
     private toast: ToastService,
     private quizService: QuizService,
-    /*private storageService: StorageService*/) { }
+    private storageService: StorageServices) { }
 
   ngOnInit(): void {
+    const solve = (this.storageService.get('solve_quiz'))
+
     this.quizService.all({}).subscribe(quizes => {
       this.quizes = quizes
 
-      //if (this.solveQuiz())
-      this.openQuiz()
+      if (solve.data===undefined)
+        this.openQuiz()
     })
+  }
+
+  openQuiz() {
+    this.modalService.open('solve-quiz')
+  }
+
+  solveQuizForm() {
+
+    this.modalService.close('solve-quiz')
+
+    this.modalService.open('solve-quiz-form')
+
+    this.storageService.remove('solve_quiz');
+
+    this.nextQuiz()
+
+    this.quizIndex = 1
+  }
+
+  nextQuiz() {
+    if (this.quizIndex < 5) {
+
+      this.getQuiz()
+
+      this.quizIndex++
+
+      return this.counter
+    } else if (this.quizIndex == 5)
+      this.quizIndex++
+
+    return this.counter = 0
+  }
+
+  getQuiz() {
+    let index = Math.floor(Math.random() * this.quizes.length)
+
+    this.quiz = this.quizes[index]
+
+    this.quizes.splice(index, 1)
   }
 
   verifyCorrect(answer) {
@@ -47,7 +88,7 @@ export class QuizSolveFormComponent implements OnInit {
   }
   verificateAnswerQuiz(quiz) {
     let text = ''
-    quiz.answers.forEach(ans => (ans.correct) ? text=ans.text:'')
+    quiz.answers.forEach(ans => (ans.correct) ? text = ans.text : '')
 
     return text
   }
@@ -77,48 +118,12 @@ export class QuizSolveFormComponent implements OnInit {
     this.nextQuiz()
   }
 
-  openQuiz() {
-    this.modalService.open('solve-quiz')
-  }
-
-  solveQuizForm() {
-
-    //this.storageService.set('solve_quiz', true);
-
-    this.modalService.close('solve-quiz')
-
-    this.modalService.open('solve-quiz-form')
-
-    this.nextQuiz()
-
-    this.quizIndex = 1
-  }
-
-  nextQuiz() {
-    if (this.quizIndex < 5) {
-
-      this.getQuiz()
-
-      this.quizIndex++
-
-      return this.counter
-    } else if (this.quizIndex == 5)
-      this.quizIndex++
-
-    return this.counter = 0
-  }
-
-  getQuiz() {
-    let index = Math.floor(Math.random() * this.quizes.length)
-
-    this.quiz = this.quizes[index]
-
-    this.quizes.splice(index, 1)
-  }
-
   discard() {
     this.modalService.close('solve-quiz')
     this.modalService.close('solve-quiz-form')
-    //this.storageService.set('solve_quiz', false);
+
+    this.storageService.save('solve_quiz', true);
+
   }
 }
+
