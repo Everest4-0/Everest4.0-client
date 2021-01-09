@@ -14,8 +14,8 @@
       <button class="btn btn-xs btn-default btn-fill" (click)="nextPage()" [disabled]="page === totalPages">Págian
         Anterior</button>
     </div>
-    <pdf-viewer src="{{serverAddress}}{{activity.attachment}}" [show-all]="true" [page]="page"
-      (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
+    <pdf-viewer src="{{serverAddress}}{{activity.attachment}}" [show-all]="false" [page]="page"
+      (after-load-complete)="afterLoadComplete($event)" [fit-to-page]="true" ></pdf-viewer>
   </div>
   <div class="content-data text-center" *ngIf="attachmentType=='youtube'" style="background-color: #000;">
     <youtube-player [videoId]="videoId" (ready)="savePlayer($event)" (change)="onStateChange($event)" [height]="480"
@@ -30,6 +30,6 @@
   </div>
 
 
-  <app-activity-task class="content-data" *ngIf="attachmentType=='quiz'" [act]="activity">
+  <app-activity-task class="content-data" (nextTask)="toNextTask($event)" *ngIf="attachmentType=='quiz'" [act]="activity">
 
   </app-activity-task>

@@ -1,3 +1,4 @@
+import { TaskAnswer } from './../course/task_answer';
 import { AppService } from './../../services/app.service';
 import { UserSetting } from './user_setting';
 import { UserData } from './user_data';
@@ -34,6 +35,8 @@ export class User {
     evaluationRequestes: Array<EvaluationRequest> = []
     evaluationRequested: Array<EvaluationRequest> = []
 
+
+    taskAnswers: Array<TaskAnswer> = [];
     datas: UserData = new UserData();
     settings: UserSetting = new UserSetting();
 

@@ -45,7 +45,7 @@
                                         :: {{j+1}}
                                     </button>
                                     {{activity.title}}
-                                    <button class="btn btn-xs pull-right border-none" *ngIf="activity.orderNo!=99"
+                                    <button class="btn btn-xs pull-right border-none" 
                                         (click)="updateActivity(activity, module)">
                                         <i class="pe-7s-note"></i>
                                     </button>
@@ -223,10 +223,17 @@
                                         </button>
                                     </div>
                                     <div class="col-md-6">
+                                        {{task.points}}
                                         <div class="form-group">
                                             <textarea class="form-control" rows="6" cols="80"
                                                 placeholder="You can write your text here..." [(ngModel)]="task.text"
                                                 name="text_{{i}}" [ngModelOptions]="{standalone: true}"></textarea>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <small class="mr-sm-2">Pontos</small>
+                                            <input class="form-control mb-8 mr-sm-8" type="number"
+                                                placeholder="You can write your text here..." [(ngModel)]="task.points"
+                                                name="points_{{i}}" [ngModelOptions]="{standalone: true}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -238,16 +245,16 @@
                                                         [ngModelOptions]="{standalone: true}" name="correct_{{i}}"
                                                         (change)="changeCorrect(task.answers,answer.text)" required />
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-10">
                                                     <input type="text" class="form-control input-sm"
                                                         [ngModelOptions]="{standalone: true}" [(ngModel)]="answer.text"
-                                                        value="{{answer.text}}" rows="5" required />
+                                                        value="{{answer.text}}" required />
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-1">
                                                     <button type="button" *ngIf="task.answers.length>2"
-                                                        class="btn btn-xs btn-danger"
+                                                        class="btn btn-danger border-none"
                                                         (click)="removeItem(task.answers,j)">
-                                                        <i class="fa fa-trash"></i>
+                                                        <i class="pe-7s-close"></i>
                                                     </button>
                                                 </div>
                                             </div>
