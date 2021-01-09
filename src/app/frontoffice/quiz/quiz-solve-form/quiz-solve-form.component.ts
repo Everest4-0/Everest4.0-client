@@ -33,8 +33,6 @@ export class QuizSolveFormComponent implements OnInit {
     this.quizService.all({rand:true, limit:5}).subscribe(quizes => {
       this.quizes = quizes
 
-      alert(quizes.length)
-
       if (solve.data === undefined)
         this.openQuiz()
 
