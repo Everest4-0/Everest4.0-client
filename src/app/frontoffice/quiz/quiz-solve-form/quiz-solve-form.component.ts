@@ -30,11 +30,14 @@ export class QuizSolveFormComponent implements OnInit {
   ngOnInit(): void {
     const solve = (this.storageService.get('solve_quiz'))
 
-    this.quizService.all({}).subscribe(quizes => {
+    this.quizService.all({rand:true, limit:5}).subscribe(quizes => {
       this.quizes = quizes
+
+      alert(quizes.length)
 
       if (solve.data === undefined)
         this.openQuiz()
+
     })
   }
 
