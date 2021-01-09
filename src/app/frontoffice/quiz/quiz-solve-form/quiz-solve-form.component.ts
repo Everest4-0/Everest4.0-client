@@ -121,9 +121,7 @@ export class QuizSolveFormComponent implements OnInit {
   discard() {
     this.modalService.close('solve-quiz')
     this.modalService.close('solve-quiz-form')
-
     this.storageService.save('solve_quiz', true);
-
   }
 }
 
