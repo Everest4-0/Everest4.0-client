@@ -31,7 +31,7 @@ export class TestimonialComponent implements OnInit {
       htmlToImage.toPng(node)
         .then(function (dataUrl) {
           var img = document.getElementById('main-test');
-          img.src = dataUrl;
+          img.setAttribute('src', dataUrl);
           document.getElementById('main').remove()
         })
         .catch(function (error) {
