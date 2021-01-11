@@ -74,8 +74,12 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-import { CountdownModule } from 'ngx-countdown';
+import { QRCodeModule } from 'angularx-qrcode';
 
+import { CountdownModule } from 'ngx-countdown';
+import { TestimonialComponent } from './courses/testimonial/testimonial.component';
+
+import { TestimonialValidationComponent } from './courses/testimonial-validation/testimonial-validation.component';
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -104,8 +108,8 @@ FullCalendarModule.registerPlugins([
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' }),
     NgxYoutubePlayerModule.forRoot(),
 
+    QRCodeModule,
     PdfViewerModule,
-
     //NgxPermissionsModule.forRoot(),
   ],
   declarations: [
@@ -155,7 +159,9 @@ FullCalendarModule.registerPlugins([
     MonitoringComponent,
 
     ListQuizComponent,
-    QuizSolveFormComponent
+    QuizSolveFormComponent,
+    TestimonialComponent,
+    TestimonialValidationComponent
   ],
   exports: [
   ],

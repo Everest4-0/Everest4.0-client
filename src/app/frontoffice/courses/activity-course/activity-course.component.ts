@@ -47,6 +47,9 @@ export class ActivityCourseComponent implements OnInit {
     if (this.activity.attType === 3) {
       return 'quiz';
     }
+    else if (this.activity.attType===4){
+      return ''
+    }
     else if (!this.activity.attachment) {
       return ''
     } else if (this.activity.attachment.split('youtube').length > 1) {

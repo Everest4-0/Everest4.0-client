@@ -39,7 +39,7 @@ export class EnrollingCourseComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     this.enrollmentService.one(id).subscribe(enrollment => {
-      debugger
+      
       this.enrollment = enrollment;
       this.loadCourse(enrollment.courseId)
     })
@@ -51,7 +51,7 @@ export class EnrollingCourseComponent implements OnInit {
     }
     this.canActivate = false
     this.enrollment.lastActivity = item;
-    debugger
+    
     if (this.enrollment.lastActivity.status === 2) {
       this.canActivate = true
     } else if (this.enrollment.lastActivity.attType === 3) {
@@ -74,7 +74,7 @@ export class EnrollingCourseComponent implements OnInit {
     if (e !== null) {
       this.canActivate = true
     }
-    debugger
+    
     try {
       this.course.modules.forEach(m => {
         if (m.activities.filter(x => x.i === this.enrollment.lastActivity.i)[0]) {
@@ -101,7 +101,7 @@ export class EnrollingCourseComponent implements OnInit {
       return;
     }
     this.enrollmentService.update(this.enrollment).subscribe(enrollment => {
-      debugger
+      
       this.toast.success('Actividade ' + (this.enrollment.lastActivity.i + 1) + ' -  ' + this.enrollment.lastActivity.title, 'Sucesso', {
         timeOut: 5000,
         progressBar: true,

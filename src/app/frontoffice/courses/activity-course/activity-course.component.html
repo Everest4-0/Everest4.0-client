@@ -33,3 +33,4 @@
   <app-activity-task class="content-data" (nextTask)="toNextTask($event)" *ngIf="attachmentType=='quiz'" [act]="activity">
 
   </app-activity-task>
+  <app-testimonial [activity]="activity" class="content-data" *ngIf="activity.attType===100"></app-testimonial>
