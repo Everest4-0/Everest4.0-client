@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModalService } from './../../../components/modal/modal.service';
 import { QuizForm } from './../../../backoffice/forms/quiz.form';
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -21,7 +22,9 @@ export class ListQuizComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private auth: AuthService,
+    private route: ActivatedRoute,
     private toast: ToastService,
+    private router: Router,
     public modalService: ModalService,
   ) { }
 
@@ -62,23 +65,45 @@ export class ListQuizComponent implements OnInit {
         } else {
           this.quizzes.push(quiz)
         }
+
         this.toast.success('Desafio ' + (this.quiz.id ? 'Actualizado' : 'criado') + ' com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })
-        this.modalService.close('quiz-modal');
+
+        this.modalService.close('form-quiz-modal');
+        this.reload();
 
       })
   }
+
   createQuiz() {
-    debugger
+    //debugger
     this.quiz = new Quiz()
     this.quiz.answers = [new Answer(true), new Answer()]
     this.quiz.user = this.auth.user
     this.modalService.open('form-quiz-modal');
   }
+
   updateQuiz(quiz: Quiz) {
     this.quiz = quiz
     this.modalService.open('form-quiz-modal');
   }
+
+  deleteQuiz(quiz: Quiz){
+    this.quizService.delete(quiz.id).subscribe(datas => {
+      this.toast.success('Eliminado com sucesso', 'Sucesso',{
+        timeOut:5000,
+        progressBar:true
+      })
+      this.reload()
+    })
+  }
+  
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
+  }
+
 }

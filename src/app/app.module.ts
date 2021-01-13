@@ -129,7 +129,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FirstloginComponent,
     DragAndDropDirective,
     ModalModule,
-    ModalComponent,
+   ModalComponent,
     FormsModule,
     FormValidatorComponent,
     FormStepsComponent,

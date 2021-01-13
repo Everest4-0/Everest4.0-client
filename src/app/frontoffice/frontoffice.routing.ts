@@ -181,7 +181,7 @@ export const FrontOfficeRoutes: Routes =
       }
     },
     {
-      path: 'quiz/quizes/delete/:id', component: DeleteQuizComponent,
+      path: 'quizes/delete/:id', component: DeleteQuizComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {

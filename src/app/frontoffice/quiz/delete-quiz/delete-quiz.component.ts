@@ -21,13 +21,7 @@ export class DeleteQuizComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id']
 
-    this.quizService.delete(id).subscribe(datas => {
-      this.toast.success('Eliminado com sucesso', 'Sucesso',{
-        timeOut:5000,
-        progressBar:true
-      })
-      this.router.navigate(['me/quiz/quizes'])
-    })
+   
   }
 
 }
