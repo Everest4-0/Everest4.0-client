@@ -89,4 +89,22 @@ export class DetailsCourseComponent implements OnInit {
   get courseDuration() {
     return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0);
     }
+
+
+  get courseEvolution() {
+    let i;
+    let n = 0;
+    debugger
+    this.course.modules.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(m => {
+      m.activities.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(a => {
+        n++;
+        if (this.enrollment.activityId === a.id) {
+          i = n
+        }
+      })
+    })
+
+    let f = (i ?? 1) * 100 / n;
+    return f === Infinity ? 0 : f;
+  }
 }
