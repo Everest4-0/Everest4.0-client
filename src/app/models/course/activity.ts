@@ -10,7 +10,7 @@ export class Activity {
     duration: number;
     orderNo: number;
     module: Module = new Module();
-
+    moduleId: string;
     attachment: string;
     tasks: Array<ActivityTask> = [];
 

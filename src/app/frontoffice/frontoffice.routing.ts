@@ -2,15 +2,11 @@ import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { VacantJobComponent } from './vacant-job/vacant-job.component';
 import { CoachingComponent } from './coaching/coaching.component';
-import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
-import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
-import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 import { EnrollingCourseComponent } from './courses/enrolling-course/enrolling-course.component';
 import { ForbidenComponent } from './costum/forbiden/forbiden.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { DetailsCourseComponent } from './courses/details-course/details-course.component';
 import { ListCourseComponent } from './courses/list-course/list-course.component';
-import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { GoalsComponent } from './goals/goals/goals.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
@@ -170,47 +166,7 @@ export const FrontOfficeRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    }, {
-      path: 'quiz/quizes/create', component: CreateQuizComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
-        }
-      }
-    },
-    {
-      path: 'quiz/quizes/delete/:id', component: DeleteQuizComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
-        }
-      }
-    },
-    {
-      path: 'quiz/quizes/update/:id', component: UpdateQuizComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
-        }
-      }
-    },
-    {
-      path: 'quiz/quizes/details/:id', component: DetailsQuizComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
-        }
-      }
-    },
-
+    }, 
     {
       path: 'courses', component: ListCourseComponent,
       canActivate: [NgxPermissionsGuard],
