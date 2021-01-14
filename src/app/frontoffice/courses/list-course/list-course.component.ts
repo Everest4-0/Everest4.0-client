@@ -45,9 +45,9 @@ export class ListCourseComponent implements OnInit {
     let i;
     let n = 0;
     let done = false;
-
-    e.course.modules.forEach(m => {
-      m.activities.forEach(a => {
+    debugger
+    e.course.modules.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(m => {
+      m.activities.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(a => {
         n++;
         if (e.activityId === a.id) {
           i = n
@@ -55,7 +55,7 @@ export class ListCourseComponent implements OnInit {
       })
     })
 
-    let f = (i ?? 1 ) * 100/ n ;
+    let f = (i ?? 1) * 100 / n;
     return f === Infinity ? 0 : f;
   }
 }
