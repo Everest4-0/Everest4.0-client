@@ -109,7 +109,7 @@ import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    //BackOfficeRoutes,
+    BackOfficeRoutes,
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
