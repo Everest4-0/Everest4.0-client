@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-update-quiz',
   templateUrl: './update-quiz.component.html',
-  styleUrls: ['./update-quiz.component.css']
+  styleUrls: ['./update-quiz.component.scss']
 })
 export class UpdateQuizComponent implements OnInit {
 
@@ -41,12 +41,11 @@ export class UpdateQuizComponent implements OnInit {
     .splice(index, 1);
   }
   //TODO: GAMBIARA
-checkCorrect(c){
-  debugger
-  this.quiz.answers.forEach(a=>a.correct=a.id===c.value)
-}
+  changeCorrect(id) {
+    this.quiz.answers.forEach(x => x.correct = x.text === id)
+  }
 
-
+  
   saveForm() {
     this.quizService.update(this.quiz).subscribe(data => {
       this.toast.success('Desafio actualizado com sucesso', 'Sucesso', {

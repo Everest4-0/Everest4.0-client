@@ -42,7 +42,6 @@ import { CreateCourseComponent } from './courses/create-course/create-course.com
 import { DetailsCourseComponent } from './courses/details-course/details-course.component';
 import { UpdateCourseComponent } from './courses/update-course/update-course.component';
 
-
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
 import { TabModule } from '@syncfusion/ej2-angular-navigations';

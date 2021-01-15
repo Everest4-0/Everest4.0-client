@@ -47,6 +47,11 @@
                             <tr *ngFor="let item of quizzes; let i=index">
                                 <td style="width: 50px;">{{i+1}}</td>
                                 <td>{{item.text}}</td>
+                                <td>
+                                    <button class="btn-fill btn-xs btn-{{['success','danger'][item.isActive?0:1]}} btn">
+                                        {{['Activo','Inactivo'][item.isActive?0:1]}}
+                                    </button>
+                                </td>
                                 <td style="width: 50px;"><button (click)="quiz=item"
                                         class="btn btn-xs border-none title h2">
                                         <h4 class="title"><i class="pe-7s-angle-right"></i></h4>
@@ -56,17 +61,16 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="content col-md-8">
                     <div class="col-md-12 card" *ngIf="quiz.text&&quiz.id">
                         <h3>
-                            {{quiz.text}} 
-                            <button (click)="updateQuiz(quiz)"
-                                class="btn btn-default pull-right border-none" style="font-size: 24px;">
+                            {{quiz.text}}
+                            <button (click)="updateQuiz(quiz)" class="btn btn-default pull-right border-none"
+                                style="font-size: 24px;">
                                 <i class="pe-7s-note"></i>
                             </button>
-                            <button (click)="deleteQuiz(quiz)"
-                                class="btn btn-default pull-right border-none" style="font-size: 24px;">
+                            <button (click)="deleteQuiz(quiz)" class="btn btn-default pull-right border-none"
+                                style="font-size: 24px;">
                                 <i class="pe-7s-trash"></i>
                             </button>
                         </h3>
@@ -168,7 +172,7 @@
             </div>
             <div class="clearfix"></div>
             <div class="col-md-12 text-right">
-                <button class="btn btn-success btn-fill pull-rightx">Salvar</button>
+                <button type="submit" class="btn btn-success btn-fill pull-rightx">Salvar</button>
             </div>
         </form>
     </div>

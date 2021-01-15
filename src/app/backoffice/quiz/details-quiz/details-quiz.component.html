@@ -1,10 +1,15 @@
 <app-backoffice-navbar [title]="'Detalhe do desafio'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-                <h4 class="title">{{quiz.text}}</h4>
+        <h4 class="title">
+            {{quiz.text}}
+            <button class="btn-fill btn-xs btn-{{['success','danger'][quiz.isActive?0:1]}} btn">
+                {{['Activo','Inactivo'][quiz.isActive?0:1]}}
+            </button>
+        </h4>
     </div>
     <div class="content table-responsive table-full-width">
-        
+
         <table class="table table-hover table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -20,6 +25,7 @@
                     <td>
                         {{answer.correct}}
                     </td>
+                    
                 </tr>
             </tbody>
         </table>

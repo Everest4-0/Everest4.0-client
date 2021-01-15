@@ -1,48 +1,63 @@
 <app-backoffice-navbar [title]="'Actualizar desafio'"></app-backoffice-navbar>
 
-{{quiz|json}}
 <div class="card">
     <div class="body">
         <div class="content">
-            <form [formGroup]="form" (ngSubmit)="saveForm()">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label>Descrição</label>
-                            <textarea type="text" class="form-control" formControlName="text" [(ngModel)]="quiz.text"
-                                rows="5" required>{{quiz.text}}</textarea>
-                        </div>
+            <div class="row">
+                <form [formGroup]="form" (ngSubmit)="saveForm()" class="col-md-8">
+                    <div class="col-md-12">
+                        <h4>Descrição</h4>
+                        <textarea type="text" class="form-control" formControlName="text" [(ngModel)]="quiz.text"
+                            rows="5" required>{{quiz.text}}</textarea>
                     </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="col-md-9">Opções</div>
-                    <div class="col-md-3 text-right"><button type="button" (click)="addAnswer()"
-                            class="btn btn-primary"> <i class="fa fa-plus"></i></button></div>
-                    <blockquote>
-
-                        <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
-                            <label>Opcao {{i+1}}</label>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <input type="radio"  name="correct" [value]="answer"
-                                        required (change)="checkCorrect($event.target)"/>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
-                                        [(ngModel)]="answer.text" value="{{answer.text}}" rows="5" required />
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4>Opções</h4>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <button type="button" (click)="addAnswer()" class="btn btn-primary"> <i
+                                        class="fa fa-plus"></i></button>
                             </div>
                         </div>
-                    </blockquote>
-                </div>
-                <div class="clearfix"></div>
-                <button class="btn btn-success btn-fill pull-rightx">Actualizar</button>
-            </form>
+
+                        <blockquote>
+                            <div class="form-group" *ngFor="let answer of quiz.answers; let i=index">
+                                <label>Opcao {{i+1}}</label>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <input type="radio" [checked]="answer.correct"
+                                            [ngModelOptions]="{standalone: true}" name="correct"
+                                            (change)="changeCorrect(answer.text)" required />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                            [(ngModel)]="answer.text" value="{{answer.text}}" rows="5" required />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger" (click)="removeAnswer(i)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group">
+                            <h4 class="title">Estado</h4>
+                            <label class="toggle-control">
+                                <input type="checkbox" formControlName="isActive" [(ngModel)]="quiz.isActive">
+                                <span class="control"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-success btn-fill pull-rightx">Salvar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

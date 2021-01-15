@@ -5,7 +5,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th style="width: 200px;">Desafio</th>
+                    <th>Desafio</th>
+                    <th>Estado</th>
                     <th>De</th>
                     <th></th>
             </thead>
@@ -14,9 +15,15 @@
                     <td>{{i+1}}</td>
                     <td>{{quiz.text}}</td>
                     <td>
+                        <button class="btn-fill btn-xs btn-{{['success','danger'][quiz.isActive?0:1]}} btn">
+                            {{['Activo','Inactivo'][quiz.isActive?0:1]}}
+                        </button>
+                    </td>
+                    <td>
                         {{quiz.user.datas.fullName}}
                     </td>
-                    <td><a routerLink="./details/{{quiz.id}}" class="btn btn-xs border-none title h2">
+                    <td>
+                        <a routerLink="./details/{{quiz.id}}" class="btn btn-xs border-none title h2">
                             <h4 class="title"><i class="pe-7s-angle-right"></i></h4>
                         </a>
                     </td>
