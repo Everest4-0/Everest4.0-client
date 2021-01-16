@@ -68,7 +68,7 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   get duration() {
-    return this.course.modules.reduce((x, y) => x + y.activities.reduce((a, b) => a + b.duration, 0), 0);
+    return this.course.modules.reduce((x, y) => x + y.activities.reduce((a, b) => a + b.duration || 0, 0), 0);
   }
   public onChangeFloat(): void {
     this.rteObj.toolbarSettings.enableFloating = this.rteFloatObj.checked;
@@ -168,7 +168,7 @@ export class DetailsCourseComponent implements OnInit {
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
     this.rteObj.toolbarSettings.enableFloating = true;
 
-    this.activity.orderNo = module.activities.length+1;
+    this.activity.orderNo = module.activities.length + 1;
     this.activity.module = module;
     this.modalService.open('form-activity-modal');
   }
@@ -176,8 +176,10 @@ export class DetailsCourseComponent implements OnInit {
   updateActivity(activity, module: Module = new Module()) {
     this.activity = new Activity()
     this.attType = 0;
-    this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
-    this.rteObj.toolbarSettings.enableFloating = true;
+    try {
+      this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
+      this.rteObj.toolbarSettings.enableFloating = true;
+    } catch (e) {}
     this.activity = activity
     this.activity.module = module
     this.modalService.open('form-activity-modal');
