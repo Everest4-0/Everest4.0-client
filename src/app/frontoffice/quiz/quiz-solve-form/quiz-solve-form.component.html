@@ -21,11 +21,11 @@
     </div>
 </jw-modal>
 
-<jw-modal id="solve-quiz-form" class="md" title="{{quizIndex>5 ? 'Resumo':''}}">
-    <div *ngIf="quizIndex<=5">
+<jw-modal id="solve-quiz-form" class="md" title="{{quizIndex>quizesLength ? 'Resumo':''}}">
+    <div *ngIf="quizIndex<=quizesLength">
         <div class="container-fluid bg-info">
             <h1 class="text-center">
-                <ng-container [counter]="counter" [times]="6-quizIndex"
+                <ng-container [counter]="counter" [times]="(quizesLength+1)-quizIndex"
                     (value)="value = $event===0 ? nextQuiz() : $event ">
                     {{ (value*1000)|amDateFormat: "mm:ss" }}
                 </ng-container>
@@ -61,7 +61,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-default border-none pull-left">
-                {{quizIndex}}/5
+                {{this.quizIndex}}/{{quizesLength}}
             </button>
             <span id="answer">
                 <button class="btn btn-default border-none">
@@ -70,7 +70,7 @@
             </span>
         </div>
     </div>
-    <div *ngIf="quizIndex>5">
+    <div *ngIf="quizIndex>quizesLength">
         <h1 class="title h1"></h1>
 
         <hr>

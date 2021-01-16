@@ -20,8 +20,9 @@ export class QuizSolveFormComponent implements OnInit {
   public answeredQuizes: Array<AnsweredQuiz> = [];
 
   public quiz: Quiz = new Quiz();
-  public quizIndex = 0;
   public quizStart = false;
+  public quizesLength=0
+  public quizIndex = 0;
   public counter = 31;
 
   constructor(private modalService: ModalService,
@@ -32,10 +33,11 @@ export class QuizSolveFormComponent implements OnInit {
   ngOnInit(): void {
     const solve = this.storageService.get('solve_quiz')
 
-    this.quizService.all({rand:true, limit:5}).subscribe(quizes => {
+    this.quizService.all({ rand: true, limit: 5 }).subscribe(quizes => {
       this.quizes = quizes
 
-      alert(this.quizes.length)
+      this.quizesLength=this.quizes.length
+
       if (solve.data === undefined)
         this.openQuiz()
 
@@ -56,25 +58,25 @@ export class QuizSolveFormComponent implements OnInit {
 
     this.nextQuiz()
 
-    this.quizStart=true;
+    this.quizStart = true;
 
-    this.quizIndex = 1
   }
 
   nextQuiz() {
-    
-    if(this.value==1&&this.quizStart)
+
+    if (this.value == 1 && this.quizStart)
       this.addAnswersQuiz(undefined)
 
-    if (this.quizIndex < 5) {
+    if (this.quizIndex < this.quizesLength) {
 
       this.getQuiz()
-
+      
       this.quizIndex++
 
       return this.counter
-    } else if (this.quizIndex == 5)
-      this.quizIndex++
+    }
+    
+    this.quizIndex++
 
     return this.counter = 0
   }
@@ -96,7 +98,7 @@ export class QuizSolveFormComponent implements OnInit {
     this.answeredQuiz = { quiz: this.quiz, isCorrect: correct }
     let lenth = this.answeredQuizes.push(this.answeredQuiz)
 
-    if (lenth == 5)
+    if (lenth == this.quizesLength)
       this.storageService.save('solve_quiz', true);
 
   }

@@ -1,28 +1,5 @@
 <div class="main-content">
     <div class="container-fluid ">
-        <div class="row hidden">
-            <div class="col-md-2">
-                <div class="card">
-                    <h5>Total</h5>
-                    <h1>34</h1>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <h5>Correctas</h5>
-                    <h1>34</h1>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card">
-                    <h5>Erradas</h5>
-                    <h1>34</h1>
-                </div>
-            </div>
-            <div class=" card col-md-6">
-                4
-            </div>
-        </div>
         <div class="row">
             <div class="card col-md-12">
                 <div class="header">
@@ -47,11 +24,6 @@
                             <tr *ngFor="let item of quizzes; let i=index">
                                 <td style="width: 50px;">{{i+1}}</td>
                                 <td>{{item.text}}</td>
-                                <td>
-                                    <button class="btn-fill btn-xs btn-{{['success','danger'][item.isActive?0:1]}} btn">
-                                        {{['Activo','Inactivo'][item.isActive?0:1]}}
-                                    </button>
-                                </td>
                                 <td style="width: 50px;"><button (click)="quiz=item"
                                         class="btn btn-xs border-none title h2">
                                         <h4 class="title"><i class="pe-7s-angle-right"></i></h4>
@@ -64,7 +36,13 @@
                 <div class="content col-md-8">
                     <div class="col-md-12 card" *ngIf="quiz.text&&quiz.id">
                         <h3>
+                            
                             {{quiz.text}}
+
+                            <span class="btn-fill btn-xs btn-{{['success','danger'][quiz.isActive?0:1]}}">
+                                {{['Activo','Inactivo'][quiz.isActive?0:1]}}
+                            </span>
+                            
                             <button (click)="updateQuiz(quiz)" class="btn btn-default pull-right border-none"
                                 style="font-size: 24px;">
                                 <i class="pe-7s-note"></i>
