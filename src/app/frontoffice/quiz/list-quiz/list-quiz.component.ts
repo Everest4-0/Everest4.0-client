@@ -7,6 +7,7 @@ import { QuizService } from '../../../services/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from 'app/models/quiz/quiz';
 import { Answer } from 'app/models/quiz/answer';
+import { JsonStorageTranscoder } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-list-quiz',
@@ -55,8 +56,10 @@ export class ListQuizComponent implements OnInit {
   changeCorrect(id) {
     this.quiz.answers.forEach(x => x.correct = x.text === id)
   }
-  saveForm() {
+  saveForm(quizForm) {
     this.quiz.isActive=false;
+
+    if(quizForm.status)
     (this.quiz.id ?
       this.quizService.update(this.quiz) :
       this.quizService.create(this.quiz))
