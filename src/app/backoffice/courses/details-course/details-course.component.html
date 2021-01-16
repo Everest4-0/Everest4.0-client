@@ -24,7 +24,7 @@
                 <h3><b>Módulos</b></h3>
                 <div class="col-md-12">
                     <div class="row" *ngFor="let module of course.modules|arrSort:'orderNo'; let i=index">
-                        <div class="row {{module.orderNo>-1 && module.orderNo<100 ? '' : 'standard-module'}}" style="background: #eee;">
+                        <div class="row {{module.orderNo>-1 && module.orderNo<90 ? '' : 'standard-module'}}" style="background: #eee;">
                             <div class="col-md-9">
                                 <small>Módulo {{i}}</small>
                                 <h5><b>{{module.title}}</b></h5>
@@ -42,10 +42,10 @@
                                 <li class="list-group-item" *ngFor="let activity of module.activities|arrSort:'orderNo'; let j=index"
                                     cdkDrag>
                                     <button class="btn btn-sm border-none">
-                                        :: {{j+1}}
+                                        :: {{j+1}} 
                                     </button>
                                     {{activity.title}}
-                                    <button class="btn btn-xs pull-right border-none" 
+                                    <button class="btn btn-xs pull-right border-none" *ngIf="activity.orderNo<99"
                                         (click)="updateActivity(activity, module)">
                                         <i class="pe-7s-note"></i>
                                     </button>
@@ -132,7 +132,7 @@
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Certificados:</div>
-                        <div class="col-md-6">5 minutos</div>
+                        <div class="col-md-6">{{course.enrollments.length}}</div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Em curso:</div>
@@ -155,9 +155,9 @@
         <form [formGroup]="activityForm" (ngSubmit)="saveActivity()" #form="ngForm">
             <div class="col-md-12">
                 <div class="form-group col-md-8">
-                    <label for="exampleInputEmail1">Título {{activity.orderNo}}</label>
+                    <label for="exampleInputEmail1">Título </label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="activity.title"
-                        formControlName="title" id="exampleInputEmail1" [readonly]="activity.module.orderNo<0 || activity.module.orderNo>90" [disabled]="true" aria-describedby="emailHelp"
+                        formControlName="title" id="exampleInputEmail1" [readonly]="activity.module.orderNo<0 || activity.module.orderNo>90"  aria-describedby="emailHelp"
                         placeholder="Title">
                 </div>
                 <div class="form-group col-md-2">
@@ -223,7 +223,6 @@
                                         </button>
                                     </div>
                                     <div class="col-md-6">
-                                        {{task.points}}
                                         <div class="form-group">
                                             <textarea class="form-control" rows="6" cols="80"
                                                 placeholder="You can write your text here..." [(ngModel)]="task.text"
