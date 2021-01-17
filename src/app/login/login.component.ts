@@ -1,3 +1,5 @@
+import { Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { ActivatedRoute } from '@angular/router';
 import { UserForm } from './../forms/user.form';
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
   signOnUser: User = new User();
   signInUser: User = new User();
   signInForm: FormGroup;
+  signOnForm: FormGroup;
   signInErro: any;
   w;
   x;
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit {
     private broadcastService: BroadcastService, 
     private msAuthService: MsalService) {
     this.userForm = this.fb.group(new UserForm(this.fb));
-    this.signInForm = this.fb.group({ email: [''], passw: [''] });
+    this.signInForm = this.fb.group({ email: ['', Validators.required], passw: ['', Validators.required] });
   }
   ngOnInit(): void {
 
@@ -110,23 +113,28 @@ export class LoginComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
-  signIn() {
-    this.auth.authenticate(this.signInUser,(u: User) => {
-      this.localUser = u;
-      window.open('./', '_self')
-    })
-  };
-  signOn() {
-    this.auth.create({ email: this.signOnUser.email, password: this.signOnUser.password, provider: 'LOCAL' }).subscribe(user => {
-      this.auth.authenticate(user,(u: User) => {
+  signIn(userForm:FormGroup) {
+    this.userForm = userForm
+
+    if(this.userForm.dirty && this.userForm.valid){
+      this.auth.authenticate(this.signInUser,(u: User) => {
         this.localUser = u;
+       
         window.open('./', '_self')
       })
-    })
+    }
+  };
+  
+  signOn(userForm:FormGroup) {
+    this.userForm = userForm
+    
     if (this.userForm.dirty && this.userForm.valid) {
-      alert(
-        `Name: ${this.userForm.value.name} Email: ${this.userForm.value.email}`
-      );
+      this.auth.create({ email: this.signOnUser.email, password: this.signOnUser.password, provider: 'LOCAL' }).subscribe(user => {
+        this.auth.authenticate(user,(u: User) => {
+          this.localUser = u;
+          window.open('./', '_self')
+        })
+      })
     }
   }
 }

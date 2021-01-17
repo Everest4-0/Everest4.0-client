@@ -110,7 +110,7 @@
     <h4>... </h4>
     <hr>
     <div class="row">
-        <form #quizForm="ngForm" [formGroup]="form" (ngSubmit)="saveForm(quizForm)" class="col-md-12">
+        <form #quizForm="ngForm" [formGroup]="form" (ngSubmit)="saveForm()" class="col-md-12">
             <div class="col-md-12">
                 <label>Descrição</label>
                 <textarea type="text" class="form-control" formControlName="text" 

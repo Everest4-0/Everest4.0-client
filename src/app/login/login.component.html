@@ -3,12 +3,14 @@
 <div class="container-login100" style="background-image: url(assets/img/full-screen-image-3.jpg);">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
         <img src="assets/img/dum-logo.svg" class="logo" alt="GOOGLE">
-        <form class="login100-form validate-form" *ngIf="!isCollapsed"  #signOnForm [formGroup]="signInForm " (ngSubmit)="signIn()">
+        <form class="login100-form validate-form" *ngIf="!isCollapsed"  #signOnForm="ngForm"
+         [formGroup]="signInForm " (ngSubmit)="signIn(signOnForm)">
             <span class="login100-form-title p-b-37">
                 Autenticar-se
             </span>
             <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter username or email">
-                <input class="input100" type="text" name="email" placeholder="E-mail" formControlName="email" [(ngModel)]="signInUser.email">
+                <input class="input100" type="email" name="email" placeholder="E-mail" formControlName="email" 
+                [(ngModel)]="signInUser.email" >
                 <span class="focus-input100"></span></div>
             <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
                 <input class="input100" type="password" name="passw" placeholder="Palavra passe" formControlName="passw" [(ngModel)]="signInUser.passw">
@@ -16,9 +18,9 @@
             </div>
             <div class="alert alert-warning" *ngIf="signInErro">
                 <strong>{{signInErro.status}}</strong> {{signInErro.statusText}}
-              </div>
+            </div>
             <div class="container-login100-form-btn">
-                <button class="login100-form-btn" (click)="signIn()">
+                <button class="login100-form-btn" [disabled]="!signOnForm.valid">
                     Entrar
                 </button>
             </div>
@@ -47,13 +49,13 @@
         </form>
 
 
-        <form class="login100-form validate-form" #signOnForm [formGroup]="userForm" (ngSubmit)="signOn()"
-            *ngIf="isCollapsed">
+        <form class="login100-form validate-form" #signOnForm="ngForm" [formGroup]="signInForm" 
+              (ngSubmit)="signOn(signOnForm)"    *ngIf="isCollapsed">
             <span class="login100-form-title p-b-37">
-                Registar-se
+                Registar-se {{signOnForm.valid}}
             </span>
             <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter email">
-                <input class="input100" type="text" formControlName="email" [(ngModel)]="signOnUser.email"
+                <input class="input100" type="email" formControlName="email" [(ngModel)]="signOnUser.email"
                     placeholder="E-mail">
                 <app-control-messages [control]="userForm.get('email')"></app-control-messages>
 
@@ -71,9 +73,7 @@
                     <app-control-messages [control]="userForm.get('email')"></app-control-messages>
                 <span class="focus-input100"></span>
             </div>
-            <div>
-                
-            </div>
+
             <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
                 <input class="" type="checkbox"> 
                 Ao criar uma conta, você concorda com os Termos de Serviço e Código de Honra e reconhece que a Everest e cada Membro processam seus dados pessoais de acordo com a Política de Privacidade e que tenho idade igual ou maior que 18 anos
@@ -81,7 +81,7 @@
                 <span class="focus-input100"></span>
             </div>
             <div class="container-login100-form-btn">
-                <button class="login100-form-btn" type="submit" >
+                <button class="login100-form-btn" [disabled]="!signOnForm.valid">
                     Registar
                 </button>
             </div>

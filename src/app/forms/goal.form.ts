@@ -5,7 +5,7 @@ export class GoalForm {
 
     constructor(fb: FormBuilder, that:Goal) {
         return fb.group({
-            objectives: [''],
+            objectives: ['', Validators.required],
             anualGoal:[],
             partials: fb.array(that.partials)
         })

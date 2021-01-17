@@ -5,7 +5,7 @@ export class TaskForm {
 
     constructor(fb: FormBuilder) {
         return fb.group({
-            descriptions: [''],
+            descriptions: ['', Validators.required],
             revenue: [],
             expenses: [],
             state: [],

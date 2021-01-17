@@ -56,10 +56,9 @@ export class ListQuizComponent implements OnInit {
   changeCorrect(id) {
     this.quiz.answers.forEach(x => x.correct = x.text === id)
   }
-  saveForm(quizForm) {
+  saveForm() {
     this.quiz.isActive=false;
 
-    if(quizForm.status)
     (this.quiz.id ?
       this.quizService.update(this.quiz) :
       this.quizService.create(this.quiz))
