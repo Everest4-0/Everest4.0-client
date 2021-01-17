@@ -142,6 +142,7 @@ export class DetailsCourseComponent implements OnInit {
       this.activityService.update(activity) :
       this.activityService.create(activity))
       .subscribe(activity => {
+        debugger
         this.toast.success('Actividade actualizada com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
@@ -185,7 +186,7 @@ export class DetailsCourseComponent implements OnInit {
     this.modalService.open('form-activity-modal');
   }
 
-
+  
   /*onDrop(event: CdkDragDrop<string[]>) {
     /*this.course.modules[event.previousIndex].order = event.currentIndex;
     moveItemInArray(
