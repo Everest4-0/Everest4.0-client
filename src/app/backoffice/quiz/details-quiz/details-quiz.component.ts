@@ -22,5 +22,14 @@ export class DetailsQuizComponent implements OnInit {
     this.quizService.one(id).subscribe(datas => this.quiz = datas)
 
   }
+  
+  get correct() {
+    let t = this.quiz.answers.filter(x => x.correct)[0];
+    if (t) {
+      return t.users.length
+    }
+    return 0
+  };
+  get wrong() { return this.quiz.answers.filter((x) => !x.correct).reduce((x, y) => x + y.users.length, 0) };
 
 }

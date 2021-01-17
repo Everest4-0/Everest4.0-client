@@ -5,12 +5,12 @@ export class UserForm {
 
     constructor(fb: FormBuilder) {
         return {
-            username: [''],
+            username: ['', Validators.required],
             passw: ['', [Validators.required, Validators.maxLength(20),Validators.minLength(6)]],
             passy: ['', [Validators.required]],
-            email: ['', [Validators.email]],
-            firstName: [''],
-            lastName: [''],
+            email: ['', [Validators.required, Validators.email]],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
             othersName: [''],
             photoUrl: ['']
         }

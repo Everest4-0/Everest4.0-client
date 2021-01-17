@@ -4,8 +4,8 @@ export class BudgetForm {
 
     constructor(fb: FormBuilder) {
         return fb.group({
-            value: [''],
-            category: ['']
+            value: ['', Validators.required],
+            category: ['', Validators.required]
         })
     }
 }
