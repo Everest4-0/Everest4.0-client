@@ -7,7 +7,7 @@ export class WorkSituationForm{
         return fb.group({
             name: ['', Validators.required],
             descriptions: ['', Validators.required],
-            isActive: ['']
+            isActive: ['', Validators.required]
         })
     }
 }

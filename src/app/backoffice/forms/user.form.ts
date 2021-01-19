@@ -6,10 +6,10 @@ export class UserForm {
         let fb=new FormBuilder();
         return fb.group({
             userName: ['',Validators.required],
-            email: [''],
+            email: ['', Validators.required],
             telePhone: ['', Validators.required],
-            isActive: [''],
-            roles: [''],
+            isActive: ['', Validators.required],
+            roles: ['', Validators.required],
             othersName: [''],
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
@@ -20,7 +20,7 @@ export class UserForm {
             professionalExperience: ['', Validators.required],
             activitySector: ['', Validators.required],
             salary: [''],
-            newsCategories: [''],
+            newsCategories: ['', Validators.required],
             i18n: [''],
             timeZones: [''],
         })

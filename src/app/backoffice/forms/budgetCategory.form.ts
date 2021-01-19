@@ -7,9 +7,9 @@ export class BudgetCategoryForm{
 
         return fb.group({
             name: ['', Validators.required],
-            direction: [''],
-            descriptions: [''],
-            isActive: ['']
+            direction: ['', Validators.required],
+            descriptions: ['', Validators.required],
+            isActive: ['', Validators.required]
         })
     }
 } 

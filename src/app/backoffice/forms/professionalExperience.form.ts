@@ -6,9 +6,9 @@ export class ProfessionalExperienceForm{
 
         return fb.group({
             from: ['', Validators.required],
-            to: [''],
-            descriptions: [''],
-            isActive: ['']
+            to: ['', Validators.required],
+            descriptions: ['', Validators.required],
+            isActive: ['', Validators.required]
         })
     }
 }
