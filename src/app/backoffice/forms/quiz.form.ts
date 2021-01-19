@@ -6,7 +6,7 @@ export class QuizForm {
         let fb = new FormBuilder();
         return fb.group({
             text: ['', Validators.required],
-            isActive:['', Validators.required],
+            isActive:[''],
             answers:fb.array([]),
             userId: ['']
         })

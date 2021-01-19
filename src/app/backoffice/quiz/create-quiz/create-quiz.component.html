@@ -1,7 +1,7 @@
 <app-backoffice-navbar [title]="'Criar desafio'"></app-backoffice-navbar>
 <div class="card">
     <div class="content">
-        <form [formGroup]="form" (ngSubmit)="saveForm()">
+        <form #quizForm="ngForm" [formGroup]="form" (ngSubmit)="saveForm()">
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -38,7 +38,8 @@
                 </blockquote>
             </div>
             <div class="clearfix"></div>
-            <button class="btn btn-success btn-fill pull-rightx">Desafiar</button>
+            <button class="btn btn-success btn-fill pull-rightx"
+                    [disabled]="!quizForm.valid">Desafiar</button>
         </form>
     </div>
 </div>
