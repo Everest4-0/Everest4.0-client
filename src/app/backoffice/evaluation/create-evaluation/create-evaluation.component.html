@@ -1,4 +1,4 @@
-<app-backoffice-navbar [title]="'Registar nova variavel de avalaição'"></app-backoffice-navbar>
+<app-backoffice-navbar [title]="'Registar nova variavel de avaliação'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
         <h4 class="title">TESTE</h4>
@@ -6,7 +6,7 @@
     </div>
 
     <div class="content">
-        <form [formGroup]="form" (ngSubmit)="saveForm()" >
+        <form #evaluation="ngForm" [formGroup]="form" (ngSubmit)="saveForm()" >
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -46,7 +46,8 @@
             </div>
 
             
-            <button type="submit" class="btn btn-success btn-fill pull-rightx">registar</button>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx"
+                    [disabled]="!evaluation.valid">registar</button>
             <div class="clearfix"></div>
         </form>
     </div>

@@ -8,7 +8,7 @@ export class EvaluationForm {
             name: ['', Validators.required],
             group: ['', Validators.required],
             descriptions: ['', Validators.required],
-            isActive: ['', Validators.required]
+            isActive: ['']
         })
     }
 }
