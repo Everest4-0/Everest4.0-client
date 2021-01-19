@@ -1,14 +1,14 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export class ActivityForm{
     constructor(){
         let fb = new FormBuilder();
 
         return fb.group({
-            title: [''],
-            descriptions: [''],
-            attachment:[''],
-            duration: ['']
+            title: ['', Validators.required],
+            descriptions: ['', Validators.required],
+            attachment:['', Validators.required],
+            duration: ['', Validators.required]
         })
     }
 }

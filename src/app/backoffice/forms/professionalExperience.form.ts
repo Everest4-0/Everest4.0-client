@@ -1,11 +1,11 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export class ProfessionalExperienceForm{
     constructor(fbx:FormBuilder){
         let fb = new FormBuilder();
 
         return fb.group({
-            from: [''],
+            from: ['', Validators.required],
             to: [''],
             descriptions: [''],
             isActive: ['']

@@ -1,24 +1,24 @@
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 
 export class UserForm {
 
     constructor(fbx: FormBuilder) {
         let fb=new FormBuilder();
         return fb.group({
-            userName: [''],
+            userName: ['',Validators.required],
             email: [''],
-            telePhone: [''],
+            telePhone: ['', Validators.required],
             isActive: [''],
             roles: [''],
             othersName: [''],
-            firstName: [''],
-            lastName: [''],
-            academicLevel: [''],
-            sex: [''],
-            birthDate: [''],
-            workSituation: [''],
-            professionalExperience: [''],
-            activitySector: [''],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            academicLevel: ['', Validators.required],
+            sex: ['', Validators.required],
+            birthDate: ['', Validators.required],
+            workSituation: ['', Validators.required],
+            professionalExperience: ['', Validators.required],
+            activitySector: ['', Validators.required],
             salary: [''],
             newsCategories: [''],
             i18n: [''],

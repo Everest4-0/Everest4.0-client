@@ -1,4 +1,4 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export class AcademicLevelForm{
     
@@ -6,9 +6,9 @@ export class AcademicLevelForm{
         let fb = new FormBuilder();
 
         return fb.group({
-            name: [''],
-            descriptions: [''],
-            isActive: ['']
+            name: ['', Validators.required],
+            descriptions: ['', Validators.required],
+            isActive: ['', Validators.required]
         })
     }
 }

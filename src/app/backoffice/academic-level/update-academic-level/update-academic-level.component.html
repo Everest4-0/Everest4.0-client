@@ -4,7 +4,7 @@
     </div>
 
     <div class="content">
-        <form [formGroup]="form" (ngSubmit)="saveForm()">
+        <form #academicLevel="ngForm" [formGroup]="form" (ngSubmit)="saveForm()">
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -38,7 +38,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-fill pull-rightx">Salvar</button>
+            <button type="submit" class="btn btn-success btn-fill pull-rightx"
+                    [disabled]="!academicLevel.valid">Salvar</button>
             <div class="clearfix"></div>
         </form>
     </div>

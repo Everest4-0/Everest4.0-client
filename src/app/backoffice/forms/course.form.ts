@@ -1,21 +1,21 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export class CourseForm {
     constructor() {
         const fb = new FormBuilder();
 
         return fb.group({
-            title: [''],
-            descriptions: [''],
-            durations: [''],
+            title: ['', Validators.required],
+            descriptions: ['', Validators.required],
+            durations: ['', Validators.required],
 
-            evaluations: [''],
-            level: [''],
-            language: [''],
-            roles: [''],
+            evaluations: ['', Validators.required],
+            level: ['', Validators.required],
+            language: ['', Validators.required],
+            roles: ['', Validators.required],
 
-            isActive: [''],
-            cover: [''],
+            isActive: ['', Validators.required],
+            cover: ['', Validators.required],
             modules: fb.array([])
         })
     }

@@ -1,4 +1,4 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export class BudgetCategoryForm{
 
@@ -6,7 +6,7 @@ export class BudgetCategoryForm{
         let fb = new FormBuilder();
 
         return fb.group({
-            name: [''],
+            name: ['', Validators.required],
             direction: [''],
             descriptions: [''],
             isActive: ['']
