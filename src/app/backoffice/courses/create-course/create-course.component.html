@@ -3,9 +3,8 @@
     <div class="header">
         <h4 class="title">TESTE</h4>
     </div>
-
     <div class="content">
-        <form [formGroup]="form">
+        <form #course="ngForm" [formGroup]="form">
             <div class="row">
                 <div class="col-md-8 col-lg-8 col-sm-12">
                     <div class="col-md-12">
@@ -122,7 +121,8 @@
                     <img src="{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" (click)="saveForm()">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-fill" 
+                        [disabled]="!course.valid">Submit</button>
                 </div>
             </div>
         </form>

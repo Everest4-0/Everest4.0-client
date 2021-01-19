@@ -7,14 +7,14 @@ export class CourseForm {
         return fb.group({
             title: ['', Validators.required],
             descriptions: ['', Validators.required],
-            durations: ['', Validators.required],
+            durations: [''],
 
             evaluations: ['', Validators.required],
             level: ['', Validators.required],
             language: ['', Validators.required],
             roles: ['', Validators.required],
 
-            isActive: ['', Validators.required],
+            isActive: [''],
             cover: ['', Validators.required],
             modules: fb.array([])
         })
