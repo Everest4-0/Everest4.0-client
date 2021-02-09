@@ -196,12 +196,22 @@ export class DetailsCourseComponent implements OnInit {
       })
     })
   }
-  /*removeActivity(activity){
-    this.activityService.deleteOne(activity).subscribe(activity=>{
+  removeActivity(activity){
+    this.activityService.delete(activity).subscribe(act=>{
+      debugger
+      let source = this.course.modules.filter(module=>module.id===activity.module.id)[0].activities
+      let index = source.findIndex((e,i)=>{if(e.id===activity.id) return true;})
+
+      source.splice(index, 1);
+      this.toast.success('A actividade '+activity.title+' foi removido com success', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+      this.modalService.close('form-activity-modal')
 
     })
 
-  }*/
+  }
   
   /*onDrop(event: CdkDragDrop<string[]>) {
     /*this.course.modules[event.previousIndex].order = event.currentIndex;

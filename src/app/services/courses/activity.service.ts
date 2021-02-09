@@ -31,6 +31,9 @@ export class ActivityService  extends AppService<Activity> implements IService<A
   create(o: any): Observable<Activity> {
     return this.createOne(o)
   }
+  delete(o: any): Observable<Activity> {
+    return this.deleteOne(o)
+  }
 
   addUserAnswer(o:any): Observable<any> {
     debugger
