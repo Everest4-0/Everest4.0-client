@@ -21,6 +21,7 @@ export class User {
 
     photoUrl: string;
 
+    message: string;
     get avatar(): string {
         let prefix = this.photoUrl.split('ttps://').length > 1 ? '' : AppService.serverAddress
         return prefix + this.photoUrl

@@ -13,6 +13,13 @@
   animation-fill-mode: both;
 }
 
+.error{
+  color: #F00;
+    padding: 5px;
+    border: solid 1px #eee;
+    border-radius: 3px;
+    width: 100%;
+}
 .animated.infinite {
   animation-iteration-count: infinite;
 }
