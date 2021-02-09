@@ -186,6 +186,22 @@ export class DetailsCourseComponent implements OnInit {
     this.modalService.open('form-activity-modal');
   }
 
+  activate(){
+    this.course.isActive=!this.course.isActive
+    this.courseService.update(this.course).subscribe(course=>{
+      
+      this.toast.success('Curso '+(this.course.isActive ? '' : 'in')+'activado com sucesso e '+(this.course.isActive ? '' : 'in')+'disponibilizado para o público ', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+    })
+  }
+  /*removeActivity(activity){
+    this.activityService.deleteOne(activity).subscribe(activity=>{
+
+    })
+
+  }*/
   
   /*onDrop(event: CdkDragDrop<string[]>) {
     /*this.course.modules[event.previousIndex].order = event.currentIndex;

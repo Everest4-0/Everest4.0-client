@@ -5,9 +5,8 @@
     <div class="content" style="background-color: rgba(0,0,0,.5);">
         <div class="row">
             <div class="col-md-9">
-                <h3><b>Titulo</b></h3>
                 <h1><b style="color: #FFF;">{{course.title}}</b></h1>
-                <h1 style="color: #FFF;">#{{course.code}} </h1>
+                <h1 style="color: #FFF;">#{{course.code}} - <button class="btn btn-fill btn-{{course.isActive ? 'success':'danger' }}" (click)="activate()">{{course.isActive ? 'Activo':'Inactivo' }}</button></h1>
             </div>
             <div class="col-md-3">
                 <img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail">
@@ -269,6 +268,8 @@
             <div class="row text-center"><br>
                 <button class="btn btn-success btn-fill" type="submit" >Salvar</button>
                 <button class="btn btn-default" type="button" (click)="modalService.close('form-activity-modal')">Fechar</button>
+                <button class="btn btn-danger" type="button" (click)="removeActivity(activity)"><i class="pe-7s-trash"></i></button>
+
             </div>
         </form>
 
