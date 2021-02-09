@@ -39,8 +39,11 @@ export class EnrollingCourseComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     this.enrollmentService.one(id).subscribe(enrollment => {
-      
+      debugger
       this.enrollment = enrollment;
+      if(this.enrollment.lastActivity===null){
+        this.enrollment.lastActivity=new Activity()
+      }
       this.loadCourse(enrollment.courseId)
     })
 
@@ -114,7 +117,8 @@ export class EnrollingCourseComponent implements OnInit {
   loadCourse(id: string): void {
 
     this.courseService.one(id).subscribe(course => {
-      course.modules.forEach(m => {
+    
+      course.modules.sort((x,z)=>x.orderNo>z.orderNo ? 1 : -1).forEach(m => {
         m.activities = m.activities.sort((x, y) => x.orderNo > y.orderNo ? 1 : -1)
         m.activities.forEach(a => {
           a.i = this.i++;
