@@ -68,7 +68,7 @@ export class CreateCourseComponent implements OnInit {
   }
 
   onFileSelect(input) {
-
+    debugger
     let reader = new FileReader();
     reader.onload = (e: any) => {
       let data = e.target.result;

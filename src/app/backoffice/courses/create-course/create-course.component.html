@@ -118,7 +118,7 @@
                     </label>
                     <input #fileUploader id='fileUploader' class="hidden" type="file"
                         (change)="onFileSelect($event.target)">
-                    <img src="{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
+                    <img src="{{course.cover}}" class="img-thumbnail">
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary btn-fill" 
