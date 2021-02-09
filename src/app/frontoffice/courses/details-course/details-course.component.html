@@ -19,11 +19,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div *ngIf="course.enrollments.length>0"> {{course.enrollments.length}} já se Inscreveram</div>
-                    <button class="btn btn-info btn-fill" (click)="enroll()" *ngIf="!enrolled">Inscrever-se</button>
-                    <button class="btn btn-success btn-fill" *ngIf="enrolled"><i class="fa fa-check"></i> Já
+                    <button class="btn btn-info btn-fill" (click)="enroll()" *ngIf="enrollment.id==null">Inscrever-se</button>
+                    <button class="btn btn-success btn-fill" *ngIf="enrollment.id!=null"><i class="fa fa-check"></i> Já
                         inscrito</button>
                     <button class="btn pin border-none"><i class="fa fa-2x fa-star"></i></button>
-                    <a [routerLink]="['/me/courses/enrolling/'+enrollment.id]" class="btn btn-info btn-fill pull-right" *ngIf="enrolled">
+                    <a [routerLink]="['/me/courses/enrolling/'+enrollment.id]" class="btn btn-info btn-fill pull-right" *ngIf="enrollment.id!=null">
                         <i *ngIf="courseEvolution>99" class="fa fa-check"></i>
                         <i *ngIf="courseEvolution<100" class="fa fa-refresh"></i>
                         {{courseEvolution}}%

@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsCourseComponent implements OnInit {
 
-  public duration=0;
+  public duration = 0;
   public course: Course = new Course();
   public relatedCourses: Array<Course> = [];
   public enrollment: Enrollment = new Enrollment();
@@ -32,19 +32,24 @@ export class DetailsCourseComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     this.loadCourse(id)
+
   }
 
   loadCourse(id: string): void {
     this.relatedCourses = [];
     this.courseService.one(id).subscribe(course => {
       this.course = course;
-      this.course.modules.forEach(m => {
+      this.course.modules.sort((x,z)=>x.orderNo>z.orderNo ? 1 : -1).forEach(m => {
         m.activities = m.activities.sort((x, y) => x.orderNo > y.orderNo ? 1 : -1)
         m.activities.forEach(a => {
-          this.duration+=a.duration
+          this.duration += a.duration
         })
       })
+
       this.enrollment = course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id)[0]
+      if (this.enrollment === undefined) {
+        this.enrollment = new Enrollment();
+      }
       this.enrollment.course = this.course;
       this.enrollment.user = this.auth.user;
       this.course.evaluations.forEach(e => {
@@ -62,6 +67,8 @@ export class DetailsCourseComponent implements OnInit {
     return this.course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id).length > 0
   }
   enroll() {
+    debugger
+    this.enrollment.course = this.course
     this.enrollmentService.create(this.enrollment).subscribe(enrollment => {
       this.enrollment = enrollment;
       this.toast.success('Parabens! Estás agora inscrito no curso ' + this.course.title, 'Sucesso', {
@@ -85,10 +92,10 @@ export class DetailsCourseComponent implements OnInit {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
   }
-  
+
   get courseDuration() {
-    return this.course.modules.reduce((a,b) => a+b.activities.reduce((x,y) => x+y.duration,0),0);
-    }
+    return this.course.modules.reduce((a, b) => a + b.activities.reduce((x, y) => x + y.duration, 0), 0);
+  }
 
 
   get courseEvolution() {
