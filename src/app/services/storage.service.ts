@@ -36,17 +36,25 @@ export class StorageServices {
     return final || {};
   }
 
+
+
+
+  get authorizationKey() {
+   return ''//this.get<any>('current_user').data.apikey
+  }
+
+
   public remove(key: string): any {
 
-    // get array of tasks from local storage
-    const storage = this.storage.get(STORAGE_KEY) || [];
-    // push new task to array
-    const index = storage.indexOf(key, 0);
-    storage.forEach((s, index) => {
-      if (s.key === key) {
-        storage.splice(index, 1);
-        this.storage.set(STORAGE_KEY, storage);
-      }
-    });
-  }
+  // get array of tasks from local storage
+  const storage = this.storage.get(STORAGE_KEY) || [];
+  // push new task to array
+  const index = storage.indexOf(key, 0);
+  storage.forEach((s, index) => {
+    if (s.key === key) {
+      storage.splice(index, 1);
+      this.storage.set(STORAGE_KEY, storage);
+    }
+  });
+}
 }
