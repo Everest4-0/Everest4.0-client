@@ -39,13 +39,14 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <input type="checkbox"formControlName="isActive"
-                        [(ngModel)]="evaluation.isActive" >
-
-                        <label> Variável no estado activo</label>
+                        <h4 class="title"> Variável no estado activo</h4>
+                        <label class="toggle-control">
+                            <input type="checkbox" formControlName="isActive" [(ngModel)]="evaluation.isActive">
+                            <span class="control"></span>
+                        </label>
                     </div>
                 </div>
-            </div>
+            </div><br><br>
             <button type="submit" class="btn btn-success btn-fill pull-rightx" 
                     [disabled]="!evaluation.valid">Salvar</button>
             <div class="clearfix"></div>

@@ -45,4 +45,8 @@ export class UserService extends AppService<User> implements IService<User> {
     return this.createOne(o)
   }
 
+  delete(o:any):Observable<User>{
+    return this.deleteOne(o)
+  }
+
 }

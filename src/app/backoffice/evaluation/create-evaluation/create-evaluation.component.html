@@ -6,13 +6,13 @@
     </div>
 
     <div class="content">
-        <form #evaluation="ngForm" [formGroup]="form" (ngSubmit)="saveForm()" >
+        <form #evaluation="ngForm" [formGroup]="form" (ngSubmit)="saveForm()">
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Variavel</label>
-                        <input type="text" class="form-control" formControlName="name"
-                        [(ngModel)]="evaluation.name" placeholder="Variavel">
+                        <input type="text" class="form-control" formControlName="name" [(ngModel)]="evaluation.name"
+                            placeholder="Variavel">
                     </div>
                 </div>
             </div>
@@ -20,8 +20,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Domínio</label>
-                        <input type="text" class="form-control" formControlName="group"
-                        [(ngModel)]="evaluation.group">
+                        <input type="text" class="form-control" formControlName="group" [(ngModel)]="evaluation.group">
                     </div>
                 </div>
             </div>
@@ -30,24 +29,23 @@
                     <div class="form-group">
                         <label>Descrição</label>
                         <textarea type="text" class="form-control" formControlName="descriptions"
-                        [(ngModel)]="evaluation.descriptions" placeholder="Descrição" rows="5"></textarea>
+                            [(ngModel)]="evaluation.descriptions" placeholder="Descrição" rows="5"></textarea>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <input type="checkbox"formControlName="isActive"
-                        [(ngModel)]="evaluation.isActive">
-
-                        <label> Variale no estado activo</label>
+                        <h4 class="title"> Variável no estado activo</h4>
+                        <label class="toggle-control">
+                            <input type="checkbox" formControlName="isActive" [(ngModel)]="evaluation.isActive">
+                            <span class="control"></span>
+                        </label>
                     </div>
                 </div>
-            </div>
-
-            
+            </div><br><br>
             <button type="submit" class="btn btn-success btn-fill pull-rightx"
-                    [disabled]="!evaluation.valid">registar</button>
+                [disabled]="!evaluation.valid">registar</button>
             <div class="clearfix"></div>
         </form>
     </div>

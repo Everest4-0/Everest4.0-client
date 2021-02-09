@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-update-evaluation',
   templateUrl: './update-evaluation.component.html',
-  styleUrls: ['./update-evaluation.component.css']
+  styleUrls: ['./update-evaluation.component.scss']
 })
 export class UpdateEvaluationComponent implements OnInit {
 
