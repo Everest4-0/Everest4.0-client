@@ -4,7 +4,7 @@
         <h4 class="title">TESTE</h4>
     </div>
     <div class="content">
-        <form #course="ngForm" [formGroup]="form">
+        <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-md-8 col-lg-8 col-sm-12">
                     <div class="col-md-12">
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary btn-fill" 
-                        [disabled]="!course.valid">Submit</button>
+                        >Submit</button>
                 </div>
             </div>
         </form>

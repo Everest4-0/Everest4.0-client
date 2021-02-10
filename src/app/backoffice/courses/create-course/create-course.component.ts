@@ -36,14 +36,14 @@ export class CreateCourseComponent implements OnInit {
   }
 
 
-  saveForm() {
+  onSubmit(f=null) {
     this.courseService.create(this.course).subscribe(course => {
       this.toast.success('novo curso cadastrado com o codigo ' + course.code + ' foi feito com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })
 
-      this.router.navigate(['/backoffice/courses']);
+      this.router.navigate(['/backoffice/courses/details/'+course.id]);
     })
   }
 
