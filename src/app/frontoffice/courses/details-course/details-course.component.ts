@@ -51,7 +51,6 @@ export class DetailsCourseComponent implements OnInit {
         this.enrollment = new Enrollment();
       }
       this.enrollment.course = this.course;
-      this.enrollment.user = this.auth.user;
       this.course.evaluations.forEach(e => {
         this.evaluationService.one(e.id).subscribe(ev => {
           ev.courses.forEach(c => {
@@ -67,7 +66,6 @@ export class DetailsCourseComponent implements OnInit {
     return this.course.enrollments.filter(enrollment => enrollment.userId === this.auth.user.id).length > 0
   }
   enroll() {
-    debugger
     this.enrollment.course = this.course
     this.enrollmentService.create(this.enrollment).subscribe(enrollment => {
       this.enrollment = enrollment;
@@ -101,12 +99,12 @@ export class DetailsCourseComponent implements OnInit {
   get courseEvolution() {
     let i;
     let n = 0;
-    debugger
+    
     this.course.modules.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(m => {
       m.activities.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(a => {
         n++;
         if (this.enrollment.activityId === a.id) {
-          i = n
+          i = n -1
         }
       })
     })
