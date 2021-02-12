@@ -6,6 +6,7 @@
       <source src="{{serverAddress}}{{activity.attachment}}" type="video/mp4">
     </video>
   </div>
+
   <div class="content-data text-center" *ngIf="attachmentType=='pdf'">
     <div *ngIf="isLoaded" style="text-align: center;">
       <button class="btn btn-xs btn-default btn-fill" (click)="prevPage()" [disabled]="page === 1">Proxima
@@ -17,6 +18,7 @@
     <pdf-viewer src="{{serverAddress}}{{activity.attachment}}" [show-all]="false" [page]="page"
       (after-load-complete)="afterLoadComplete($event)" [fit-to-page]="true" ></pdf-viewer>
   </div>
+
   <div class="content-data text-center" *ngIf="attachmentType=='youtube'" style="background-color: #000;">
     <youtube-player [videoId]="videoId" (ready)="savePlayer($event)" (change)="onStateChange($event)" [height]="480"
       [width]="700" [playerVars]="playerVars">
@@ -29,8 +31,7 @@
     </button>
   </div>
 
-
-  <app-activity-task class="content-data" (nextTask)="toNextTask($event)" *ngIf="attachmentType=='quiz'" [act]="activity">
-
+  <app-activity-task class="content-data" [done]="true" (nextTask)="toNextTask($event)" *ngIf="attachmentType=='quiz'" [act]="activity">
   </app-activity-task>
+
   <app-testimonial [activity]="activity" class="content-data" *ngIf="activity.attType===100"></app-testimonial>
