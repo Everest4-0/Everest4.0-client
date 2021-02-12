@@ -39,7 +39,6 @@ export class EnrollingCourseComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     this.enrollmentService.one(id).subscribe(enrollment => {
-      debugger
       this.enrollment = enrollment;
       if(this.enrollment.lastActivity===null){
         this.enrollment.lastActivity=new Activity()
