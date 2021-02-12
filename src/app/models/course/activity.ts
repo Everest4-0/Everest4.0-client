@@ -7,7 +7,7 @@ export class Activity {
 
     title: string;
     descriptions: string;
-    duration: number;
+    duration: number = 2;
     orderNo: number;
     module: Module = new Module();
     moduleId: string;

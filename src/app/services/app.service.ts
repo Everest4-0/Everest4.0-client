@@ -52,7 +52,7 @@ export class AppService<T> {
     return this.http.put(this.url, o, { 'headers': this.headers })
   }
 
-  protected deleteOne(o: T): Observable<any> {
-    return this.http.delete(this.url + '/' + o.id, { 'headers': this.headers })
+  protected deleteOne(id): Observable<any> {
+    return this.http.delete(this.url + '/' + id, { 'headers': this.headers })
   }
 }
