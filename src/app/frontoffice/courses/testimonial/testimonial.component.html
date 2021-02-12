@@ -12,14 +12,14 @@
                 <div style="width:33%"></div>
             </div>
             <div style="margin: 13% auto 0% auto; width: 600px; height: 250px; text-align: center;">
-                <p>Reconhecemos pelo presente que</p>
-                <h1 style="text-transform: uppercase;">{{auth.user.datas.fullName}}</h1>
-                <p>concluiu nosso programa de treinamento {{course.code}} - {{course.title}}.</p>
+                <p style="font-size:23px">Reconhecemos pelo presente que</p>
+                <h2 style="text-transform: uppercase;">{{auth.user.datas.fullName}}</h2>
+                <p style="font-size: 23px">concluiu o curso</p><br><br><h2 style="color:#1e9de7"> {{course.title}}</h2>
             </div>
 
             <div style="display: flex;">
                 <div style="width:33%;color: #FFF;padding-top: 80px; text-align:left">
-                    UB-0125412<br>
+                    CO-{{course.code}}<br>
                     01-2021
                 </div>
                 <div style="width:33%"></div>

@@ -23,10 +23,12 @@ export class TestimonialComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     let node = document.getElementById('main');
 
 
     this.moduleService.one(this.activity.moduleId).subscribe(module=>this.course=module.course)
+    
     setTimeout(() => {
       htmlToImage.toPng(node)
         .then(function (dataUrl) {
