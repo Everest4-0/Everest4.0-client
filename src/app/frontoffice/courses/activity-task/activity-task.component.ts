@@ -36,7 +36,8 @@ export class ActivityTaskComponent implements OnInit {
 
       this.task = this.activity.tasks[this.taskIndex];
       this.activityService.getUserAnswer({ userId: this.auth.user.id, activityId: this.activity.id }).subscribe(d => {
-        if (d.length === this.activity.tasks.length) {
+        debugger
+        if (d.length >= this.activity.tasks.length) {
           this.taskAnswers = d
           this.done = true
         }
@@ -66,11 +67,11 @@ export class ActivityTaskComponent implements OnInit {
     this.user.taskAnswers[0] = answer
     this.taskAnswers.push(answer)
   }
-  
+
   get corrects() {
     return [
       this.taskAnswers.filter(t => t.correct)
-      .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points+''), 0),
+        .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points + ''), 0),
       this.taskAnswers.filter(t => t.correct).length
     ]
   }
@@ -78,7 +79,7 @@ export class ActivityTaskComponent implements OnInit {
 
     return [
       this.taskAnswers.filter(t => !t.correct)
-      .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points+''), 0),
+        .reduce((x, y) => x + parseFloat(this.activity.tasks.filter(x => x.id === y.taskId)[0].points + ''), 0),
       this.taskAnswers.filter(t => !t.correct).length
     ]
   }
@@ -87,5 +88,13 @@ export class ActivityTaskComponent implements OnInit {
   }
   finishQuiz() {
     this.nextTask.emit('ola mundo')
+  }
+  currency(n) {
+
+    return n.toLocaleString(
+      undefined, // leave undefined to use the browser's locale,
+      // or use a string like 'en-US' to override it.
+      { minimumFractionDigits: 2 }
+    );
   }
 }
