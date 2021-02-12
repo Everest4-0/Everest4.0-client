@@ -136,20 +136,22 @@ export class DetailsCourseComponent implements OnInit {
 
 
   saveActivity() {
+    
     let activity = this.activity;
     activity.module.activities = null;
+
     (this.activity.id ?
       this.activityService.update(activity) :
       this.activityService.create(activity))
       .subscribe(activity => {
-        debugger
+        
         this.toast.success('Actividade actualizada com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })
         this.modalService.close('form-activity-modal');
         this.course.modules.forEach(module => {
-          debugger
+          
           if (module.id === this.activity.module.id) {
             if (this.activity.id) {
               module.activities.filter(a => a.id === this.activity.id)[0] = activity
@@ -163,7 +165,7 @@ export class DetailsCourseComponent implements OnInit {
   }
 
   addActivity(module: Module) {
-    debugger
+    
     this.activity = new Activity();
     this.attType = 0;
     this.rteObj.toolbarSettings.type = ToolbarType.MultiRow;
@@ -196,6 +198,7 @@ export class DetailsCourseComponent implements OnInit {
       })
     })
   }
+
   removeActivity(activity){
     this.activityService.delete(activity).subscribe(act=>{
       debugger
@@ -224,7 +227,8 @@ export class DetailsCourseComponent implements OnInit {
    
   }
  */
-  onFileSelect(input) {
+  
+ onFileSelect(input) {
 
     let reader = new FileReader();
     reader.onload = (e: any) => {
