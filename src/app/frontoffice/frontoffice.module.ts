@@ -5,7 +5,6 @@ import { NewsListComponent } from './news/news-list/news-list.component';
 import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { VacantJobComponent } from './vacant-job/vacant-job.component';
-import { CoachingComponent } from './coaching/coaching.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { CounterDirective } from './../directive/counter.directive';
 import { ActivityTaskComponent } from './courses/activity-task/activity-task.component';
@@ -80,6 +79,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { TestimonialComponent } from './courses/testimonial/testimonial.component';
 
 import { TestimonialValidationComponent } from './courses/testimonial-validation/testimonial-validation.component';
+import { CoachModule } from './coach/coach.module';
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -110,6 +110,7 @@ FullCalendarModule.registerPlugins([
 
     QRCodeModule,
     PdfViewerModule,
+    CoachModule
     //NgxPermissionsModule.forRoot(),
   ],
   declarations: [
@@ -153,7 +154,6 @@ FullCalendarModule.registerPlugins([
     DetailsCourseComponent,
 
 
-    CoachingComponent,
     VacantJobComponent,
     HelpdeskComponent,
     MonitoringComponent,

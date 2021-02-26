@@ -1,7 +1,6 @@
 import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { VacantJobComponent } from './vacant-job/vacant-job.component';
-import { CoachingComponent } from './coaching/coaching.component';
 import { EnrollingCourseComponent } from './courses/enrolling-course/enrolling-course.component';
 import { ForbidenComponent } from './costum/forbiden/forbiden.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -58,16 +57,7 @@ export const FrontOfficeRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    }, {
-      path: 'coaching', component: CoachingComponent,
-      canActivate: [NgxPermissionsGuard],
-      data: {
-        permissions: {
-          only: ['PRO'],
-          redirectTo: '/me/403'
-        }
-      }
-    }, {
+    },{
       path: 'vacant-n-jobs', component: VacantJobComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
