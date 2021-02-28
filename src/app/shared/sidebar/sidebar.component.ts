@@ -18,10 +18,8 @@ export const FRONTOFFICE_ROUTES: RouteInfo[] = [
 
   { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['PRO', 'BASIC', 'FREE'] },
   { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
-//  { path: '/me/quiz', title: 'Desafios', icon: 'pe-7s-stopwatch', roles: ['PRO', 'BASIC', 'FREE'] },
-  //{ path: '/me/icons', title: 'Competências', icon: 'pe-7s-gym', class: 'disabled', roles: ['FREE', 'PREMIUM'] },
   { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['PRO', 'BASIC','FREE'] },
-  { path: '/me/coaching', title: 'Coaching online', icon: 'pe-7s-umbrella', roles: ['PRO'] },
+  { path: '/me/coach', title: 'Coaching online', icon: 'pe-7s-umbrella', roles: ['PRO'] },
   { path: '/me/vacant-n-jobs', title: 'Vagas e gestão de carreiras ', icon: 'pe-7s-speaker', roles: ['PRO', 'BASIC'] },
   { path: '/me/monitoring', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', roles: ['PRO', 'BASIC'] },
   { path: '/me/helpdesk', title: 'Apoio ao cliente', icon: 'pe-7s-help1', roles: ['PRO', 'BASIC', 'FREE'] },
