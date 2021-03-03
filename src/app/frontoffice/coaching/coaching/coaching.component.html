@@ -1,0 +1,48 @@
+<div class="container-fluid menu-coach">
+    <div class="row">
+        <div class="col-md-11">
+            <div class="col-md links">
+                <a href="#" class="btn btn-fill">Actualizar diagnóstico</a>
+                <a href="#" class="btn btn-info btn-fill">Portal do Profissional</a>
+                <a href="#" class="btn btn-primary btn-fill">Subscrever serviço</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-img">
+                        <app-diagnostic-view></app-diagnostic-view>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" *ngFor="let currentResults of results" style="padding:15px">
+                            
+                            <h4>{{currentResults.name}} <span class="badge ">{{currentResults.evaluations.length}}</span></h4>
+                            <ul class="list-group" *ngFor="let group of currentResults.groups">
+                                <li class="list-group-item list-group-item-action active">
+                                    <b>{{group[0]}}</b>
+                                </li>
+                                <div *ngFor="let item of group[1]">
+                                    <li class="list-group-item">
+                                        {{item.name}}</li>
+                                </div>
+                            </ul>
+                            <ul class="list-group" *ngFor="let group of currentResults.otherGroups">
+                                <li class="list-group-item list-group-item-action bg-info">
+                                    <b>{{group}}</b>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

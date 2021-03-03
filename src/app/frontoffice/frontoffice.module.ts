@@ -79,7 +79,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { TestimonialComponent } from './courses/testimonial/testimonial.component';
 
 import { TestimonialValidationComponent } from './courses/testimonial-validation/testimonial-validation.component';
-import { CoachModule } from './coach/coach.module';
+import { CoachingModule } from './coaching/coaching.module';
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -110,7 +110,7 @@ FullCalendarModule.registerPlugins([
 
     QRCodeModule,
     PdfViewerModule,
-    CoachModule
+    CoachingModule
     //NgxPermissionsModule.forRoot(),
   ],
   declarations: [
