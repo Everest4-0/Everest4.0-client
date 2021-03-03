@@ -203,3 +203,12 @@ border-top: solid;
 box-shadow: 0 0 50px;
 padding: 20px;
 }
+
+
+.bg-header{
+ 
+    background: url(assets/img/background-part.png);
+    color: #FFF !important; 
+    background-position: 25% ;
+    background-repeat: no-repeat;
+}
