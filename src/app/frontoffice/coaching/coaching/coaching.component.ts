@@ -25,6 +25,7 @@ export class CoachingComponent implements OnInit {
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
 
+  public evaluationDatas: any = {};
   public weakness = [];
   public strengths = []
 
@@ -43,10 +44,25 @@ export class CoachingComponent implements OnInit {
 
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
 
-      debugger
-      let fin = []
+      this.evaluations = evaluations
+
+      let evaluationsGross = evaluations.reduce((result, currentObject) => {
+        const val = currentObject.evaluation['group']
+        result[val] = result[val] || []
+        result[val].push(currentObject)
+        return result
+      }, {})
+
+      let evaluationArr: Array<Array<any>>;
+          evaluationArr= Object.entries(evaluationsGross)
+      evaluationArr.forEach(((arr) => {
+        arr[3] = (arr[1].reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (arr[1].length)).toFixed(2);
+      }))
+
+      this.evaluationDatas = { labels: evaluationArr.map(x => x[0]), data: evaluationArr.map(x => parseFloat(x[3])) }
+
       let evs = []
-      let setEv = evaluations.forEach((ev) => {
+      evaluations.forEach((ev) => {
         if (!evs.map(x => x[0]).includes(ev.evaluation.name))
           evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
       })
@@ -63,21 +79,13 @@ export class CoachingComponent implements OnInit {
         }
 
       })
-      this.evaluations = evaluations
-      let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)
+
       this.results.forEach(result => {
 
+        result.evaluations = evs.filter(evaluation => result.conditions(evaluation[2])).map(g => g[1][0].evaluation);
 
-        result.evaluations = evs
-          .filter(evaluation => result.conditions(evaluation[2])).map(g => g[1][0].evaluation);
+        result.groups = this.groupBy(result.evaluations, 'group')
 
-        /* result.evaluations = evaluations
-           .filter(evaluation => result.conditions(evaluation.points) && evaluation.requested === null);*/
-        result.groups = this.groupBy(result.evaluations, 'group')/*result.evaluations.map(x => x.group)
-          .filter((value, index, self) => {
-            return self.indexOf(value) === index;
-          })*/
-        
         result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
 
         result.otherGroups = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !result.groups.map(x => x[0]).includes(x))
@@ -102,4 +110,20 @@ export class CoachingComponent implements OnInit {
     })
   }
 
+
+
+  accordion(that: any): void {
+
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
+
+    var panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+
+  }
 }

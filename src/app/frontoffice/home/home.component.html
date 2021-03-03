@@ -25,9 +25,13 @@
 
         </div>
         <div class="col-md-4" style=" min-height: 200px">
-            <div class="card">
-                <a [routerLink]="['/me/quizes']" class="btn btn-success btn-lg">
+            <div class="" style=" padding: 15px">
+                <a [routerLink]="['/me/quizes']" class="btn btn-success">
                     Desafios
+                </a>
+
+                <a [routerLink]="['/me/vacant-n-jobs']" class="btn btn-info" [ngxPermissionsOnly]="['PRO', 'BASIC'] ">
+                    <i class="pe-7s-speaker"></i> Vagas de emprego
                 </a>
 
                 <ng-template>

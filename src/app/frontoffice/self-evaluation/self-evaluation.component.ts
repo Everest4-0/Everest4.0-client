@@ -49,7 +49,6 @@ export class SelfEvaluationComponent implements OnInit {
 
   getPbvalue(arr: Array<any>) {
     return (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
-
   }
   openModal(id: string, v: Evaluation) {
     if (v.points > 0) {

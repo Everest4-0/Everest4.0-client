@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -9,6 +9,8 @@ import { Chart } from 'chart.js';
 export class DiagnosticViewComponent implements AfterViewInit {
   @ViewChild('radarCanvas') radarCanvas;
 
+  @Input() public data = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3,1] };
+  public datai = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3,1] };
   radarChart: any;
 
 
@@ -20,17 +22,17 @@ export class DiagnosticViewComponent implements AfterViewInit {
     this.radarChart = new Chart(this.radarCanvas.nativeElement, {
       type: 'radar',
       data: {
-        labels: ['Running', 'Swimming', 'Eating'],
+        labels: this.data.labels,
         datasets: [{
 
-          label: 'Diagnistico',
+          label: 'Diagnóstico',
           borderColor: [
             'rgba(254,0,0,.8)'
           ],
           backgroundColor: [
             'rgba(254,0,0,.1)',
           ],
-          data: [5, 1, 4]
+          data: this.data.data
         },
         {
           label: 'Esperado',
@@ -40,7 +42,7 @@ export class DiagnosticViewComponent implements AfterViewInit {
           backgroundColor: [
             'rgba(7, 143, 0,.1)',
           ],
-          data: [5, 5, 5]
+          data: [4, 4, 4]
         }],
         borderWidth: 1
       },
@@ -51,7 +53,7 @@ export class DiagnosticViewComponent implements AfterViewInit {
           },
           ticks: {
             suggestedMin: 0,
-            suggestedMax: 5
+            suggestedMax: 4
           }
         }
       }
