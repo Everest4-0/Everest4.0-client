@@ -25,7 +25,7 @@ export class ResultsComponent implements OnInit {
     /*{ code: 'O', name: 'Oportunidades' },
     { code: 'T', name: 'Ameaças' },*/
   ]
-  public currentResults= [];
+  public currentResults = [];
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
@@ -41,31 +41,29 @@ export class ResultsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
-      
-      
-      let fin=[]
+
+      let fin = []
       let evs = []
       let setEv = evaluations.forEach((ev) => {
         if (!evs.map(x => x[0]).includes(ev.evaluation.name))
           evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
       })
-      evs.forEach((e,k) => {
+      evs.forEach((e, k) => {
         debugger
-        let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length) 
-        if(points ===4)
-        {
+        let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
+        if (points === 4) {
           e.push(true)
         }
-        else if(points <3)
-        {
+        else if (points < 3) {
           e.push(false)
-        }else{
+        } else {
           evs.splice(k, 1);
         }
-        
+
       })
       this.evaluations = evaluations
       let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)
@@ -125,7 +123,7 @@ export class ResultsComponent implements OnInit {
   }
 
   setResults(e) {
-    
+
     let u = this.results;
     this.currentResults = e
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))

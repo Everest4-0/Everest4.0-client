@@ -5,7 +5,8 @@
                 <div class="card">
                     <div class="header text-center">
                         <h4 class="title">Pacotes Everest4.0 Premium</h4>
-                        <p class="category">Looking for more components? Please check our Premium Version of Everest4.0</p>
+                        <p class="category">Looking for more components? Please check our Premium Version of Everest4.0
+                        </p>
                         <br>
                     </div>
                     <div class="content table-responsive table-full-width table-upgrade">
@@ -13,8 +14,11 @@
                             <thead>
                                 <tr>
                                     <th></th>
+                                    <th class="text-center">basic</th>
                                     <th class="text-center">FREE</th>
                                     <th class="text-center">Premium</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,15 +61,102 @@
                                     <td><i class="fa fa-times text-danger"></i></td>
                                     <td><i class="fa fa-check text-success"></i></td>
                                 </tr>
+
+
                                 <tr>
-                                    <td></td>
-                                    <td>Free</td>
-                                    <td>Just $49</td>
+                                    <td>Desafios</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
                                 </tr>
+
+                                <tr>
+                                    <td> Gestão de compromissos</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Diagnósticos</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Notícias</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Vagas de Emprego
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Cursos online
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Objectivos e planos de acção
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Controlo financéiro
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Feedback 360º
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Gestão de carreiras</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Coaching online</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Plano de desenvolvimento de competências</td>
+                                    <td><i class="fa fa-times text-danger"></i></td>
+                                    <td><i class="fa fa-check text-success"></i></td>
+                                </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <tr *ngIf="auth.user.roleId=='PREMIUM'">
                                     <td></td>
                                     <td>
-                                        <a href="#" (click)="upgrade('FREE')" class="btn btn-round btn-fill btn-default">Mudar para FREE</a>
+                                        <a href="#" (click)="upgrade('FREE')"
+                                            class="btn btn-round btn-fill btn-default">Mudar para FREE</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-round btn-fill btn-info disabled">Versão Actual</a>
@@ -74,10 +165,12 @@
                                 <tr *ngIf="auth.user.roleId=='FREE'">
                                     <td></td>
                                     <td>
-                                        <a href="#" class="btn btn-round btn-fill btn-default disabled">Versão Actual</a>
+                                        <a href="#" class="btn btn-round btn-fill btn-default disabled">Versão
+                                            Actual</a>
                                     </td>
                                     <td>
-                                        <a (click)="upgrade('PREMIUM')" class="btn btn-round btn-fill btn-info">Mudar para Premium</a>
+                                        <a (click)="upgrade('PREMIUM')" class="btn btn-round btn-fill btn-info">Mudar
+                                            para Premium</a>
                                     </td>
                                 </tr>
                             </tbody>

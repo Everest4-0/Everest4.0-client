@@ -1,11 +1,9 @@
 <div class="container-fluid menu-coach">
     <div class="row">
-        <div class="col-md-11">
-            <div class="col-md links">
-                <a href="#" class="btn btn-fill">Actualizar diagnóstico</a>
-                <a href="#" class="btn btn-primary btn-fill">Subscrever serviço</a>
-                <a href="#" class="btn btn-info btn-fill">Portal do Profissional</a>
-            </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <a href="#" class="btn btn-info btn-fill">Portal do Profissional</a>
+            <a href="#" class="btn btn-danger btn-fill">Subscrever serviço</a>
         </div>
     </div>
 </div>
@@ -14,8 +12,46 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-img text-center">
-                        <app-diagnostic-view [data]=evaluationDatas *ngIf="evaluationDatas.data!==undefined"></app-diagnostic-view>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-5" style="text-align: end; margin-top: 5%;">
+                            <a href="#" class=" btn btn-info">
+                                <i class="pe-7s-note"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="card-img">
+                            <app-diagnostic-view [data]=evaluationDatas *ngIf="evaluationDatas.data!==undefined"></app-diagnostic-view>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row" style="text-align: center; margin: 0;">
+                        <div class="col-md-8">
+                            <h1 class="card-title">Avalie-se cada dia!</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-img">
+                                <img class="card-img img-responsive" src="assets/img/carrer.png" alt="img">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-text">
+                                Some quick example text to build on the card title and make up the bulk
+                                of the card's content. <br>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                Officiis sunt earum fuga quisquam velit voluptates doloribus?
+                                Perferendis, nemo non illo provident nam sequi iusto! Possimus
+                                dolor voluptatum autem porro tempore.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
