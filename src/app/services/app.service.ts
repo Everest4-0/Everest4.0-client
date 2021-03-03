@@ -34,7 +34,7 @@ export class AppService<T> {
 
   protected getAll(a: any): Observable<any> {
     let str = '';
-    debugger
+    
     for (var key in a) {
       if (str !== '') {
         str += '&';
