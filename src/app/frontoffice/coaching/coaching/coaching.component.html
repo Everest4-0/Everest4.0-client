@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                         <div class="card" *ngFor="let currentResults of results" style="padding:15px">
                             
-                            <h4>{{currentResults.name}}</h4>
+                            <h4>{{currentResults.name}} <span class="badge ">{{currentResults.evaluations.length}}</span></h4>
                             <ul class="list-group" *ngFor="let group of currentResults.groups">
                                 <li class="list-group-item list-group-item-action active">
                                     <b>{{group[0]}}</b>
