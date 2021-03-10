@@ -30,7 +30,6 @@ export class CoachingComponent implements OnInit {
   public weakness = [];
   public strengths = []
 
-  goal = new Goal();
   form = new GoalForm(this.fb, this.goal);
 
   constructor(
