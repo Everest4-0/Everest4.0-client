@@ -1,3 +1,4 @@
+import { CoachingComponent } from './coaching/coaching/coaching.component';
 import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { VacantJobComponent } from './vacant-job/vacant-job.component';
@@ -201,5 +202,21 @@ export const FrontOfficeRoutes: Routes =
       path: '',
       redirectTo: '/form',
       pathMatch: 'full'
+    },
+    {
+      path: 'coaching',
+      component: CoachingComponent,
+      canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['BASIC', 'PRO', 'ADMIN'],
+          redirectTo: '/me/403'
+        }
+      },
+      children: [
+        {
+          path: '',
+          loadChildren: './coaching/coaching.module#CoachingModule'
+        }]
     }
   ];

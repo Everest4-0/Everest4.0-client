@@ -153,7 +153,6 @@ FullCalendarModule.registerPlugins([
     ListCourseComponent,
     DetailsCourseComponent,
 
-
     VacantJobComponent,
     HelpdeskComponent,
     MonitoringComponent,
