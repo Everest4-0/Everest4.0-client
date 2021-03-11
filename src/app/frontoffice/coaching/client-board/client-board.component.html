@@ -1,0 +1,93 @@
+<div class="container-fluid menu-coach bg-header">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Portal do Profissional</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a [routerLink]="['board']" class="btn btn-info btn-fill">Portal do Profissional</a>
+            <a href="#" class="btn btn-danger btn-fill">Subscrever serviço</a>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div class="col-md-8">
+        <div class="col-md-6">
+            <div class="card" style="padding: 25px;">
+                <h4>Diagnóstico</h4>
+                <app-diagnostic-view [data]=diagnosticDatas *ngIf="diagnosticDatas.data!==undefined">
+                </app-diagnostic-view>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card" style="padding: 25px;">
+                <h4>Evolução</h4>
+                <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas!==undefined">
+                </app-coaching-evolution>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header ">
+                    <h3 class="pull-left">Notas</h3>
+                    <button class="btn border-none pull-right">
+                        <h3><i class="pe-7s-plus"></i></h3>
+                    </button>
+                    <img src="assets/img/sidebar-3.jpg">
+                </div>
+                <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+
+                    <ul class="list-group">
+                        <div *ngFor="let v of [1,2,3,4]">
+                            <li class="list-group-item">
+                                <button class="btn btn-xs pe-7s-help1 border-none"> </button>
+                                xxxxxx
+                                <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
+
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
+                    <span class="badge badge-info"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header ">
+                    <h3 class="pull-left">Feedback das sessões</h3>
+                    <button class="btn border-none pull-right">
+                        <h3><i class="pe-7s-plus"></i></h3>
+                    </button>
+                    <img src="assets/img/sidebar-0.jpg">
+                </div>
+                <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+
+                    <ul class="list-group">
+                        <div *ngFor="let v of [1,2,3,4]">
+                            <li class="list-group-item">
+                                <button class="btn btn-xs pe-7s-help1 border-none"> </button>
+                                xxxxxx
+                                <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
+
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
+                    <span class="badge badge-info"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="padding: 25px;">
+            <h4>Agendas e Pendentes</h4>
+        </div>
+    </div>
+</div>
+<app-chat></app-chat>
