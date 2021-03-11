@@ -1,0 +1,59 @@
+.menu-coach {
+    width: 100%;
+    height: 25%;
+    .row {
+        margin: 0;
+        height: 100%;
+
+        .col-md-6 {
+            margin-top: 5%;
+
+            a{
+                margin: 2px;
+            }
+        }
+    }
+
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+}
+
+
+.accordion {
+        
+    transition: 0.4s;border: none;
+    font-size: 20px;
+    padding: 0 5px;
+    margin: 0;
+    text-align: center;
+    width: 30px;
+}
+
+.active, .accordion:hover {
+}
+
+.accordion:after {
+  //  content: '\2304';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+  //  content: "\2303";
+}
+
+.panel {
+    padding: 0 18px;
+    box-shadow: 0 0 15px rgba(0,0,0,.1);
+    border-radius: none;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0 15px;
+    margin-top: 0;
+    transition: max-height 0.2s ease-out;
+}
