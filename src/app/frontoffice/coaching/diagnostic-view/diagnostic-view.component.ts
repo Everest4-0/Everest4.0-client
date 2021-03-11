@@ -47,6 +47,9 @@ export class DiagnosticViewComponent implements AfterViewInit {
         borderWidth: 1
       },
       options: {
+        legend: {
+          position: 'bottom'
+        },
         scale: {
           angleLines: {
             display: true
