@@ -163,6 +163,10 @@ FullCalendarModule.registerPlugins([
     TestimonialValidationComponent
   ],
   exports: [
+    ModalModule,
+
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
   ]
