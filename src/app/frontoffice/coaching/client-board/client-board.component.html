@@ -28,60 +28,11 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header ">
-                    <h3 class="pull-left">Notas</h3>
-                    <button class="btn border-none pull-right">
-                        <h3><i class="pe-7s-plus"></i></h3>
-                    </button>
-                    <img src="assets/img/sidebar-3.jpg">
-                </div>
-                <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
-                    <ul class="list-group">
-                        <div *ngFor="let v of [1,2,3,4]">
-                            <li class="list-group-item">
-                                <button class="btn btn-xs pe-7s-help1 border-none"> </button>
-                                xxxxxx
-                                <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
-
-                            </li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
-                    <span class="badge badge-info"></span>
-                </div>
-            </div>
+            <app-coaching-note></app-coaching-note>
         </div>
 
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header ">
-                    <h3 class="pull-left">Feedback das sessões</h3>
-                    <button class="btn border-none pull-right">
-                        <h3><i class="pe-7s-plus"></i></h3>
-                    </button>
-                    <img src="assets/img/sidebar-0.jpg">
-                </div>
-                <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
-                    <ul class="list-group">
-                        <div *ngFor="let v of [1,2,3,4]">
-                            <li class="list-group-item">
-                                <button class="btn btn-xs pe-7s-help1 border-none"> </button>
-                                xxxxxx
-                                <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
-
-                            </li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
-                    <span class="badge badge-info"></span>
-                </div>
-            </div>
-
+            <app-coaching-feedback></app-coaching-feedback>
         </div>
     </div>
     <div class="col-md-4">
