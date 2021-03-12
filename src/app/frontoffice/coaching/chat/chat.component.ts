@@ -7,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  public isChating=false
-  constructor() { }
+  private socket: any;
+  public data: any;
+
+  public isChating = true
+  public message = '123456789';
+  constructor() {
+  
+  }
 
   ngOnInit(): void {
+    
+  }
+
+  send() {
+
   }
 
 }

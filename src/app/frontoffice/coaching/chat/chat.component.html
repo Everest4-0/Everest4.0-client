@@ -29,15 +29,17 @@
                         <span class="msg_time_send">8:55 AM, Today</span>
                     </div>
                 </div>
+
+                {{message|json}}
             </div>
             <div class="card-footer">
                 <div class="input-group">
                     <div class="input-group-append">
                         <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
                     </div>
-                    <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                    <textarea name="" class="form-control type_msg"  [(ngModel)]="message" placeholder="Type your message..."></textarea>
                     <div class="input-group-append">
-                        <span class="input-group-text send_btn"><i class="fa fa-location-arrow"></i></span>
+                        <span class="input-group-text send_btn" (click)="send()"><i class="fa fa-location-arrow"></i></span>
                     </div>
                 </div>
             </div>
