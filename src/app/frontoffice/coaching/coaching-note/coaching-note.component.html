@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-header ">
+        <img src="assets/img/sidebar-3.jpg">
+        <h3 class="pull-left">Notas</h3>
+        <button class="btn border-none pull-right" (click)="openModal()">
+            <h3><i class="pe-7s-plus"></i></h3>
+        </button>
+    </div>
+    <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+
+        <ul class="list-group">
+            <div *ngFor="let note of notes">
+                <li class="list-group-item">
+                    <button class="btn btn-xs pe-7s-help1 border-none"> </button>
+                    {{note.title}}
+                    <button class="btn btn-xs pull-right border-none" (click)="openModal(note)"><i
+                            class="pe-7s-note"></i></button>
+
+                </li>
+            </div>
+        </ul>
+    </div>
+</div>
+
+
+<jw-modal id="note-modal" class="sm">
+    <h4>Nota {{notes.length +1}}</h4>
+    <hr>
+    <div class="row text-center">
+        <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-lg" [(ngModel)]="note.title"
+                                formControlName="title" required aria-describedby="emailHelp" placeholder="Título">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea type="email" class="form-control form-control-lg" [(ngModel)]="note.descriptions"
+                                formControlName="descriptions" required aria-describedby="emailHelp"
+                                placeholder="insira o seu texto aqui" style="height: 400px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center"><br>
+                <button class="btn btn-success bg-success">Salvar</button>
+            </div>
+        </form>
+
+    </div>
+</jw-modal>
