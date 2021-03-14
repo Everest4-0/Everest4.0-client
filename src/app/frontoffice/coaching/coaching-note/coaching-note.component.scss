@@ -10,7 +10,6 @@
     background: #1DC7EA;
     background: linear-gradient(to bottom, #1DC7EA 0%, #4091ff 100%);
     background-size: 150% 150%;
-
     button{
         padding:0;
     }
@@ -36,5 +35,22 @@
             border-bottom: solid 1px #eee;
         }
     }
+    small {
+        color: #aaa;
+        font-size: 10px;
+        margin-left: 20px;
+    }
 }
 }
+.jw-modal{
+
+    .form-title{
+        font-weight: 900;
+        font-size: 24px;
+    }
+}
+.editting
+    input, .editting
+    textarea{
+        border: none !important
+    }
