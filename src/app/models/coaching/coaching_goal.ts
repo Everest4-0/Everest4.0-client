@@ -1,4 +1,4 @@
-export class Goal {
+export class CoachingGoal {
     id: string;
     descriptions: string;
     isActive: boolean;

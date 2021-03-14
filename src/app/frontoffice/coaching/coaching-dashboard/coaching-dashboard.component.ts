@@ -1,3 +1,6 @@
+import { CoachingGoalService } from './../../../services/coaching/coaching-goal.service';
+import { CoachingDurationService } from './../../../services/coaching/coaching-duration.service';
+import { CoachingDuration } from '../../../models/coaching/coaching_duration';
 import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
 import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
 import { UserEvaluationService } from './../../../services/user-evaluation.service';
@@ -34,8 +37,11 @@ export class CoachingDashboardComponent implements OnInit {
   public evaluationDatas: any = {};
   public weakness = [];
   public strengths = [];
+
   public subscriptions: Array<CoachingSubscription> = [];
   public subscription: CoachingSubscription = new CoachingSubscription();
+  
+  public coachingDurations: Array<CoachingDuration> = []; 
 
   form = new GoalForm(this.fb, this.goal);
 
@@ -45,7 +51,9 @@ export class CoachingDashboardComponent implements OnInit {
     private goalService: GoalService,
     private evaluationService: UserEvaluationService,
     private modalService: ModalService,
-    private coachingSubscriptionService: CoachingSubscriptionService
+    private coachingSubscriptionService: CoachingSubscriptionService,
+    private coachingDurationService: CoachingDurationService,
+    private coachingGoalService: CoachingGoalService
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +66,10 @@ export class CoachingDashboardComponent implements OnInit {
       }
 
     })
+    this.coachingDurationService.all().subscribe(durations=>{
+      this.coachingDurations = durations;
+    })
+
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {

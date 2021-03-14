@@ -1,5 +1,5 @@
 
-export class Duration {
+export class CoachingDuration {
     id: string;
     months:number;
     description: string;
