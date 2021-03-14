@@ -8,6 +8,8 @@ import { UserEvaluation } from './../../../models/diagnostic/user-evaluation';
 import { Component, OnInit, Input } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
 
+import { ModalService } from 'app/components/modal';
+
 
 @Component({
   selector: 'app-coaching-dashboard',
@@ -36,7 +38,8 @@ export class CoachingDashboardComponent implements OnInit {
     private auth: AuthService,
     private fb: FormBuilder,
     private goalService: GoalService,
-    private evaluationService: UserEvaluationService
+    private evaluationService: UserEvaluationService,
+    private modalService: ModalService
 
   ) { }
 
@@ -111,8 +114,13 @@ export class CoachingDashboardComponent implements OnInit {
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
   }
 
+  openSubscription() {
+    this.modalService.open('coach-subscription')
+  }
 
-
+  discard() {
+    this.modalService.close('coach-subscription')
+  }
   accordion(that: any): void {
 
     that.classList.toggle("pe-7s-angle-up");
