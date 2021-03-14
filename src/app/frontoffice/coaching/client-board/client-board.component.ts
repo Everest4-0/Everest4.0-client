@@ -38,7 +38,7 @@ export class ClientBoardComponent implements OnInit {
   form = new GoalForm(this.fb, this.goal);
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private fb: FormBuilder,
     private goalService: GoalService,
     private evaluationService: UserEvaluationService,
