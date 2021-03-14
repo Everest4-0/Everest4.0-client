@@ -13,6 +13,7 @@ export class SubscriptionService extends AppService<Subscription> implements ISe
   constructor(public http: HttpClient) {
     super(http, 'coaching.subscriptions');
   }
+  
   one(id: string): Observable<Subscription> {
     return this.getOne(id)
   }
@@ -32,4 +33,5 @@ export class SubscriptionService extends AppService<Subscription> implements ISe
   create(o: any): Observable<Subscription> {
     return this.createOne(o)
   }
+
 }
