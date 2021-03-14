@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 export class DurationService extends AppService<Duration> implements IService<Duration> {
 
   constructor(public http: HttpClient) {
-    super(http, 'coaching.notes');
+    super(http, 'coaching.durations');
   }
   one(id: string): Observable<Duration> {
     return this.getOne(id)
