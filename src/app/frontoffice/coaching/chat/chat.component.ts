@@ -4,7 +4,7 @@ import { ChatMessageService } from './../../../services/main/chat-message.servic
 import { User } from './../../../models/main/user';
 import { AuthService } from './../../../services/auth.service';
 import { Chat } from './../../../models/main/chat';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import * as moment from 'moment';
 
@@ -19,13 +19,13 @@ export class ChatComponent implements OnInit {
 
 
 
-  public chat: Chat = new Chat();
+  @Input() public chat: Chat = new Chat();
   public message: ChatMessage = new ChatMessage();
   public data: any;
   private socket: any;
   public ids: any = {};
   public isChating = false
-  //public message = '123456789';
+  
   public commingFromOut;
   public to: User = new User();
   constructor(

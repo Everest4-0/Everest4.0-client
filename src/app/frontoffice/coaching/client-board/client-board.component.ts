@@ -24,7 +24,7 @@ export class ClientBoardComponent implements OnInit {
     { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
   ];
 
-  public coachingSubscription: CoachingSubscription = new CoachingSubscription();
+  public subscription: CoachingSubscription = new CoachingSubscription();
   public currentResults = [];
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
@@ -51,7 +51,7 @@ export class ClientBoardComponent implements OnInit {
 
     const id = this.route.snapshot.params['id'];
     this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
-      this.coachingSubscription = coachingSubscription;
+      this.subscription = coachingSubscription;
     })
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
