@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CoachingSubscriptionService extends AppService<CoachingSubscription> implements IService<CoachingSubscription> {
-  
+
   constructor(public http: HttpClient) {
     super(http, 'coaching.subscriptions');
   }

@@ -49,11 +49,10 @@ export class ClientBoardComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     const id = this.route.snapshot.params['id'];
-    /*this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
+    this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
       this.coachingSubscription = coachingSubscription;
-    })*/
+    })
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {

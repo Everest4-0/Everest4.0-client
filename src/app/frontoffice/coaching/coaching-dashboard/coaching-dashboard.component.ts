@@ -1,3 +1,5 @@
+import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
+import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
 import { UserEvaluationService } from './../../../services/user-evaluation.service';
 import { AuthService } from 'app/services/auth.service';
 import { GoalService } from 'app/services/goal.service';
@@ -31,7 +33,9 @@ export class CoachingDashboardComponent implements OnInit {
 
   public evaluationDatas: any = {};
   public weakness = [];
-  public strengths = []
+  public strengths = [];
+  public subscriptions: Array<CoachingSubscription> = [];
+  public subscription: CoachingSubscription = new CoachingSubscription();
 
   form = new GoalForm(this.fb, this.goal);
 
@@ -40,12 +44,17 @@ export class CoachingDashboardComponent implements OnInit {
     private fb: FormBuilder,
     private goalService: GoalService,
     private evaluationService: UserEvaluationService,
-    private modalService: ModalService
-
+    private modalService: ModalService,
+    private coachingSubscriptionService: CoachingSubscriptionService
   ) { }
 
   ngOnInit(): void {
 
+    this.coachingSubscriptionService.all({ userId: this.auth.user.id }).subscribe(subscriptions => {
+      this.subscriptions = subscriptions;
+      this.subscription = subscriptions[0];
+
+    })
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
@@ -60,7 +69,7 @@ export class CoachingDashboardComponent implements OnInit {
       }, {})
 
       let evaluationArr: Array<Array<any>>;
-          evaluationArr= Object.entries(evaluationsGross)
+      evaluationArr = Object.entries(evaluationsGross)
       evaluationArr.forEach(((arr) => {
         arr[3] = (arr[1].reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (arr[1].length)).toFixed(2);
       }))
@@ -99,9 +108,9 @@ export class CoachingDashboardComponent implements OnInit {
           })*/
         result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
       })
-      
+
     })
-    
+
   }
   groupBy = (xs, key) => {
     return xs.reduce(function (rv, x) {

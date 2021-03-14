@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit {
   public data: any;
   private socket: any;
   public ids: any = {};
-  public isChating = true
+  public isChating = false
   //public message = '123456789';
   public commingFromOut;
   public to: User = new User();
