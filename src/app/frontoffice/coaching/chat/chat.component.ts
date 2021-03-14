@@ -17,17 +17,17 @@ import { io } from "socket.io-client";
 })
 export class ChatComponent implements OnInit {
 
-
-
   @Input() public chat: Chat = new Chat();
+  @Input() public isCoach: boolean;
+  @Input() public to: User = new User();
+
   public message: ChatMessage = new ChatMessage();
   public data: any;
   private socket: any;
   public ids: any = {};
   public isChating = false
-  
+
   public commingFromOut;
-  public to: User = new User();
   constructor(
     public auth: AuthService,
     private chatMessageService: ChatMessageService,
@@ -38,25 +38,18 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let to = this.auth.user.id == 'd761c981-3502-49e4-a425-ef189f97e5bf' ? 'c33cda14-38c3-4670-9643-7d71c23fb098' : 'd761c981-3502-49e4-a425-ef189f97e5bf'
-    this.auth.one(to).subscribe(user => {
-      this.message.to = this.to = user
-    })
-
     this.socket.on('connect', socket => {
       this.ids = { server: this.socket.id, client: this.message.to.apikey }
       this.startChat()
-
     });
 
     this.socket.on('chat-to-' + this.auth.user.id.split('-')[0], data => {
       this.chat.messages.push(data);
       this.scrollToEnd()
-
     });
   }
   startChat() {
-    this.chatService.one('e2046104-7b22-490c-9a17-b1882f91cefd').subscribe(chat => {
+    this.chatService.one(this.chat.id).subscribe(chat => {
       chat.messages = chat.messages.sort((x, y) => moment(x.createdAt).isAfter(y.createdAt) ? 1 : -1)
       this.message.chat = this.chat = chat;
       this.scrollToEnd()

@@ -59,8 +59,11 @@ export class CoachingDashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.coachingSubscriptionService.all({ userId: this.auth.user.id }).subscribe(subscriptions => {
+      
       this.subscriptions = subscriptions;
-      this.subscription = subscriptions[0];
+      if (subscriptions.length > 0) {
+        this.subscription = subscriptions[0];
+      }
 
     })
     this.coachingDurationService.all().subscribe(durations=>{
