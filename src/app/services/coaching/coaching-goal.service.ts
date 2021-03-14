@@ -1,35 +1,35 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IService } from './../service.interface';
+import { IService } from '../service.interface';
 import { Injectable } from '@angular/core';
-import { Goal } from 'app/models/coaching/goal';
+import { CoachingGoal } from 'app/models/coaching/coaching_goal';
 import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GoalService extends AppService<Goal> implements IService<Goal> {
+export class CoachingGoalService extends AppService<CoachingGoal> implements IService<CoachingGoal> {
 
   constructor(public http: HttpClient) {
     super(http, 'coaching.goals');
   }
-  one(id: string): Observable<Goal> {
+  one(id: string): Observable<CoachingGoal> {
     return this.getOne(id)
   }
 
-  all(f: any={}): Observable<Array<Goal>> {
+  all(f: any={}): Observable<Array<CoachingGoal>> {
     return this.getAll(f)
   }
 
-  update(o: any): Observable<Goal> {
+  update(o: any): Observable<CoachingGoal> {
     return this.updateOne(o);
   }
   
-  delete(o:any):Observable<Goal>{
+  delete(o:any):Observable<CoachingGoal>{
     return this.deleteOne(o);
   }
 
-  create(o: any): Observable<Goal> {
+  create(o: any): Observable<CoachingGoal> {
     return this.createOne(o)
   }
 }

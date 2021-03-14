@@ -1,35 +1,35 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IService } from './../service.interface';
-import { Duration } from './../../models/coaching/duration';
+import { CoachingDuration } from '../../models/coaching/coaching_duration';
 import { AppService } from './../app.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DurationService extends AppService<Duration> implements IService<Duration> {
+export class CoachingDurationService extends AppService<CoachingDuration> implements IService<CoachingDuration> {
 
   constructor(public http: HttpClient) {
     super(http, 'coaching.durations');
   }
-  one(id: string): Observable<Duration> {
+  one(id: string): Observable<CoachingDuration> {
     return this.getOne(id)
   }
 
-  all(f: any={}): Observable<Array<Duration>> {
+  all(f: any={}): Observable<Array<CoachingDuration>> {
     return this.getAll(f)
   }
 
-  update(o: any): Observable<Duration> {
+  update(o: any): Observable<CoachingDuration> {
     return this.updateOne(o);
   }
   
-  delete(o:any):Observable<Duration>{
+  delete(o:any):Observable<CoachingDuration>{
     return this.deleteOne(o);
   }
 
-  create(o: any): Observable<Duration> {
+  create(o: any): Observable<CoachingDuration> {
     return this.createOne(o)
   }
 }

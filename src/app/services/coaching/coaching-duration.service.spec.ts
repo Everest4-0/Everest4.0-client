@@ -1,13 +1,12 @@
+import { CoachingDurationService } from './coaching-duration.service';
 import { TestBed } from '@angular/core/testing';
 
-import { DurationService } from './duration.service';
-
 describe('DurationService', () => {
-  let service: DurationService;
+  let service: CoachingDurationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DurationService);
+    service = TestBed.inject(CoachingDurationService);
   });
 
   it('should be created', () => {
