@@ -3,7 +3,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <a [routerLink]="['board']" class="btn btn-info btn-fill">Portal do Profissional</a>
-            <a href="#" class="btn btn-danger btn-fill">Subscrever serviço</a>
+            <button class="btn btn-danger btn-fill" (click)='openSubscription()'>Subscrever serviço</button>
         </div>
     </div>
 </div>
@@ -35,7 +35,8 @@
                             <h4>
                                 <button class="accordion btn btn-xs pe-7s-angle-down" (click)="accordion($event.target)"
                                     title='panel-{{currentResults.name}}'></button>
-                                {{currentResults.name}} <span class="badge ">{{currentResults.evaluations.length}}</span>
+                                {{currentResults.name}} <span
+                                    class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
                             <div id="panel-{{currentResults.name}}" class="list-group panel">
                                 <ul class="list-group" *ngFor="let group of currentResults.groups">
@@ -60,3 +61,55 @@
         </div>
     </div>
 </div>
+<jw-modal id="coach-subscription" class="md" title="Coaching online e gestão de carreiras">
+    <div class="row">
+        <form class="form col-md-12">
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-6">Finalidade</div>
+                <div class="col-md-6">
+                    <select class="form-control" aria-label=".form-select-sm example" id="">
+                        <option value="Melhoria do desenvolvimento">Melhoria do desenvolvimento</option>
+                        <option value="Mudança de emprego">Mudança de emprego</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-6">Duração</div>
+                <div class="col-md-6">
+                    <select class="form-control" aria-label=".form-select-sm example" id="">
+                        <option value="Melhoria do desenvolvimento">Melhoria do desenvolvimento</option>
+                        <option value="Mudança de emprego">Mudança de emprego</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-6">Informação adicional</div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-12 text">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Quod id magnam blanditiis, ut repudiandae debitis! Labore
+                </div>
+            </div>
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-12 text">
+                    <input type="checkbox" name="" id="" value=""> Compreendi e autorizo a cobrança
+                </div>
+            </div>
+            <div class="row" style="margin: 2%;">
+                <div class="col-md-6 text-left">
+                    <button type="button" class="btn btn-danger" (click)='discard()'>Cancelar</button>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button type="button" class="btn btn-primary btn-fill" >Confirmar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</jw-modal>
