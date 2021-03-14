@@ -4,7 +4,6 @@ import { User } from 'app/models/main/user';
 
 export class Subscription {
     id: string;
-    title:string;
     description: string;
     isActive: boolean;
     user: User = new User();
