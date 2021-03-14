@@ -28,19 +28,13 @@ export class AppService<T> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
     return this.http.get('./angular.json', { headers });
   }
-  protected getOne(s: string): Observable<any> {
-    return this.http.get(this.url + '/' + s, { 'headers': this.headers })
+  protected getOne(s: string, a?: any): Observable<any> {
+    let str = this.getQuery(a);
+    return this.http.get(this.url + '/' + s + '?' + str, { 'headers': this.headers })
   }
 
   protected getAll(a: any): Observable<any> {
-    let str = '';
-    
-    for (var key in a) {
-      if (str !== '') {
-        str += '&';
-      }
-      str += key + '=' + encodeURIComponent(a[key]);
-    }
+    let str = this.getQuery(a);
     return this.http.get(this.url + '?' + str, { 'headers': this.headers })
   }
 
@@ -54,5 +48,18 @@ export class AppService<T> {
 
   protected deleteOne(id): Observable<any> {
     return this.http.delete(this.url + '/' + id, { 'headers': this.headers })
+  }
+
+  private getQuery(a: any) {
+    let str = '';
+
+    for (var key in a) {
+      if (str !== '') {
+        str += '&';
+      }
+      str += key + '=' + encodeURIComponent(a[key]);
+    }
+
+    return str;
   }
 }

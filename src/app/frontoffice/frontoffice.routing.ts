@@ -209,7 +209,7 @@ export const FrontOfficeRoutes: Routes =
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['BASIC', 'PRO', 'ADMIN'],
+          only: ['FREE','BASIC', 'PRO', 'ADMIN'],
           redirectTo: '/me/403'
         }
       },

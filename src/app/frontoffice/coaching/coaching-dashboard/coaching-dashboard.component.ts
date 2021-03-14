@@ -8,6 +8,7 @@ import { UserEvaluation } from './../../../models/diagnostic/user-evaluation';
 import { Component, OnInit, Input } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-coaching-dashboard',
@@ -37,10 +38,10 @@ export class CoachingDashboardComponent implements OnInit {
     private fb: FormBuilder,
     private goalService: GoalService,
     private evaluationService: UserEvaluationService
-
   ) { }
 
   ngOnInit(): void {
+
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {

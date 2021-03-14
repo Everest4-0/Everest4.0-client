@@ -9,6 +9,6 @@ export const CoachingRoutes: Routes = [
         path: '', component: CoachingDashboardComponent
     },
     {
-        path: 'board', component: ClientBoardComponent
+        path: 'board/:id', component: ClientBoardComponent
     }
 ]; 

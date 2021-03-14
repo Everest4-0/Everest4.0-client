@@ -3,6 +3,8 @@ import { ModalModule } from './../../components/modal/modal.module';
 import { CoachingComponent } from './coaching/coaching.component';
 import { CoachingRoutes } from './coaching.routing';
 
+import { MomentModule } from 'ngx-moment';
+
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,6 +32,7 @@ import { CoachingFeedbackComponent } from './coaching-feedback/coaching-feedback
     CommonModule, 
     ModalModule,
 
+    MomentModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(CoachingRoutes)

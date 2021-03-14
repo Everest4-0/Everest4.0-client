@@ -7,12 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CoachingComponent implements OnInit {
 
-  constructor(
-
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }

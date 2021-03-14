@@ -4,40 +4,34 @@
             <div class="card-header msg_head">
                 <div class="d-flex bd-highlight row" style="    background: rgba(0,0,0,.8);">
                     <div class="img_cont col-md-3">
-                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                        <img src="{{auth.serverAddress}}{{to.photoUrl}}"
                             class="rounded-circle user_img">
                         <span class="online_icon"></span>
                     </div>
                     <div class="user_info col-md-9">
-                        <span>Chat with Khalid</span>
-                        <p>1767 Messages</p>
+                        <span>Chat with <b>{{to.datas.fullName}}</b></span>
+                        <p>{{chat.messages.length}} Menssagens</p>
+                        <p>{{ids|json}}</p>
                     </div>
                 </div>
                 <span id="action_menu_btn" (click)="isChating=!isChating"><i class="pe-7s-angle-down" style="font-size: 48px;"></i></span>
                 
             </div>
-            <div class="card-body msg_card_body">
-                <div class="d-flex justify-content-start mb-4 msg">
-                    <div class="msg_cotainer">
-                        Hi, how are you samim?
-                        <span class="msg_time">8:40 AM, Today</span>
+            <div class="card-body msg_card_body" id="msg_card_body">
+                <div class="d-flex justify-content-{{auth.user.id!==message.from.id ? 'start':'end'}} mb-4 msg" *ngFor="let message of chat.messages">
+                    <div class="msg_cotainer{{auth.user.id!==message.from.id ? '_send':''}}">
+                        {{message.message}}
+                        <span class="msg_time{{auth.user.id==message.from.id ? '_send':''}}">{{message.createdAt|amLocale:'pt'|  amDateFormat: "HH:mm"}}, Today</span>
                     </div>
-                </div>
-                <div class="d-flex justify-content-end mb-4 msg">
-                    <div class="msg_cotainer_send">
-                        Hi Khalid i am good tnx how about you?
-                        <span class="msg_time_send">8:55 AM, Today</span>
-                    </div>
-                </div>
-
-                {{message|json}}
+                </div >
+                {{commingFromOut|json}}
             </div>
             <div class="card-footer">
                 <div class="input-group">
                     <div class="input-group-append">
                         <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
                     </div>
-                    <textarea name="" class="form-control type_msg"  [(ngModel)]="message" placeholder="Type your message..."></textarea>
+                    <textarea name="" class="form-control type_msg"  [(ngModel)]="message.message" placeholder="Type your message..."></textarea>
                     <div class="input-group-append">
                         <span class="input-group-text send_btn" (click)="send()"><i class="fa fa-location-arrow"></i></span>
                     </div>

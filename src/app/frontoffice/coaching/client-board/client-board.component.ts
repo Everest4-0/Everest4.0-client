@@ -1,3 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
+import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
+import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
 import { UserEvaluationService } from './../../../services/user-evaluation.service';
 import { AuthService } from 'app/services/auth.service';
 import { GoalService } from 'app/services/goal.service';
@@ -21,6 +24,7 @@ export class ClientBoardComponent implements OnInit {
     { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
   ];
 
+  public coachingSubscription: CoachingSubscription = new CoachingSubscription();
   public currentResults = [];
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
@@ -37,11 +41,19 @@ export class ClientBoardComponent implements OnInit {
     private auth: AuthService,
     private fb: FormBuilder,
     private goalService: GoalService,
-    private evaluationService: UserEvaluationService
+    private evaluationService: UserEvaluationService,
+    private coachingSubscriptionService: CoachingSubscriptionService,
+    private route: ActivatedRoute
 
   ) { }
 
   ngOnInit(): void {
+
+
+    const id = this.route.snapshot.params['id'];
+    /*this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
+      this.coachingSubscription = coachingSubscription;
+    })*/
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
