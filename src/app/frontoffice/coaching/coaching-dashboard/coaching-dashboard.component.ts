@@ -1,3 +1,6 @@
+import { CoachingSubscriptionForm } from './../../../forms/coaching-subscription';
+import { ToastService } from 'ng-uikit-pro-standard';
+import { CoachingGoal } from 'app/models/coaching/coaching_goal';
 import { CoachingGoalService } from './../../../services/coaching/coaching-goal.service';
 import { CoachingDurationService } from './../../../services/coaching/coaching-duration.service';
 import { CoachingDuration } from '../../../models/coaching/coaching_duration';
@@ -42,8 +45,9 @@ export class CoachingDashboardComponent implements OnInit {
   public subscription: CoachingSubscription = new CoachingSubscription();
   
   public coachingDurations: Array<CoachingDuration> = []; 
+  public coachingGoals: Array<CoachingGoal> = []; 
 
-  form = new GoalForm(this.fb, this.goal);
+  form = new CoachingSubscriptionForm(this.fb);
 
   constructor(
     private auth: AuthService,
@@ -53,7 +57,8 @@ export class CoachingDashboardComponent implements OnInit {
     private modalService: ModalService,
     private coachingSubscriptionService: CoachingSubscriptionService,
     private coachingDurationService: CoachingDurationService,
-    private coachingGoalService: CoachingGoalService
+    private coachingGoalService: CoachingGoalService,
+    private toast:ToastService
   ) { }
 
   ngOnInit(): void {
@@ -66,8 +71,13 @@ export class CoachingDashboardComponent implements OnInit {
       }
 
     })
+
     this.coachingDurationService.all().subscribe(durations=>{
-      this.coachingDurations = durations;
+      this.coachingDurations = durations.sort((a,b)=> {return (a.months < b.months) ? -1 : 1;});
+    })
+
+    this.coachingGoalService.all().subscribe(goals=>{
+      this.coachingGoals = goals;
     })
 
     this.goal.user = this.auth.user;
@@ -146,6 +156,12 @@ export class CoachingDashboardComponent implements OnInit {
 
   discard() {
     this.modalService.close('coach-subscription')
+  }
+  saveSubcription(){
+    debugger
+    this.coachingSubscriptionService.create(this.subscription).subscribe(subs=>{
+      console.log(subs);
+    })
   }
   accordion(that: any): void {
 

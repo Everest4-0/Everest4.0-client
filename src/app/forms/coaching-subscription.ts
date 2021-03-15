@@ -5,9 +5,9 @@ export class CoachingSubscriptionForm {
     constructor(fb: FormBuilder) {
         return fb.group({
             description: ['', Validators.required],
-            userId: ['', Validators.required],
-            durationId: ['', Validators.required],
-            goalId: ['', Validators.required]
+            user: ['', Validators.required],
+            duration: ['', Validators.required],
+            goal: ['', Validators.required]
         })
     }
 }

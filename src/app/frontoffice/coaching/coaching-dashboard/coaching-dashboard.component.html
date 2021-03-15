@@ -2,8 +2,10 @@
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
-            <a [routerLink]="['board/'+subscription.id]" class="btn btn-info btn-fill" *ngIf="subscription.id!==undefined">Portal do Profissional</a>
-            <button class="btn btn-danger btn-fill" (click)='openSubscription()' *ngIf="subscription.id===undefined">Subscrever serviço</button>
+            <a [routerLink]="['board/'+subscription.id]" class="btn btn-info btn-fill"
+                *ngIf="subscription.id!==undefined">Portal do Profissional</a>
+            <button class="btn btn-danger btn-fill" (click)='openSubscription()'
+                *ngIf="subscription.id===undefined">Subscrever serviço</button>
         </div>
     </div>
 </div>
@@ -61,55 +63,46 @@
         </div>
     </div>
 </div>
-<jw-modal id="coach-subscription" class="md" title="Coaching online e gestão de carreiras">
+<jw-modal id="coach-subscription" class="sm" title="Coaching online e gestão de carreiras">
+    <h4 class="h4 title">Subscrevendo serviço coaching</h4>
+    <hr>{{subscription|json}}
     <div class="row">
-        <form class="form col-md-12">
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-6">Finalidade</div>
-                <div class="col-md-6">
-                    <select class="form-control" aria-label=".form-select-sm example" id="">
-                        <option value="Melhoria do desenvolvimento">Melhoria do desenvolvimento</option>
-                        <option value="Mudança de emprego">Mudança de emprego</option>
+        <form #subscriptionForm="ngForm" [formGroup]="form" (ngSubmit)="saveSubcription()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Finalidade</label>
+                    <select class="form-control" aria-label=".form-select-sm example" formControlName="goal"
+                    [(ngModel)]="subscription.goal">
+                        <option *ngFor="let item of coachingGoals;" value="{{item}}">{{item.title}}
+                        </option>
                     </select>
                 </div>
-            </div>
-
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-6">Duração</div>
-                <div class="col-md-6">
-                    <select class="form-control" aria-label=".form-select-sm example" id="">
-                        <option value="Melhoria do desenvolvimento">Melhoria do desenvolvimento</option>
-                        <option value="Mudança de emprego">Mudança de emprego</option>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Duração</label>
+                    <select class="form-control" aria-label=".form-select-sm example" formControlName="duration"
+                    [(ngModel)]="subscription.duration">
+                        <option *ngFor="let item of coachingDurations; let i = index" value="{{item}}">
+                            {{item.months}} {{item.description}}</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-6">Informação adicional</div>
-                <div class="col-md-6">
-                    <input type="text" class="form-control">
+                <div class="form-group">
+                    <label>Informação adicional</label>
+                    <textarea class="form-control" cols="30" rows="4" 
+                        formControlName="user" [(ngModel)]="subscription.descriptions">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <div class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                        Quod id magnam blanditiis, ut repudiandae debitis! Labore</div>
+                </div>
+                <div class="form-group">    
+                    <input type="checkbox"> Compreendi e autorizo a cobrança
                 </div>
             </div>
-
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-12 text">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Quod id magnam blanditiis, ut repudiandae debitis! Labore
-                </div>
-            </div>
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-12 text">
-                    <input type="checkbox" name="" id="" value=""> Compreendi e autorizo a cobrança
-                </div>
-            </div>
-            <div class="row" style="margin: 2%;">
-                <div class="col-md-6 text-left">
-                    <button type="button" class="btn btn-danger" (click)='discard()'>Cancelar</button>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button type="button" class="btn btn-primary btn-fill" >Confirmar</button>
-                </div>
+            <div class="row text-center"><br>
+                <button class="btn btn-success btn-fill">Salvar</button>
             </div>
         </form>
     </div>
+    
 </jw-modal>
