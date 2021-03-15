@@ -5,17 +5,18 @@
         <button class="btn border-none pull-right" (click)="openModal()">
             <h3><i class="pe-7s-plus"></i></h3>
         </button>
+        
     </div>
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
         <ul class="list-group">
-            <div *ngFor="let note of notes">
+            <div *ngFor="let note of notes;let i=index">
                 <li class="list-group-item">
-                    <button class="btn btn-xs pe-7s-help1 border-none"> </button>
-                    {{note.title}}
+                    <span class="pull-left">{{i+1}}. &nbsp;&nbsp;</span>
+                     {{note.title}}<br>
+                    <small>{{note.updatedAt|amLocale:'pt'|amDateFormat: "LLLL"}}</small>
                     <button class="btn btn-xs pull-right border-none" (click)="openModal(note)"><i
                             class="pe-7s-note"></i></button>
-
                 </li>
             </div>
         </ul>
@@ -23,16 +24,19 @@
 </div>
 
 
-<jw-modal id="note-modal" class="sm">
-    <h4>Nota {{notes.length +1}}</h4>
+<jw-modal id="note-modal" class="sm {{editting ? 'editting':''}}">
+    <br>
+    <h4><span *ngIf="!editting">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota</span>
+    <button class="btn pull-right border-none" (click)="editting=!editting" *ngIf="editting"><i
+        class="pe-7s-note"></i></button></h4>
     <hr>
-    <div class="row text-center">
+    <div class="row text-center card-body">
         <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-lg" [(ngModel)]="note.title"
+                            <input type="email" style="font-weight: 900;font-size: 24px;" class="form-control form-title form-control-lg" [(ngModel)]="note.title"
                                 formControlName="title" required aria-describedby="emailHelp" placeholder="Título">
                         </div>
                     </div>
@@ -48,7 +52,7 @@
                 </div>
             </div>
             <div class="row text-center"><br>
-                <button class="btn btn-success bg-success">Salvar</button>
+                <button class="btn btn-success bg-success" *ngIf="!editting || note.id===undefined">Salvar</button>
             </div>
         </form>
 

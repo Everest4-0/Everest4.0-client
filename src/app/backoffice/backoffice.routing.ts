@@ -30,6 +30,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CreateCategoryBudgetComponent } from './budgetCategory/create-category-budget/create-category-budget.component';
+import { CoachingComponent } from './coaching-backoffice/coaching/coaching.component';
 
 
 const backOfficeRoutes: Routes = [
@@ -74,7 +75,16 @@ const backOfficeRoutes: Routes = [
     { path: 'courses/update/:id',              component: UpdateCourseComponent },
     { path: 'courses/delete/:id',              component: DeleteUserComponent },
     { path: 'courses/details/:id',             component: DetailsCourseComponent },
-
+    
+    {
+      path: 'coaching',
+      component: CoachingComponent,
+      children: [
+        {
+          path: '',
+          loadChildren: './coaching-backoffice/coaching-backoffice.module#CoachingBackofficeModule'
+        }]
+    }
 ];
 
 @NgModule({
