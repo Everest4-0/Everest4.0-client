@@ -41,14 +41,13 @@ export class CoachingNoteComponent implements OnInit {
 
   update() {
     this.noteService.update(this.note).subscribe(note => {
-      debugger
       this.notes.filter(n => n.id === note.id)[0] = note;
       this.modalService.close('note-modal');
     })
   }
   openModal(note = {}) {
 
-    this.note = note ?? new Note();
+    this.note = note.id!==undefined ? note : new Note();
     this.editting = this.note.id !== undefined;
     this.modalService.open('note-modal');
   }

@@ -1,8 +1,9 @@
-import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
+
 import { ClientBoardComponent } from './client-board/client-board.component';
-import { CoachingComponent } from './coaching/coaching.component';
+
 
 import { Routes } from '@angular/router';
+import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
 
 export const CoachingRoutes: Routes = [
     {
