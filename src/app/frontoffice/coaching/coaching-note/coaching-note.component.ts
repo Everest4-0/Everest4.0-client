@@ -45,9 +45,9 @@ export class CoachingNoteComponent implements OnInit {
       this.modalService.close('note-modal');
     })
   }
-  openModal(note = {}) {
+  openModal(note = null) {
 
-    this.note = note.id!==undefined ? note : new Note();
+    this.note = note!==null ? note : new Note();
     this.editting = this.note.id !== undefined;
     this.modalService.open('note-modal');
   }
