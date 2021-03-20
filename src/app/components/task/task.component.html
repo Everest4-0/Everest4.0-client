@@ -1,5 +1,5 @@
 
-<div class="btn-group pull-right">
+<div class="btn-group pull-right" *ngIf="showControls">
     <button type="button" (click)="isCalendar=!isCalendar" class=" tabs btn {{!isCalendar ? 'active' : '' }}" style="border: none;font-size: 24px;"><i
             class="pe-7s-menu"></i></button>
     <button type="button" (click)="isCalendar=!isCalendar" class=" tabs btn {{isCalendar ? 'active' : '' }}" style="border: none;font-size: 24px;"><i
@@ -7,7 +7,7 @@
     <button type="button" (click)="modalService.open('todo-modal')" class="btn" style="border: none;font-size: 24px;"><i
             class="pe-7s-plus"></i></button>
 </div>
-<app-schedule *ngIf="!isCalendar"></app-schedule>
+<app-schedule *ngIf="!isCalendar" [filters]="filters"></app-schedule>
 <app-calendar *ngIf="isCalendar"></app-calendar>
 
 <jw-modal id="todo-modal" class="sm" title="Agenda">

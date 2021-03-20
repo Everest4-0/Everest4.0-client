@@ -1,4 +1,19 @@
 
+.card.red{
+    .card-header{
+        background: #ea1d1d;
+        background: linear-gradient(to bottom, #ea1d1d 0%, #770000 100%);
+    }
+}
+
+.card.default{
+    .card-header{
+    background: #1DC7EA;
+    background: linear-gradient(to bottom, #1DC7EA 0%, #4091ff 100%);
+    }
+}
+
+
 .card{
     .card-header{padding: 5px 15px;
         background: #FFF;
@@ -7,8 +22,6 @@
     //box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
-    background: #1DC7EA;
-    background: linear-gradient(to bottom, #1DC7EA 0%, #4091ff 100%);
     background-size: 150% 150%;
     button{
         padding:0;

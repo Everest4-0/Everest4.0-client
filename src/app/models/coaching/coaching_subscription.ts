@@ -1,3 +1,4 @@
+import { Note } from './note';
 import { CoachingDuration } from './coaching_duration';
 import { CoachingGoal } from './coaching_goal';
 import { User } from './../main/user';
@@ -12,12 +13,13 @@ export class CoachingSubscription {
     createdAt: Date;
     updatedAt: Date;
 
+    notes: Array<Note> = []
     goal: CoachingGoal = new CoachingGoal();
     duration: CoachingDuration = new CoachingDuration();
     user: User = new User();
     coach: User = new User();
     chat: Chat = new Chat()
-    
+
     constructor() {
     }
 }

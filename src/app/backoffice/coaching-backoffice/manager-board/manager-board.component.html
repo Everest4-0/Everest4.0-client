@@ -1,1 +1,56 @@
-<p>manager-board works!</p>
+<div class="container-fluid menu-coach bg-header">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Portal do Profissional</h3>
+        </div>
+        <div class="col-md-6 text-right">
+
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-4">
+                <h5 style="margin: 0;">Gestor de Careira</h5>
+                <h4 style="margin: 0;"><b>{{subscription.user.datas.fullName}}</b></h4>
+
+            </div>
+            <div class="col-md-2">
+                <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail">
+            </div>
+            <app-progress-bar done="59" [noLabel]=true></app-progress-bar>
+            <app-progress-bar done="73" [noLabel]=true></app-progress-bar>
+
+        </div>
+
+    </div>
+</div>
+<div class="main-content">
+    <div class="col-md-8">
+        <div class="col-md-6">
+            <div class="card" style="padding: 25px;">
+                <h4>Diagnóstico</h4>
+                <app-diagnostic-view [data]=diagnosticDatas *ngIf="diagnosticDatas.data!==undefined">
+                </app-diagnostic-view>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card" style="padding: 25px;">
+                <a [routerLink]="['board']" class="btn btn-sm btn-info btn-fill pull-right">Plano de Acção</a>
+                <h4 class="pull-left">Evolução</h4>
+                <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas!==undefined">
+                </app-coaching-evolution>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <app-coaching-note [subscription]="subscription" *ngIf="subscription.id" [cssClass]="'red'" ></app-coaching-note>
+        </div>
+
+        <div class="col-md-6">
+            <app-coaching-feedback  [cssClass]="'red'"></app-coaching-feedback>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <app-task [showControls]="false" [filters]="['coaching']"></app-task>
+    </div>
+</div>
+<app-chat [chat]="subscription.chat" [isCoach]='false' [to]="subscription.coach"></app-chat>

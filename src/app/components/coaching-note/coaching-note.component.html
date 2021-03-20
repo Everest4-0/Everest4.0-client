@@ -1,25 +1,39 @@
-<div class="card">
+<div class="card {{cssClass}}">
     <div class="card-header ">
         <img src="assets/img/sidebar-3.jpg">
         <h3 class="pull-left">Notas</h3>
         <button class="btn border-none pull-right" (click)="openModal()">
             <h3><i class="pe-7s-plus"></i></h3>
         </button>
-        
+
     </div>
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-
         <ul class="list-group">
-            <div *ngFor="let note of notes;let i=index">
+            <div *ngFor="let note of notes.slice(i,4+i);let j=index">
                 <li class="list-group-item">
-                    <span class="pull-left">{{i+1}}. &nbsp;&nbsp;</span>
-                     {{note.title}}<br>
-                    <small>{{note.updatedAt|amLocale:'pt'|amDateFormat: "LLLL"}}</small>
+                    <span class="pull-left">{{j+i+1}}. &nbsp;&nbsp;</span>
+                    {{note.title}}<br>
+                    <small>{{note.updatedAt|amLocale:'pt'|amTimeAgo}}</small>
                     <button class="btn btn-xs pull-right border-none" (click)="openModal(note)"><i
                             class="pe-7s-note"></i></button>
                 </li>
             </div>
         </ul>
+    </div>
+    <div class="card-footer row">
+
+        <div class="col-md-12">
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="btn-group">
+                    <button type="button" class="btn border-none" (click)="i=i-4"><i class="pe-7s-angle-left text24"></i></button>
+                    <button type="button" class="btn border-none "><small>{{(i===0 ? 1 : (i+4)/4 )}} de {{notes.length%4 + ((notes.length/4)%4>0 ? 1 : 0)}}</small></button>
+                    <button type="button" class="btn border-none" (click)="i=i+4"><i class="pe-7s-angle-right text24"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -27,8 +41,9 @@
 <jw-modal id="note-modal" class="sm {{editting ? 'editting':''}}">
     <br>
     <h4><span *ngIf="!editting">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota</span>
-    <button class="btn pull-right border-none" (click)="editting=!editting" *ngIf="editting"><i
-        class="pe-7s-note"></i></button></h4>
+        <button class="btn pull-right border-none" (click)="editting=!editting" *ngIf="editting"><i
+                class="pe-7s-note"></i></button>
+    </h4>
     <hr>
     <div class="row text-center card-body">
         <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -36,7 +51,8 @@
                 <div class="col-sm-12">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="email" style="font-weight: 900;font-size: 24px;" class="form-control form-title form-control-lg" [(ngModel)]="note.title"
+                            <input type="email" style="font-weight: 900;font-size: 24px;"
+                                class="form-control form-title form-control-lg" [(ngModel)]="note.title"
                                 formControlName="title" required aria-describedby="emailHelp" placeholder="Título">
                         </div>
                     </div>

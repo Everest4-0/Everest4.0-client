@@ -66,6 +66,7 @@ import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component
 import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
 import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
+import { ComponentsModule } from 'app/components/components.module';
 
 
 @NgModule({
@@ -115,7 +116,7 @@ import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
     NgSelectModule,
     DragDropModule,
     ModalModule,
-
+    ComponentsModule,
     /*********************** */
 
     // BrowserModule,

@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../components/components.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { MomentModule } from 'ngx-moment';
   imports: [
     CommonModule,
     MomentModule,
+    ComponentsModule,
     RouterModule.forChild(CoachingRoutes)
   ]
 })

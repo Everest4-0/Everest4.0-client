@@ -13,7 +13,8 @@ export class ToDo {
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
-
+    
+    tags:Array<any>=[];
     constructor() {
     }
 }

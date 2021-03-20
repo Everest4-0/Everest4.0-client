@@ -31,7 +31,15 @@ div#swal2-content {
 .fade.modal-backdrop.show, .d-block.fade.modal.show {
     opacity: 1;
 }
-
+.text24{
+    font-size: 24px;
+}
+.text32{
+    font-size: 32px;
+}
+.text18{
+    font-size: 18px;
+}
 .text-violet {
     color: #9368E9;
 }

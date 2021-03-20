@@ -1,16 +1,17 @@
-import { TodoService } from './../../../services/todo.service';
+import { Goal } from './../../models/goal/goal';
+
+import { TodoService } from '../../services/todo.service';
 import { FormBuilder } from '@angular/forms';
-import { ToDoForm } from './../../../forms/todo.form';
-import { ToDo } from './../../../models/goal/todo';
-import { Goal } from './../../../models/goal/goal';
 import { ModalService } from 'app/components/modal';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { TaskService } from './../../../services/task.service';
+import { TaskService } from '../../services/task.service';
 import { AuthService } from 'app/services/auth.service';
-import { GoalService } from './../../../services/goal.service';
-import { Task } from './../../../models/goal/task';
-import { Component, OnInit } from '@angular/core';
+import { GoalService } from '../../services/goal.service';
+import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { Task } from 'app/models/goal/task';
+import { ToDoForm } from 'app/forms/todo.form';
+import { ToDo } from 'app/models/goal/todo';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -19,8 +20,9 @@ import * as moment from 'moment';
 export class ScheduleComponent implements OnInit {
 
 
-  public thisWeekLimit =5;
-  public overDueLimit =5;
+  @Input() filters=[]
+  public thisWeekLimit = 5;
+  public overDueLimit = 5;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
   public todos: Array<ToDo> = []
@@ -37,7 +39,7 @@ export class ScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     let lSunday, nSunday, oSunday, now;
     lSunday = oSunday = now = new Date((new Date()).setHours(0, 0, 0, 0));
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
@@ -57,7 +59,7 @@ export class ScheduleComponent implements OnInit {
     })
 
     this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
-      
+
       this.todos = todos
         .filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
         .sort((x, y) => x.startDate > y.startDate ? 1 : -1)
@@ -67,7 +69,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateState(task, state, list) {
-debugger
+    debugger
     task.state = state
     task.goal = null
     this.taskService.update(task).subscribe(task => {

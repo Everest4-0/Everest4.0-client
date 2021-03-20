@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-md-6">
-            <app-coaching-note></app-coaching-note>
+            <app-coaching-note [subscription]="subscription" *ngIf="subscription.id"></app-coaching-note>
         </div>
 
         <div class="col-md-6">
@@ -46,9 +46,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card" style="padding: 25px;">
-            <h4>Agendas e Pendentes</h4>
-        </div>
+        <app-task [showControls]="false" [filters]="['coaching']"></app-task>
     </div>
 </div>
 <app-chat [chat]="subscription.chat" [isCoach]='false' [to]="subscription.coach"></app-chat>

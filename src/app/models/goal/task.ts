@@ -14,6 +14,9 @@ export class Task {
     budgets: Array<Budget> = []
 
     goal: Goal = new Goal();
+
+    tags: Array<any> = [];
+
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;

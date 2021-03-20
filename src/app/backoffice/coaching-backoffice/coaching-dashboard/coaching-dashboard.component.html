@@ -1,4 +1,3 @@
-
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -9,39 +8,45 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                <div *ngFor="let v of [1,2,3,4]" class="col-md-3">
+                <a routerLink="/backoffice/coaching/board/{{subscription.id}}" *ngFor="let subscription of subscriptions" class="col-md-3">
                     <div class="card text-center">
-                        
-                        <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail"/>
+                        <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail" />
                         <b>{{subscription.user.datas.fullName}}</b><br>
-                        <small>{{subscription.createdAt|amLocale:'pt'|amDateFormat: "LLLL"}}</small>
-                        <div class="row">
-                            <div class="container">
-                            </div>
+                        <small>{{subscription.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+
+                        <app-progress-bar done="59" [noLabel]=true></app-progress-bar>
+                        <app-progress-bar done="73" [noLabel]=true></app-progress-bar>
+                        <div class="row text-center">
+                            <button class="btn btn-xs btn-info btn-fill"> Avaliar</button>
                         </div>
                     </div>
-                    <li class="list-group-item">
-                        <button class="btn btn-xs pe-7s-help1 border-none"> </button>
-                        xxxxxx
-                        <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
-                    </li>
+                </a>
+                <div *ngFor="let i of lessSbscriptions" class="col-md-3">
+                    <div class="card text-center">
+                        <br />
+                        <br />
+                        <img src="/assets/img/faces/base.png" class="img-thumbnail" style="opacity: .05" />
+                        <br />
+                        <br />
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <app-task [showControls]="false" [filters]="['coaching']"></app-task>
+                <div class="card hidden">
                     <div class="card-header ">
                         <h3 class="pull-left">Feedback das sessões</h3>
                         <img src="assets/img/sidebar-4.jpg">
                     </div>
                     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
-                
+
                         <ul class="list-group">
                             <div *ngFor="let v of [1,2,3,4]">
                                 <li class="list-group-item">
                                     <button class="btn btn-xs pe-7s-help1 border-none"> </button>
                                     xxxxxx
                                     <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
-                
+
                                 </li>
                             </div>
                         </ul>

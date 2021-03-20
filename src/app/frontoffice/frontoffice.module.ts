@@ -20,11 +20,11 @@ import { ForbidenComponent } from './costum/forbiden/forbiden.component';
 import { DetailsCourseComponent } from './courses/details-course/details-course.component';
 import { ListCourseComponent } from './courses/list-course/list-course.component';
 import { UserSettingsComponent } from './user/user-settings/user-settings.component';
-import { TaskComponent } from './goals/task/task.component';
+import { TaskComponent } from '../components/task/task.component';
 
 import { MomentModule } from 'ngx-moment';
-import { CalendarComponent } from './goals/calendar/calendar.component';
-import { ScheduleComponent } from './goals/schedule/schedule.component';
+import { CalendarComponent } from '../components/calendar/calendar.component';
+import { ScheduleComponent } from '../components/schedule/schedule.component';
 import { BudgetsComponent } from './goals/budgets/budgets.component';
 import { PlansComponent } from './goals/plans/plans.component';
 import { ResultsComponent } from './goals/results/results.component';
@@ -80,6 +80,7 @@ import { TestimonialComponent } from './courses/testimonial/testimonial.componen
 
 import { TestimonialValidationComponent } from './courses/testimonial-validation/testimonial-validation.component';
 import { CoachingModule } from './coaching/coaching.module';
+import { ComponentsModule } from 'app/components/components.module';
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -96,7 +97,6 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     LbdModule,
     ModalModule,
-    MomentModule,
     FullCalendarModule,
     FlexLayoutModule,
     PipesModule,
@@ -110,8 +110,10 @@ FullCalendarModule.registerPlugins([
 
     QRCodeModule,
     PdfViewerModule,
-    CoachingModule
+    CoachingModule,
     //NgxPermissionsModule.forRoot(),
+
+    ComponentsModule
   ],
   declarations: [
     CounterDirective,
@@ -124,8 +126,6 @@ FullCalendarModule.registerPlugins([
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    RatingComponent,
-    ProgressBarComponent,
     SelfEvaluationComponent,
     FeedbackEvaluationComponent,
     EvaluationRequestComponent,
@@ -136,7 +136,6 @@ FullCalendarModule.registerPlugins([
     ResultsComponent,
     PlansComponent,
     BudgetsComponent,
-    TaskComponent,
     NewsListComponent,
     UserSettingsComponent,
     UserSecurityComponent,
@@ -147,8 +146,6 @@ FullCalendarModule.registerPlugins([
     ActivityTaskComponent,
     ForbidenComponent,
 
-    ScheduleComponent,
-    CalendarComponent,
 
     ListCourseComponent,
     DetailsCourseComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-coaching-feedback',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoachingFeedbackComponent implements OnInit {
 
+  @Input() cssClass = 'default'
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  openModal() { }
 }

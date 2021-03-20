@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoachingDashboardComponent implements OnInit {
 
+  public lessSbscriptions: Array<any> = [];
   public subscriptions: Array<CoachingSubscription> = []
   public subscription: CoachingSubscription = new CoachingSubscription()
   constructor(
@@ -18,10 +19,12 @@ export class CoachingDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.coachingSubscriptionService.all({coachId:this.auth.user.id}).subscribe(subscriptions=>{
-      this.subscriptions=subscriptions;
-      this.subscription=subscriptions[0];
+    this.coachingSubscriptionService.all({ coachId: this.auth.user.id }).subscribe(subscriptions => {
+      this.subscriptions = subscriptions;
 
+      for (let i = 0; i < 4 - subscriptions.length; i++) {
+        this.lessSbscriptions.push(i)
+      }
     })
   }
 

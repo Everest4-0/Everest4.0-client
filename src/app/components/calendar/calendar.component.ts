@@ -1,12 +1,12 @@
-import { TodoService } from './../../../services/todo.service';
+import { TodoService } from '../../services/todo.service';
 import { CalendarOptions } from '@fullcalendar/angular';
-import { Goal } from './../../../models/goal/goal';
-import { Task } from './../../../models/goal/task';
+import { Goal } from './../../models/goal/goal';
+import { Task } from './../../models/goal/task';
 import { ModalService } from 'app/components/modal';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { TaskService } from './../../../services/task.service';
+import { TaskService } from '../../services/task.service';
 import { AuthService } from 'app/services/auth.service';
-import { GoalService } from './../../../services/goal.service';
+import { GoalService } from '../../services/goal.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import dayGridPlugin from '@fullcalendar/daygrid';

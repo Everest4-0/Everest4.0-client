@@ -1,7 +1,11 @@
-<div class="card">
+<div class="card {{cssClass}}">
     <div class="card-header ">
-        <h3 class="pull-left">Feedback das sessões</h3>
         <img src="assets/img/sidebar-4.jpg">
+
+        <h3 class="pull-left">Feedback das sessões</h3>
+        <button class="btn border-none pull-right" (click)="openModal()">
+            <h3><i class="pe-7s-plus"></i></h3>
+        </button>
     </div>
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 

@@ -1,13 +1,13 @@
-import { TodoService } from './../../../services/todo.service';
-import { FormBuilder } from '@angular/forms';
-import { ModalService } from './../../../components/modal/modal.service';
-import { ToastService } from 'ng-uikit-pro-standard';
-import { AuthService } from './../../../services/auth.service';
-import { ToDoForm } from './../../../forms/todo.form';
-import { ToDo } from './../../../models/goal/todo';
-import { Task } from './../../../models/goal/task';
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { ScheduleComponent } from '../schedule/schedule.component';
+import { TodoService } from '../../services/todo.service';
+import { FormBuilder } from '@angular/forms';
+import { ModalService } from '../modal/modal.service';
+import { ToastService } from 'ng-uikit-pro-standard';
+import { AuthService } from '../../services/auth.service';
+import { ToDoForm } from '../../forms/todo.form';
+import { ToDo } from '../../models/goal/todo';
+import { Task } from '../../models/goal/task';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 @Component({
   selector: 'app-task',
@@ -18,11 +18,13 @@ import * as moment from 'moment';
 export class TaskComponent implements OnInit {
 
   @ViewChild(ScheduleComponent) child: ScheduleComponent;
+  @Input() filters = [];
+  @Input() showControls = true;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
   public todo: ToDo = new ToDo()
   form = new ToDoForm(this.fb)
-  isCalendar: boolean=false;
+  isCalendar: boolean = false;
   dpConfig = {
     mode: 'daytime'
   }
