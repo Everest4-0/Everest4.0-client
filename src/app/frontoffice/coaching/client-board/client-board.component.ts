@@ -1,3 +1,4 @@
+import { Feedback } from './../../../models/coaching/feedback';
 import { ActivatedRoute } from '@angular/router';
 import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
 import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
@@ -31,7 +32,7 @@ export class ClientBoardComponent implements OnInit {
   goal = new Goal();
 
   public diagnosticDatas: any = {};
-  public evaluationDatas: any = {};
+  public evaluationDatas:Array<any> = []; 
   public weakness = [];
   public strengths = []
 
@@ -51,7 +52,7 @@ export class ClientBoardComponent implements OnInit {
 
     const id = this.route.snapshot.params['id'];
     this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
-      coachingSubscription.notes=coachingSubscription.notes.filter(x=>x.userId==this.auth.user.id)
+      coachingSubscription.notes = coachingSubscription.notes.filter(x => x.userId == this.auth.user.id)
       this.subscription = coachingSubscription;
     })
     this.goal.user = this.auth.user;
@@ -109,24 +110,26 @@ export class ClientBoardComponent implements OnInit {
       })
 
     })
-    this.evaluationDatas = [
-      {
-        label: 'Sell per week',
-        fill: false,
-        lineTension: 0,
-        borderColor: '#F00',
-        data: [0, 3, 2, 5],
-
-      },
-      {
-        label: 'Sell per week',
-        fill: false,
-        lineTension: 0,
-        borderColor: 'rgba(75,192,192,1)',
-        data: [3, 0, 5, 2],
-      }
-    ]
   }
+
+
+  feedbackListUpdate(feedbacks: Array<Feedback>) {
+    debugger
+    this.evaluationDatas = []
+    let items = feedbacks[0].points.map(point => point.item)
+    items.forEach((item, i) => {
+      this.evaluationDatas.push(
+        {
+          label: item.title,
+          fill: false,
+          lineTension: 0,
+          borderColor: ['#9467bd', '#fdbf6f', '#1f77b4', '#cccccc', '#bb2255', '#b17428'][i],
+          data: feedbacks.map(feedback => feedback.points.filter(point => point.item.id === item.id)[0].point),
+
+        })
+    })
+  }
+
   groupBy = (xs, key) => {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);

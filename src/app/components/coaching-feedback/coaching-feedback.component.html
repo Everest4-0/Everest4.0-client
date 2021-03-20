@@ -2,7 +2,7 @@
     <div class="card-header ">
         <img src="assets/img/sidebar-4.jpg">
 
-        <h3 class="pull-left">Feedback das sessões</h3>
+        <h3 class="pull-left">Feedbacks</h3>
         <button class="btn border-none pull-right" (click)="openModal()">
             <h3><i class="pe-7s-plus"></i></h3>
         </button>
@@ -10,14 +10,58 @@
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
         <ul class="list-group">
-            <div *ngFor="let v of [1,2,3,4]">
+            <div *ngFor="let feedback of feedbacks; let i=index">
                 <li class="list-group-item">
-                    <button class="btn btn-xs pe-7s-help1 border-none"> </button>
-                    xxxxxx
-                    <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
-
+                    <div class="row">
+                        Feedback {{i+1}}
+                        <button class="btn btn-xs border-none"> {{points(feedback)}}</button>
+                        <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
+                    </div>
+                    <div class="row">
+                        <small>{{feedback.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+                    </div>
                 </li>
             </div>
         </ul>
     </div>
 </div>
+
+
+<jw-modal id="feedback-modal" class="sm {{editing ? 'editing':''}}">
+    <br>
+    <h4><span *ngIf="!editing">{{feedback.id ==undefined ? 'Registar' : 'Actualizar'}} Feedback</span>
+        <button class="btn pull-right border-none" (click)="editing=!editing" *ngIf="editing"><i
+                class="pe-7s-note"></i></button>
+    </h4>
+    <hr>
+    <div class="row text-center card-body">
+        <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box blockquote blockquote-primary" *ngFor="let point of feedback.points; let i=index">
+                        <div class="col-md-9 text-left">
+                            {{i+1}}.
+                            <b>{{point.item.title}}</b>
+                            <app-progress-bar done="point.point" [noLabel]=true></app-progress-bar>
+                        </div>
+                        <div class=" col-md-3 form-group">
+                            <input type="number" class="form-control form-control-lg" min=0 max=5 step=1
+                                [(ngModel)]="point.point" [ngModelOptions]="{standalone: true}" placeholder="Title">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea type="email" class="form-control form-control-lg"
+                                [(ngModel)]="feedback.descriptions" formControlName="descriptions" required
+                                aria-describedby="emailHelp" placeholder="insira o seu texto aqui"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center"><br>
+                <button class="btn btn-success bg-success" *ngIf="!editing || feedback.id===undefined">Salvar</button>
+            </div>
+        </form>
+
+    </div>
+</jw-modal>

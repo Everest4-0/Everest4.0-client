@@ -1,3 +1,5 @@
+import { FeedbackItem } from './../../../models/coaching/feedback_item';
+import { FeedbackItemService } from './../../../services/coaching/feedback-item.service';
 import { ActivatedRoute } from '@angular/router';
 import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
 import { UserEvaluationService } from './../../../services/user-evaluation.service';
@@ -10,6 +12,7 @@ import { UserEvaluation } from './../../../models/diagnostic/user-evaluation';
 import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
+import { Feedback } from 'app/models/coaching/feedback';
 
 @Component({
   selector: 'app-manager-board',
@@ -18,7 +21,7 @@ import { PartialGoal } from 'app/models/goal/partial-goal';
 })
 export class ManagerBoardComponent implements OnInit {
 
-  
+
   public results = [
     { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
     { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
@@ -31,17 +34,19 @@ export class ManagerBoardComponent implements OnInit {
   goal = new Goal();
 
   public diagnosticDatas: any = {};
-  public evaluationDatas: any = {};
+  public evaluationDatas:Array<any> = []; 
   public weakness = [];
   public strengths = []
 
+  public feedbacItems: Array<FeedbackItem> = []
   constructor(
+
     public auth: AuthService,
     private goalService: GoalService,
     private evaluationService: UserEvaluationService,
     private coachingSubscriptionService: CoachingSubscriptionService,
-    private route: ActivatedRoute
-
+    private route: ActivatedRoute,
+    private feedbacItemService: FeedbackItemService,
   ) { }
 
   ngOnInit(): void {
@@ -105,23 +110,21 @@ export class ManagerBoardComponent implements OnInit {
       })
 
     })
-    this.evaluationDatas = [
-      {
-        label: 'Sell per week',
-        fill: false,
-        lineTension: 0,
-        borderColor: '#F00',
-        data: [0, 3, 2, 5],
+  }
+  feedbackListUpdate(feedbacks: Array<Feedback>) {
+    this.evaluationDatas = []
+    let items = feedbacks[0].points.map(point => point.item)
+    items.forEach((item, i) => {
+      this.evaluationDatas.push(
+        {
+          label: item.title,
+          fill: false,
+          lineTension: 0,
+          borderColor: ['#9467bd', '#fdbf6f', '#1f77b4', '#cccccc', '#bb2255', '#b17428'][i],
+          data: feedbacks.map(feedback => feedback.points.filter(point => point.item.id === item.id)[0].point),
 
-      },
-      {
-        label: 'Sell per week',
-        fill: false,
-        lineTension: 0,
-        borderColor: 'rgba(75,192,192,1)',
-        data: [3, 0, 5, 2],
-      }
-    ]
+        })
+    })
   }
   groupBy = (xs, key) => {
     return xs.reduce(function (rv, x) {
@@ -129,6 +132,7 @@ export class ManagerBoardComponent implements OnInit {
       return rv;
     }, {});
   }
+
   setResults(e) {
 
     let u = this.results;
