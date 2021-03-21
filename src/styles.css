@@ -32,7 +32,7 @@ div#swal2-content {
     opacity: 1;
 }
 .text24{
-    font-size: 24px;
+    font-size: 24px !important;
 }
 .text32{
     font-size: 32px;

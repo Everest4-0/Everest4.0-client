@@ -1,9 +1,9 @@
-<div class="card {{cssClass}}">
+<div class="card {{role === 'coach' ? 'red' : 'default'}}">
     <div class="card-header ">
         <img src="assets/img/sidebar-4.jpg">
 
         <h3 class="pull-left">Feedbacks</h3>
-        <button class="btn border-none pull-right" (click)="openModal()">
+        <button class="btn border-none pull-right" *ngIf="role=='coach'" (click)="openModal()">
             <h3><i class="pe-7s-plus"></i></h3>
         </button>
     </div>
@@ -15,7 +15,8 @@
                     <div class="row">
                         Feedback {{i+1}}
                         <button class="btn btn-xs border-none"> {{points(feedback)}}</button>
-                        <button class="btn btn-xs pull-right btn-info btn-fill"> Avaliar</button>
+                        <button class="btn btn-xs pull-right border-none" (click)="feedbackView(feedback,i)"> <i
+                                class="pe-7s-angle-right text24"></i></button>
                     </div>
                     <div class="row">
                         <small>{{feedback.createdAt|amLocale:'pt'|amTimeAgo}}</small>
@@ -63,5 +64,62 @@
             </div>
         </form>
 
+    </div>
+</jw-modal>
+
+<jw-modal id="feedback-view-modal" class="lg">
+    <br>
+    
+    <div class="row card-body">
+        <div class="col-md-6">
+            <h4>Feedback {{feedback.orderNo}}</h4>
+            <div class="box blockquote blockquote-primary" *ngFor="let point of feedback.points; let i=index">
+                <div class="col-md-9 text-left">
+                    {{i+1}}.
+                    <b>{{point.item.title}}</b>
+                    <app-progress-bar done="{{point.point*100/5}}" [noLabel]=true></app-progress-bar>
+                </div>
+                <div class=" col-md-3 form-group">
+                    <h4>{{point.point}}</h4>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">{{feedback.descriptions}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 card comments">
+            <h3>Comentários</h3>
+            <div id='card-body' class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item {{item.user.id==auth.user.id ? 'mine':'theirs'}}"
+                        *ngFor="let item of feedback.comments">
+                        <small>{{ item.user.id==auth.user.id ? 'Eu' : item.user.datas.fullName}}</small>
+                        <div class="well">
+                            {{item.text}}
+                        </div>
+                        <small>{{item.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer" style="padding:0">
+                <form (ngSubmit)="onSubmit()" style="margin-bottom: -10px;">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
+                        </div>
+                        <textarea name="" class="form-control type_msg" [(ngModel)]="comment.text"
+                            [ngModelOptions]="{standalone: true}" placeholder="Type your message..."></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text send_btn" (click)="sendComment()"><i
+                                    class="fa fa-location-arrow"></i></span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
     </div>
 </jw-modal>
