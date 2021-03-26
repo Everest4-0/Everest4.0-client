@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card" style="padding: 25px;">
+            <div class="card" style="padding: 25px; min-height: 365px;">
                 <a [routerLink]="['board']" class="btn btn-sm btn-info btn-fill pull-right">Plano de Acção</a>
                 <h4 class="pull-left">Evolução</h4>
                 <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas.length>0">
@@ -41,7 +41,7 @@
             <app-coaching-note [subscription]="subscription" *ngIf="subscription.id"></app-coaching-note>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" style="min-height: 300px;">
             <app-coaching-feedback [subscription]="subscription" (feedbackListUpdate)="feedbackListUpdate($event)"></app-coaching-feedback>
         </div>
     </div>

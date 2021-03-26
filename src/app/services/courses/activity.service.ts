@@ -36,12 +36,12 @@ export class ActivityService  extends AppService<Activity> implements IService<A
   }
 
   addUserAnswer(o:any): Observable<any> {
-    debugger
+    
     return this.http.post(this.url+'/add_user_answer', o)
   }
   getUserAnswer(a:any): Observable<any> {
     let str = '';
-debugger
+
     for (var key in a) {
       if (str != '') {
         str += "&";

@@ -1,6 +1,6 @@
 <div class="container-fluid menu-coach bg-header">
     <div class="row">
-        <div class="col-md-6"></div>
+        <div class="col-md-6"><h2>Gestão de Carreira e coaching online</h2></div>
         <div class="col-md-6 text-right">
             <a [routerLink]="['board/'+subscription.id]" class="btn btn-info btn-fill"
                 *ngIf="subscription.id!==undefined">Portal do Profissional</a>
@@ -9,7 +9,28 @@
         </div>
     </div>
 </div>
-<div class="main-content">
+<div class="main-content" *ngIf="subscription.id && subscription.coach==null">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <h2>Passo 2: Selecione o seu Gestor de carreira</h2>
+            <div class="row">
+                <div *ngFor="let coach of coaches" class="col-md-2">
+                    <div class="card text-center "
+                        style="background: url({{auth.serverAddress}}{{coach.photoUrl}}); background-size:cover; background-position: center;">
+                        <img src="/assets/img/faces/base.png" class="img-thumbnail" style="opacity: .0" />
+
+                    </div><b>{{coach.datas.fullName}}</b><br>
+                    <small>{{coach.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+
+                    <div class="row text-center">
+                        <button class="btn btn-xs btn-info btn-fill" (click)="selectCoach(coach)"> Selecionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content" *ngIf="!(subscription.id && subscription.coach==null)">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -65,37 +86,37 @@
 </div>
 <jw-modal id="coach-subscription" class="sm" title="Coaching online e gestão de carreiras">
     <h4 class="h4 title">Subscrevendo serviço coaching</h4>
-    <hr>{{subscription|json}}
+    <hr>
     <div class="row">
         <form #subscriptionForm="ngForm" [formGroup]="form" (ngSubmit)="saveSubcription()">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Finalidade</label>
                     <select class="form-control" aria-label=".form-select-sm example" formControlName="goal"
-                    [(ngModel)]="subscription.goal">
+                        [(ngModel)]="subscription.goal">
                         <option *ngFor="let item of coachingGoals;" value="{{item}}">{{item.title}}
                         </option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Duração</label>
+                    <label for="exampleInputPassword1">Duração(meses)</label>
                     <select class="form-control" aria-label=".form-select-sm example" formControlName="duration"
-                    [(ngModel)]="subscription.duration">
+                        [(ngModel)]="subscription.duration">
                         <option *ngFor="let item of coachingDurations; let i = index" value="{{item}}">
                             {{item.months}} {{item.description}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Informação adicional</label>
-                    <textarea class="form-control" cols="30" rows="4" 
-                        formControlName="user" [(ngModel)]="subscription.descriptions">
+                    <textarea class="form-control" cols="30" rows="4" formControlName="user"
+                        [(ngModel)]="subscription.descriptions">
                     </textarea>
                 </div>
                 <div class="form-group">
                     <div class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                         Quod id magnam blanditiis, ut repudiandae debitis! Labore</div>
                 </div>
-                <div class="form-group">    
+                <div class="form-group">
                     <input type="checkbox"> Compreendi e autorizo a cobrança
                 </div>
             </div>
@@ -104,5 +125,5 @@
             </div>
         </form>
     </div>
-    
+
 </jw-modal>

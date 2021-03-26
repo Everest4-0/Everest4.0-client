@@ -36,7 +36,7 @@ export class ActivityTaskComponent implements OnInit {
 
       this.task = this.activity.tasks[this.taskIndex];
       this.activityService.getUserAnswer({ userId: this.auth.user.id, activityId: this.activity.id }).subscribe(d => {
-        debugger
+        
         if (d.length >= this.activity.tasks.length) {
           this.taskAnswers = d
           this.done = true
@@ -57,7 +57,7 @@ export class ActivityTaskComponent implements OnInit {
       this.taskAnswers.push(this.task.answers.filter(x => !x.correct)[0])
     }
     this.activityService.addUserAnswer(this.user).subscribe(data => {
-      debugger
+      
       let u = data;
       this.user.taskAnswers[0] = undefined
     })

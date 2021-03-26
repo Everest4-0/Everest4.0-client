@@ -11,15 +11,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientBoardComponent } from './client-board/client-board.component';
 import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
-import { CoachingEvolutionComponent } from '../../components/coaching-evolution/coaching-evolution.component';
-import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
     CoachingComponent, 
     ClientBoardComponent,
-    CoachingDashboardComponent,
-    ChatComponent
+    CoachingDashboardComponent
   ],
   imports: [
     CommonModule, 

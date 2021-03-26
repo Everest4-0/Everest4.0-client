@@ -3,8 +3,9 @@ import { User } from './user';
 
 export class Chat {
     id: string;
-    messages: Array<ChatMessage>=[];
-
+    messages: Array<ChatMessage> = [];
+    to: User = new User()
+    from: User = new User()
     isActive: boolean;
     isOnline: boolean;
     createdAt: Date;

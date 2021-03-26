@@ -81,7 +81,7 @@ export class ListQuizComponent implements OnInit {
   }
 
   createQuiz() {
-    //debugger
+    //
     this.quiz = new Quiz()
     this.quiz.answers = [new Answer(true), new Answer()]
     this.quiz.user = this.auth.user

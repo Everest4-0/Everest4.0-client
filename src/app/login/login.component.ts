@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   login = (user) => {
-    debugger
+    
     this.localUser.castSocialUser(user);
     this.auth.authenticate(this.localUser, (user: User) => {
       this.localUser = user;
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
   signIn(userForm:FormGroup) {
-    debugger
+    
     this.userForm = userForm
 
     if(this.userForm.dirty && this.userForm.valid){
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
   
   signOn(userForm:FormGroup) {
     this.userForm = userForm
-    debugger
+    
     if (this.userForm.dirty && this.userForm.valid) {
       this.auth.create(this.signOnUser).subscribe(user => {
         this.auth.authenticate(user,(u: User) => {

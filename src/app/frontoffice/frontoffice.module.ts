@@ -100,6 +100,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     FlexLayoutModule,
     PipesModule,
+    MomentModule,
     CountdownModule,
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl/*, useClass: MyIntl */ },

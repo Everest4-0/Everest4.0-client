@@ -31,7 +31,7 @@ export class AuthService extends AppService<User> implements IService<any> {
   authenticate(o: User, callback): Observable<any> {
     const service = this.http.post(this.url + '/authenticate', o);
     service.subscribe((u: User) => {
-      debugger
+      
       switch (parseInt(u.code)) {
         case 401:
           u.message = 'Endereço de e-mail ou palavra-passe esta incorretas.'
@@ -64,7 +64,7 @@ export class AuthService extends AppService<User> implements IService<any> {
     return this.getOne(id)
   }
 
-  all(f: any): Observable<Array<User>> {
+  all(f: any={}): Observable<Array<User>> {
     return this.getAll(f)
   }
 

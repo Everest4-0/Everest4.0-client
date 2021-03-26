@@ -45,7 +45,7 @@ export class CoachingFeedbackComponent implements OnInit {
   ngOnInit(): void {
 
     this.feedbackService.all().subscribe(feedbacks => {
-      this.feedbacks = feedbacks
+      this.feedbacks = feedbacks.reverse()
 
       this.feedbackListUpdate.emit(this.feedbacks);
     })

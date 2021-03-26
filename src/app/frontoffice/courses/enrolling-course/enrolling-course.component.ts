@@ -148,7 +148,7 @@ export class EnrollingCourseComponent implements OnInit {
   get courseEvolution() {
     let i;
     let n = 0;
-    debugger
+    
     this.course.modules.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(m => {
       m.activities.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(a => {
         n++;

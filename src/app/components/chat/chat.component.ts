@@ -1,9 +1,9 @@
-import { ChatService } from './../../../services/main/chat.service';
-import { ChatMessage } from './../../../models/main/chat_message';
-import { ChatMessageService } from './../../../services/main/chat-message.service';
-import { User } from './../../../models/main/user';
-import { AuthService } from './../../../services/auth.service';
-import { Chat } from './../../../models/main/chat';
+import { Chat } from './../../models/main/chat';
+import { ChatService } from '../../services/main/chat.service';
+import { ChatMessage } from '../../models/main/chat_message';
+import { ChatMessageService } from '../../services/main/chat-message.service';
+import { User } from '../../models/main/user';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 import * as moment from 'moment';
@@ -18,9 +18,9 @@ import { io } from "socket.io-client";
 export class ChatComponent implements OnInit {
 
   @Input() public chat: Chat = new Chat();
-  @Input() public isCoach: boolean;
+  @Input() public isCoach = false;
   @Input() public to: User = new User();
-
+  @Input() public chats: Array<ChatMessage> = [];
   public message: ChatMessage = new ChatMessage();
   public data: any;
   private socket: any;
@@ -37,7 +37,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.socket.on('connect', socket => {
       this.ids = { server: this.socket.id, client: this.message.to.apikey }
       this.startChat()
@@ -48,16 +47,26 @@ export class ChatComponent implements OnInit {
       this.scrollToEnd()
     });
   }
-  startChat() {
+  startChat(chat = null) {
+    
+    if (chat !== null && chat.id !== undefined) {
+      this.chat = chat
+    }
+    if (this.chat.id == undefined) return;
     this.chatService.one(this.chat.id).subscribe(chat => {
+      if (this.to.id !== undefined) {
+        chat.to = this.to;
+        chat.from = this.auth.user;
+      }
       chat.messages = chat.messages.sort((x, y) => moment(x.createdAt).isAfter(y.createdAt) ? 1 : -1)
-      this.message.chat = this.chat = chat;
+      this.chat = chat;
       this.scrollToEnd()
     })
   }
   send() {
     this.message.from = this.auth.user;
     this.message.to = this.to;
+    this.message.chat = this.chat
     this.chatMessageService.create(this.message).subscribe(x => {
       this.message.message = ''
       this.chat.messages.push(this.message)
@@ -67,9 +76,14 @@ export class ChatComponent implements OnInit {
 
   scrollToEnd() {
     setTimeout(() => {
-      var elem = document.getElementById('msg_card_body');
+      const elem = document.getElementById('msg_card_body');
       elem.scrollTop = elem.scrollHeight;
     }, 500)
   }
 
+  openChat() {
+    this.chat = this.isCoach ? new Chat() : this.chat;
+    this.isChating = true
+    this.startChat();
+  }
 }

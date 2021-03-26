@@ -114,7 +114,7 @@ export class ClientBoardComponent implements OnInit {
 
 
   feedbackListUpdate(feedbacks: Array<Feedback>) {
-    debugger
+    
     this.evaluationDatas = []
     let items = feedbacks[0].points.map(point => point.item)
     items.forEach((item, i) => {

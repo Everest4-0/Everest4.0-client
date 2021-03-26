@@ -201,7 +201,7 @@ export class DetailsCourseComponent implements OnInit {
 
   removeActivity(activity){
     this.activityService.delete(activity).subscribe(act=>{
-      debugger
+      
       let source = this.course.modules.filter(module=>module.id===activity.module.id)[0].activities
       let index = source.findIndex((e,i)=>{if(e.id===activity.id) return true;})
 

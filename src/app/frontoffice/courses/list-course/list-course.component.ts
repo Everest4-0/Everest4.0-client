@@ -45,7 +45,7 @@ export class ListCourseComponent implements OnInit {
     let i;
     let n = 0;
     let done = false;
-    debugger
+    
     e.course.modules.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(m => {
       m.activities.sort((x, y) => x.orderNo > y.orderNo ? 0 : -1).forEach(a => {
         n++;

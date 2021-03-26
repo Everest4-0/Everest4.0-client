@@ -53,7 +53,7 @@ export class ResultsComponent implements OnInit {
           evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
       })
       evs.forEach((e, k) => {
-        debugger
+        
         let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
         if (points === 4) {
           e.push(true)

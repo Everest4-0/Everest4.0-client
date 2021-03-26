@@ -15,6 +15,7 @@ import { ModalModule } from './modal';
 import { PipesModule } from 'app/pipes/pipes.module';
 import { MomentModule } from 'ngx-moment';
 import { CoachingEvolutionComponent } from './coaching-evolution/coaching-evolution.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -31,6 +32,9 @@ import { CoachingEvolutionComponent } from './coaching-evolution/coaching-evolut
     DiagnosticViewComponent,
     CoachingFeedbackComponent,
     CoachingEvolutionComponent,
+
+    
+    ChatComponent
   ],
   imports: [
     MomentModule,
@@ -56,6 +60,8 @@ import { CoachingEvolutionComponent } from './coaching-evolution/coaching-evolut
     DiagnosticViewComponent,
     CoachingFeedbackComponent,
     CoachingEvolutionComponent,
+
+    ChatComponent
   ]
 })
 export class ComponentsModule { }
