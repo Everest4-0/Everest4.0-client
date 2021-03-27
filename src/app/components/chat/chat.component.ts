@@ -43,12 +43,16 @@ export class ChatComponent implements OnInit {
     });
 
     this.socket.on('chat-to-' + this.auth.user.id.split('-')[0], data => {
-      this.chat.messages.push(data);
+      debugger
+      //let chat=this.chats.filter(x=>x.id==data.chatId)[0].messages.push(data)
+      if (this.chat.id == data.chatId) {
+        this.chat.messages.push(data);
+      }
       this.scrollToEnd()
     });
   }
   startChat(chat = null) {
-    
+
     if (chat !== null && chat.id !== undefined) {
       this.chat = chat
     }
@@ -64,12 +68,13 @@ export class ChatComponent implements OnInit {
     })
   }
   send() {
+
     this.message.from = this.auth.user;
-    this.message.to = this.to;
+    this.message.to = this.chat.to;
     this.message.chat = this.chat
     this.chatMessageService.create(this.message).subscribe(x => {
+      this.chat.messages.push(x)
       this.message.message = ''
-      this.chat.messages.push(this.message)
       this.scrollToEnd()
     })
   }
@@ -77,7 +82,9 @@ export class ChatComponent implements OnInit {
   scrollToEnd() {
     setTimeout(() => {
       const elem = document.getElementById('msg_card_body');
-      elem.scrollTop = elem.scrollHeight;
+      if (elem !== null) {
+        elem.scrollTop = elem.scrollHeight;
+      }
     }, 500)
   }
 
@@ -85,5 +92,13 @@ export class ChatComponent implements OnInit {
     this.chat = this.isCoach ? new Chat() : this.chat;
     this.isChating = true
     this.startChat();
+  }
+
+  isMine(message) {
+
+    if (message.from == undefined) {
+      return false;
+    }
+    return this.auth.user.id !== message.from.id
   }
 }
