@@ -19,7 +19,8 @@ export class Course {
     user: User = new User();
     cover: string;
 
-    roles:Array<string>=[];
+    privacity = 0;
+    roles: Array<string> = [];
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;

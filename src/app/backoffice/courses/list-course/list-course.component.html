@@ -19,7 +19,10 @@
                     <td style="width: 100px;"><img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail"></td>
                     <td>
                         <h5><b>{{course.title}}</b></h5>
-                        <small>{{course.descriptions.substring(0, 100)}}</small>
+                        <small>{{course.descriptions ? course.descriptions.substring(0, 100) : ''}}</small>
+                        <h4 style="margin: 0;">
+                            <i class="{{['pe-7s-global','pe-7s-lock'][course.privacity]}}"></i> 
+                        </h4>
                     </td>
                     <td>
                         <button class="btn-fill btn-xs btn-{{['success','danger'][course.isActive?0:1]}} btn">{{['Activo','Inactivo'][course.isActive?0:1]}}</button>

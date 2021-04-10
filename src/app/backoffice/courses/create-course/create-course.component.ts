@@ -20,7 +20,7 @@ export class CreateCourseComponent implements OnInit {
   public course: Course = new Course()
   public evaluations: Array<Evaluation> = []
   form = new CourseForm()
-  private levels = [{ id: 0, text: 'Iniciante' }, { id: 1, text: 'Intermediário' }, { id: 2, text: 'Avançado' }]
+  public levels = [{ id: 0, text: 'Iniciante' }, { id: 1, text: 'Intermediário' }, { id: 2, text: 'Avançado' }]
   constructor(
     private auth: AuthService,
     private courseService: CourseService,

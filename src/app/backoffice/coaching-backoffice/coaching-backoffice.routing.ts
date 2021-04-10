@@ -1,6 +1,7 @@
 import { ManagerBoardComponent } from './manager-board/manager-board.component';
 import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
 import { Routes } from '@angular/router';
+import { VirtualDataroomComponent } from 'app/components/virtual-dataroom/virtual-dataroom.component';
 
 export const CoachingRoutes: Routes = [
     {
@@ -8,5 +9,8 @@ export const CoachingRoutes: Routes = [
     },
     {
         path: 'board/:id', component: ManagerBoardComponent
+    },
+    {
+        path: 'virtual-dataroom', component: VirtualDataroomComponent
     }
 ]; 

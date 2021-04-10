@@ -1,0 +1,182 @@
+<div class="card {{cssClass}}" *ngIf="small">
+    <div class="card-header ">
+        <img src="assets/img/sidebar-3.jpg">
+        <h3 class="pull-left">Virtual data room</h3>
+        <a [routerLink]="['/backoffice/coaching/virtual-dataroom']" title="Expandir" class="btn border-none pull-right">
+            <h3><i class="pe-7s-exapnd2"></i></h3>
+        </a>
+        <a class="btn border-none pull-right" title="Registar novo" (click)="openModal()">
+            <h3><i class="pe-7s-plus"></i></h3>
+        </a>
+
+    </div>
+    <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+        <ul class="list-group">
+            <li class="list-group-item {{dataRoomType(item)}}" *ngFor="let item of dataRooms.slice(0,5)">
+                <i class="icon pe-7s-{{dataRoomType(item,true)}}"></i>
+                {{item.title}}<br>
+                <small>{{item.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+                <div class="dropdown pull-right ">
+                    <button class="btn btn-xs border-none dropdown-toggle" type="button" data-toggle="dropdown"><i
+                            class="pe-7s-more"></i></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"> <i class="pe-7s-back"></i> Partilhar</a></li>
+                        <li><a href="#"> <i class="pe-7s-cloud-download"></i> Baixar</a></li>
+                        <li><a href="#"> <i class="pe-7s-close"></i> Eliminar</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="card-footer row">
+
+    </div>
+</div>
+
+<div class="row big-dataroom" *ngIf="!small">
+    
+    <div class="col-md-12">
+        <h2>Virtual data Room</h2>
+        <a class="btn border-none btn-fill btn-primary" style="padding:0" (click)="openModal()">
+            <h4 style="margin: 10px 30px;"><i class="pe-7s-plus"></i> Novo</h4>
+        </a>
+    </div>
+    <div class="col-md-8">
+        <div class="col-md-12 data " *ngFor="let item of dataRooms">
+
+            <div class="row row-header {{dataRoomType(item)}}">
+                <div class="col-xs-6">
+
+                    <h3><i class="icon pe-7s-{{dataRoomType(item,true)}}"></i> {{item.title}}</h3>
+                    <small>{{item.createdAt|amLocale:'pt'| amTimeAgo}}</small>
+                </div>
+                <div class="col-xs-6">
+
+                    <div class="dropdown pull-right " style="margin: 24px 0;">
+                        <button class="btn btn-xs border-none dropdown-toggle" type="button" data-toggle="dropdown"><i
+                                class="pe-7s-more"></i></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"> <i class="pe-7s-back"></i> Partilhar</a></li>
+                            <li><a href="#"> <i class="pe-7s-cloud-download"></i> Baixar</a></li>
+                            <li><a href="#"> <i class="pe-7s-close"></i> Eliminar</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row-body">
+                {{item.descriptions}}
+            </div>
+            <div class="row-media row">
+                <div class="col-md-{{cells(item.files)}}" *ngFor="let file of item.files; let i=index"
+                    style="background:url({{auth.serverAddress + file.path}}); background-size: cover;">
+                    <img src="/assets/img/faces/base.png" style="width: 100%;opacity: 0;">
+                </div>
+            </div>
+
+            <div class="row-footer row">
+                <div class="col-md-8 row">
+                    <div class="col-md-2">
+                        <img src="https://demo.hasthemes.com/adda-preview/adda/assets/images/profile/profile-small-1.jpg"
+                            class="img-thumbnail">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<jw-modal id="data-room-modal" class="md" title="Data Room">
+
+    <div class="row">
+        <form #dataRoomForm="ngForm" [formGroup]="form" (ngSubmit)="saveDataRoom()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Titulo</label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="dataRoom.title"
+                        formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text formControl text-muted hidden">We'll never share your email
+                        with anyone
+                        else.</small>
+                </div>
+
+                <label for="exampleInputEmail1">Texto</label>
+                <div class="form-group">
+                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="dataRoom.descriptions"
+                        formControlName="descriptions"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <input type="file" #fileDropRef id="fileDropRef" multiple (change)="addDataRoomFiles(fileDropRef.files)"
+                    name="files" accept="jpg;png;mp4;pdf" class="hidden" />
+                <div class="col-md-12" appDragAndDrop (fileDropped)="addDataRoomFiles($event)"
+                    style="border:solid 1px #eee; padding:25px">
+                    <div class="col-md-3" *ngFor="let file of dataRoom.files; let i=index"
+                        style="background:url({{file.data}}); background-size: cover;">
+                        <a style="margin: 25% auto;" (click)="removeUploded(file, i)"><i class="pe-7s-close"
+                                style="color: #FFF;font-size: 68px;"></i></a>
+                    </div>
+                </div>
+                <div class="">
+                    <label class="btn btn-default btn-fill" for="fileDropRef" style="padding: 0;">
+                        <h4 style="margin: 10px 30px;"><i class="pe-7s-upload" style="color: #FFF;"></i> Upload</h4>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success btn-fill" type="submit" (click)="saveDataRoom()">Salvar</button>
+
+    </div>
+</jw-modal>
+
+
+<jw-modal id="data-share-modal" class="md" title="Data Room">
+
+    <div class="row">
+        <form #dataRoomForm="ngForm" [formGroup]="form" (ngSubmit)="saveDataRoom()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Titulo</label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="dataRoom.title"
+                        formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text formControl text-muted hidden">We'll never share your email
+                        with anyone
+                        else.</small>
+                </div>
+
+                <label for="exampleInputEmail1">Texto</label>
+                <div class="form-group">
+                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="dataRoom.descriptions"
+                        formControlName="descriptions"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <input type="file" #fileDropRef id="fileDropRef" multiple (change)="addDataRoomFiles(fileDropRef.files)"
+                    name="files" accept="jpg;png;mp4;pdf" class="hidden" />
+                <div class="col-md-12" appDragAndDrop (fileDropped)="addDataRoomFiles($event)"
+                    style="border:solid 1px #eee; padding:25px">
+                    <div class="col-md-3" *ngFor="let file of dataRoom.files; let i=index"
+                        style="background:url({{file.data}}); background-size: cover;">
+                        <a style="margin: 25% auto;" (click)="removeUploded(file, i)"><i class="pe-7s-close"
+                                style="color: #FFF;font-size: 68px;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success btn-fill" type="submit" (click)="saveDataRoom()">Partilhar</button>
+
+    </div>
+</jw-modal>

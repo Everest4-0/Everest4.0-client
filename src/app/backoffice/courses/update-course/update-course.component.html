@@ -1,7 +1,7 @@
 <app-backoffice-navbar [title]="'Cursos'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-        <h4 class="title">TESTE</h4>
+        <h4 class="title"></h4>
     </div>
 
     <div class="content">
@@ -11,43 +11,51 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Título</label>
-                            <input type="email" class="form-control form-control-lg" [(ngModel)]="course.title"
+                            <input type="email" class="form-control form-control-lg" [(ngModel)]="nCourse.title"
                                 formControlName="title" id="exampleInputEmail1" aria-describedby="emailHelp"
                                 placeholder="Title">
                             <small id="emailHelp" class="form-text formContro text-muted">We'll never share your email
                                 with anyone
                                 else.</small>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="exampleInputEmail1">Nivel de dificuldade</label>
-                            <select class="form-control form-control-lg" [(ngModel)]="course.level"
+                            <select class="form-control form-control-lg" [(ngModel)]="nCourse.level"
                                 formControlName="level">
                                 <option value="{{level.id}}" *ngFor="let level of levels">{{level.text}}</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="exampleInputEmail1">Língua</label>
-                            <select class="form-control form-control-lg" [(ngModel)]="course.language"
+                            <select class="form-control form-control-lg" [(ngModel)]="nCourse.language"
                                 formControlName="language">
                                 <option *ngFor="let item of ['PT','EN','FR','ES']">{{item}}</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Privacidade</label>
+                            <select class="form-control form-control-lg" [(ngModel)]="nCourse.privacity"
+                                formControlName="language">
+                                <option value=0>Público</option>
+                                <option value=1>Privado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="">Perfil</label>
                             <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PRO']" formControlName="roles"
-                                [(ngModel)]="course.roles">
+                                [(ngModel)]="nCourse.roles">
                             </ng-select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="exampleInputEmail1">Competências</label>
                             <ng-select [multiple]="true" [items]="evaluations" formControlName="evaluations"
-                                [(ngModel)]="course.evaluations" bindLabel="name">
+                                [(ngModel)]="nCourse.evaluations" bindLabel="name">
                             </ng-select>
-                            </div>
+                        </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Descrição</label>
                             <textarea type="email" class="form-control form-control-lg" formControlName="descriptions"
-                                [(ngModel)]="course.descriptions" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                [(ngModel)]="nCourse.descriptions" id="exampleInputEmail1" aria-describedby="emailHelp"
                                 rows="8" placeholder="Enter email">
                             </textarea>
                         </div>
@@ -66,11 +74,11 @@
                     </div>
                     <div class="col-md-12">
 
-                        <blockquote cdkDropList #partsList="cdkDropList" [cdkDropListData]="course.modules"
+                        <blockquote cdkDropList #partsList="cdkDropList" [cdkDropListData]="nCourse.modules"
                             (cdkDropListDropped)="onDrop($event)">
                             <div @list class="list-container">
                                 <div class="box blockquote blockquote-primary" style="border-top: solid;"
-                                    *ngFor="let module of course.modules; let i=index" cdkDrag>
+                                    *ngFor="let module of nCourse.modules; let i=index" cdkDrag>
                                     <div class="col-md-12">Módulo {{i+1}}
 
                                         <button type="button" class="btn btn-danger btn-sm  pull-right"
@@ -118,11 +126,12 @@
                     </label>
                     <input #fileUploader id='fileUploader' class="hidden" type="file"
                         (change)="onFileSelect($event.target)">
-                    <img src="{{course.cover.length>200 ? '' : auth.serverAddress}}{{course.cover}}" class="img-thumbnail" *ngIf="course.cover">
+                    <img src="{{nCourse.cover.length>200 ? '' : auth.serverAddress}}{{nCourse.cover}}"
+                        class="img-thumbnail" *ngIf="nCourse.cover">
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary btn-fill" (click)="saveForm()"
-                            [disabled]="!course.valid">Submit</button>
+                        [disabled]="!nCourse.valid">Submit</button>
                 </div>
             </div>
         </form>

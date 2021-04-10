@@ -6,7 +6,9 @@
         <div class="row">
             <div class="col-md-9">
                 <h1><b style="color: #FFF;">{{course.title}}</b></h1>
-                <h1 style="color: #FFF;">#{{course.code}} - <button class="btn btn-fill btn-{{course.isActive ? 'success':'danger' }}" (click)="activate()">{{course.isActive ? 'Activo':'Inactivo' }}</button></h1>
+                <h1 style="color: #FFF;">#{{course.code}} 
+                    <i class="{{['pe-7s-global','pe-7s-lock'][course.privacity]}}"></i>
+                     <button class="btn btn-fill btn-{{course.isActive ? 'success':'danger' }}" (click)="activate()">{{course.isActive ? 'Activo':'Inactivo' }}</button></h1>
             </div>
             <div class="col-md-3">
                 <img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail">
@@ -37,7 +39,7 @@
 
                         <div class="panel" id="panel-expenses-{{i}}" cdkDropList #partsList="cdkDropList"
                             [cdkDropListData]="activity.tasks" (cdkDropListDropped)="onDrop(module,$event)">
-                            <ul @list class="list-group">
+                            <ul class="list-group">
                                 <li class="list-group-item" *ngFor="let activity of module.activities|arrSort:'orderNo'; let j=index"
                                     cdkDrag>
                                     <button class="btn btn-sm border-none">
@@ -88,7 +90,11 @@
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Nível:</div>
-                        <div class="col-md-6">{{['Iniciante','Intermediario','Avançado'][course.level]}}</div>
+                        <div class="col-md-6">{{['Iniciante','Intermédio','Avançado'][course.level]}}</div>
+                    </li>
+                    <li class="list-group-item row">
+                        <div class="col-md-6">Privacidade:</div>
+                        <div class="col-md-6"><i class="{{['pe-7s-global','pe-7s-lock'][course.privacity]}}"></i> {{['Público','Privado'][course.privacity]}}</div>
                     </li>
                     <li class="list-group-item row">
                         <div class="col-md-6">Perfil:</div>

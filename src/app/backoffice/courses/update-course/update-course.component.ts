@@ -18,9 +18,10 @@ import { Module } from 'app/models/course/module';
 export class UpdateCourseComponent implements OnInit {
 
   public course: Course = new Course()
+  public nCourse: Course = new Course()
   public evaluations: Array<Evaluation> = []
   form = new CourseForm()
-  private levels = [{ id: 0, text: 'Iniciante' }, { id: 1, text: 'Intermediário' }, { id: 2, text: 'Avançado' }]
+  public levels = [{ id: 0, text: 'Iniciante' }, { id: 1, text: 'Intermediário' }, { id: 2, text: 'Avançado' }]
   constructor(
     public auth: AuthService,
     private courseService: CourseService,
@@ -36,40 +37,41 @@ export class UpdateCourseComponent implements OnInit {
     this.courseService.one(id).subscribe(course => {
       course.modules = course.modules.filter(x => x.orderNo > -1 && x.orderNo < 100)
       this.course = course
+      this.nCourse = course
     })
     this.evaluationService.all().subscribe(evaluations => this.evaluations = evaluations)
   }
 
 
   saveForm() {
-    this.courseService.update(this.course).subscribe(course => {
+    this.courseService.update(this.nCourse).subscribe(course => {
       this.toast.success('novo curso cadastrado com o codigo ' + course.code + ' foi feito com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })
 
-      this.router.navigate(['/backoffice/courses/details/' + course.id]);
+      this.router.navigate(['/backoffice/courses/details/' +course.id]);
     })
   }
 
   addModule() {
-    this.course.modules.push(new Module())
+    this.nCourse.modules.push(new Module())
   }
 
   removeModule(index) {
-    if (this.course.modules.length === 1) {
+    if (this.nCourse.modules.length === 1) {
       return;
     }
-    this.course.modules.splice(index, 1);
+    this.nCourse.modules.splice(index, 1);
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
-      this.course.modules,
+      this.nCourse.modules,
       event.previousIndex,
       event.currentIndex
     )
-    this.course.modules.forEach((m, i) => m.orderNo = i)
+    this.nCourse.modules.forEach((m, i) => m.orderNo = i)
   }
 
   onFileSelect(input) {
@@ -77,7 +79,7 @@ export class UpdateCourseComponent implements OnInit {
     let reader = new FileReader();
     reader.onload = (e: any) => {
       let data = e.target.result;
-      this.course.cover = e.target.result;
+      this.nCourse.cover = e.target.result;
     }
     reader.readAsDataURL(input.files[0]);
   }

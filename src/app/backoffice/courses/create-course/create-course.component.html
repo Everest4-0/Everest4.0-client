@@ -17,33 +17,40 @@
                                 with anyone
                                 else.</small>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="exampleInputEmail1">Nivel de dificuldade</label>
                             <select class="form-control form-control-lg" [(ngModel)]="course.level"
                                 formControlName="level">
                                 <option value="{{level.id}}" *ngFor="let level of levels">{{level.text}}</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="exampleInputEmail1">Língua</label>
                             <select class="form-control form-control-lg" [(ngModel)]="course.language"
                                 formControlName="language">
                                 <option *ngFor="let item of ['PT','EN','FR','ES']">{{item}}</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Privacidade</label>
+                            <select class="form-control form-control-lg" [(ngModel)]="course.privacity"
+                                formControlName="language">
+                                <option value=0>Público</option>
+                                <option value=1>Privado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="">Perfil</label>
-                            <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PROFESSIONAL']" formControlName="roles"
+                            <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PRO']" formControlName="roles"
                                 [(ngModel)]="course.roles">
                             </ng-select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="exampleInputEmail1">Competências</label>
                             <ng-select [multiple]="true" [items]="evaluations" formControlName="evaluations"
                                 [(ngModel)]="course.evaluations" bindLabel="name">
                             </ng-select>
-                            </div>
-                        
+                        </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputPassword1">Descrição</label>
                             <textarea type="email" class="form-control form-control-lg" formControlName="descriptions"
@@ -121,8 +128,7 @@
                     <img src="{{course.cover}}" class="img-thumbnail">
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary btn-fill" 
-                        >Submit</button>
+                    <button type="submit" class="btn btn-primary btn-fill">Submit</button>
                 </div>
             </div>
         </form>

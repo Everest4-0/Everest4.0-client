@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoachingFeedbackComponent } from './coaching-feedback/coaching-feedback.component';
 import { CoachingNoteComponent } from './coaching-note/coaching-note.component';
@@ -16,6 +17,7 @@ import { PipesModule } from 'app/pipes/pipes.module';
 import { MomentModule } from 'ngx-moment';
 import { CoachingEvolutionComponent } from './coaching-evolution/coaching-evolution.component';
 import { ChatComponent } from './chat/chat.component';
+import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.component';
 
 
 
@@ -34,7 +36,10 @@ import { ChatComponent } from './chat/chat.component';
     CoachingEvolutionComponent,
 
     
-    ChatComponent
+    ChatComponent,
+
+    
+    VirtualDataroomComponent
   ],
   imports: [
     MomentModule,
@@ -47,6 +52,7 @@ import { ChatComponent } from './chat/chat.component';
     CommonModule,
     FullCalendarModule,
 
+    RouterModule
   ],
   exports:[
     ProgressBarComponent,
@@ -61,7 +67,9 @@ import { ChatComponent } from './chat/chat.component';
     CoachingFeedbackComponent,
     CoachingEvolutionComponent,
 
-    ChatComponent
+    ChatComponent,
+
+    VirtualDataroomComponent
   ]
 })
 export class ComponentsModule { }

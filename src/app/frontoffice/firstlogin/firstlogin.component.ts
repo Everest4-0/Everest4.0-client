@@ -124,7 +124,8 @@ export class FirstloginComponent implements OnInit {
         this.user.photoUrl = this.file.imageUrl;
       };
     }
-  } onFileDropped($event) {
+  } 
+  onFileDropped($event) {
     this.onChange($event[0]);
   }
 }

@@ -7,6 +7,10 @@
     "lib": ["es6", "dom"],
     "mapRoot": "./",
     "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ],
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
     "sourceMap": true,

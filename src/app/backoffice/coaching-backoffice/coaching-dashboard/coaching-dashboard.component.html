@@ -8,7 +8,8 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                <a routerLink="/backoffice/coaching/board/{{subscription.id}}" *ngFor="let subscription of subscriptions" class="col-md-3">
+                <a routerLink="/backoffice/coaching/board/{{subscription.id}}"
+                    *ngFor="let subscription of subscriptions" class="col-md-3">
                     <div class="card text-center">
                         <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail" />
                         <b>{{subscription.user.datas.fullName}}</b><br>
@@ -50,6 +51,74 @@
                                 </li>
                             </div>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header ">
+                        <img src="assets/img/sidebar-3.jpg">
+                        <h3 class="pull-left">Histórico</h3>
+                    </div>
+                    <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+                        <ul class="list-group">
+                            <a *ngFor="let subscription of subscriptions" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-2" style="padding: 0;">
+                                        <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}"
+                                            class=""  style="    width: 100%;margin: -10px 1px;"/>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <b>{{subscription.user.datas.fullName}}</b><br>
+                                        <small>{{subscription.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+                                        <app-progress-bar done="73" [noLabel]=true></app-progress-bar>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a routerLink="/backoffice/coaching/board/{{subscription.id}}" class="btn btn-xs border-none pull-right"> <i class="pe-7s-angle-right" style="font-size: 24px;margin: 15px 0;"></i></a>
+                                    </div>
+                                </div>
+                            </a>
+                        </ul>
+
+                    </div>
+                    <div class="card-footer row">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <app-virtual-dataroom [small]="true" [cssClass]="'red'"></app-virtual-dataroom>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header ">
+                        <img src="assets/img/sidebar-3.jpg">
+                        <h3 class="pull-left">Programas</h3>
+                    </div>
+                    <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+                        <ul class="list-group">
+                            <a *ngFor="let program of programs.slice(0,5); let i=index" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <b>{{program.title}}</b><br>
+                                        <small>{{program.descriptions ? program.descriptions.substring(0, 60) : ''}}</small>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a routerLink="/backoffice/coaching/board/{{program.id}}" class="btn btn-xs border-none pull-right"> <i class="pe-7s-angle-right" style="font-size: 24px;margin: 10px 0;"></i></a>
+                                    </div>
+                                </div>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="card-footer row">
+
                     </div>
                 </div>
             </div>

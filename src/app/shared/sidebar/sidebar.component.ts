@@ -4,6 +4,9 @@ import { AuthService } from '../../services/auth.service';
 import { StorageServices } from '../../services/storage.service';
 import { StorageService } from 'ngx-webstorage-service';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'environments/environment';
+
+//import {environment} from '../environments/environment';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -49,6 +52,7 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
   backofficeMenuItems = this.router.url.includes('/backoffice') ? BACKOFFICE_ROUTES : [];
   frontofficeMenuItems = this.router.url.includes('/backoffice') ? [] : FRONTOFFICE_ROUTES;
+  appVersion = environment.appVersion
   public roles;
   constructor(
     public auth: AuthService, private router: Router,
