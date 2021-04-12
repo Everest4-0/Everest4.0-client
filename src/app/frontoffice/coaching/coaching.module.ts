@@ -11,12 +11,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientBoardComponent } from './client-board/client-board.component';
 import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
+import { ProgramEnrollmentComponent } from './program-enrollment/program-enrollment.component';
 
 @NgModule({
   declarations: [
     CoachingComponent, 
     ClientBoardComponent,
-    CoachingDashboardComponent
+    CoachingDashboardComponent,
+    ProgramEnrollmentComponent
   ],
   imports: [
     CommonModule, 

@@ -14,18 +14,22 @@ import { CoachingSubscription } from 'app/models/coaching/coaching_subscription'
 export class CoachingNoteComponent implements OnInit {
 
   @Input() cssClass = 'default'
-  i=0;
+  i = 0;
   public notes: Array<Note> = []
   @Input() public subscription: CoachingSubscription = new CoachingSubscription();
   public note: Note = new Note();
   public form = new NoteForm()
   public editting = this.note.id !== undefined;
+
+  public paginate = { firstInPage: 0, page: 1 };
+
   constructor(
     private noteService: NoteService,
     private modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.noteService.all({subscriptionId:this.subscription.id}).subscribe(notes => {
+
+    this.noteService.all({ subscriptionId: this.subscription.id }).subscribe(notes => {
       this.notes = notes
     })
   }
@@ -37,7 +41,7 @@ export class CoachingNoteComponent implements OnInit {
   }
 
   create() {
-    this.note.subscription=this.subscription;
+    this.note.subscription = this.subscription;
     this.noteService.create(this.note).subscribe(note => {
       this.notes.push(note);
       this.modalService.close('note-modal');
@@ -59,5 +63,8 @@ export class CoachingNoteComponent implements OnInit {
   closeModal() {
 
     this.modalService.close('note-modal');
+  }
+  updatePage($event) {
+    this.paginate = $event
   }
 }

@@ -23,13 +23,15 @@ export class VirtualDataroomComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    $(document).ready(function () {
-      if(!this.small) {
-        $('div.container-fluid > div.row > div.col-md-12').attr('style', 'box-shadow: none !important;background:transparent !important ;')
-      }
+    this.dataRoomService.all().subscribe(datas => {
+      this.dataRooms = datas
     })
-    this.dataRoomService.all().subscribe(datas => this.dataRooms = datas)
+  }
+
+  styling() {
+    $(document).ready(function () {
+      $('div.container-fluid > div.row > div.col-md-12').attr('style', 'box-shadow: none !important;background:transparent !important ;')
+    })
   }
 
   openModal() {
@@ -67,6 +69,7 @@ export class VirtualDataroomComponent implements OnInit {
   removeUploded(file, i) {
     this.dataRoom.files = this.dataRoom.files.filter(x => x.data !== file.data)
   }
+
   cells(files) {
 
     if (files.length === 1)

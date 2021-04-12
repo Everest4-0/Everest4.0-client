@@ -67,6 +67,7 @@ import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
 import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
 import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
 import { ComponentsModule } from 'app/components/components.module';
+import { ProgramEnrollmentComponent } from './coaching-backoffice/program-enrollment/program-enrollment.component';
 
 
 @NgModule({
@@ -101,7 +102,8 @@ import { ComponentsModule } from 'app/components/components.module';
     DetailsQuizComponent,
     DeleteQuizComponent,
     UpdateQuizComponent,
-    CreateQuizComponent
+    CreateQuizComponent,
+    ProgramEnrollmentComponent
   ],
   imports: [
     

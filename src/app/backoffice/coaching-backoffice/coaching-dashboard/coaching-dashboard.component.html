@@ -107,7 +107,7 @@
                             <a *ngFor="let program of programs.slice(0,5); let i=index" class="list-group-item">
                                 <div class="row">
                                     <div class="col-md-11">
-                                        <b>{{program.title}}</b><br>
+                                        <b><i class="{{['pe-7s-global','pe-7s-lock'][program.privacity]}}"></i>  {{program.title}}</b><br>
                                         <small>{{program.descriptions ? program.descriptions.substring(0, 60) : ''}}</small>
                                     </div>
                                     <div class="col-md-1">

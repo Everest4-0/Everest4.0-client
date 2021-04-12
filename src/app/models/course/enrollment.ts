@@ -7,7 +7,7 @@ export class Enrollment {
     code: number;
     descriptions: boolean;
 
-    course: Course;
+    course: Course=new Course;
     courseId: string;
     user: User;
     userId: string;

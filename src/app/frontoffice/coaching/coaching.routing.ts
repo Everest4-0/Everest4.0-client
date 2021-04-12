@@ -1,3 +1,4 @@
+import { ProgramEnrollmentComponent } from './../../backoffice/coaching-backoffice/program-enrollment/program-enrollment.component';
 
 import { ClientBoardComponent } from './client-board/client-board.component';
 
@@ -11,5 +12,8 @@ export const CoachingRoutes: Routes = [
     },
     {
         path: 'board/:id', component: ClientBoardComponent
+    },
+    {
+        path: 'program-enrolling/:id', component: ProgramEnrollmentComponent
     }
 ]; 

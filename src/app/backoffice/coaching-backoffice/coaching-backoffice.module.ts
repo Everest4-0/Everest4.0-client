@@ -7,10 +7,11 @@ import { ManagerBoardComponent } from './manager-board/manager-board.component';
 import { CoachingDashboardComponent } from './coaching-dashboard/coaching-dashboard.component';
 import { CoachingRoutes } from '../coaching-backoffice/coaching-backoffice.routing';
 import { MomentModule } from 'ngx-moment';
+import { ProgramEnrollmentComponent } from './program-enrollment/program-enrollment.component';
 
 
 @NgModule({
-  declarations: [CoachingComponent, ManagerBoardComponent, CoachingDashboardComponent],
+  declarations: [CoachingComponent, ManagerBoardComponent, CoachingDashboardComponent, ProgramEnrollmentComponent],
   imports: [
     CommonModule,
     MomentModule,

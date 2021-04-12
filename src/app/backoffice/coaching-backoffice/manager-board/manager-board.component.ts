@@ -1,3 +1,8 @@
+import { Enrollment } from './../../../models/course/enrollment';
+import { ToastService } from 'ng-uikit-pro-standard';
+import { EnrollmentService } from './../../../services/courses/enrollment.service';
+import { Course } from 'app/models/course/course';
+import { CourseService } from './../../../services/courses/course.service';
 import { FeedbackItem } from './../../../models/coaching/feedback_item';
 import { FeedbackItemService } from './../../../services/coaching/feedback-item.service';
 import { ActivatedRoute } from '@angular/router';
@@ -28,13 +33,15 @@ export class ManagerBoardComponent implements OnInit {
   ];
 
   public subscription: CoachingSubscription = new CoachingSubscription();
+  public programsRecomendados: Array<Course> = []
+  public programsOutros: Array<Course> = []
   public currentResults = [];
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
 
   public diagnosticDatas: any = {};
-  public evaluationDatas:Array<any> = []; 
+  public evaluationDatas: Array<any> = [];
   public weakness = [];
   public strengths = []
 
@@ -43,8 +50,11 @@ export class ManagerBoardComponent implements OnInit {
 
     public auth: AuthService,
     private goalService: GoalService,
+    private courseService: CourseService,
     private evaluationService: UserEvaluationService,
     private coachingSubscriptionService: CoachingSubscriptionService,
+    private enrollmentService: EnrollmentService,
+    private toast: ToastService,
     private route: ActivatedRoute,
     private feedbacItemService: FeedbackItemService,
   ) { }
@@ -53,8 +63,15 @@ export class ManagerBoardComponent implements OnInit {
 
     const id = this.route.snapshot.params['id'];
     this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
+
       this.subscription = coachingSubscription;
+      this.courseService.all({ userId: this.auth.user.id }).subscribe(programs => {
+        this.programsOutros = programs
+        this.programsRecomendados = [];//programs.filter(c => c.evaluations.filter(e => this.subscription.goal.descriptions === e.name));
+      })
     })
+
+
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
@@ -140,7 +157,22 @@ export class ManagerBoardComponent implements OnInit {
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
   }
 
-
+  enrollProgram(program: Course) {
+    alert(program.title)
+    let newEnrollment = new Enrollment()
+    newEnrollment.course = program;
+    this.enrollmentService.create(newEnrollment).subscribe(enrollment => {
+      this.subscription.enrollment = enrollment;
+      this.subscription.enrollment.course = program;
+      this.coachingSubscriptionService.update(this.subscription).subscribe(subscription => {
+        
+        this.toast.success('Parabens! Estás agora inscrito no curso ' + program.title, 'Sucesso', {
+          timeOut: 5000,
+          progressBar: true,
+        })
+      })
+    })
+  }
 
   accordion(that: any): void {
 

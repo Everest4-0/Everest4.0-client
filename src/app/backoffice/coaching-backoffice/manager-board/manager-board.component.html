@@ -5,12 +5,50 @@
         </div>
         <div class="col-md-6 text-right">
 
-            <div class="col-md-6">
-            </div>
             <div class="col-md-4">
+            </div>
+            <div class="col-md-6">
                 <h5 style="margin: 0;">Cliente</h5>
                 <h4 style="margin: 0;"><b>{{subscription.user.datas.fullName}}</b></h4>
-
+                <div class="dropdown text-right">
+                    <button class="btn btn-sm btn-info btn-fill  dropdown-toggle" type="button" data-toggle="dropdown">
+                        <div *ngIf="subscription.enrollment===null">
+                            <i class="pe-7s-attention text-red"></i>
+                            Selecione um Plano de Acção
+                            <span class="caret"></span>
+                        </div>
+                        <a style="color: #FFF;" [routerLink]="['/backoffice/coaching/program/enrolled/'+subscription.enrollment.id]" routerLinkActive="router-link-active"  *ngIf="subscription.enrollment">
+                            <i class="pe-7s-ribbon"></i>
+                            Plano de Acção: <b>{{subscription.enrollment.course.title}}</b>
+                        </a>
+                    </button>
+                    <ul class="dropdown-menu pull-right"  *ngIf="subscription.enrollment===null">
+                        <li class="dropdown-header" *ngIf="programsRecomendados.length>0">
+                            <h4>Recomendados</h4>
+                        </li>
+                        <a *ngFor="let program of programsRecomendados.slice(0,3); let i=index" class="list-group-item" (click)="enrollProgram(program)">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <b><i class="{{['pe-7s-global','pe-7s-lock'][program.privacity]}}"></i>
+                                        {{program.title}}</b><br>
+                                    <small>{{program.descriptions ? program.descriptions.substring(0, 60) : ''}}</small>
+                                </div>
+                            </div>
+                        </a>
+                        <li class="dropdown-header" *ngIf="programsRecomendados.length>0">
+                            <h4>Outros</h4>
+                        </li>
+                        <a *ngFor="let program of programsOutros.slice(0,3); let i=index" class="list-group-item" (click)="enrollProgram(program)">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <b><i class="{{['pe-7s-global','pe-7s-lock'][program.privacity]}}"></i>
+                                        {{program.title}}</b><br>
+                                    <small>{{program.descriptions ? program.descriptions.substring(0, 60) : ''}}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-2">
                 <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail">
@@ -34,7 +72,7 @@
 
         <div class="col-md-6">
             <div class="card" style="padding: 25px;">
-                <a [routerLink]="['board']" class="btn btn-sm btn-info btn-fill pull-right">Plano de Acção</a>
+
                 <h4 class="pull-left">Evolução</h4>
                 <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas.length>0">
                 </app-coaching-evolution>

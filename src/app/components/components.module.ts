@@ -18,6 +18,8 @@ import { MomentModule } from 'ngx-moment';
 import { CoachingEvolutionComponent } from './coaching-evolution/coaching-evolution.component';
 import { ChatComponent } from './chat/chat.component';
 import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.component';
+import { EnrollingCourseComponent } from './enrolling-course/enrolling-course.component';
+import { PaginateComponent } from './paginate/paginate.component';
 
 
 
@@ -39,7 +41,13 @@ import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.co
     ChatComponent,
 
     
-    VirtualDataroomComponent
+    VirtualDataroomComponent,
+
+    
+    EnrollingCourseComponent,
+
+    
+    PaginateComponent
   ],
   imports: [
     MomentModule,
@@ -69,7 +77,8 @@ import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.co
 
     ChatComponent,
 
-    VirtualDataroomComponent
+    VirtualDataroomComponent,
+    EnrollingCourseComponent
   ]
 })
 export class ComponentsModule { }

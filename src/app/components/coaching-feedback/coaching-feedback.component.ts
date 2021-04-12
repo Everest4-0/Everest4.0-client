@@ -34,6 +34,7 @@ export class CoachingFeedbackComponent implements OnInit {
   public form = new FeedBackForm();
 
 
+  public paginate = { firstInPage: 0, page: 1 };
   constructor(
     public auth: AuthService,
     private feedbackItemService: FeedbackItemService,
@@ -119,5 +120,10 @@ export class CoachingFeedbackComponent implements OnInit {
   points(feedback) {
 
     return (feedback.points.reduce((x, y) => x + y.point, 0) / feedback.points.length).toFixed(2)
+  }
+
+
+  updatePage($event) {
+    this.paginate = $event
   }
 }

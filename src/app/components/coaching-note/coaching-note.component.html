@@ -5,13 +5,12 @@
         <button class="btn border-none pull-right" (click)="openModal()">
             <h3><i class="pe-7s-plus"></i></h3>
         </button>
-
     </div>
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
         <ul class="list-group">
-            <div *ngFor="let note of notes.slice(i,4+i);let j=index">
+            <div *ngFor="let note of notes.slice(paginate.firstInPage,paginate.page*4);let j=index">
                 <li class="list-group-item">
-                    <span class="pull-left">{{j+i+1}}. &nbsp;&nbsp;</span>
+                    <span class="pull-left">{{j+paginate.firstInPage+1}}. &nbsp;&nbsp;</span>
                     {{note.title}}<br>
                     <small>{{note.updatedAt|amLocale:'pt'|amTimeAgo}}</small>
                     <button class="btn btn-xs pull-right border-none" (click)="openModal(note)"><i
@@ -21,17 +20,12 @@
         </ul>
     </div>
     <div class="card-footer row">
-
         <div class="col-md-12">
             <div class="col-md-6">
                 
             </div>
             <div class="col-md-6 text-right">
-                <div class="btn-group">
-                    <button type="button" class="btn border-none" (click)="i=i-4"><i class="pe-7s-angle-left text24"></i></button>
-                    <button type="button" class="btn border-none "><small>{{(i===0 ? 1 : (i+4)/4 )}} de {{notes.length%4 + ((notes.length/4)%4>0 ? 1 : 0)}}</small></button>
-                    <button type="button" class="btn border-none" (click)="i=i+4"><i class="pe-7s-angle-right text24"></i></button>
-                </div>
+                <app-paginate [items]="notes" *ngIf="notes.length>0" (updatePage)="updatePage($event)"></app-paginate>
             </div>
         </div>
     </div>

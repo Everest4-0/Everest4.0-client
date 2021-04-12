@@ -1,3 +1,4 @@
+import { Enrollment } from './../course/enrollment';
 import { Note } from './note';
 import { CoachingDuration } from './coaching_duration';
 import { CoachingGoal } from './coaching_goal';
@@ -18,6 +19,7 @@ export class CoachingSubscription {
     duration: CoachingDuration = new CoachingDuration();
     user: User = new User();
     coach: User = new User();
+    enrollment: Enrollment = new Enrollment();
     chat: Chat = new Chat()
 
     constructor() {
