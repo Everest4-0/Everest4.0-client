@@ -1,6 +1,6 @@
 <div class="card">
     <div class="header">
-        <button type="button" (click)="openModal('todo-modal')" class="btn pull-right"
+        <button type="button" *ngIf="role.includes('c')" (click)="openModal('todo-modal')" class="btn pull-right"
             style="border: none;font-size: 24px;"><i class="pe-7s-plus"></i></button>
         <h4 class="title"><b>Agendas e pendentes</b></h4>
         <span>{{now|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM [de] YYYY" }}</span>
@@ -9,7 +9,7 @@
 
     <div class="card-body">
         <div class="list-group">
-            <a class="list-group-item" *ngFor="let item of tasks | slice:0:overDueLimit let i = index">
+            <a class="list-group-item  {{(item.startDate | amDateFormat: 'DMY') == (now | amDateFormat: 'DMY') ? 'active' : ''}}" *ngFor="let item of tasks | slice:0:overDueLimit let i = index">
                 <div class="row">
                     <div class="col-xs-2 col-md-1">
                         <div class="checkbox">
@@ -45,7 +45,7 @@
     <button class="btn pull-right" style="font-size: 50px; border:none;" (click)="closeModal('task-detail-modal')"><i
             class="pe-7s-close"></i></button>
     <button class="btn pull-right" style="font-size: 50px; border:none;" (click)="closeModal('task-detail-modal');openModal('todo-modal',taskDetails)"><i
-            class="pe-7s-edit"></i></button>
+            class="pe-7s-edit" *ngIf="role.includes('u')"></i></button>
     <h1>
         {{taskDetails.subject}}
     </h1>

@@ -58,7 +58,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <app-task [showControls]="false" [filters]="['coaching']"></app-task>
+        <app-shared-todo [role]="'r'" [tasks]="subscription.todos" (updateList)="updateList($event)" *ngIf="subscription.todos"></app-shared-todo>
     </div>
 </div>
 <app-chat [chat]="subscription.chat" [isCoach]='false' [to]="subscription.coach"></app-chat>

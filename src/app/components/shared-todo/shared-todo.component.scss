@@ -10,6 +10,9 @@
 .card-body {
     .list-group{
         margin: 15px;
+        .active{
+            border-left: solid 5px #24baee;
+        }
     }
 }
 

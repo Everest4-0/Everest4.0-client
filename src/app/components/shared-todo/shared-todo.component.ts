@@ -23,6 +23,7 @@ export class SharedTodoComponent implements OnInit {
 
 
   @Input() filters = []
+  @Input() role = ''
   @Output() updateList: EventEmitter<ToDo> = new EventEmitter<ToDo>()
   public thisWeekLimit = 5;
   public overDueLimit = 5;
@@ -93,6 +94,12 @@ export class SharedTodoComponent implements OnInit {
     debugger
     if (toDo) {
       this.todo = toDo;
+      this.todo.endTime=this.todo.startDate.toString().split('T')[1].slice(0,5)
+      this.todo.startTime=this.todo.endDate.toString().split('T')[1].slice(0,5)
+      
+    this.todo.endDate = new Date(this.todo.startDate)
+    //this.todo.startDate = new Date(this.todo.startDate + 'T' + this.todo.startTime + ':00')*/
+      
     }
     this.modalService.open(id);
   }
@@ -123,5 +130,9 @@ export class SharedTodoComponent implements OnInit {
       todo = toDo;
       this.modalService.close('todo-modal')
     })
+  }
+
+  isToday(item){
+    
   }
 }
