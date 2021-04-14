@@ -66,10 +66,10 @@ export class CoachingDashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
     this.auth.all({ '$filter': 'COACH' }).subscribe(users => this.coaches = users)
     this.coachingSubscriptionService.all({ userId: this.auth.user.id }).subscribe(subscriptions => {
       
+      this.modalService.open('payment-subscription')
       this.subscriptions = subscriptions;
       if (subscriptions.length > 0) {
         this.subscription = subscriptions[0];
@@ -156,7 +156,8 @@ export class CoachingDashboardComponent implements OnInit {
   }
 
   openSubscription() {
-    this.modalService.open('coach-subscription')
+    //this.modalService.open('coach-subscription')
+    this.modalService.open('payment-subscription')
   }
 
   discard() {

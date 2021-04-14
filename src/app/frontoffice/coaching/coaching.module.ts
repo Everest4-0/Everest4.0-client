@@ -1,3 +1,4 @@
+import { PaymentModule } from './../../payment/payment.module';
 import { ComponentsModule } from 'app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from './../../components/modal/modal.module';
@@ -25,7 +26,7 @@ import { ProgramEnrollmentComponent } from './program-enrollment/program-enrollm
 
     ComponentsModule,
     ModalModule,
-
+    PaymentModule,
     MomentModule,
     FormsModule,
     ReactiveFormsModule,

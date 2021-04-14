@@ -1,3 +1,4 @@
+import { PaymentModule } from './../payment/payment.module';
 import { QuizSolveFormComponent } from './quiz/quiz-solve-form/quiz-solve-form.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { UserSecurityComponent } from './user/user-security/user-security.component';
@@ -114,7 +115,8 @@ FullCalendarModule.registerPlugins([
     CoachingModule,
     //NgxPermissionsModule.forRoot(),
 
-    ComponentsModule
+    ComponentsModule,
+    PaymentModule
   ],
   declarations: [
     CounterDirective,
