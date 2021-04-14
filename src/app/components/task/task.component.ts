@@ -19,6 +19,7 @@ export class TaskComponent implements OnInit {
 
   @ViewChild(ScheduleComponent) child: ScheduleComponent;
   @Input() filters = [];
+  @Input() outToDos = [];
   @Input() showControls = true;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()

@@ -5,7 +5,7 @@ export interface IService<T> {
 
     all(f: any): Observable<Array<any>>
 
-    update(o: T): Observable<any>
+    update(o: T, q?: any): Observable<any>
 
     create(o: T): Observable<any>
 }

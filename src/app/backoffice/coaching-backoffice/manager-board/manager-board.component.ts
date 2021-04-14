@@ -1,3 +1,7 @@
+import { ModalService } from './../../../components/modal/modal.service';
+import { TodoService } from './../../../services/todo.service';
+import { ToDoForm } from './../../../forms/todo.form';
+import { ToDo } from './../../../models/goal/todo';
 import { Enrollment } from './../../../models/course/enrollment';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { EnrollmentService } from './../../../services/courses/enrollment.service';
@@ -18,6 +22,7 @@ import { CoachingSubscription } from './../../../models/coaching/coaching_subscr
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
 import { Feedback } from 'app/models/coaching/feedback';
+import moment = require('moment');
 
 @Component({
   selector: 'app-manager-board',
@@ -46,6 +51,11 @@ export class ManagerBoardComponent implements OnInit {
   public strengths = []
 
   public feedbacItems: Array<FeedbackItem> = []
+
+
+  public todo: ToDo = new ToDo()
+  public todos: Array<ToDo> = []
+  form = new ToDoForm();
   constructor(
 
     public auth: AuthService,
@@ -57,6 +67,9 @@ export class ManagerBoardComponent implements OnInit {
     private toast: ToastService,
     private route: ActivatedRoute,
     private feedbacItemService: FeedbackItemService,
+
+    private toDoService: TodoService,
+    public modalService: ModalService,
   ) { }
 
   ngOnInit(): void {
@@ -165,7 +178,7 @@ export class ManagerBoardComponent implements OnInit {
       this.subscription.enrollment = enrollment;
       this.subscription.enrollment.course = program;
       this.coachingSubscriptionService.update(this.subscription).subscribe(subscription => {
-        
+
         this.toast.success('Parabens! Estás agora inscrito no curso ' + program.title, 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
@@ -185,5 +198,21 @@ export class ManagerBoardComponent implements OnInit {
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
+  }
+
+  openModal(id) {
+    this.modalService.open(id)
+  }
+
+  updateList($event) {
+    debugger
+    this.coachingSubscriptionService.update(this.subscription, { todoId: $event.id, add_todo: true }).subscribe(subscription => {
+      this.toast.success('Agenda adiconado a subscrição actual', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true,
+      })
+      this.subscription.todos.push($event);
+      this.todo = new ToDo();
+    })
   }
 }

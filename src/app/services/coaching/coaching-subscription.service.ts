@@ -22,8 +22,8 @@ export class CoachingSubscriptionService extends AppService<CoachingSubscription
     return this.getAll(f)
   }
 
-  update(o: any): Observable<CoachingSubscription> {
-    return this.updateOne(o);
+  update(o: any,q:any={}): Observable<CoachingSubscription> {
+    return this.updateOne(o,q);
   }
 
   create(o: any): Observable<CoachingSubscription> {

@@ -17,7 +17,7 @@ export class AppService<T> {
   public serverAddress = serverAddress;
   constructor(public http: HttpClient, private service: string) {
     this.url = `${this.serverAddress}/api/v1/${service.split('.').join('/')}`;
-    
+
     try {
       let data = JSON.parse(localStorage.getItem("local_everest_key"));
       this.headers = new HttpHeaders({ apikey: environment.appKey, authorization: data.filter(o => o.key === 'current_user')[0].data.apikey })
@@ -42,8 +42,9 @@ export class AppService<T> {
     return this.http.post(this.url, o, { 'headers': this.headers })
   }
 
-  protected updateOne(o: any): Observable<any> {
-    return this.http.put(this.url, o, { 'headers': this.headers })
+  protected updateOne(o: any, q: any = {}): Observable<any> {
+    let str = this.getQuery(q)
+    return this.http.put(this.url + '?' + str, o, { 'headers': this.headers })
   }
 
   protected deleteOne(id): Observable<any> {

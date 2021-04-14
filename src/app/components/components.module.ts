@@ -20,6 +20,7 @@ import { ChatComponent } from './chat/chat.component';
 import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.component';
 import { EnrollingCourseComponent } from './enrolling-course/enrolling-course.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { SharedTodoComponent } from './shared-todo/shared-todo.component';
 
 
 
@@ -47,7 +48,10 @@ import { PaginateComponent } from './paginate/paginate.component';
     EnrollingCourseComponent,
 
     
-    PaginateComponent
+    PaginateComponent,
+
+    
+    SharedTodoComponent
   ],
   imports: [
     MomentModule,
@@ -77,8 +81,17 @@ import { PaginateComponent } from './paginate/paginate.component';
 
     ChatComponent,
 
+    ModalModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+    
     VirtualDataroomComponent,
-    EnrollingCourseComponent
+    EnrollingCourseComponent,
+
+
+
+    SharedTodoComponent
   ]
 })
 export class ComponentsModule { }

@@ -90,6 +90,6 @@
         </div>
     </div>
     <div class="col-md-4">
-        <app-task [showControls]="false" [filters]="['coaching']"></app-task>
+        <app-shared-todo [tasks]="subscription.todos" (updateList)="updateList($event)" *ngIf="subscription.todos"></app-shared-todo>
     </div>
 </div>

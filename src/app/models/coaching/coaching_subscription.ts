@@ -1,3 +1,4 @@
+import { ToDo } from './../goal/todo';
 import { Enrollment } from './../course/enrollment';
 import { Note } from './note';
 import { CoachingDuration } from './coaching_duration';
@@ -22,6 +23,7 @@ export class CoachingSubscription {
     enrollment: Enrollment = new Enrollment();
     chat: Chat = new Chat()
 
+    todos: Array<ToDo> = [];
     constructor() {
     }
 }
