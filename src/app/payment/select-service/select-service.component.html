@@ -1,0 +1,73 @@
+<div class="demo10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6" *ngIf="service=='free'">
+                <div class="pricingTable10 free">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Grátis</h3>
+                        <span class="price-value">
+                            <span class="currency">AKZ</span> 0
+                            <span class="month">/mês</span>
+                        </span>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>Desafios</li>
+                            <li>Gestão de compromissos</li>
+                            <li>Diagnósticos</li>
+                            <li>Notícias<br>-<br>-<br>-<br>-<br></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6" *ngIf="service=='basic'">
+                <div class="pricingTable10 basic">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Básico</h3>
+                        <span class="price-value">
+                            <span class="currency">AKZ</span> 4.000
+                            <span class="month">/mês</span>
+                        </span>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>Vagas de Emprego</li>
+                            <li>Cursos online</li>
+                            <li>Objectivos e planos de acção</li>
+                            <li>Controlo financéiro</li>
+                            <li>Feedback 360º</li>
+                            <li>Mais plano grátis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6" *ngIf="service=='premium'">
+                <div class="pricingTable10 premium">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">PROFISSIONAL</h3>
+                        <span class="price-value">
+                            <span class="currency">AKZ</span> 34.000
+                            <span class="month">/mês</span>
+                        </span>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>Gestão de carreiras</li>
+                            <li>Coaching online</li>
+                            <li>Plano de desenvolvimento de competências</li>
+                            <li>Mais plano básico<br>-<br>-<br>-<br></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li><a (click)="set('free')" class="read free">Pacote Free</a></li>
+                    <li><a (click)="set('basic')" class="read basic">Pacote Básico</a></li>
+                    <li><a (click)="set('premium')" class="read premium">Pacote Profissional</a></li>
+                    <li><a (click)="set('coaching')" class="read coaching">Coaching online</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

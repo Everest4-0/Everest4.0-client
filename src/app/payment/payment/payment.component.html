@@ -1,0 +1,209 @@
+<div class="wrapper">
+    <div class="image-holder">
+        <img src="images/form-wizard.png" alt="">
+    </div>
+    <form action="">
+        <div id="wizard" role="application" class="wizard clearfix">
+            <span class="step-title">{{stepsLabels[currentStep]}} - {{currentStep}}</span>
+            <div class="steps clearfix">
+                <ul role="tablist" class="">
+                    <li role="tab" aria-disabled="false"
+                        class="last {{currentStep>=i ? 'checked' : ''}} {{currentStep==i ? 'current' : ''}}"
+                        *ngFor="let item of stepsLabels; let i = index">
+                        <a id="wizard-t-{{i}}" href="#wizard-h-{{i}}" aria-controls="wizard-p-{{i}}">
+                            <span class="number">{{i+1}}.</span> </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content clearfix">
+                <!-- SECTION 0 -->
+                <h4 id="wizard-h-0" tabindex="-1" class="title"></h4>
+                <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body" aria-hidden="true"  *ngIf="currentStep==0">
+                    <app-select-service [service]="services[0].id" (setService)="setService($event)"></app-select-service>
+                </section>
+                
+                <!-- SECTION 3 -->
+                <h4 id="wizard-h-1" tabindex="-1" class="title"></h4>
+                <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"  *ngIf="currentStep==1">
+                    <div class="product">
+                        <div class="item" *ngFor="let item of services">
+                            <div class="left">
+                                <a href="#" class="thumb" style="background-color: {{item.color}};">
+                                    <img src="images/item-1.png" alt="">
+                                    <h1 style="color: #FFF;"><b>{{item.id.charAt(0).toUpperCase()}}</b></h1>
+                                </a>
+                                <div class="purchase">
+                                    <h4>
+                                       {{item.title}}
+                                    </h4>
+                                    <span>x1</span>
+                                </div>
+                            </div>
+                            <span class="price">AKZ{{item.price}}</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="checkout">
+                        <div class="subtotal">
+                            <span class="heading">Subtotal</span>
+                            <span>AKZ {{total}}</span>
+                        </div>
+                        <div class="subtotal">
+                            <span class="heading">IVA</span>
+                            <span>AKZ 0.0</span>
+                        </div>
+                        <p class="shipping">
+                            * (M00) - Regime transitório
+                        </p>
+                        <div class="total">
+                            <span class="heading">Total</span>
+                            <span class="total-price">AKZ{{total}}</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- SECTION 1 -->
+                <h4 id="wizard-h-2" tabindex="-1" class="title current"></h4>
+                <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body current" aria-hidden="false" *ngIf="currentStep==2">
+                    <div class="form-row form-group">
+                            <div class="col-md-6">Login com
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
+                                    <img src="assets/img/icon/microsoft.svg" alt="GOOGLE"> 
+                                </a>
+                                <a (click)="signInWithGoogle()" class="login100-social-item">
+                                    <img src="assets/img/icon/google.svg" alt="GOOGLE"> 
+                                </a>
+                                <a (click)="signInWithFB()" disabled class="login100-social-item">
+                                    <img src="assets/img/icon/facebook.svg" alt="GOOGLE"> 
+                                </a>
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="form-holder">
+                            <label for="">
+                                First Name *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-holder">
+                            <label for="">
+                                Last Name *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Country *
+                        </label>
+                        <div class="form-holder">
+                            <select name="" id="" class="form-control">
+                                <option value="viet nam" class="option">Viet Nam</option>
+                                <option value="united states" class="option">United States</option>
+                                <option value="united kingdom" class="option">United Kingdom</option>
+                            </select>
+                            <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Address *
+                        </label>
+                        <input type="text" class="form-control" placeholder="Street address"
+                            style="margin-bottom: 20px">
+                        <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="form-holder">
+                            <label for="">
+                            Town / City *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-holder">
+                            <label for="">
+                                Postcode / Zip *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="form-holder">
+                            <label for="">
+                                Phone *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-holder">
+                            <label for="">
+                                Email Address *
+                            </label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- SECTION 4 -->
+                <h4 id="wizard-h-3" tabindex="-1" class="title"></h4>
+                <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body" aria-hidden="true"   *ngIf="currentStep==3">
+                    <div class="checkbox-circle">
+                        <label class="active">
+                            <input type="radio" name="billing method" value="Direct bank transfer" checked="">Direct
+                            bank transfer&gt;
+                            <span class="checkmark"></span>
+                            <div class="tooltip">
+                                Make your payment directly into our bank account. Please use your Order ID as the
+                                payment reference. Your order will not be shipped until the funds have cleared in our
+                                account.
+                            </div>
+                        </label>
+                        <div class="col-md-3">
+                            <button (click)="paymentType=0">
+                                <img src="assets/img/icon/referal-payment.png">
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button (click)="paymentType=1">
+                                <img src="assets/img/icon/credit-payment.png">
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button (click)="paymentType=2">
+                                <img src="assets/img/icon/paypal.png">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card text-center refereal-payment" *ngIf="paymentType==0">
+                            <img src="assets/img/icon/multicaixa_logo.png">
+                            <br>
+                           <span>Entidade:</span>  <b>00997</b><br>
+                           <span>Referência: </span>  <b>961000000</b><br>
+                           <span>Montante: </span>  <b>KZ {{total}}</b><br>
+
+
+ 
+<small>Pagamento disponível até 28/03/2020 às 18h22</small>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="actions clearfix">
+                <ul role="menu" aria-label="Pagination">
+                    <li class="{{currentStep==0 ? 'disabled' : ''}}" aria-disabled="true">
+                        <a (click)="prev()" role="menuitem">Voltar </a>
+                    </li>
+                    <li class="{{currentStep==4 ? 'disabled' : ''}}" *ngIf="currentStep<4" aria-hidden="false">
+                        <a (click)="next()" role="menuitem">Proximo </a>
+                    </li>
+                    <li aria-hidden="true" *ngIf="currentStep==4">
+                        <a href="#finish" role="menuitem">Pagar e concluir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
