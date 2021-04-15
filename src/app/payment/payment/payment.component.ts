@@ -125,5 +125,5 @@ export class PaymentComponent implements OnInit {
   closeMe() {
     this.close.emit()
   }
-  get total() { return this.services.reduce((y, x) => x.price + y, 0) * this.payment.quantity }
+  get total() { return this.payment.services.reduce((y, x) => x.price + y, 0) * this.payment.quantity }
 }

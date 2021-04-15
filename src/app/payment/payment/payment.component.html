@@ -1,6 +1,8 @@
 <div class="row" style="background: url(assets/img/wp/everest.jpg)">
     <div class="row" style="background-color:rgba(255,255,255,.5)">
-    <div class="col-md-6"></div>
+    <div class="col-md-6">
+        {{payment|json}}
+    </div>
     <div class="col-md-6">
         <div id="wizard" role="application" class="wizard clearfix">
             <span class="step-title">{{stepsLabels[currentStep]}} </span>
@@ -28,7 +30,7 @@
                 <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"
                     *ngIf="currentStep==1">
                     <div class="product">
-                        <div class="item" *ngFor="let item of services">
+                        <div class="item" *ngFor="let item of payment.services">
                             <div class="left">
                                 <a href="#" class="thumb" style="background-color: {{item.color}};">
                                     <img src="images/item-1.png" alt="">
