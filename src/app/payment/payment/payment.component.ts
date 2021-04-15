@@ -46,7 +46,7 @@ export class PaymentComponent implements OnInit {
 
   @ViewChild('f') form: NgForm;
 
-  @Output() close:EventEmitter<any>=new EventEmitter<any>()
+  @Output() close: EventEmitter<any> = new EventEmitter<any>()
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -103,12 +103,15 @@ export class PaymentComponent implements OnInit {
     if (this.currentStep == 3) {
       this.form.ngSubmit.emit();
     } else {
+
       this.currentStep = this.currentStep === 4 ? 4 : this.currentStep + 1;
+      this.currentStep = this.currentStep === 2 ? 3 : this.currentStep
     }
   }
 
   prev() {
     this.currentStep = this.currentStep === 0 ? 0 : this.currentStep - 1;
+    this.currentStep = this.currentStep === 2 ? 1 : this.currentStep
   }
 
   setService($event) {
@@ -119,8 +122,8 @@ export class PaymentComponent implements OnInit {
     debugger
     this.payment[key] = $event
   }
-  closeMe(){
-this.close.emit()
+  closeMe() {
+    this.close.emit()
   }
   get total() { return this.services.reduce((y, x) => x.price + y, 0) * this.payment.quantity }
 }
