@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
+
+import * as $ from 'jquery'
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -17,20 +19,39 @@ export class PaymentComponent implements OnInit {
     price: 4000,
     color: '#2dbcff'
   }];
+  public payment = {
+    discount: 0,
+    quantity: 1,
+    currency: 'AOA',
+    customer: {
+      name: '',
+      address: {
+        line1: '',
+        city: '',
+        country: ''
+      },
 
+    },
+    services: [{
+      id: 'basic',
+      title: 'Pacote Basico',
+      price: 4000,
+      color: '#2dbcff'
+    }]
+  }
   public paymentType;
-  public currentStep = 3
+  public currentStep = 0
   public stepsLabels = ['Selecionar serviço', 'Configurar serviço', 'Seus dados', 'Metodo de Pagamento', 'Resumo']
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
+
+  @ViewChild('f') form: NgForm;
+
+  @Output() close:EventEmitter<any>=new EventEmitter<any>()
 
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
         iconColor: '#666EE8',
-        color: '#31325F',
-        fontWeight: '300',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '18px',
         '::placeholder': {
           color: '#CFD7E0'
         }
@@ -44,16 +65,27 @@ export class PaymentComponent implements OnInit {
 
   stripeTest: FormGroup;
 
-  constructor(private fb: FormBuilder, private stripeService: StripeService) {}
+
+
+
+  constructor(private fb: FormBuilder, private stripeService: StripeService) { }
 
   ngOnInit(): void {
     this.stripeTest = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]]
     });
   }
 
   createToken(): void {
+    debugger
     const name = this.stripeTest.get('name').value;
+    const address = this.stripeTest.get('address').value;
+    const city = this.stripeTest.get('city').value;
+    const country = this.stripeTest.get('country').value;
+    this.payment.customer.address = { line1: address, city: city, country }
     this.stripeService
       .createToken(this.card.element, { name })
       .subscribe((result) => {
@@ -68,15 +100,27 @@ export class PaymentComponent implements OnInit {
   }
 
   next() {
-    this.currentStep = this.currentStep === 4 ? 4 : this.currentStep + 1;
+    if (this.currentStep == 3) {
+      this.form.ngSubmit.emit();
+    } else {
+      this.currentStep = this.currentStep === 4 ? 4 : this.currentStep + 1;
+    }
   }
 
   prev() {
     this.currentStep = this.currentStep === 0 ? 0 : this.currentStep - 1;
   }
+
   setService($event) {
-    this.services = [$event]
+    this.payment.services = [$event]
   }
 
-  get total() { return this.services.reduce((y, x) => x.price + y, 0) }
+  setValue($event, key) {
+    debugger
+    this.payment[key] = $event
+  }
+  closeMe(){
+this.close.emit()
+  }
+  get total() { return this.services.reduce((y, x) => x.price + y, 0) * this.payment.quantity }
 }

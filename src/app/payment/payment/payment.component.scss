@@ -576,10 +576,12 @@ textarea.form-control {
 	}
 }
 .payment-icon.active {
-	border-bottom: solid 5px #aaa;
+	border-bottom: solid 5px #aaa !important;
+	
 }
 .payment-icon {
-	height: 90px img {
-
+	height: 90px 
+	img {
+		height: 90px !important
 	}
 }

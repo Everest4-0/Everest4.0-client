@@ -190,6 +190,10 @@ export class CoachingDashboardComponent implements OnInit {
 
 
   }
+
+  closePayment(){
+    this.modalService.close('payment-subscription')
+  }
 }
 
 
