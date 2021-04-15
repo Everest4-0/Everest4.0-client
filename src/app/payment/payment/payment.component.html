@@ -161,18 +161,18 @@
                             </div>
                         </label>
                         <div class="col-md-3">
-                            <a (click)="paymentType=0">
-                              <img src="assets/img/icon/referal-payment.png">
+                            <a (click)="paymentType=0" class="payment-icon {{paymentType==0 ? 'active' : ''}}">
+                              <img src="assets/img/icon/referal-payment.png" class="img-thumbnail">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a (click)="paymentType=1">
-                                <img src="assets/img/icon/credit-payment.png">
+                            <a (click)="paymentType=1" class="payment-icon {{paymentType==1 ? 'active' : ''}}">
+                                <img src="assets/img/icon/credit-payment.png" class="img-thumbnail">
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a (click)="paymentType=2">
-                                <img src="assets/img/icon/paypal.png">
+                            <a (click)="paymentType=2"  class="payment-icon {{paymentType==2 ? 'active' : ''}}">
+                                <img src="assets/img/icon/paypal.png" class="img-thumbnail">
                             </a>
                         </div>
                     </div>
