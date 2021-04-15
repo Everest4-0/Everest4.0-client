@@ -2,7 +2,6 @@
     <div class="image-holder">
         <img src="images/form-wizard.png" alt="">
     </div>
-    <form action="">
         <div id="wizard" role="application" class="wizard clearfix">
             <span class="step-title">{{stepsLabels[currentStep]}} - {{currentStep}}</span>
             <div class="steps clearfix">
@@ -18,13 +17,16 @@
             <div class="content clearfix">
                 <!-- SECTION 0 -->
                 <h4 id="wizard-h-0" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body" aria-hidden="true"  *ngIf="currentStep==0">
-                    <app-select-service [service]="services[0].id" (setService)="setService($event)"></app-select-service>
+                <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body" aria-hidden="true"
+                    *ngIf="currentStep==0">
+                    <app-select-service [service]="services[0].id" (setService)="setService($event)">
+                    </app-select-service>
                 </section>
-                
+
                 <!-- SECTION 3 -->
                 <h4 id="wizard-h-1" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"  *ngIf="currentStep==1">
+                <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"
+                    *ngIf="currentStep==1">
                     <div class="product">
                         <div class="item" *ngFor="let item of services">
                             <div class="left">
@@ -34,7 +36,7 @@
                                 </a>
                                 <div class="purchase">
                                     <h4>
-                                       {{item.title}}
+                                        {{item.title}}
                                     </h4>
                                     <span>x1</span>
                                 </div>
@@ -61,23 +63,24 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- SECTION 1 -->
                 <h4 id="wizard-h-2" tabindex="-1" class="title current"></h4>
-                <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body current" aria-hidden="false" *ngIf="currentStep==2">
+                <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body current"
+                    aria-hidden="false" *ngIf="currentStep==2">
                     <div class="form-row form-group">
-                            <div class="col-md-6">Login com
-                            </div>
-                            <div class="col-md-6">
-                                <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
-                                    <img src="assets/img/icon/microsoft.svg" alt="GOOGLE"> 
-                                </a>
-                                <a (click)="signInWithGoogle()" class="login100-social-item">
-                                    <img src="assets/img/icon/google.svg" alt="GOOGLE"> 
-                                </a>
-                                <a (click)="signInWithFB()" disabled class="login100-social-item">
-                                    <img src="assets/img/icon/facebook.svg" alt="GOOGLE"> 
-                                </a>
+                        <div class="col-md-6">Login com
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
+                                <img src="assets/img/icon/microsoft.svg" alt="GOOGLE">
+                            </a>
+                            <a (click)="signInWithGoogle()" class="login100-social-item">
+                                <img src="assets/img/icon/google.svg" alt="GOOGLE">
+                            </a>
+                            <a (click)="signInWithFB()" disabled class="login100-social-item">
+                                <img src="assets/img/icon/facebook.svg" alt="GOOGLE">
+                            </a>
                         </div>
                     </div>
                     <div class="form-row form-group">
@@ -118,7 +121,7 @@
                     <div class="form-row form-group">
                         <div class="form-holder">
                             <label for="">
-                            Town / City *
+                                Town / City *
                             </label>
                             <input type="text" class="form-control">
                         </div>
@@ -148,7 +151,8 @@
 
                 <!-- SECTION 4 -->
                 <h4 id="wizard-h-3" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body" aria-hidden="true"   *ngIf="currentStep==3">
+                <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body" aria-hidden="true"
+                    *ngIf="currentStep==3">
                     <div class="checkbox-circle">
                         <label class="active">
                             <input type="radio" name="billing method" value="Direct bank transfer" checked="">Direct
@@ -162,7 +166,7 @@
                         </label>
                         <div class="col-md-3">
                             <a (click)="paymentType=0" class="payment-icon {{paymentType==0 ? 'active' : ''}}">
-                              <img src="assets/img/icon/referal-payment.png" class="img-thumbnail">
+                                <img src="assets/img/icon/referal-payment.png" class="img-thumbnail">
                             </a>
                         </div>
                         <div class="col-md-3">
@@ -171,7 +175,7 @@
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a (click)="paymentType=2"  class="payment-icon {{paymentType==2 ? 'active' : ''}}">
+                            <a (click)="paymentType=2" class="payment-icon {{paymentType==2 ? 'active' : ''}}">
                                 <img src="assets/img/icon/paypal.png" class="img-thumbnail">
                             </a>
                         </div>
@@ -180,13 +184,27 @@
                         <div class="card text-center refereal-payment" *ngIf="paymentType==0">
                             <img src="assets/img/icon/multicaixa_logo.png">
                             <br>
-                           <span>Entidade:</span>  <b>00997</b><br>
-                           <span>Referência: </span>  <b>961000000</b><br>
-                           <span>Montante: </span>  <b>KZ {{total}}</b><br>
+                            <span>Entidade:</span> <b>00997</b><br>
+                            <span>Referência: </span> <b>961000000</b><br>
+                            <span>Montante: </span> <b>KZ {{total}}</b><br>
 
 
- 
-<small>Pagamento disponível até 28/03/2020 às 18h22</small>
+
+                            <small>Pagamento disponível até 28/03/2020 às 18h22</small>
+                        </div>
+                        <div class="card text-center refereal-payment" *ngIf="paymentType==1">
+                            <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+                                <input type="text" formControlName="name" placeholder="Jane Doe">
+                                <ngx-stripe-card
+                                  [options]="cardOptions"
+                                  [elementsOptions]="elementsOptions"
+                                ></ngx-stripe-card>
+                                <button type="submit">
+                                  CREATE TOKEN
+                                </button>
+                              </form>
+
+                            <small>Pagamento disponível até 28/03/2020 às 18h22</small>
                         </div>
                     </div>
                 </section>
@@ -205,5 +223,4 @@
                 </ul>
             </div>
         </div>
-    </form>
 </div>

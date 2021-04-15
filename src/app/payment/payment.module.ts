@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectServiceComponent } from './select-service/select-service.component';
@@ -7,6 +8,8 @@ import { PaymentMethodComponent } from './payment-method/payment-method.componen
 import { ResumeNCommitComponent } from './resume-n-commit/resume-n-commit.component';
 import { PaymentComponent } from './payment/payment.component';
 
+// Import the library
+import { NgxStripeModule } from 'ngx-stripe';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { PaymentComponent } from './payment/payment.component';
     ResumeNCommitComponent,
     PaymentComponent],
   imports: [
-    CommonModule
+    CommonModule,
+
+    ReactiveFormsModule,
+    NgxStripeModule.forRoot('pk_test_51IeHexKPeIS2foQkTuM0F6H5Nej1bxE0NIQm48NzJTAk4kA8IaXqDl5Rr5a7FoTsA30HPvkHIgytwSvv048bNukN00kXvH0uva'),
   ],
   exports:[
     PaymentComponent
