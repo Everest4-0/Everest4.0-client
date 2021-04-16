@@ -1,3 +1,4 @@
+import { ChargeService } from './../../services/payemnt/charge.service';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
@@ -68,7 +69,10 @@ export class PaymentComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private stripeService: StripeService) { }
+  constructor(
+    private fb: FormBuilder,
+    private stripeService: StripeService,
+    private chargeService: ChargeService) { }
 
   ngOnInit(): void {
     this.stripeTest = this.fb.group({
