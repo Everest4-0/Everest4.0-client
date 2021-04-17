@@ -21,7 +21,7 @@
                         <h5 style="padding: 0;margin: 0; font-weight: 600;">
                             {{item.startDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM H:m" }}
                         </h5>
-                        <span>{{item.subject}} - {{item.done|json}}</span><br>
+                        <span>{{item.subject}}</span><br>
                         <span
                             class="label label-{{['default','success'][item.done ? 1 : 0]}}">{{['Pendente','Concluido'][item.done
                             ? 1 : 0 ]}}</span>

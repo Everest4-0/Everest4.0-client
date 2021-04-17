@@ -1,5 +1,9 @@
+import { AuthService } from './../../services/auth.service';
+import { Address } from './../../models/payment/address';
+import { Customer } from './../../models/payment/customer';
+import { Charge } from './../../models/payment/charge';
 import { ChargeService } from './../../services/payemnt/charge.service';
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
@@ -14,40 +18,18 @@ import * as $ from 'jquery'
 })
 export class PaymentComponent implements OnInit {
 
-  public services: Array<any> = [{
-    id: 'basic',
-    title: 'Pacote Basico',
-    price: 4000,
-    color: '#2dbcff'
-  }];
-  public payment = {
-    discount: 0,
-    quantity: 1,
-    currency: 'AOA',
-    customer: {
-      name: '',
-      address: {
-        line1: '',
-        city: '',
-        country: ''
-      },
 
-    },
-    services: [{
-      id: 'basic',
-      title: 'Pacote Basico',
-      price: 4000,
-      color: '#2dbcff'
-    }]
-  }
+  public payment: Charge = new Charge();
+
   public paymentType;
   public currentStep = 0
   public stepsLabels = ['Selecionar serviço', 'Configurar serviço', 'Seus dados', 'Metodo de Pagamento', 'Resumo']
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
-
   @ViewChild('f') form: NgForm;
-
+  @Input() serviceKey;
+  @Input() exclusice = false;
   @Output() close: EventEmitter<any> = new EventEmitter<any>()
+  @Output() done: EventEmitter<any> = new EventEmitter<any>()
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -66,15 +48,18 @@ export class PaymentComponent implements OnInit {
 
   stripeTest: FormGroup;
 
-
-
-
   constructor(
     private fb: FormBuilder,
+    private auth: AuthService,
     private stripeService: StripeService,
     private chargeService: ChargeService) { }
 
   ngOnInit(): void {
+    this.payment.services = [{
+      key: this.serviceKey
+    }]
+
+    this.payment.customer.user = this.auth.user;
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -84,18 +69,22 @@ export class PaymentComponent implements OnInit {
   }
 
   createToken(): void {
-    debugger
-    const name = this.stripeTest.get('name').value;
-    const address = this.stripeTest.get('address').value;
-    const city = this.stripeTest.get('city').value;
-    const country = this.stripeTest.get('country').value;
-    this.payment.customer.address = { line1: address, city: city, country }
+    this.payment.customer.name = this.stripeTest.get('name').value;
+
+    this.payment.customer.address.line1 = this.stripeTest.get('address').value;
+    this.payment.customer.address.city = this.stripeTest.get('city').value;
+    this.payment.customer.address.country = this.stripeTest.get('country').value;
+    this.payment.descriptions = 'Everest4.0 - serviço ' + this.payment.services[0].title
     this.stripeService
-      .createToken(this.card.element, { name })
+      .createToken(this.card.element, { name: this.payment.customer.name })
       .subscribe((result) => {
         if (result.token) {
-          // Use the token
-          console.log(result.token.id);
+          this.payment.customer.source = result.token
+          this.chargeService.create(this.payment).subscribe(payment => {
+            // tslint:disable-next-line:radix
+            this.done.emit({ payment: payment, quantity: parseInt(this.payment.quantity.toString()) })
+            this.currentStep = 4
+          })
         } else if (result.error) {
           // Error creating the token
           console.log(result.error.message);
@@ -104,7 +93,7 @@ export class PaymentComponent implements OnInit {
   }
 
   next() {
-    if (this.currentStep == 3) {
+    if (this.currentStep === 3) {
       this.form.ngSubmit.emit();
     } else {
 
@@ -123,11 +112,10 @@ export class PaymentComponent implements OnInit {
   }
 
   setValue($event, key) {
-    debugger
-    this.payment[key] = $event
+        this.payment[key] = $event
   }
-  closeMe() {
-    this.close.emit()
+  closeMe(f = false) {
+    this.close.emit(f)
   }
   get total() { return this.payment.services.reduce((y, x) => x.price + y, 0) * this.payment.quantity }
 }

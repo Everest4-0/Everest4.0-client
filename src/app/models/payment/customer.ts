@@ -13,6 +13,7 @@ export class Customer {
     charges: Array<Charge> = [];
     user: User = new User();
 
+    source: any;
     createdAt: Date;
     updatedAt: Date;
 

@@ -90,6 +90,6 @@
         </div>
     </div>
     <div class="col-md-4">
-        <app-shared-todo [role]="'crud'" [tasks]="subscription.todos" (updateList)="updateList($event)" *ngIf="subscription.todos"></app-shared-todo>
+        <app-shared-todo [role]="'crud'" [tasks]="subscription.todos" (updateList)="updateList($event)" *ngIf="subscription.todos.length>0"></app-shared-todo>
     </div>
 </div>

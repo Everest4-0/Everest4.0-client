@@ -37,13 +37,15 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+
     this.socket.on('connect', socket => {
       this.ids = { server: this.socket.id, client: this.message.to.apikey }
       this.startChat()
     });
 
     this.socket.on('chat-to-' + this.auth.user.id.split('-')[0], data => {
-      debugger
+      
       //let chat=this.chats.filter(x=>x.id==data.chatId)[0].messages.push(data)
       if (this.chat.id == data.chatId) {
         this.chat.messages.push(data);

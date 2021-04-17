@@ -1,7 +1,7 @@
 <div class="demo10">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6" *ngIf="service=='free'">
+            <div class="col-md-4 col-sm-6" *ngIf="service.key=='free'">
                 <div class="pricingTable10 free">
                     <div class="pricingTable-header">
                         <h3 class="heading">Grátis</h3>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6" *ngIf="service=='basic'">
+            <div class="col-md-4 col-sm-6" *ngIf="service.key=='basic'">
                 <div class="pricingTable10 basic">
                     <div class="pricingTable-header">
                         <h3 class="heading">Básico</h3>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6" *ngIf="service=='premium'">
+            <div class="col-md-4 col-sm-6" *ngIf="service.key=='premium'">
                 <div class="pricingTable10 premium">
                     <div class="pricingTable-header">
                         <h3 class="heading">PROFISSIONAL</h3>
@@ -60,7 +60,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6" *ngIf="service.key=='coaching'">
+                <div class="pricingTable10 coaching">
+                    <div class="pricingTable-header">
+                        <h3 class="heading">Coaching online e<br> Gestão de Careira</h3>
+                        <span class="price-value">
+                            <span class="currency">AKZ</span> 7.000
+                            <span class="month">/mês</span>
+                        </span>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li>Gestão de carreiras</li>
+                            <li>Coaching online</li>
+                            <li>Plano de desenvolvimento de competências</li>
+                            <li><br>-<br>-<br></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="!exclusice">
                 <ul>
                     <li><a (click)="set('free')" class="read free">Pacote Free</a></li>
                     <li><a (click)="set('basic')" class="read basic">Pacote Básico</a></li>

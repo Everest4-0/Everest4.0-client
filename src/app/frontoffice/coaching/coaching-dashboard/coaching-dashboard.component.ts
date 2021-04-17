@@ -1,3 +1,4 @@
+import { Charge } from './../../../models/payment/charge';
 import { User } from 'app/models/main/user';
 import { CoachingSubscriptionForm } from './../../../forms/coaching-subscription';
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -19,7 +20,6 @@ import { PartialGoal } from 'app/models/goal/partial-goal';
 import { Router } from "@angular/router"
 import { ActivatedRoute } from '@angular/router';
 import { ModalService } from 'app/components/modal';
-
 
 @Component({
   selector: 'app-coaching-dashboard',
@@ -68,11 +68,13 @@ export class CoachingDashboardComponent implements OnInit {
 
     this.auth.all({ '$filter': 'COACH' }).subscribe(users => this.coaches = users)
     this.coachingSubscriptionService.all({ userId: this.auth.user.id }).subscribe(subscriptions => {
-      
-      this.modalService.open('payment-subscription')
+
       this.subscriptions = subscriptions;
       if (subscriptions.length > 0) {
         this.subscription = subscriptions[0];
+        if (!this.subscription.isActive) {
+          this.modalService.open('coach-subscription')
+        }
       }
 
     })
@@ -164,16 +166,16 @@ export class CoachingDashboardComponent implements OnInit {
     this.modalService.close('coach-subscription')
   }
   saveSubcription() {
-    this.coachingSubscriptionService.create(this.subscription).subscribe(subscription => {
+    this.coachingSubscriptionService.update(this.subscription).subscribe(subscription => {
       this.subscription = subscription;
       this.discard()
     })
   }
-  selectCoach(coach){
-    this.subscription.coach=coach;
+  selectCoach(coach) {
+    this.subscription.coach = coach;
     this.coachingSubscriptionService.update(this.subscription).subscribe(subscription => {
       this.subscription = subscription;
-      this.router.navigate(['/me/coaching/board/'+ subscription.id])
+      this.router.navigate(['/me/coaching/board/' + subscription.id])
     })
   }
   accordion(that: any): void {
@@ -191,8 +193,19 @@ export class CoachingDashboardComponent implements OnInit {
 
   }
 
-  closePayment(){
+  closePayment() {
     this.modalService.close('payment-subscription')
+  }
+
+  paymentDone({payment, quantity}) {
+    debugger
+    this.subscription.payment = payment;
+    this.subscription.duration = this.coachingDurations.filter(d => d.months === quantity)[0] || this.coachingDurations[0];
+    this.coachingSubscriptionService.create(this.subscription).subscribe(subscription => {
+      this.subscription = subscription;
+      this.modalService.open('coach-subscription')
+    })
+
   }
 }
 

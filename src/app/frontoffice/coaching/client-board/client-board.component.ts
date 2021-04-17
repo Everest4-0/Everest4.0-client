@@ -32,7 +32,7 @@ export class ClientBoardComponent implements OnInit {
   goal = new Goal();
 
   public diagnosticDatas: any = {};
-  public evaluationDatas:Array<any> = []; 
+  public evaluationDatas: Array<any> = [];
   public weakness = [];
   public strengths = []
 
@@ -114,7 +114,7 @@ export class ClientBoardComponent implements OnInit {
 
 
   feedbackListUpdate(feedbacks: Array<Feedback>) {
-    
+
     this.evaluationDatas = []
     let items = feedbacks[0].points.map(point => point.item)
     items.forEach((item, i) => {
@@ -136,6 +136,7 @@ export class ClientBoardComponent implements OnInit {
       return rv;
     }, {});
   }
+
   setResults(e) {
 
     let u = this.results;
@@ -143,7 +144,9 @@ export class ClientBoardComponent implements OnInit {
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
   }
 
+  updateList($todo) {
 
+  }
 
   accordion(that: any): void {
 

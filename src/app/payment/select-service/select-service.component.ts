@@ -7,41 +7,44 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SelectServiceComponent implements OnInit {
 
-  @Input() service;
+  @Input() service: any = { key: '' };
+  @Input() exclusice = false;
 
   @Output() setService: EventEmitter<any> = new EventEmitter<any>()
+
   public services = [
     {
-      id: 'free',
+      key: 'free',
       title: 'Pacote Free',
       price: 0,
-      color:'#4d4d4d'
+      color: '#4d4d4d'
     }, {
-      id: 'basic',
+      key: 'basic',
       title: 'Pacote Basico',
       price: 4000,
-      color:'#2dbcff'
+      color: '#2dbcff'
     }, {
-      id: 'premium',
+      key: 'premium',
       title: 'Pacote Profissinal',
       price: 34000,
-      color:'#eba102'
+      color: '#eba102'
     }, {
-      id: 'coaching',
+      key: 'coaching',
       title: 'Coaching online',
       price: 7000,
-      color:'#02ebb1'
+      color: '#02ebb1'
     }
   ]
   constructor() { }
 
   ngOnInit(): void {
+    this.set(this.service.key);
   }
 
   set(j) {
     debugger
-    this.service = j;
-    this.setService.emit(this.services.filter(i => i.id == j)[0])
+    this.service = this.services.filter(i => i.key == j)[0]
+    this.setService.emit(this.service)
   }
 
 }

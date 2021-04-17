@@ -1,3 +1,4 @@
+import { Charge } from './../payment/charge';
 import { ToDo } from './../goal/todo';
 import { Enrollment } from './../course/enrollment';
 import { Note } from './note';
@@ -23,6 +24,7 @@ export class CoachingSubscription {
     enrollment: Enrollment = new Enrollment();
     chat: Chat = new Chat()
 
+    payment: Charge = new Charge();
     todos: Array<ToDo> = [];
     constructor() {
     }

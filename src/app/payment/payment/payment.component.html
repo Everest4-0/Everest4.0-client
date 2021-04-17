@@ -1,486 +1,507 @@
 <div class="row" style="background: url(assets/img/wp/everest.jpg)">
     <div class="row" style="background-color:rgba(255,255,255,.5)">
-    <div class="col-md-6">
-        {{payment|json}}
-    </div>
-    <div class="col-md-6">
-        <div id="wizard" role="application" class="wizard clearfix">
-            <span class="step-title">{{stepsLabels[currentStep]}} </span>
-            <div class="steps clearfix">
-                <ul role="tablist" class="">
-                    <li role="tab" aria-disabled="false"
-                        class="last {{currentStep>=i ? 'checked' : ''}} {{currentStep==i ? 'current' : ''}}"
-                        *ngFor="let item of stepsLabels; let i = index">
-                        <a id="wizard-t-{{i}}" href="#wizard-h-{{i}}" aria-controls="wizard-p-{{i}}">
-                            <span class="number">{{i+1}}.</span> </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="content clearfix">
-                <!-- SECTION 0 -->
-                <h4 id="wizard-h-0" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body" aria-hidden="true"
-                    *ngIf="currentStep==0">
-                    <app-select-service [service]="services[0].id" (setService)="setService($event)">
-                    </app-select-service>
-                </section>
+        <div class="col-md-6">
+            {{payment|json}}
+        </div>
+        <div class="col-md-6">
+            <div id="wizard" role="application" class="wizard clearfix">
+                <span class="step-title">{{stepsLabels[currentStep]}} </span>
+                <div class="steps clearfix">
+                    <ul role="tablist" class="">
+                        <li role="tab" aria-disabled="false"
+                            class="last {{currentStep>=i ? 'checked' : ''}} {{currentStep==i ? 'current' : ''}}"
+                            *ngFor="let item of stepsLabels; let i = index">
+                            <a id="wizard-t-{{i}}" href="#wizard-h-{{i}}" aria-controls="wizard-p-{{i}}">
+                                <span class="number">{{i+1}}.</span> </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content clearfix">
+                    <!-- SECTION 0 -->
+                    <h4 id="wizard-h-0" tabindex="-1" class="title"></h4>
+                    <section id="wizard-p-0" role="tabpanel" aria-labelledby="wizard-h-0" class="body"
+                        aria-hidden="true" *ngIf="currentStep==0">
+                        <app-select-service [service]="payment.services[0]" [exclusice]="exclusice" *ngIf="payment.services.length>0"
+                            (setService)="setService($event)">
+                        </app-select-service>
+                    </section>
 
-                <!-- SECTION 3 -->
-                <h4 id="wizard-h-1" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body" aria-hidden="true"
-                    *ngIf="currentStep==1">
-                    <div class="product">
-                        <div class="item" *ngFor="let item of payment.services">
-                            <div class="left">
-                                <a href="#" class="thumb" style="background-color: {{item.color}};">
-                                    <img src="images/item-1.png" alt="">
-                                    <h1 style="color: #FFF;"><b>{{item.id.charAt(0).toUpperCase()}}</b></h1>
-                                </a>
-                                <div class="purchase">
-                                    <h4>
-                                        {{item.title}}
-                                    </h4>
-                                    <span>{{item.price.toFixed(2)}}</span>
-                                    <h3><input type="number" min=1 max=12 step=1 value={{payment.quantity}} style="width: 60px;font-weight: 400;
+                    <!-- SECTION 3 -->
+                    <h4 id="wizard-h-1" tabindex="-1" class="title"></h4>
+                    <section id="wizard-p-1" role="tabpanel" aria-labelledby="wizard-h-1" class="body"
+                        aria-hidden="true" *ngIf="currentStep==1">
+
+                        <div class="product">
+                            <div class="item" *ngFor="let item of payment.services">
+                                <div class="left">
+                                    <a href="#" class="thumb" style="background-color: {{item.color}};">
+                                        <img src="images/item-1.png" alt="">
+                                        <h1 style="color: #FFF;"><b>{{item.key.charAt(0).toUpperCase()}}</b></h1>
+                                    </a>
+                                    <div class="purchase">
+                                        <h4>
+                                            {{item.title}}
+                                        </h4>
+                                        <span>{{item.price.toFixed(2)}}</span>
+                                        <h3><input type="number" min=1 max=12 step=1 value={{payment.quantity}} style="width: 60px;font-weight: 400;
                                         border: none;
                                         font-size: 23px;
-                                        text-align: center;" (change)="setValue($event.currentTarget.value,'quantity')"> Meses</h3> 
+                                        text-align: center;"
+                                                (change)="setValue($event.currentTarget.value,'quantity')"> Meses</h3>
                                         <small>Disconto(0%): 0.0</small>
+                                    </div>
+                                </div>
+                                <span class="price">{{payment.currency}}
+                                    {{(item.price*payment.quantity).toFixed(2)}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="checkout text-right">
+                            <div class="subtotal">
+                                <span class="heading">Subtotal</span>
+                                <span>{{payment.currency}} {{(total).toFixed(2)}}</span>
+                            </div>
+                            <div class="subtotal">
+                                <span class="heading">IVA</span>
+                                <span>{{payment.currency}} 0.0</span>
+                                <small>* (M00) - Regime transitório </small>
+                            </div>
+                            <div class="total">
+                                <h3 class="total-price">{{payment.currency}} {{(total).toFixed(2)}}</h3>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 1 -->
+                    <h4 id="wizard-h-2" tabindex="-1" class="title current"></h4>
+                    <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body current"
+                        aria-hidden="false" *ngIf="currentStep==2">
+                        <h3 class="total-price text-right" style="border-bottom: solid 1px #EEE;">{{payment.currency}}
+                            {{(total).toFixed(2)}}</h3>
+                        <div class="form-row form-group">
+                            <div class="col-md-6">Login com
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
+                                    <img src="assets/img/icon/microsoft.svg" alt="GOOGLE">
+                                </a>
+                                <a (click)="signInWithGoogle()" class="login100-social-item">
+                                    <img src="assets/img/icon/google.svg" alt="GOOGLE">
+                                </a>
+                                <a (click)="signInWithFB()" disabled class="login100-social-item">
+                                    <img src="assets/img/icon/facebook.svg" alt="GOOGLE">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <label for="">
+                                    First Name *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-holder">
+                                <label for="">
+                                    Last Name *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="">
+                                Country *
+                            </label>
+                            <div class="form-holder">
+                                <select name="" id="" class="form-control">
+                                    <option value="viet nam" class="option">Viet Nam</option>
+                                    <option value="united states" class="option">United States</option>
+                                    <option value="united kingdom" class="option">United Kingdom</option>
+                                </select>
+                                <i class="zmdi zmdi-caret-down"></i>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="">
+                                Address *
+                            </label>
+                            <input type="text" class="form-control" placeholder="Street address"
+                                style="margin-bottom: 20px">
+                            <input type="text" class="form-control"
+                                placeholder="Apartment, suite, unit etc. (optional)">
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <label for="">
+                                    Town / City *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-holder">
+                                <label for="">
+                                    Postcode / Zip *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="form-holder">
+                                <label for="">
+                                    Phone *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-holder">
+                                <label for="">
+                                    Email Address *
+                                </label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- SECTION 4 -->
+                    <h4 id="wizard-h-3" tabindex="-1" class="title"></h4>
+                    <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body"
+                        aria-hidden="true" *ngIf="currentStep==3">
+                        <h3 class="total-price text-right" style="border-bottom: solid 1px #EEE;">{{payment.currency}}
+                            {{(total).toFixed(2)}}</h3>
+                        <div class="checkbox-circle">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <button type="button"
+                                        class="btn btn-primary border-none payment-icon {{paymentType==0 ? 'active' : ''}}"
+                                        (click)="paymentType=0">
+                                        <img src="assets/img/icon/referal-payment.png" class="img-thumbnail"
+                                            style="height:40px">
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-primary border-none payment-icon {{paymentType==1 ? 'active' : ''}}"
+                                        (click)="paymentType=1">
+                                        <img src="assets/img/icon/credit-payment.png" class="img-thumbnail"
+                                            style="height:40px">
+                                    </button>
+                                    <button type="button"
+                                        class="btn btn-primary border-none payment-icon {{paymentType==2 ? 'active' : ''}}"
+                                        (click)="paymentType=2">
+                                        <img src="assets/img/icon/paypal.png" class="img-thumbnail" style="height:40px">
+                                    </button>
                                 </div>
                             </div>
-                            <span class="price">{{payment.currency}} {{(item.price*payment.quantity).toFixed(2)}}</span>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="checkout text-right">
-                        <div class="subtotal">
-                            <span class="heading">Subtotal</span>
-                            <span>{{payment.currency}} {{(total*payment.quantity).toFixed(2)}}</span>
-                        </div>
-                        <div class="subtotal">
-                            <span class="heading">IVA</span>
-                            <span>{{payment.currency}} 0.0</span>
-                            <small>* (M00) - Regime transitório </small>
-                        </div>
-                        <div class="total">
-                            <h3 class="total-price">{{payment.currency}} {{(total).toFixed(2)}}</h3>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- SECTION 1 -->
-                <h4 id="wizard-h-2" tabindex="-1" class="title current"></h4>
-                <section id="wizard-p-2" role="tabpanel" aria-labelledby="wizard-h-2" class="body current"
-                    aria-hidden="false" *ngIf="currentStep==2">
-                    <h3 class="total-price text-right" style="border-bottom: solid 1px #EEE;">{{payment.currency}} {{(total).toFixed(2)}}</h3>
-                    <div class="form-row form-group">
-                        <div class="col-md-6">Login com
                         </div>
-                        <div class="col-md-6">
-                            <a href="#" (click)="signInWithMicrosoft()" class="login100-social-item">
-                                <img src="assets/img/icon/microsoft.svg" alt="GOOGLE">
-                            </a>
-                            <a (click)="signInWithGoogle()" class="login100-social-item">
-                                <img src="assets/img/icon/google.svg" alt="GOOGLE">
-                            </a>
-                            <a (click)="signInWithFB()" disabled class="login100-social-item">
-                                <img src="assets/img/icon/facebook.svg" alt="GOOGLE">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="form-row form-group">
-                        <div class="form-holder">
-                            <label for="">
-                                First Name *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-holder">
-                            <label for="">
-                                Last Name *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label for="">
-                            Country *
-                        </label>
-                        <div class="form-holder">
-                            <select name="" id="" class="form-control">
-                                <option value="viet nam" class="option">Viet Nam</option>
-                                <option value="united states" class="option">United States</option>
-                                <option value="united kingdom" class="option">United Kingdom</option>
-                            </select>
-                            <i class="zmdi zmdi-caret-down"></i>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <label for="">
-                            Address *
-                        </label>
-                        <input type="text" class="form-control" placeholder="Street address"
-                            style="margin-bottom: 20px">
-                        <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
-                    </div>
-                    <div class="form-row form-group">
-                        <div class="form-holder">
-                            <label for="">
-                                Town / City *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-holder">
-                            <label for="">
-                                Postcode / Zip *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row form-group">
-                        <div class="form-holder">
-                            <label for="">
-                                Phone *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-holder">
-                            <label for="">
-                                Email Address *
-                            </label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </section>
-
-
-                <!-- SECTION 4 -->
-                <h4 id="wizard-h-3" tabindex="-1" class="title"></h4>
-                <section id="wizard-p-3" role="tabpanel" aria-labelledby="wizard-h-3" class="body" aria-hidden="true"
-                    *ngIf="currentStep==3">
-                    <h3 class="total-price text-right" style="border-bottom: solid 1px #EEE;">{{payment.currency}} {{(total).toFixed(2)}}</h3>
-                    <div class="checkbox-circle">
                         <div class="col-md-12">
-                            <div class="btn-group">
-                                <button type="button"
-                                    class="btn btn-primary border-none payment-icon {{paymentType==0 ? 'active' : ''}}"
-                                    (click)="paymentType=0">
-                                    <img src="assets/img/icon/referal-payment.png" class="img-thumbnail"
-                                        style="height:40px">
-                                </button>
-                                <button type="button"
-                                    class="btn btn-primary border-none payment-icon {{paymentType==1 ? 'active' : ''}}"
-                                    (click)="paymentType=1">
-                                    <img src="assets/img/icon/credit-payment.png" class="img-thumbnail"
-                                        style="height:40px">
-                                </button>
-                                <button type="button"
-                                    class="btn btn-primary border-none payment-icon {{paymentType==2 ? 'active' : ''}}"
-                                    (click)="paymentType=2">
-                                    <img src="assets/img/icon/paypal.png" class="img-thumbnail" style="height:40px">
-                                </button>
+                            <div class="card text-center refereal-payment" *ngIf="paymentType==0">
+                                <img src="assets/img/icon/multicaixa_logo.png">
+                                <br>
+                                <span>Entidade:</span> <b>00997</b><br>
+                                <span>Referência: </span> <b>961000000</b><br>
+                                <span>Montante: </span> <b>KZ {{total}}</b><br>
+
+
+
+                                <small>Pagamento disponível até 28/03/2020 às 18h22</small>
+                            </div>
+                            <div class="card refereal-payment" *ngIf="paymentType==1">
+                                <form #f="ngForm" novalidate (ngSubmit)="createToken()" id="form" style="width: 100%;"
+                                    [formGroup]="stripeTest">
+                                    <div class="form-group">
+                                        <label for="pwd">Nome completo</label>
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Cartão</label>
+                                        <ngx-stripe-card [containerClass]="'form-control'" [options]="cardOptions"
+                                            [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pwd">Endereço</label>
+                                        <input type="text" class="form-control" formControlName="address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Cidade</label>
+                                        <input type="text" class="form-control" formControlName="city">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Pais</label>
+                                        <select class="form-control country-select" formControlName="country">
+                                            <option>Afghanistan</option>
+                                            <option>Albania</option>
+                                            <option>Algeria</option>
+                                            <option>American Samoa</option>
+                                            <option>Andorra</option>
+                                            <option>Angola</option>
+                                            <option>Anguilla</option>
+                                            <option>Antarctica</option>
+                                            <option>Antigua and Barbuda</option>
+                                            <option>Argentina</option>
+                                            <option>Armenia</option>
+                                            <option>Aruba</option>
+                                            <option>Australia</option>
+                                            <option>Austria</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                            <option>Belarus</option>
+                                            <option>Belgium</option>
+                                            <option>Belize</option>
+                                            <option>Benin</option>
+                                            <option>Bermuda</option>
+                                            <option>Bhutan</option>
+                                            <option>Bolivia</option>
+                                            <option>Bonaire</option>
+                                            <option>Bosnia and Herzegovina</option>
+                                            <option>Botswana</option>
+                                            <option>Bouvet Island</option>
+                                            <option>Brazil</option>
+                                            <option>British Indian Ocean Territory</option>
+                                            <option>British Virgin Islands</option>
+                                            <option>Brunei</option>
+                                            <option>Bulgaria</option>
+                                            <option>Burkina Faso</option>
+                                            <option>Burundi</option>
+                                            <option>Cambodia</option>
+                                            <option>Cameroon</option>
+                                            <option>Canada</option>
+                                            <option>Cape Verde</option>
+                                            <option>Cayman Islands</option>
+                                            <option>Central African Republic</option>
+                                            <option>Chad</option>
+                                            <option>Chile</option>
+                                            <option>China</option>
+                                            <option>Christmas Island</option>
+                                            <option>Cocos (Keeling) Islands</option>
+                                            <option>Colombia</option>
+                                            <option>Comoros</option>
+                                            <option>Cook Islands</option>
+                                            <option>Costa Rica</option>
+                                            <option>Croatia</option>
+                                            <option>Cuba</option>
+                                            <option>Curacao</option>
+                                            <option>Cyprus</option>
+                                            <option>Czech Republic</option>
+                                            <option>Democratic Republic of the Congo</option>
+                                            <option>Denmark</option>
+                                            <option>Djibouti</option>
+                                            <option>Dominica</option>
+                                            <option>Dominican Republic</option>
+                                            <option>East Timor</option>
+                                            <option>Ecuador</option>
+                                            <option>Egypt</option>
+                                            <option>El Salvador</option>
+                                            <option>Equatorial Guinea</option>
+                                            <option>Eritrea</option>
+                                            <option>Estonia</option>
+                                            <option>Ethiopia</option>
+                                            <option>Falkland Islands</option>
+                                            <option>Faroe Islands</option>
+                                            <option>Fiji</option>
+                                            <option>Finland</option>
+                                            <option>France</option>
+                                            <option>French Guiana</option>
+                                            <option>French Polynesia</option>
+                                            <option>French Southern territories</option>
+                                            <option>Gabon</option>
+                                            <option>Gambia</option>
+                                            <option>Georgia</option>
+                                            <option>Germany</option>
+                                            <option>Ghana</option>
+                                            <option>Gibraltar</option>
+                                            <option>Greece</option>
+                                            <option>Greenland</option>
+                                            <option>Grenada</option>
+                                            <option>Guadeloupe</option>
+                                            <option>Guam</option>
+                                            <option>Guatemala</option>
+                                            <option>Guinea</option>
+                                            <option>Guinea-Bissau</option>
+                                            <option>Guyana</option>
+                                            <option>Haiti</option>
+                                            <option>Heard Island and McDonald Islands</option>
+                                            <option>Honduras</option>
+                                            <option>Hong Kong</option>
+                                            <option>Hungary</option>
+                                            <option>Iceland</option>
+                                            <option>India</option>
+                                            <option>Indonesia</option>
+                                            <option>Iran</option>
+                                            <option>Iraq</option>
+                                            <option>Ireland</option>
+                                            <option>Israel</option>
+                                            <option>Italy</option>
+                                            <option>Ivory Coast</option>
+                                            <option>Jamaica</option>
+                                            <option>Japan</option>
+                                            <option>Jordan</option>
+                                            <option>Kazakhstan</option>
+                                            <option>Kenya</option>
+                                            <option>Kiribati</option>
+                                            <option>Kuwait</option>
+                                            <option>Kyrgyzstan</option>
+                                            <option>Laos</option>
+                                            <option>Latvia</option>
+                                            <option>Lebanon</option>
+                                            <option>Lesotho</option>
+                                            <option>Liberia</option>
+                                            <option>Libya</option>
+                                            <option>Liechtenstein</option>
+                                            <option>Lithuania</option>
+                                            <option>Luxembourg</option>
+                                            <option>Macao</option>
+                                            <option>Macedonia</option>
+                                            <option>Madagascar</option>
+                                            <option>Malawi</option>
+                                            <option>Malaysia</option>
+                                            <option>Maldives</option>
+                                            <option>Mali</option>
+                                            <option>Malta</option>
+                                            <option>Marshall Islands</option>
+                                            <option>Martinique</option>
+                                            <option>Mauritania</option>
+                                            <option>Mauritius</option>
+                                            <option>Mayotte</option>
+                                            <option>Mexico</option>
+                                            <option>Micronesia</option>
+                                            <option>Moldova</option>
+                                            <option>Monaco</option>
+                                            <option>Mongolia</option>
+                                            <option>Montserrat</option>
+                                            <option>Morocco</option>
+                                            <option>Mozambique</option>
+                                            <option>Myanmar</option>
+                                            <option>Namibia</option>
+                                            <option>Nauru</option>
+                                            <option>Nepal</option>
+                                            <option>Netherlands</option>
+                                            <option>New Caledonia</option>
+                                            <option>New Zealand</option>
+                                            <option>Nicaragua</option>
+                                            <option>Niger</option>
+                                            <option>Nigeria</option>
+                                            <option>Niue</option>
+                                            <option>Norfolk Island</option>
+                                            <option>North Korea</option>
+                                            <option>Northern Mariana Islands</option>
+                                            <option>Norway</option>
+                                            <option>Oman</option>
+                                            <option>Pakistan</option>
+                                            <option>Palau</option>
+                                            <option>Palestine</option>
+                                            <option>Panama</option>
+                                            <option>Papua New Guinea</option>
+                                            <option>Paraguay</option>
+                                            <option>Peru</option>
+                                            <option>Philippines</option>
+                                            <option>Pitcairn Islands</option>
+                                            <option>Poland</option>
+                                            <option>Portugal</option>
+                                            <option>Puerto Rico</option>
+                                            <option>Qatar</option>
+                                            <option>Republic of the Congo</option>
+                                            <option>Réunion</option>
+                                            <option>Romania</option>
+                                            <option>Russia</option>
+                                            <option>Rwanda</option>
+                                            <option>Saint Helena</option>
+                                            <option>Saint Kitts and Nevis</option>
+                                            <option>Saint Lucia</option>
+                                            <option>Saint Pierre and Miquelon</option>
+                                            <option>Saint Vincent and the Grenadines</option>
+                                            <option>Samoa</option>
+                                            <option>San Marino</option>
+                                            <option>Sao Tome and Principe</option>
+                                            <option>Saudi Arabia</option>
+                                            <option>Senegal</option>
+                                            <option>Serbia</option>
+                                            <option>Seychelles</option>
+                                            <option>Sierra Leone</option>
+                                            <option>Singapore</option>
+                                            <option>Slovakia</option>
+                                            <option>Slovenia</option>
+                                            <option>Solomon Islands</option>
+                                            <option>Somalia</option>
+                                            <option>South Africa</option>
+                                            <option>South Georgia and the South Sandwich Islands</option>
+                                            <option>South Korea</option>
+                                            <option>Spain</option>
+                                            <option>Sri Lanka</option>
+                                            <option>Sudan</option>
+                                            <option>Suriname</option>
+                                            <option>Svalbard and Jan Mayen</option>
+                                            <option>Swaziland</option>
+                                            <option>Sweden</option>
+                                            <option>Switzerland</option>
+                                            <option>Syria</option>
+                                            <option>Taiwan</option>
+                                            <option>Tajikistan</option>
+                                            <option>Tanzania</option>
+                                            <option>Thailand</option>
+                                            <option>Togo</option>
+                                            <option>Tokelau</option>
+                                            <option>Tonga</option>
+                                            <option>Trinidad and Tobago</option>
+                                            <option>Tunisia</option>
+                                            <option>Turkey</option>
+                                            <option>Turkmenistan</option>
+                                            <option>Turks and Caicos Islands</option>
+                                            <option>Tuvalu</option>
+                                            <option>U.S. Virgin Islands</option>
+                                            <option>Uganda</option>
+                                            <option>Ukraine</option>
+                                            <option>United Arab Emirates</option>
+                                            <option>United Kingdom</option>
+                                            <option>United States</option>
+                                            <option>Uruguay</option>
+                                            <option>Uzbekistan</option>
+                                            <option>Vanuatu</option>
+                                            <option>Vatican City</option>
+                                            <option>Venezuela</option>
+                                            <option>Vietnam</option>
+                                            <option>Wallis and Futuna</option>
+                                            <option>Western Sahara</option>
+                                            <option>Yemen</option>
+                                            <option>Zambia</option>
+                                            <option>Zimbabwe</option>
+                                        </select>
+                                    </div>
+                                    <input type="submit" id="form" class="hidden" />
+                                </form>
                             </div>
                         </div>
+                    </section>
 
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card text-center refereal-payment" *ngIf="paymentType==0">
-                            <img src="assets/img/icon/multicaixa_logo.png">
+                    <h4 id="wizard-h-4" tabindex="-1" class="title"></h4>
+                    <section id="wizard-p-4" role="tabpanel" aria-labelledby="wizard-h-4" class="body"
+                        aria-hidden="true" *ngIf="currentStep==4">
+                        <div class="col-md-12 text-center" style="padding:16%;">
+                            <i class="fa fa-check" style="font-size: 78px;"></i>
                             <br>
-                            <span>Entidade:</span> <b>00997</b><br>
-                            <span>Referência: </span> <b>961000000</b><br>
-                            <span>Montante: </span> <b>KZ {{total}}</b><br>
-
-
-
-                            <small>Pagamento disponível até 28/03/2020 às 18h22</small>
+                            <br>
+                            <h2>Pagamento feito com successo</h2>
+                            <br>
+                            <br>
+                            <a (click)="closeMe(true)" class="btn btn-success">Fechar</a>
                         </div>
-                        <div class="card refereal-payment" *ngIf="paymentType==1">
-                            <form #f="ngForm" novalidate (ngSubmit)="createToken()" id="form" style="width: 100%;"
-                                [formGroup]="stripeTest">
-                                <div class="form-group">
-                                    <label for="pwd">Nome completo</label>
-                                    <input type="text" class="form-control" formControlName="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="pwd">Cartão</label>
-                                    <ngx-stripe-card [containerClass]="'form-control'" [options]="cardOptions"
-                                        [elementsOptions]="elementsOptions"></ngx-stripe-card>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="pwd">Endereço</label>
-                                    <input type="text" class="form-control" formControlName="address">
-                                </div>
-                                <div class="form-group">
-                                    <label for="pwd">Cidade</label>
-                                    <input type="text" class="form-control" formControlName="city">
-                                </div>
-                                <div class="form-group">
-                                    <label for="pwd">Pais</label>
-                                    <select class="form-control country-select"  formControlName="country">
-                                        <option>Afghanistan</option>
-                                        <option>Albania</option>
-                                        <option>Algeria</option>
-                                        <option>American Samoa</option>
-                                        <option>Andorra</option>
-                                        <option>Angola</option>
-                                        <option>Anguilla</option>
-                                        <option>Antarctica</option>
-                                        <option>Antigua and Barbuda</option>
-                                        <option>Argentina</option>
-                                        <option>Armenia</option>
-                                        <option>Aruba</option>
-                                        <option>Australia</option>
-                                        <option>Austria</option>
-                                        <option>Azerbaijan</option>
-                                        <option>Bahamas</option>
-                                        <option>Bahrain</option>
-                                        <option>Bangladesh</option>
-                                        <option>Barbados</option>
-                                        <option>Belarus</option>
-                                        <option>Belgium</option>
-                                        <option>Belize</option>
-                                        <option>Benin</option>
-                                        <option>Bermuda</option>
-                                        <option>Bhutan</option>
-                                        <option>Bolivia</option>
-                                        <option>Bonaire</option>
-                                        <option>Bosnia and Herzegovina</option>
-                                        <option>Botswana</option>
-                                        <option>Bouvet Island</option>
-                                        <option>Brazil</option>
-                                        <option>British Indian Ocean Territory</option>
-                                        <option>British Virgin Islands</option>
-                                        <option>Brunei</option>
-                                        <option>Bulgaria</option>
-                                        <option>Burkina Faso</option>
-                                        <option>Burundi</option>
-                                        <option>Cambodia</option>
-                                        <option>Cameroon</option>
-                                        <option>Canada</option>
-                                        <option>Cape Verde</option>
-                                        <option>Cayman Islands</option>
-                                        <option>Central African Republic</option>
-                                        <option>Chad</option>
-                                        <option>Chile</option>
-                                        <option>China</option>
-                                        <option>Christmas Island</option>
-                                        <option>Cocos (Keeling) Islands</option>
-                                        <option>Colombia</option>
-                                        <option>Comoros</option>
-                                        <option>Cook Islands</option>
-                                        <option>Costa Rica</option>
-                                        <option>Croatia</option>
-                                        <option>Cuba</option>
-                                        <option>Curacao</option>
-                                        <option>Cyprus</option>
-                                        <option>Czech Republic</option>
-                                        <option>Democratic Republic of the Congo</option>
-                                        <option>Denmark</option>
-                                        <option>Djibouti</option>
-                                        <option>Dominica</option>
-                                        <option>Dominican Republic</option>
-                                        <option>East Timor</option>
-                                        <option>Ecuador</option>
-                                        <option>Egypt</option>
-                                        <option>El Salvador</option>
-                                        <option>Equatorial Guinea</option>
-                                        <option>Eritrea</option>
-                                        <option>Estonia</option>
-                                        <option>Ethiopia</option>
-                                        <option>Falkland Islands</option>
-                                        <option>Faroe Islands</option>
-                                        <option>Fiji</option>
-                                        <option>Finland</option>
-                                        <option>France</option>
-                                        <option>French Guiana</option>
-                                        <option>French Polynesia</option>
-                                        <option>French Southern territories</option>
-                                        <option>Gabon</option>
-                                        <option>Gambia</option>
-                                        <option>Georgia</option>
-                                        <option>Germany</option>
-                                        <option>Ghana</option>
-                                        <option>Gibraltar</option>
-                                        <option>Greece</option>
-                                        <option>Greenland</option>
-                                        <option>Grenada</option>
-                                        <option>Guadeloupe</option>
-                                        <option>Guam</option>
-                                        <option>Guatemala</option>
-                                        <option>Guinea</option>
-                                        <option>Guinea-Bissau</option>
-                                        <option>Guyana</option>
-                                        <option>Haiti</option>
-                                        <option>Heard Island and McDonald Islands</option>
-                                        <option>Honduras</option>
-                                        <option>Hong Kong</option>
-                                        <option>Hungary</option>
-                                        <option>Iceland</option>
-                                        <option>India</option>
-                                        <option>Indonesia</option>
-                                        <option>Iran</option>
-                                        <option>Iraq</option>
-                                        <option>Ireland</option>
-                                        <option>Israel</option>
-                                        <option>Italy</option>
-                                        <option>Ivory Coast</option>
-                                        <option>Jamaica</option>
-                                        <option>Japan</option>
-                                        <option>Jordan</option>
-                                        <option>Kazakhstan</option>
-                                        <option>Kenya</option>
-                                        <option>Kiribati</option>
-                                        <option>Kuwait</option>
-                                        <option>Kyrgyzstan</option>
-                                        <option>Laos</option>
-                                        <option>Latvia</option>
-                                        <option>Lebanon</option>
-                                        <option>Lesotho</option>
-                                        <option>Liberia</option>
-                                        <option>Libya</option>
-                                        <option>Liechtenstein</option>
-                                        <option>Lithuania</option>
-                                        <option>Luxembourg</option>
-                                        <option>Macao</option>
-                                        <option>Macedonia</option>
-                                        <option>Madagascar</option>
-                                        <option>Malawi</option>
-                                        <option>Malaysia</option>
-                                        <option>Maldives</option>
-                                        <option>Mali</option>
-                                        <option>Malta</option>
-                                        <option>Marshall Islands</option>
-                                        <option>Martinique</option>
-                                        <option>Mauritania</option>
-                                        <option>Mauritius</option>
-                                        <option>Mayotte</option>
-                                        <option>Mexico</option>
-                                        <option>Micronesia</option>
-                                        <option>Moldova</option>
-                                        <option>Monaco</option>
-                                        <option>Mongolia</option>
-                                        <option>Montserrat</option>
-                                        <option>Morocco</option>
-                                        <option>Mozambique</option>
-                                        <option>Myanmar</option>
-                                        <option>Namibia</option>
-                                        <option>Nauru</option>
-                                        <option>Nepal</option>
-                                        <option>Netherlands</option>
-                                        <option>New Caledonia</option>
-                                        <option>New Zealand</option>
-                                        <option>Nicaragua</option>
-                                        <option>Niger</option>
-                                        <option>Nigeria</option>
-                                        <option>Niue</option>
-                                        <option>Norfolk Island</option>
-                                        <option>North Korea</option>
-                                        <option>Northern Mariana Islands</option>
-                                        <option>Norway</option>
-                                        <option>Oman</option>
-                                        <option>Pakistan</option>
-                                        <option>Palau</option>
-                                        <option>Palestine</option>
-                                        <option>Panama</option>
-                                        <option>Papua New Guinea</option>
-                                        <option>Paraguay</option>
-                                        <option>Peru</option>
-                                        <option>Philippines</option>
-                                        <option>Pitcairn Islands</option>
-                                        <option>Poland</option>
-                                        <option>Portugal</option>
-                                        <option>Puerto Rico</option>
-                                        <option>Qatar</option>
-                                        <option>Republic of the Congo</option>
-                                        <option>Réunion</option>
-                                        <option>Romania</option>
-                                        <option>Russia</option>
-                                        <option>Rwanda</option>
-                                        <option>Saint Helena</option>
-                                        <option>Saint Kitts and Nevis</option>
-                                        <option>Saint Lucia</option>
-                                        <option>Saint Pierre and Miquelon</option>
-                                        <option>Saint Vincent and the Grenadines</option>
-                                        <option>Samoa</option>
-                                        <option>San Marino</option>
-                                        <option>Sao Tome and Principe</option>
-                                        <option>Saudi Arabia</option>
-                                        <option>Senegal</option>
-                                        <option>Serbia</option>
-                                        <option>Seychelles</option>
-                                        <option>Sierra Leone</option>
-                                        <option>Singapore</option>
-                                        <option>Slovakia</option>
-                                        <option>Slovenia</option>
-                                        <option>Solomon Islands</option>
-                                        <option>Somalia</option>
-                                        <option>South Africa</option>
-                                        <option>South Georgia and the South Sandwich Islands</option>
-                                        <option>South Korea</option>
-                                        <option>Spain</option>
-                                        <option>Sri Lanka</option>
-                                        <option>Sudan</option>
-                                        <option>Suriname</option>
-                                        <option>Svalbard and Jan Mayen</option>
-                                        <option>Swaziland</option>
-                                        <option>Sweden</option>
-                                        <option>Switzerland</option>
-                                        <option>Syria</option>
-                                        <option>Taiwan</option>
-                                        <option>Tajikistan</option>
-                                        <option>Tanzania</option>
-                                        <option>Thailand</option>
-                                        <option>Togo</option>
-                                        <option>Tokelau</option>
-                                        <option>Tonga</option>
-                                        <option>Trinidad and Tobago</option>
-                                        <option>Tunisia</option>
-                                        <option>Turkey</option>
-                                        <option>Turkmenistan</option>
-                                        <option>Turks and Caicos Islands</option>
-                                        <option>Tuvalu</option>
-                                        <option>U.S. Virgin Islands</option>
-                                        <option>Uganda</option>
-                                        <option>Ukraine</option>
-                                        <option>United Arab Emirates</option>
-                                        <option>United Kingdom</option>
-                                        <option>United States</option>
-                                        <option>Uruguay</option>
-                                        <option>Uzbekistan</option>
-                                        <option>Vanuatu</option>
-                                        <option>Vatican City</option>
-                                        <option>Venezuela</option>
-                                        <option>Vietnam</option>
-                                        <option>Wallis and Futuna</option>
-                                        <option>Western Sahara</option>
-                                        <option>Yemen</option>
-                                        <option>Zambia</option>
-                                        <option>Zimbabwe</option>
-                                    </select>
-                                </div>
-                                <input type="submit" id="form" class="hidden"/>
-                            </form>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="actions clearfix">
-                <ul role="menu" aria-label="Pagination">
-                    <li class="{{currentStep==0 ? 'disabled' : ''}}" aria-disabled="true">
-                        <a (click)="prev()" role="menuitem">Voltar </a>
-                    </li>
-                    <li class="{{currentStep==4 ? 'disabled' : ''}}" *ngIf="currentStep<4" aria-hidden="false">
-                        <a (click)="next()" role="menuitem">Proximo </a>
-                    </li>
-                    <li aria-hidden="true" *ngIf="currentStep==4">
-                        <a href="#finish" role="menuitem">Pagar e concluir</a>
-                    </li>
-                </ul>
-                <a (click)="closeMe()">Cancelar</a>
+                    </section>
+                </div>
+                <div class="actions clearfix" *ngIf="currentStep<4">
+                    <ul role="menu" aria-label="Pagination">
+                        <li class="{{currentStep==0 ? 'disabled' : ''}}" aria-disabled="true">
+                            <a (click)="prev()" role="menuitem">Voltar </a>
+                        </li>
+                        <li class="{{currentStep==4 ? 'disabled' : ''}}" *ngIf="currentStep<4" aria-hidden="false">
+                            <a (click)="next()" role="menuitem">Proximo </a>
+                        </li>
+                        <li aria-hidden="true" *ngIf="currentStep==4">
+                            <a href="#finish" role="menuitem">Pagar e concluir</a>
+                        </li>
+                    </ul>
+                    <a (click)="closeMe()">Cancelar</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

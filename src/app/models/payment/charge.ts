@@ -2,12 +2,15 @@ import { Customer } from './customer';
 
 export class Charge {
     id: string;
-    description: string;
+    descriptions: string;
     amount: number;
-    currency: string;
-    
+    currency: string = 'AOA';
+    discount: number = 0;
+    quantity: number = 1;
+    services: Array<any> = []
+
     customer: Customer = new Customer();
-    isActive: boolean=false;
+    isActive: boolean = false;
     createdAt: Date;
     updatedAt: Date;
 
