@@ -6,6 +6,10 @@
                 *ngIf="subscription.id && subscription.isActive && subscription.coach!=null">Portal do Profissional</a>
             <button class="btn btn-danger btn-fill" (click)='openSubscription()'
                 *ngIf="subscription.id===undefined">Subscrever serviço</button>
+            <button class="btn btn-primary btn-fill btn-lg" (click)='openPandingPayment()'
+                *ngIf="subscription.payment && !subscription.payment.isActive">
+                <i class="pe-7s-attention text-red"></i>
+                Serviço pendente</button>
         </div>
     </div>
 </div>
@@ -121,5 +125,23 @@
 
 <jw-modal id="payment-subscription" class="xx-lg" >
     <app-payment (close)="closePayment()" (done)="paymentDone($event)" [serviceKey]="'coaching'" [exclusice]="true"></app-payment>
+</jw-modal>
+<jw-modal id="panding-payment" class="md" >
+    <div class="card text-center refereal-payment"  style="padding:30px 16%;">
+
+        <h2>Faça o pagamento para a concluir a adesão ao serviço</h2>
+        <br>
+        <img src="assets/img/icon/multicaixa_logo.png">
+        <br>
+        <br>
+        <span>Entidade:</span> <b>{{subscription.payment.entity}}</b><br>
+        <span>Referência: </span> <b>{{subscription.payment.reference}}</b><br>
+        <span>Montante: </span> <b>KZ {{subscription.payment.amount}}</b><br>
+
+        <small>Pagamento disponível até {{subscription.payment.createdAt | amLocale:'pt'| amAdd: 24 : 'hours'| amParseZone | amDateFormat: "DD/MM/YYYY [ás] HH:mm" }}</small>
+
+        <br>
+        
+    </div>
 </jw-modal>
 

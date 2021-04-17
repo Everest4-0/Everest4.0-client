@@ -1,3 +1,4 @@
+import { MomentModule } from 'ngx-moment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,7 +23,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     PaymentComponent],
   imports: [
     CommonModule,
-
+    MomentModule,
     ReactiveFormsModule,
     NgxStripeModule.forRoot('pk_test_51IeHexKPeIS2foQkTuM0F6H5Nej1bxE0NIQm48NzJTAk4kA8IaXqDl5Rr5a7FoTsA30HPvkHIgytwSvv048bNukN00kXvH0uva'),
   ],

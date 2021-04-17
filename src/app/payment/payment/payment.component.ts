@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
 
   public payment: Charge = new Charge();
 
-  public paymentType;
+
   public currentStep = 0
   public stepsLabels = ['Selecionar serviço', 'Configurar serviço', 'Seus dados', 'Metodo de Pagamento', 'Resumo']
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
@@ -92,9 +92,19 @@ export class PaymentComponent implements OnInit {
       });
   }
 
+  createReferencepayment() {
+    this.chargeService.create(this.payment).subscribe(payment => {
+      this.done.emit({ payment: payment, quantity: parseInt(this.payment.quantity.toString()) })
+      this.currentStep = 4
+    })
+  }
   next() {
     if (this.currentStep === 3) {
-      this.form.ngSubmit.emit();
+      if (this.payment.type === 1) {
+        this.form.ngSubmit.emit();
+      } else if (this.payment.type === 0) {
+        this.createReferencepayment()
+      }
     } else {
 
       this.currentStep = this.currentStep === 4 ? 4 : this.currentStep + 1;
@@ -112,7 +122,7 @@ export class PaymentComponent implements OnInit {
   }
 
   setValue($event, key) {
-        this.payment[key] = $event
+    this.payment[key] = $event
   }
   closeMe(f = false) {
     this.close.emit(f)

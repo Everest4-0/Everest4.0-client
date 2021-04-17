@@ -170,20 +170,20 @@
                             <div class="col-md-12">
                                 <div class="btn-group">
                                     <button type="button"
-                                        class="btn btn-primary border-none payment-icon {{paymentType==0 ? 'active' : ''}}"
-                                        (click)="paymentType=0">
+                                        class="btn btn-primary border-none payment-icon {{payment.type==0 ? 'active' : ''}}"
+                                        (click)="payment.type=0">
                                         <img src="assets/img/icon/referal-payment.png" class="img-thumbnail"
                                             style="height:40px">
                                     </button>
                                     <button type="button"
-                                        class="btn btn-primary border-none payment-icon {{paymentType==1 ? 'active' : ''}}"
-                                        (click)="paymentType=1">
+                                        class="btn btn-primary border-none payment-icon {{payment.type==1 ? 'active' : ''}}"
+                                        (click)="payment.type=1">
                                         <img src="assets/img/icon/credit-payment.png" class="img-thumbnail"
                                             style="height:40px">
                                     </button>
                                     <button type="button"
-                                        class="btn btn-primary border-none payment-icon {{paymentType==2 ? 'active' : ''}}"
-                                        (click)="paymentType=2">
+                                        class="btn btn-primary border-none payment-icon {{payment.type==2 ? 'active' : ''}}"
+                                        (click)="payment.type=2">
                                         <img src="assets/img/icon/paypal.png" class="img-thumbnail" style="height:40px">
                                     </button>
                                 </div>
@@ -191,18 +191,18 @@
 
                         </div>
                         <div class="col-md-12">
-                            <div class="card text-center refereal-payment" *ngIf="paymentType==0">
+                            <div class="card text-center refereal-payment" style="padding:10%" *ngIf="payment.type==0">
+                                <h3>
+
+                                    Pagamento por referencia Bancária
+                                </h3>
+                                <br><br>
                                 <img src="assets/img/icon/multicaixa_logo.png">
-                                <br>
-                                <span>Entidade:</span> <b>00997</b><br>
-                                <span>Referência: </span> <b>961000000</b><br>
-                                <span>Montante: </span> <b>KZ {{total}}</b><br>
-
-
-
-                                <small>Pagamento disponível até 28/03/2020 às 18h22</small>
+                                <br><br>
+                                <h3>Clique em proximo para continuar </h3>
+                                
                             </div>
-                            <div class="card refereal-payment" *ngIf="paymentType==1">
+                            <div class="card refereal-payment" *ngIf="payment.type==1">
                                 <form #f="ngForm" novalidate (ngSubmit)="createToken()" id="form" style="width: 100%;"
                                     [formGroup]="stripeTest">
                                     <div class="form-group">
@@ -476,7 +476,7 @@
                     <h4 id="wizard-h-4" tabindex="-1" class="title"></h4>
                     <section id="wizard-p-4" role="tabpanel" aria-labelledby="wizard-h-4" class="body"
                         aria-hidden="true" *ngIf="currentStep==4">
-                        <div class="col-md-12 text-center" style="padding:16%;">
+                        <div class="col-md-12 text-center" style="padding:16%;" *ngIf="payment.type!=0">
                             <i class="fa fa-check" style="font-size: 78px;"></i>
                             <br>
                             <br>
@@ -485,6 +485,22 @@
                             <br>
                             <a (click)="closeMe(true)" class="btn btn-success">Fechar</a>
                         </div>
+                        <div class="card text-center refereal-payment" *ngIf="payment.type==0"  style="padding:16%;">
+
+                            <h2>Faça o pagamento para a concluir a adesão ao serviço</h2>
+                            <br>
+                            <img src="assets/img/icon/multicaixa_logo.png">
+                            <br>
+                            <span>Entidade:</span> <b>{{payment.entity}}</b><br>
+                            <span>Referência: </span> <b>{{payment.reference}}</b><br>
+                            <span>Montante: </span> <b>KZ {{total}}</b><br>
+
+                            <small>Pagamento disponível até {{payment.createdAt | amLocale:'pt'| amAdd: 24 : 'hours'| amParseZone | amDateFormat: "DD/MM/YYYY [ás] HH:mm" }}</small>
+
+                            <br>
+                            <a (click)="closeMe(true)" class="btn btn-success">Fechar</a>
+                        </div>
+
                     </section>
                 </div>
                 <div class="actions clearfix" *ngIf="currentStep<4">

@@ -9,6 +9,10 @@ export class Charge {
     quantity: number = 1;
     services: Array<any> = []
 
+    type: number;
+    reference: number;
+    entity: number;
+
     customer: Customer = new Customer();
     isActive: boolean = false;
     createdAt: Date;

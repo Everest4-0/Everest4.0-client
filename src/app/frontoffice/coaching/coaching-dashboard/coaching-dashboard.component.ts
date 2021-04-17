@@ -72,7 +72,7 @@ export class CoachingDashboardComponent implements OnInit {
       this.subscriptions = subscriptions;
       if (subscriptions.length > 0) {
         this.subscription = subscriptions[0];
-        if (!this.subscription.isActive) {
+        if (!this.subscription.isActive && this.subscription.payment.isActive) {
           this.modalService.open('coach-subscription')
         }
       }
@@ -196,14 +196,19 @@ export class CoachingDashboardComponent implements OnInit {
   closePayment() {
     this.modalService.close('payment-subscription')
   }
+  openPandingPayment(){
+    this.modalService.open('panding-payment')
+  }
 
-  paymentDone({payment, quantity}) {
+  paymentDone({ payment, quantity }) {
     debugger
     this.subscription.payment = payment;
     this.subscription.duration = this.coachingDurations.filter(d => d.months === quantity)[0] || this.coachingDurations[0];
     this.coachingSubscriptionService.create(this.subscription).subscribe(subscription => {
       this.subscription = subscription;
-      this.modalService.open('coach-subscription')
+      if (payment.isActive) {
+        this.modalService.open('coach-subscription')
+      }
     })
 
   }
