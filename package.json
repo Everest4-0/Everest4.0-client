@@ -1,6 +1,6 @@
 {
   "name": "lbd-free-angular-cli",
-  "version": "v1.6.1.3",
+  "version": "v1.6.1.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
