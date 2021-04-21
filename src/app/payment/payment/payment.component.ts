@@ -94,6 +94,8 @@ export class PaymentComponent implements OnInit {
 
   createReferencepayment() {
     this.chargeService.create(this.payment).subscribe(payment => {
+      debugger
+      // tslint:disable-next-line:radix
       this.done.emit({ payment: payment, quantity: parseInt(this.payment.quantity.toString()) })
       this.currentStep = 4
     })
@@ -124,6 +126,7 @@ export class PaymentComponent implements OnInit {
   setValue($event, key) {
     this.payment[key] = $event
   }
+  
   closeMe(f = false) {
     this.close.emit(f)
   }
