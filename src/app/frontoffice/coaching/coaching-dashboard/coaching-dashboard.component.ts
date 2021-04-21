@@ -196,7 +196,7 @@ export class CoachingDashboardComponent implements OnInit {
   closePayment() {
     this.modalService.close('payment-subscription')
   }
-  openPandingPayment(){
+  openPandingPayment() {
     this.modalService.open('panding-payment')
   }
 
@@ -205,7 +205,7 @@ export class CoachingDashboardComponent implements OnInit {
     this.subscription.payment = payment;
     this.subscription.duration = this.coachingDurations.filter(d => d.months === quantity)[0] || this.coachingDurations[0];
     this.coachingSubscriptionService.create(this.subscription).subscribe(subscription => {
-      this.subscription = subscription;
+      this.subscription = { ...this.subscription, ...subscription };
       if (payment.isActive) {
         this.modalService.open('coach-subscription')
       }
