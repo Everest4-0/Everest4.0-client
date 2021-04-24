@@ -205,7 +205,6 @@ export class ManagerBoardComponent implements OnInit {
   }
 
   updateList($event) {
-    debugger
     this.coachingSubscriptionService.update(this.subscription, { todoId: $event.id, add_todo: true }).subscribe(subscription => {
       this.toast.success('Agenda adiconado a subscrição actual', 'Sucesso', {
         timeOut: 5000,

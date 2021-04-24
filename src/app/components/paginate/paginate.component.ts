@@ -15,7 +15,6 @@ export class PaginateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    debugger
     this.paginate.total = this.items.length
     this.paginate.pages = Math.ceil(this.paginate.total / this.paginate.perPage)
   }
