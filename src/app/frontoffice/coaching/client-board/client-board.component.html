@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <img src="{{auth.serverAddress}}{{subscription.coach.photoUrl}}" class="img-thumbnail">
+                <img src="{{subscription.coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{subscription.coach.photoUrl}}" class="img-thumbnail">
             </div>
 
         </div>

@@ -20,7 +20,7 @@
             <div class="row">
                 <div *ngFor="let coach of coaches" class="col-md-2">
                     <div class="card text-center "
-                        style="background: url({{auth.serverAddress}}{{coach.photoUrl}}); background-size:cover; background-position: center;">
+                        style="background: url({{coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{coach.photoUrl}}); background-size:cover; background-position: center;">
                         <img src="/assets/img/faces/base.png" class="img-thumbnail" style="opacity: .0" />
 
                     </div><b>{{coach.datas.fullName}}</b><br>
@@ -126,7 +126,7 @@
 <jw-modal id="payment-subscription" class="xx-lg" >
     <app-payment (close)="closePayment()" (done)="paymentDone($event)" [serviceKey]="'premium'" [exclusice]="true"></app-payment>
 </jw-modal>
-<jw-modal id="panding-payment" class="md" *ngIf="subscription.payment.id" >
+<jw-modal id="panding-payment" class="md" *ngIf="subscription.payment.id && subscription.payment.isActive===false" >
     <div class="card text-center refereal-payment"  style="padding:30px 16%;">
 
         <h2>Faça o pagamento para a concluir a adesão ao serviço</h2>
@@ -136,7 +136,7 @@
         <br>
         <span>Entidade:</span> <b>{{subscription.payment.entity}}</b><br>
         <span>Referência: </span> <b>{{subscription.payment.reference}}</b><br>
-        <span>Montante: </span> <b>KZ {{subscription.payment.amount|currency:' ':'':'pt'}}</b><br>
+        <span>Montante: </span> <b>KZ {{subscription.payment.amount|currency:' ':''}}</b><br>
 
         <small>Pagamento disponível até {{subscription.payment.createdAt | amLocale:'pt'| amAdd: 24 : 'hours'| amParseZone | amDateFormat: "DD/MM/YYYY [ás] HH:mm" }}</small>
 
