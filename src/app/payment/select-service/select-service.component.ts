@@ -42,7 +42,6 @@ export class SelectServiceComponent implements OnInit {
   }
 
   set(j) {
-    debugger
     this.service = this.services.filter(i => i.key == j)[0]
     this.setService.emit(this.service)
   }

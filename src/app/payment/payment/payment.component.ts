@@ -70,7 +70,7 @@ export class PaymentComponent implements OnInit {
 
   createToken(): void {
     this.payment.customer.name = this.stripeTest.get('name').value;
-
+    debugger
     this.payment.customer.address.line1 = this.stripeTest.get('address').value;
     this.payment.customer.address.city = this.stripeTest.get('city').value;
     this.payment.customer.address.country = this.stripeTest.get('country').value;
@@ -94,7 +94,6 @@ export class PaymentComponent implements OnInit {
 
   createReferencepayment() {
     this.chargeService.create(this.payment).subscribe(payment => {
-      debugger
       // tslint:disable-next-line:radix
       this.done.emit({ payment: payment, quantity: parseInt(this.payment.quantity.toString()) })
       this.currentStep = 4
@@ -126,7 +125,7 @@ export class PaymentComponent implements OnInit {
   setValue($event, key) {
     this.payment[key] = $event
   }
-  
+
   closeMe(f = false) {
     this.close.emit(f)
   }
