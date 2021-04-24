@@ -31,7 +31,6 @@ export class DragAndDropDirective {
 
   // Drop listener
   @HostListener('drop', ['$event']) public ondrop(evt) {
-    debugger
     evt.preventDefault();
     evt.stopPropagation();
     this.fileOver = false;
