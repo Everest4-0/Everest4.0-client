@@ -114,7 +114,7 @@ FullCalendarModule.registerPlugins([
     PdfViewerModule,
     CoachingModule,
     //NgxPermissionsModule.forRoot(),
-
+    NgxPermissionsModule.forChild(),
     ComponentsModule,
     PaymentModule
   ],

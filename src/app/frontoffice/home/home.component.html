@@ -4,7 +4,7 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <lbd-chart [title]="'% Objectivos semanais'" *ngIf="dataLoaded" [subtitle]="''"
+                    <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'% Objectivos semanais'"
                         [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType"
                         [chartData]="emailChartDataSeries" [legendItems]="emailChartLegendItems" [withHr]="true"
                         [chartOptions]="chartOptions">
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <lbd-chart [title]="'Dashboard executivo'" *ngIf="dataLoaded" [subtitle]="''"
+                    <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'Dashboard executivo'"
                         [chartType]="activityChartType" [chartData]="activityChartData"
                         [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive"
                         [legendItems]="activityChartLegendItems" [withHr]="true">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="row">
-                <app-news-list></app-news-list>
+                <app-news></app-news>
             </div>
 
         </div>
@@ -29,12 +29,11 @@
                 <a [routerLink]="['/me/quizes']" class="btn btn-success">
                     Desafios
                 </a>
+                <ng-template [ngxPermissionsOnly]="['PRO', 'BASIC'] ">
+                    <a [routerLink]="['/me/vacant-n-jobs']" class="btn btn-info">
+                        <i class="pe-7s-speaker"></i> Vagas de emprego
+                    </a>
 
-                <a [routerLink]="['/me/vacant-n-jobs']" class="btn btn-info" [ngxPermissionsOnly]="['PRO', 'BASIC'] ">
-                    <i class="pe-7s-speaker"></i> Vagas de emprego
-                </a>
-
-                <ng-template>
                 </ng-template>
             </div>
             <app-task></app-task>
