@@ -91,7 +91,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
         authority: "https://login.microsoftonline.com/common/", // This is your tenant ID
-        redirectUri: 'http://everest.nova-vps.com:9000'// This is your redirect URI
+        redirectUri: 'https://application.qld.everest40.com/'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -111,6 +111,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       extraQueryParameters: {}
     })
     , NgxPermissionsModule.forRoot()
+    , NgxPermissionsModule.forChild()
   ],
   declarations: [
     FirstloginComponent,
