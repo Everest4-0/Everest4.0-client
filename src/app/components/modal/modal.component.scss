@@ -45,7 +45,11 @@ jw-modal {
                     padding: 5px;
                     position: relative;
                     z-index: 2;
-                    color: #fff;
+                    margin-bottom: 0px;
+                }
+                *{
+                color: #FFF !important;
+
                 }
                 img {
                     position: absolute;

@@ -17,10 +17,13 @@
                 <div class="row" *ngFor="let item of revenue; let i = index">
                     <div class="col-md-12">
                         <div class="col col-xs-6">
-                            <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-revenue-{{i}}"
+                            <button class="accordion btn btn-xs pe-7s-angle-down pull-left" title="panel-revenue-{{i}}"
                                 (click)="accordion($event.target)"></button>
-                            {{item.descriptions}}
-                            <span class="tin-text"></span>
+                            <div>
+                                <span class="tin-text">{{item.goal.objectives}}</span><br />
+                                {{item.descriptions}}
+                            </div>
+
                         </div>
                         <div class="col col-xs-3 text-right">
                             {{item.revenue}} kzs<br>
@@ -28,7 +31,8 @@
                         </div>
                         <div class="col col-xs-2">
                             <span
-                                class="label label-{{['success','danger','danger'][stateBudget(item,true)]}} label-xs">{{['Em dia','Desvio','Desvio'][stateBudget(item,true)]}}</span>
+                                class="label label-{{['success','danger','danger'][stateBudget(item,true)]}} label-xs">{{['Em
+                                dia','Desvio','Desvio'][stateBudget(item,true)]}}</span>
                         </div>
 
                         <div class="col col-xs-1 actions text-right"><button class="btn"
@@ -85,11 +89,12 @@
                 <div class="row" *ngFor="let item of expenses; let i = index">
                     <div class="col-md-12">
                         <div class="col col-xs-6">
-
-                            <button class="accordion btn btn-xs pe-7s-angle-down" title="panel-expenses-{{i}}"
+                            <button class="accordion btn btn-xs pe-7s-angle-down pull-left" title="panel-expenses-{{i}}"
                                 (click)="accordion($event.target)"></button>
-                            {{item.descriptions}}
-                            <span class="tin-text"></span>
+                            <div>
+                                <span class="tin-text">{{item.goal.objectives}}</span><br />
+                                {{item.descriptions}}
+                            </div>
                         </div>
                         <div class="col col-xs-3 text-right">
                             {{item.expenses}} kzs<br>
@@ -98,7 +103,8 @@
 
                         <div class="col col-xs-2">
                             <span
-                                class="label label-{{['danger','warning','success'][stateBudget(item,false)]}} label-xs">{{['Desvio','Crítico','Em dia'][stateBudget(item,false)]}}</span>
+                                class="label label-{{['danger','warning','success'][stateBudget(item,false)]}} label-xs">{{['Desvio','Crítico','Em
+                                dia'][stateBudget(item,false)]}}</span>
                         </div>
 
                         <div class="col col-xs-1 actions text-right"><button class="btn"
@@ -140,16 +146,15 @@
 </div>
 <div class="col-sm-6">
     <h2>...</h2>
-        
-        <lbd-chart *ngIf="expensesCharData" [title]="'Receitas'" [chartType]="activityChartType"
-            [chartData]="expensesCharData" [chartOptions]="activityChartOptions"
-            [chartResponsive]="activityChartResponsive">
-        </lbd-chart>
-        <hr>
-        <lbd-chart *ngIf="revenueCharData" [title]="'Despesas'" [chartType]="activityChartType"
-            [chartData]="revenueCharData" [chartOptions]="activityChartOptions"
-            [chartResponsive]="activityChartResponsive">
-        </lbd-chart>
+
+    <lbd-chart *ngIf="expensesCharData" [title]="'Receitas'" [chartType]="activityChartType"
+        [chartData]="expensesCharData" [chartOptions]="activityChartOptions"
+        [chartResponsive]="activityChartResponsive">
+    </lbd-chart>
+    <hr>
+    <lbd-chart *ngIf="revenueCharData" [title]="'Despesas'" [chartType]="activityChartType"
+        [chartData]="revenueCharData" [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive">
+    </lbd-chart>
 </div>
 
 
@@ -159,7 +164,7 @@
     <div class="row">
         <div class="col-md-6">
             <h5>Orçamento</h5>
-            <h6>{{budget.direction ?  budget.task.revenue : budget.task.expenses }}</h6>
+            <h6>{{budget.direction ? budget.task.revenue : budget.task.expenses }}</h6>
         </div>
         <div class="col-md-6">
             <h5>Realizado</h5>

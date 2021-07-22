@@ -13,6 +13,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() opened: boolean;
   @Input() closeOnBackgroundClick: string = 'true';
   @Input() title: string;
+  @Input() subtitle: string='';
   private element: any;
 
   constructor(private modalService: ModalService, private el: ElementRef) {

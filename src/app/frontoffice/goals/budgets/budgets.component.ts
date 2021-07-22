@@ -73,6 +73,8 @@ export class BudgetsComponent implements OnInit {
     this.goalService.all({ userId: this.authService.user.id }).subscribe(goals => {
       goals.forEach(goal => {
         goal.tasks.forEach(task => {
+          
+          task.goal=goal
           if (task.revenue > 0) {
             this.revenue.push(task);
           }

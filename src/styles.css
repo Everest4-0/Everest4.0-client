@@ -3,7 +3,9 @@
 * {
     transition: .5;
 }
-
+.error{
+    color:#900
+}
 h2#swal2-title {
     font-size: 3.4em !important;
 }

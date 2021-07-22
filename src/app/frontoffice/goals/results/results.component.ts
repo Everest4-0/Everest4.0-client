@@ -29,7 +29,7 @@ export class ResultsComponent implements OnInit {
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
-  form = new GoalForm(this.fb, this.goal)
+  form = new GoalForm(this.goal)
 
   constructor(
     private auth: AuthService,

@@ -39,24 +39,21 @@
     </div>
 
 
-    <jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}">
-        <h4>Carregar Objectivos e metas para <b>{{goal.group}} </b></h4>
+    <jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}" subtitle="Carregar Objectivos <b>{{goal.group}} </b>">
+        
         <hr>
         <div class="row">
             <form [formGroup]="form" (ngSubmit)="saveGoal()">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Objectivo</label>
+                        <label for="inputObjectives">Objectivo<span class="error">*</span></label>
                         <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
-                            formControlName="objectives" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text formContro text-muted hidden">We'll never share your
-                            email with anyone
-                            else.</small>
+                            formControlName="objectives" id="inputObjectives">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Meta Anual</label>
+                        <label for="inputAnualGoal">Meta Anual<span class="error">*</span></label>
                         <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
-                            [(ngModel)]="goal.anualGoal" formControlName="anualGoal">
+                            [(ngModel)]="goal.anualGoal" formControlName="anualGoal" id="inputAnualGoal">
                     </div>
                     <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">
                         <div class="form-group" *ngFor="let item of goal.partials; let i=index">
@@ -70,6 +67,6 @@
             </form>
         </div>
         <div class="row text-center"><br>
-            <button class="btn btn-success btn-fill" (click)="saveGoal()">Salvar</button>
+            <button class="btn btn-success btn-fill" [disabled]="!form.valid" (click)="saveGoal()">Salvar</button>
         </div>
     </jw-modal>
