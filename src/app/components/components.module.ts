@@ -21,6 +21,7 @@ import { VirtualDataroomComponent } from './virtual-dataroom/virtual-dataroom.co
 import { EnrollingCourseComponent } from './enrolling-course/enrolling-course.component';
 import { PaginateComponent } from './paginate/paginate.component';
 import { SharedTodoComponent } from './shared-todo/shared-todo.component';
+import { ControlMessagesComponent } from './control-messages/control-messages.component';
 
 
 
@@ -51,7 +52,10 @@ import { SharedTodoComponent } from './shared-todo/shared-todo.component';
     PaginateComponent,
 
     
-    SharedTodoComponent
+    SharedTodoComponent,
+
+    
+    ControlMessagesComponent
   ],
   imports: [
     MomentModule,

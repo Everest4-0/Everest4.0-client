@@ -32,7 +32,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-xs"><i class="pe-7s-angle-left"></i></button>
                             <button type="button" class="btn btn-xs"><i class="pe-7s-angle-right"></i></button>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,14 +47,17 @@
                     <div class="col col-sm-4 col-md-4 actions text-right">
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="label label-{{['default','danger','warning','success','danger'][task.state]}}">{{['Pendente','Por inicial','Em curso','Concluido','Cancelado'][task.state]}}
-                                    
-                                    <b class="caret"  *ngIf="states(task.state).length"></b></span>
+                                <span
+                                    class="label label-{{['default','danger','warning','success','danger'][task.state]}}">{{['Pendente','Por
+                                    inicial','Em curso','Concluido','Cancelado'][task.state]}}
+
+                                    <b class="caret" *ngIf="states(task.state).length"></b></span>
 
                             </a>
                             <ul class="dropdown-menu" *ngIf="states(task.state).length">
                                 <li *ngFor="let state of states(task.state)">
-                                    <a (click)="updateState(task,state)">{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                                    <a (click)="updateState(task,state)">{{['Pendente','Por inicial','Em
+                                        curso','Concluido','Cancelar'][state]}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,71 +80,73 @@
 </div>
 
 
-<jw-modal id="plan-modal" class="md" title="{{task.goal.objectives}}">
-    <h4>Registar nova tarefa</h4>
-    <hr>
+<jw-modal id="plan-modal" class="md" title="{{task.goal.objectives}}" subtitle="Registar nova tarefa">
     <div class="row">
+        <input type="text" b5kDatepicker>
         <form [formGroup]="form" (ngSubmit)="saveTask()">
             <div class="col-md-12">
                 <div class="form-group  col-md-12">
-                    
-                    <label for="exampleInputEmail1">Tarefa</label>
+
+                    <label for="inputDescriptions">Tarefa</label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="task.descriptions"
-                        formControlName="descriptions" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text formContro text-muted hidden">We'll never share your email
-                        with anyone
-                        else.</small>
+                        formControlName="descriptions" #descriptions>
+
+                        <span class="validation">
+                            <i class="fa fa-check text-success" *ngIf="!descriptions.invalid"></i>
+                            <i class="fa fa-times text-danger" *ngIf="descriptions.invalid"></i>
+                        </span>
+                        <control-messages [control]="form.get('descriptions')"></control-messages>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="exampleInputPassword1">Duração (minutos)</label>
+                    <label for="inputDuration">Duração (minutos)</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.duration"
-                        formControlName="duration">
+                        formControlName="duration" id="duration">
                 </div>
                 <div class="form-group col-md-8">
-                    <label for="exampleInputPassword1">Data de conclusão</label>
+                    <label for="inputDueDate">Data de conclusão</label>
                     <input type="date" class="form-control form-control-lg" [(ngModel)]="task.dueDate"
-                        formControlName="dueDate">
+                        formControlName="dueDate" id="inputDueDate">
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="exampleInputPassword1">Receitas</label>
+                    <label for="inputRevenue">Receitas</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.revenue"
-                        formControlName="revenue">
+                        formControlName="revenue" id="inputRevenue">
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="exampleInputPassword1">Curstos</label>
+                    <label for="inputExpenses">Curstos</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
-                        formControlName="expenses">
+                        formControlName="expenses" id="inputExpenses">
                 </div>
                 <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Estado</label>
                     <div>
-                    <div class="o-switch btn-group" data-toggle="buttons" role="group">
-                        <label class="btn btn-secondary active color-yellow" (click)="setEstate(1)">
-                            <input type="radio" [(ngModel)]="task.state" name="option1" value="1" id="option1"
-                                autocomplete="off" [ngModelOptions]="{standalone: true}" checked  > Por iniciar
-                        </label>
-                        <label class="btn btn-secondary color-green" (click)="setEstate(2)">
-                            <input type="radio" [(ngModel)]="task.state" name="option2" value="2" id="option2"
-                                autocomplete="off" [ngModelOptions]="{standalone: true}"> Em curso
-                        </label>
-                        <label class="btn btn-secondary color-red" (click)="setEstate(3)">
-                            <input type="radio" [(ngModel)]="task.state" name="option3" value="3" id="option3"
-                                autocomplete="off" [ngModelOptions]="{standalone: true}" > Concluido
-                        </label>
-                    </div>
+                        <div class="o-switch btn-group" data-toggle="buttons" role="group">
+                            <label class="btn btn-secondary active color-yellow" (click)="setEstate(1)">
+                                <input type="radio" [(ngModel)]="task.state" name="option1" value="1" id="option1"
+                                    autocomplete="off" [ngModelOptions]="{standalone: true}" checked> Por iniciar
+                            </label>
+                            <label class="btn btn-secondary color-green" (click)="setEstate(2)">
+                                <input type="radio" [(ngModel)]="task.state" name="option2" value="2" id="option2"
+                                    autocomplete="off" [ngModelOptions]="{standalone: true}"> Em curso
+                            </label>
+                            <label class="btn btn-secondary color-red" (click)="setEstate(3)">
+                                <input type="radio" [(ngModel)]="task.state" name="option3" value="3" id="option3"
+                                    autocomplete="off" [ngModelOptions]="{standalone: true}"> Concluido
+                            </label>
+                        </div>
                     </div>
                 </div>
-            
+
                 <div class="form-group col-md-12">
-                    <label for="exampleInputPassword1">Observações</label>
+                    <label for="textAreaObservations">Observações</label>
                     <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
-                        formControlName="observations"></textarea>
+                        formControlName="observations" id="textAreaObservations"></textarea>
                 </div>
             </div>
         </form>
     </div>
     <div class="row text-center"><br>
-        <button class="btn btn-success btn-fill" (click)="saveTask()">Salvar</button>
+        <button class="btn btn-success btn-fill" [disabled]="!form.valid" (click)="saveTask()">Salvar</button>
     </div>
 </jw-modal>
 
@@ -170,7 +175,8 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span
-                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por inicial','Em curso','Concluido'][taskDetails.state]}}
+                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por
+                            inicial','Em curso','Concluido'][taskDetails.state]}}
                             <b class="caret" *ngIf="states(taskDetails.state).length"></b></span>
                     </a>
                     <ul class="dropdown-menu" *ngIf="states(taskDetails.state).length">
@@ -203,7 +209,7 @@
 
                 <h5>Observações</h5>
                 <span>{{taskDetails.observations}}</span>
-                    
+
             </div>
         </div>
         <div class="col-md-12">

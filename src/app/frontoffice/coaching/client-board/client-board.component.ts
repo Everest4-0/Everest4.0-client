@@ -36,7 +36,7 @@ export class ClientBoardComponent implements OnInit {
   public weakness = [];
   public strengths = []
 
-  form = new GoalForm(this.fb, this.goal);
+  form = new GoalForm(this.goal);
 
   constructor(
     public auth: AuthService,
