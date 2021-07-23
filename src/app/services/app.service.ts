@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { isDevMode } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';
 const serverAddress = environment.serverAddress;
@@ -18,7 +17,7 @@ export class AppService<T> {
     this.url = `${this.serverAddress}/api/v1/${service.split('.').join('/')}`;
 
     try {
-      let data = JSON.parse(localStorage.getItem("local_everest_key"));
+      const data = JSON.parse(localStorage.getItem('local_everest_key'));
       this.headers = new HttpHeaders(
         {
            apikey: environment.appKey,
@@ -32,12 +31,12 @@ export class AppService<T> {
     return this.http.get('./angular.json', { headers });
   }
   protected getOne(s: string, a?: any): Observable<any> {
-    let str = this.getQuery(a);
+    const str = this.getQuery(a);
     return this.http.get(this.url + '/' + s + '?' + str, { 'headers': this.headers })
   }
 
   protected getAll(a: any): Observable<any> {
-    let str = this.getQuery(a);
+    const str = this.getQuery(a);
     return this.http.get(this.url + '?' + str, { 'headers': this.headers })
   }
 
@@ -46,7 +45,7 @@ export class AppService<T> {
   }
 
   protected updateOne(o: any, q: any = {}): Observable<any> {
-    let str = this.getQuery(q)
+    const str = this.getQuery(q)
     return this.http.put(this.url + '?' + str, o, { 'headers': this.headers })
   }
 
@@ -57,7 +56,7 @@ export class AppService<T> {
   private getQuery(a: any) {
     let str = '';
 
-    for (var key in a) {
+    for (const key in a) {
       if (str !== '') {
         str += '&';
       }
