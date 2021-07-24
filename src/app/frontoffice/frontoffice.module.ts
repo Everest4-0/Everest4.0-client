@@ -160,7 +160,7 @@ FullCalendarModule.registerPlugins([
     ListQuizComponent,
     QuizSolveFormComponent,
     TestimonialComponent,
-    TestimonialValidationComponent
+    TestimonialValidationComponent,
   ],
   exports: [
     ModalModule,

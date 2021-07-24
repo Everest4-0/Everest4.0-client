@@ -10,6 +10,7 @@ import { GoalForm } from './../../../forms/goal.form';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -19,17 +20,25 @@ import { PartialGoal } from 'app/models/goal/partial-goal';
 export class ResultsComponent implements OnInit {
 
 
-  public results = [
-    { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
-    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
-    /*{ code: 'O', name: 'Oportunidades' },
-    { code: 'T', name: 'Ameaças' },*/
-  ]
-  public currentResults = {name:null, currentResults: [], groups: [] };
+
+  public currentResults = { name: null, currentResults: [], groups: [] };
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public evaluations: Array<UserEvaluation> = [];
   goal = new Goal();
   form = new GoalForm(this.goal)
+
+
+
+  public results = [
+    { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
+    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
+  ];
+
+
+  public diagnosticDatas: any = {};
+  public evaluationDatas: any = {}
+  public weakness = [];
+  public strengths = []
 
   constructor(
     private auth: AuthService,
@@ -37,7 +46,10 @@ export class ResultsComponent implements OnInit {
     private fb: FormBuilder,
     private evaluationService: UserEvaluationService,
     private goalService: GoalService,
-    private toast: ToastService
+    private toast: ToastService,
+
+    private route: ActivatedRoute
+
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +92,23 @@ export class ResultsComponent implements OnInit {
             return self.indexOf(value) === index;
           })*/
         result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
+
+
+        let evaluationsGross = evaluations.reduce((result, currentObject) => {
+          const val = currentObject.evaluation['group']
+          result[val] = result[val] || []
+          result[val].push(currentObject)
+          return result
+        }, {})
+
+        let evaluationArr: Array<Array<any>>;
+        evaluationArr = Object.entries(evaluationsGross)
+        evaluationArr.forEach(((arr) => {
+          arr[3] = (arr[1].reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (arr[1].length)).toFixed(2);
+        }))
+
+        this.evaluationDatas = { labels: evaluationArr.map(x => x[0]), data: evaluationArr.map(x => parseFloat(x[3])) }
+
       })
     })
   }
@@ -122,10 +151,46 @@ export class ResultsComponent implements OnInit {
     this.openModal('result-modal')
   }
 
-  setResults(e) {
+  otherResultsx(e) {
+    return ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+  }
 
-    let u = this.results;
-    this.currentResults = e
-    this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+
+  notIn(arr: Array<any>, a): boolean{
+    debugger
+  return arr.filter(x => x !== a).length==0
+}
+
+groupByx = (xs, key) => {
+  return xs.reduce(function (rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+}
+
+setResultsx(e) {
+
+  let u = this.results;
+  this.currentResults = e
+  this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+}
+
+updateList($todo) {
+
+}
+
+accordion(that: any): void {
+
+  that.classList.toggle("pe-7s-angle-up");
+  that.classList.toggle("pe-7s-angle-down");
+
+  var panel = document.getElementById(that.getAttribute('title'))
+    if(panel.style.maxHeight) {
+  panel.style.maxHeight = null;
+} else {
+  panel.style.maxHeight = panel.scrollHeight + "px";
+}
+
+
   }
 }
