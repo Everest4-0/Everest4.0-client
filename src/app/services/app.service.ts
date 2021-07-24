@@ -20,9 +20,9 @@ export class AppService<T> {
       const data = JSON.parse(localStorage.getItem('local_everest_key'));
       this.headers = new HttpHeaders(
         {
-           apikey: environment.appKey,
-           authorization: data.filter(o => o.key === 'current_user')[0].data.apikey 
-          })
+          apikey: environment.appKey,
+          authorization: data.filter(o => o.key === 'current_user')[0].data.apikey
+        })
     } catch (e) { }
 
   }
@@ -51,6 +51,10 @@ export class AppService<T> {
 
   protected deleteOne(id): Observable<any> {
     return this.http.delete(this.url + '/' + id, { 'headers': this.headers })
+  }
+
+  protected deleteBy(o): Observable<any> {
+    return this.http.post(this.url + '/delete/by', o, { 'headers': this.headers })
   }
 
   private getQuery(a: any) {

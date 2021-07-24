@@ -30,4 +30,8 @@ export class UserEvaluationService  extends AppService<UserEvaluation> implement
   create(o: any): Observable<UserEvaluation> {
     return this.createOne(o)
   }
+
+  remove(f:any): Observable<Array<UserEvaluation>> {
+    return this.deleteBy(f);
+  }
 }

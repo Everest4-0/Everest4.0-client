@@ -97,5 +97,7 @@ export class SelfEvaluationComponent implements OnInit {
     })
     this.modalService.close('self-evaluation-modal');
   }
-
+  removeEvaluation(id){
+    this.userEvaluationService.remove({group:id}).subscribe(evaluations => alert(1))
+  }
 }
