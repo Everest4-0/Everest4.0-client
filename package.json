@@ -1,18 +1,19 @@
 {
   "name": "lbd-free-angular-cli",
-  "version": "v1.6.1.4",
+  "version": "v1.6.1.5 - 2021-07-24T14:36:52",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build",
-    "build:pod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --vendor-chunk --build-optimizer",
+    "build:prod": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --vendor-chunk --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "private": true,
+  "proxy": "https://server.qld.everest40.com",
   "dependencies": {
     "@angular/animations": "9.0.6",
     "@angular/cdk": "^11.0.3",
