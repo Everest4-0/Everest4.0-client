@@ -47,9 +47,9 @@ export class SelfEvaluationComponent implements OnInit {
     })
   }
 
-  getPbvalue(arr: Array<any>) {
-    return (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
-  }
+  getPbvalue = (arr: Array<any>) =>
+    (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
+
   openModal(id: string, v: Evaluation) {
     if (v.points > 0) {
       this.toast.warning('Já foi feita auto avaliação sobre ' + v.name + ' no Dominio ' + v.group + ' Aguarde próximo ciclo ou contacte o apoio ao cliente',
@@ -62,28 +62,22 @@ export class SelfEvaluationComponent implements OnInit {
     this.currentEvaluation.points = 0
     this.modalService.open(id);
   }
-  closeModal(id: string) {
+  closeModal(id: string): void {
     this.currentEvaluation.points = 0
     this.modalService.close(id);
   }
-  evaluationPoints(id: string): number {
-    let total = this.userEvaluations.filter(e => e.evaluation.id == id).reduce((t, m) => { return t + m.points }, 0);
+  evaluationPoints = (id: string): number =>
+    this.userEvaluations.filter(e => e.evaluation.id === id).reduce((t, m) => { return t + m.points }, 0);
 
-    return total;
-  }
-  onChange(e) {
-    this.currentEvaluation.points = e
-  }
-  cleanEvaluation(){
-    this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
+  onChange = (e) =>
+    this.currentEvaluation.points = e;
 
-    })
-  }
   saveEvaluation() {
     this.userEvaluationService.create(this.currentEvaluation).subscribe(e => {
       this.evaluations.forEach(x => {
-        if (x.id == e.evaluationId)
+        if (x.id === e.evaluationId) {
           x.points = e.points
+        }
       })
 
       this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
@@ -97,7 +91,17 @@ export class SelfEvaluationComponent implements OnInit {
     })
     this.modalService.close('self-evaluation-modal');
   }
-  removeEvaluation(id){
-    this.userEvaluationService.remove({group:id}).subscribe(evaluations => alert(1))
-  }
+  removeEvaluation = (group: string) =>
+    this.userEvaluationService.remove({ group }).subscribe(evaluations => {
+      this.evaluations.filter(x => {
+        if (x.group === group) {
+          x.points = 0
+        }
+      })
+      this.toast.success(`A avaliação do domínio ${group} foi reiniciado com successo`, 'Sucesso', {
+        timeOut: 10000,
+        progressBar: true,
+      })
+    })
+
 }
