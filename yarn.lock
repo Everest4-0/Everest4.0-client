@@ -6635,6 +6635,14 @@ ngx-permissions@^8.1.1:
   dependencies:
     tslib "^1.10.0"
 
+ngx-skeleton-loader@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-skeleton-loader/-/ngx-skeleton-loader-4.0.0.tgz#2bd6ef369c2a1c3d053c09b2a099b403b373a662"
+  integrity sha512-fbCWZrBVJF1jVVK056z3zPcAk0EXUtImdRkrjbc4xiWNkmhGskGfNh6UxKrkheMS9iOJoaLLo8KscLeUa9yggQ==
+  dependencies:
+    perf-marks "^1.13.4"
+    tslib "^1.10.0"
+
 ngx-stripe@^11.0.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/ngx-stripe/-/ngx-stripe-11.1.0.tgz#af7720d0e7398bccbba25f34b33022632d894168"
@@ -7305,6 +7313,13 @@ pdfjs-dist@~2.5.207:
   version "2.5.207"
   resolved "https://registry.yarnpkg.com/pdfjs-dist/-/pdfjs-dist-2.5.207.tgz#b5e8c19627be64269cd3fb6df3eaaf45ddffe7b6"
   integrity sha512-xGDUhnCYPfHy+unMXCLCJtlpZaaZ17Ew3WIL0tnSgKFUZXHAPD49GO9xScyszSsQMoutNDgRb+rfBXIaX/lJbw==
+
+perf-marks@^1.13.4:
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/perf-marks/-/perf-marks-1.14.2.tgz#7511c24239b9c2071717993a33ec3057f387b8c7"
+  integrity sha512-N0/bQcuTlETpgox/DsXS1voGjqaoamMoiyhncgeW3rSHy/qw8URVgmPRYfFDQns/+C6yFUHDbeSBGL7ixT6Y4A==
+  dependencies:
+    tslib "^2.1.0"
 
 perfect-scrollbar@1.4.0:
   version "1.4.0"

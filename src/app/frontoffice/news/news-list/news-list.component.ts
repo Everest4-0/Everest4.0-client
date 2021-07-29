@@ -10,7 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class NewsListComponent implements OnInit {
 
   bingNews: any = {};
-  news: any;
+  news: [];
 
 
   public show: boolean = true;

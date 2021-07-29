@@ -74,6 +74,7 @@
     "ngx-countdown": "^11.0.1",
     "ngx-moment": "^5.0.0",
     "ngx-permissions": "^8.1.1",
+    "ngx-skeleton-loader": "^4.0.0",
     "ngx-stripe": "^11.0.0",
     "ngx-timeago": "^2.0.0",
     "ngx-ui-switch": "^10.0.2",

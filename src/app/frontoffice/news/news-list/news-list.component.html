@@ -3,20 +3,32 @@
     <p class="category hidden">Fonte: BING</p>
     <label style="font-size: 10px; color: #AAA; font-weight: normal;">{{bingNews.readLink}}</label>
 </div>
-<div class="col-md-3 " *ngFor="let item of news| slice:0:8" style="height: 300px;">
-    <a href="{{item.url}}" target="_blank">
-        <div class="card">
-            <div class="card-header">
-                <img src="{{ item.urlToImage}}" class="img-responsive" style="width: 100%;" /></div>
-            <div class="card-body" style="padding: 5px 15px; height: 140px;">
-                <label class="pull-right">{{item.publishedAt|amLocale:'pt'| amTimeAgo}}</label>
-                <h5>{{ item.title }}</h5>
-                <p style="display: none;">{{ item.description }}</p>
-            </div>
-            <div class="card-footer  hidden" style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
-                <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
 
+<ngx-skeleton-loader *ngIf="news.length==0" count="5" appearance="circle" [theme]="{
+    width: '70px',
+    height: '70px',
+    'border-radius': '10px'
+  }">
+</ngx-skeleton-loader>
+<div class="row" *ngIf="news.length>0">
+
+    <div class="col-md-3 " *ngFor="let item of news| slice:0:8" style="height: 300px;">
+        <a href="{{item.url}}" target="_blank">
+            <div class="card">
+                <div class="card-header">
+                    <img src="{{ item.urlToImage}}" class="img-responsive" style="width: 100%;" />
+                </div>
+                <div class="card-body" style="padding: 5px 15px; height: 140px;">
+                    <label class="pull-right">{{item.publishedAt|amLocale:'pt'| amTimeAgo}}</label>
+                    <h5>{{ item.title }}</h5>
+                    <p style="display: none;">{{ item.description }}</p>
+                </div>
+                <div class="card-footer  hidden" style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
+                    <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
+
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
+
 </div>

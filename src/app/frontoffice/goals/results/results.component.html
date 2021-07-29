@@ -27,7 +27,9 @@
                                 {{currentResults.name}} <span
                                     class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
-                            <div id="panel-{{currentResults.name}}" class="list-group panel">
+
+                            <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse"></ngx-skeleton-loader>
+                            <div id="panel-{{currentResults.name}}" class="list-group panel" *ngIf="currentResults.groups.length>0">
                                 <ul class="list-group" *ngFor="let group of currentResults.groups">
                                     <li class="list-group-item list-group-item-action active">
                                         <b>{{group[0]}}</b>
@@ -90,6 +92,6 @@
         </form>
     </div>
     <div class="row text-center"><br>
-        <button class="btn btn-success btn-fill"  (click)="saveGoal()">Salvar</button>
+        <button class="btn btn-success btn-fill" (click)="saveGoal()">Salvar</button>
     </div>
 </jw-modal>

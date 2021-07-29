@@ -83,6 +83,8 @@ import { TestimonialValidationComponent } from './courses/testimonial-validation
 import { CoachingModule } from './coaching/coaching.module';
 import { ComponentsModule } from 'app/components/components.module';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 FullCalendarModule.registerPlugins([
   listPlugin,
   interactionPlugin,
@@ -116,7 +118,9 @@ FullCalendarModule.registerPlugins([
     //NgxPermissionsModule.forRoot(),
     NgxPermissionsModule.forChild(),
     ComponentsModule,
-    PaymentModule
+    PaymentModule ,
+
+    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' })
   ],
   declarations: [
     CounterDirective,

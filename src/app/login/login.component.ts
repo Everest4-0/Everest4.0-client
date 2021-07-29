@@ -38,13 +38,13 @@ export class LoginComponent implements OnInit {
     public fb: FormBuilder,
     public auth: AuthService,
     private route: ActivatedRoute,
-    private broadcastService: BroadcastService, 
+    private broadcastService: BroadcastService,
     private msAuthService: MsalService) {
     this.userForm = this.fb.group(new UserForm(this.fb));
     this.signInForm = this.fb.group({ email: ['', Validators.required], passw: ['', Validators.required] });
   }
   ngOnInit(): void {
-
+    this.signOnUser.apikey = 'signOn';
     this.route.queryParamMap.subscribe(queryParams => {
       this.w = queryParams.get("w");
       this.x = queryParams.get("x");
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   login = (user) => {
-    
+
     this.localUser.castSocialUser(user);
     this.auth.authenticate(this.localUser, (user: User) => {
       this.localUser = user;
@@ -113,23 +113,24 @@ export class LoginComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
-  signIn(userForm:FormGroup) {
-    
+  signIn(userForm: FormGroup) {
+
     this.userForm = userForm
 
-    if(this.userForm.dirty && this.userForm.valid){
-      this.auth.authenticate(this.signInUser,(u: User) => {
+    if (this.userForm.dirty && this.userForm.valid) {
+      this.auth.authenticate(this.signInUser, (u: User) => {
         this.localUser = u;
       })
     }
   };
-  
-  signOn(userForm:FormGroup) {
+
+  signOn(userForm: FormGroup) {
+    debugger
     this.userForm = userForm
-    
+
     if (this.userForm.dirty && this.userForm.valid) {
-      this.auth.create(this.signOnUser).subscribe(user => {
-        this.auth.authenticate(user,(u: User) => {
+      this.auth.signOn(this.signOnUser).subscribe(user => {
+        this.auth.authenticate(user, (u: User) => {
           this.localUser = u;
           window.open('./', '_self')
         })
