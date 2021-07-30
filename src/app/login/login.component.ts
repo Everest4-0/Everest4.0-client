@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocialAuthService, FacebookLoginProvider, GoogleLoginProvider, VKLoginProvider, SocialUser } from "angularx-social-login";
 import { MsalService, BroadcastService } from '@azure/msal-angular';
 import { Logger, CryptoUtils } from 'msal';
+import Validator from 'app/helpers/validator';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   public isCollapsed = false;
   isIframe = false;
-  user: SocialUser;
+  user: SocialUser = new SocialUser();
+  errors: any = {};
   newUser = this.msAuthService.getAccount();
   localUser: User = new User();
   loggedIn: boolean;
@@ -41,7 +43,14 @@ export class LoginComponent implements OnInit {
     private broadcastService: BroadcastService,
     private msAuthService: MsalService) {
     this.userForm = this.fb.group(new UserForm(this.fb));
-    this.signInForm = this.fb.group({ email: ['', Validators.required], passw: ['', Validators.required] });
+    this.signInForm = this.fb.group(
+      {
+        email: ['', Validators.required],
+        password: ['', Validators.required, Validator.passwordValid],
+
+        confirm_password: ['', [Validators.required]]
+      },
+      { validator: Validator.ConfirmedValidator('password', 'confirm_password') });
   }
   ngOnInit(): void {
     this.signOnUser.apikey = 'signOn';
@@ -75,7 +84,9 @@ export class LoginComponent implements OnInit {
       piiLoggingEnabled: false
     }));
   }
-
+  get f() {
+    return this.signInForm.controls;
+  }
   login = (user) => {
 
     this.localUser.castSocialUser(user);
@@ -126,14 +137,18 @@ export class LoginComponent implements OnInit {
 
   signOn(userForm: FormGroup) {
     debugger
-    this.userForm = userForm
 
-    if (this.userForm.dirty && this.userForm.valid) {
-      this.auth.signOn(this.signOnUser).subscribe(user => {
-        this.auth.authenticate(user, (u: User) => {
-          this.localUser = u;
-          window.open('./', '_self')
-        })
+    if (userForm.dirty && userForm.valid) {
+      this.auth.signOn(this.signOnUser).subscribe((data: any) => {
+        if (data.success) {
+          this.auth.authenticate(data.user, (u: User) => {
+            this.localUser = u;
+            window.open('./', '_self')
+          })
+        } else {
+          this.errors = data.errors
+        }
+
       })
     }
   }
