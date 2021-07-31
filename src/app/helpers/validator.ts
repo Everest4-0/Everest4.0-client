@@ -15,6 +15,18 @@ export default class Validator {
         return of(final);
     };
 
+    static emailValid = (email): Observable<any> => {
+        const final =
+            /^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$/.test(email.value)
+                ? null :
+                {
+                    invalidEmail: true
+                }
+
+
+        return of(final);
+    };
+
     // Validates URL
     static urlValidator(url): any {
         if (url.pristine) {
@@ -116,4 +128,5 @@ export default class Validator {
             }
         }
     }
+
 }
