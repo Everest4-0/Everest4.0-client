@@ -25,7 +25,8 @@
                         </td>
                         <td style="width: 100px;">
                             <img src="{{getUserAvatar(item.requester.photoUrl)}}"
-                                class="img-thumbnail pull-left" style="width:100px">
+                                class="img-thumbnail pull-left" style="width:100px"
+                                onerror="this.onerror=null;this.src='assets/img/image_not_found.png';">
                         </td>
                         <td>
 
@@ -62,7 +63,9 @@
 <div class="row">
     <div *ngFor="let item of requesteds" class="col-sm-2">
         <div class="card" style="padding: 5px;">
-            <img class="card-img-top img img-responsive full-width" src="{{getUserAvatar(item.requested.photoUrl)}}"
+            <img class="card-img-top img img-responsive full-width"
+            src="{{getUserAvatar(item.requested.photoUrl)}}"
+            onerror="this.onerror=null;this.src='assets/img/image_not_found.png';"
                 style="width: 100%;">
             <div class="card-body">
                 <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}"></app-progress-bar>
