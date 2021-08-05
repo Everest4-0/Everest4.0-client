@@ -84,6 +84,7 @@ import { CoachingModule } from './coaching/coaching.module';
 import { ComponentsModule } from 'app/components/components.module';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { EvaluationComponent } from './diagnostic/evaluation/evaluation.component';
 
 FullCalendarModule.registerPlugins([
   listPlugin,
@@ -165,6 +166,7 @@ FullCalendarModule.registerPlugins([
     QuizSolveFormComponent,
     TestimonialComponent,
     TestimonialValidationComponent,
+    EvaluationComponent,
   ],
   exports: [
     ModalModule,

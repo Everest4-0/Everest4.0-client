@@ -11,6 +11,8 @@ import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
 import { ActivatedRoute } from '@angular/router';
+import { EvaluationService } from 'app/services/evaluation.service';
+import { Evaluation } from 'app/models/diagnostic/evaluation';
 
 @Component({
   selector: 'app-results',
@@ -23,7 +25,8 @@ export class ResultsComponent implements OnInit {
 
   public currentResults = { name: null, currentResults: [], groups: [] };
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
-  public evaluations: Array<UserEvaluation> = [];
+  public userEvaluations: Array<UserEvaluation> = [];
+  public evaluations: Array<Evaluation> = [];
   goal = new Goal();
   form = new GoalForm(this.goal)
 
@@ -44,7 +47,8 @@ export class ResultsComponent implements OnInit {
     private auth: AuthService,
     private modalService: ModalService,
     private fb: FormBuilder,
-    private evaluationService: UserEvaluationService,
+    private userEvaluationService: UserEvaluationService,
+    private evaluationService: EvaluationService,
     private goalService: GoalService,
     private toast: ToastService,
 
@@ -56,45 +60,39 @@ export class ResultsComponent implements OnInit {
 
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
-    this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
+    this.userEvaluationService.all({ requesterId: this.auth.user.id }).subscribe(userEvaluations => {
 
-      let fin = []
-      let evs = []
-      let setEv = evaluations.forEach((ev) => {
-        if (!evs.map(x => x[0]).includes(ev.evaluation.name))
-          evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
+      const evs = []
+      userEvaluations.forEach((ev) => {
+        if (!evs.map(x => x[0]).includes(ev.evaluation.name)) {
+          evs.push([ev.evaluation.name, userEvaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
+        }
       })
       evs.forEach((e, k) => {
 
-        let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
+        const points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
         if (points === 4) {
           e.push(true)
-        }
-        else if (points < 3) {
+        } else if (points < 3) {
           e.push(false)
         } else {
           evs.splice(k, 1);
         }
 
       })
-      this.evaluations = evaluations
-      let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)
+      this.userEvaluations = userEvaluations
       this.results.forEach(result => {
 
 
         result.evaluations = evs
           .filter(evaluation => result.conditions(evaluation[2])).map(g => g[1][0].evaluation);
 
-        /* result.evaluations = evaluations
-           .filter(evaluation => result.conditions(evaluation.points) && evaluation.requested === null);*/
-        result.groups = this.groupBy(result.evaluations, 'group')/*result.evaluations.map(x => x.group)
-          .filter((value, index, self) => {
-            return self.indexOf(value) === index;
-          })*/
+        result.groups = this.groupBy(result.evaluations, 'group')
+
         result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
 
 
-        let evaluationsGross = evaluations.reduce((result, currentObject) => {
+        const evaluationsGross = userEvaluations.reduce((result, currentObject) => {
           const val = currentObject.evaluation['group']
           result[val] = result[val] || []
           result[val].push(currentObject)
@@ -109,10 +107,11 @@ export class ResultsComponent implements OnInit {
 
         this.evaluationDatas = { labels: evaluationArr.map(x => x[0]), data: evaluationArr.map(x => parseFloat(x[3])) }
 
+
+
       })
     })
   }
-
   groupBy = (xs, key) => {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -156,40 +155,38 @@ export class ResultsComponent implements OnInit {
   }
 
 
-  notIn(arr: Array<any>, a): boolean{
+  notIn(arr: Array<any>, a): boolean {
     debugger
-  return arr.filter(x => x !== a).length==0
-}
+    return arr.filter(x => x !== a).length == 0
+  }
 
-groupByx = (xs, key) => {
-  return xs.reduce(function (rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-}
+  groupByx = (xs, key) => {
+    return xs.reduce(function (rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  }
 
-setResultsx(e) {
+  setResultsx(e) {
+    this.currentResults = e
+    this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+  }
 
-  let u = this.results;
-  this.currentResults = e
-  this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
-}
+  updateList($todo) {
 
-updateList($todo) {
+  }
 
-}
+  accordion(that: any): void {
 
-accordion(that: any): void {
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
 
-  that.classList.toggle("pe-7s-angle-up");
-  that.classList.toggle("pe-7s-angle-down");
-
-  var panel = document.getElementById(that.getAttribute('title'))
-    if(panel.style.maxHeight) {
-  panel.style.maxHeight = null;
-} else {
-  panel.style.maxHeight = panel.scrollHeight + "px";
-}
+    let panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
 
 
   }

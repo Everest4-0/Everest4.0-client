@@ -1,10 +1,10 @@
 <div class="text-right">
-    <button class="btn btn-success" (click)="openModal('ask-evaluation-modal')">Solicitar FeedBack</button>
+    <button class="btn btn-success" (click)="openFeedBackModal()">Solicitar FeedBack</button>
     <button class="btn btn-success">Partilhar</button>
 </div>
 <div>
     <div class="col-md-12" *ngFor="let item of evaluations">
-        <lbd-chart [title]="item[0]" [subtitle]="'...'" [chartType]="activityChartType"
+        <lbd-chart [title]="item[0]" [chartType]="activityChartType"
             [chartData]="getActivityChartData(item[0])" chartClass="lite" [chartOptions]="activityChartOptions"
             [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems">
         </lbd-chart>
@@ -21,16 +21,26 @@
                 [(ngModel)]="evaluationRequest.requested.email" (keyup)="filterValues($event)">
             <div *ngIf='users.length>0' class="user-filter">
                 <span *ngFor="let item of users" (click)="selectRequested(item)">
-                    {{item.datas.firstName}} {{item.datas.lastName}}
+                    <img src="{{getUserAvatar(item.photoUrl)}}"
+                        onerror="this.onerror=null;this.src='assets/img/default-avatar.png';"
+                        class="img-thumbnail pull-left" style="width: 40px;height: 40px;">
+                    <div class="pull-left">
+                        {{item.datas.firstName}} {{item.datas.lastName}}
+                        <br />
+                        <small>{{item.email}} </small>
+                    </div>
                 </span>
             </div>
         </div>
         <div class="col-md-12 user-selected" *ngIf="evaluationRequest.requested.id">
             <div class="col-sm-3">
-                <img src="{{getUserAvatar(evaluationRequest.requested.photoUrl)}}" class="img-responsive img-thumbnail">
+                <img src="{{getUserAvatar(evaluationRequest.requested.photoUrl)}}"
+                    onerror="this.onerror=null;this.src='assets/img/default-avatar.png';"
+                    class="img-responsive img-thumbnail">
             </div>
             <div class="col-sm-8">
-                <h5><b>{{evaluationRequest.requested.datas.firstName}} {{evaluationRequest.requested.datas.lastName}}</b></h5>
+                <h5><b>{{evaluationRequest.requested.datas.firstName}}
+                        {{evaluationRequest.requested.datas.lastName}}</b></h5>
                 {{evaluationRequest.requested.email}}
             </div>
             <div class="col-sm-1"><i class="fa fa-trash" (click)="evaluationRequest.requested={}"></i></div>
@@ -38,11 +48,12 @@
         <div class="form-group">
             <label for="exampleFormControlSelect2">Relação</label>
             <select class="form-control" formControlName="relationId" [(ngModel)]="evaluationRequest.relationId">
-                <option value="{{item}}" *ngFor="let item of activeRelation">{{relationLabel[item-1]}}</option>                
+                <option value="{{item}}" *ngFor="let item of activeRelation">{{relationLabel[item-1]}}</option>
             </select>
         </div>
+        <div  class="error"  *ngFor="let error of evaluationRequest.errors">{{error}}</div>
     </form>
     <div class="row text-center"><br>
-        <button class="btn btn-info btn-fill bg-info" (click)="askEvaluation()">Salvar</button>
+        <button class="btn btn-info btn-fill bg-info" (click)="askEvaluation()" [disabled]="evaluationRequest.errors.length>0">Salvar</button>
     </div>
 </jw-modal>

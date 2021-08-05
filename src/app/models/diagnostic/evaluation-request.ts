@@ -12,7 +12,19 @@ export class EvaluationRequest {
     createdAt: Date;
     updatedAt: Date;
 
-    get relation() {
+    get relation(): string {
         return ['Familiar', 'Colega de trabalho', 'Amigo'][this.relationId - 1];
+    }
+    get errors(): any[] {
+        const errors = [];
+
+        if (!this.relationId) {
+            errors.push('O campo relação é obrigatório')
+        }
+        if (!this.requested.id) {
+            errors.push('O campo utilisador é obrigatório')
+        }
+
+        return errors;
     }
 }
