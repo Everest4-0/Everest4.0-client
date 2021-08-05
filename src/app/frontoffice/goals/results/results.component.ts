@@ -5,7 +5,7 @@ import { UserEvaluationService } from 'app/services/user-evaluation.service';
 import { AuthService } from 'app/services/auth.service';
 import { GoalService } from 'app/services/goal.service';
 import { Goal } from 'app/models/goal/goal';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GoalForm } from './../../../forms/goal.form';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,9 +20,6 @@ import { Evaluation } from 'app/models/diagnostic/evaluation';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-
-
-
   public currentResults = { name: null, currentResults: [], groups: [] };
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public userEvaluations: Array<UserEvaluation> = [];
@@ -30,8 +27,9 @@ export class ResultsComponent implements OnInit {
   goal = new Goal();
   form = new GoalForm(this.goal)
 
-
-
+  get controls() {
+    return this.form.controls;
+  }
   public results = [
     { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
     { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
@@ -48,11 +46,8 @@ export class ResultsComponent implements OnInit {
     private modalService: ModalService,
     private fb: FormBuilder,
     private userEvaluationService: UserEvaluationService,
-    private evaluationService: EvaluationService,
     private goalService: GoalService,
     private toast: ToastService,
-
-    private route: ActivatedRoute
 
   ) { }
 
@@ -128,17 +123,21 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
+debugger
+    if (this.form.dirty && this.form.valid) {
+      this.goalService.create(this.goal).subscribe(goal => {
+        this.goal = new Goal()
+        this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
 
-    this.goalService.create(this.goal).subscribe(goal => {
-      this.goal = new Goal()
-      this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
-
-      this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
-        timeOut: 50000,
-        progressBar: true,
+        this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
+          timeOut: 50000,
+          progressBar: true,
+        })
+        this.modalService.close('result-modal')
       })
-      this.modalService.close('result-modal')
-    })
+    } else {
+      this.validateAllFormFields(this.form);
+    }
   }
   openModal(id) {
     this.modalService.open(id);
@@ -156,8 +155,7 @@ export class ResultsComponent implements OnInit {
 
 
   notIn(arr: Array<any>, a): boolean {
-    debugger
-    return arr.filter(x => x !== a).length == 0
+    return arr.filter(x => x !== a).length === 0
   }
 
   groupByx = (xs, key) => {
@@ -172,16 +170,12 @@ export class ResultsComponent implements OnInit {
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
   }
 
-  updateList($todo) {
-
-  }
-
   accordion(that: any): void {
 
     that.classList.toggle("pe-7s-angle-up");
     that.classList.toggle("pe-7s-angle-down");
 
-    let panel = document.getElementById(that.getAttribute('title'))
+    const panel = document.getElementById(that.getAttribute('title'))
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
     } else {
@@ -189,5 +183,21 @@ export class ResultsComponent implements OnInit {
     }
 
 
+  }
+
+
+  /**
+   * refine
+   */
+  validateAllFormFields(formGroup: FormGroup) {
+
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 }
