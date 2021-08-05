@@ -66,22 +66,14 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{auth.user.datas.firstName}} {{auth.user.datas.lastName}}
-                        <b class="caret"></b>
+                        <img src="{{auth.user.avatar}}" style="max-width: 100%;border-radius: 100px;width: 30px;height: 30px;"
+                            onerror="this.onerror=null;this.src='assets/img/default-avatar.png';">
                     </a>
                     <div class="card card-user dropdown-menu" style="width: 300px;">
-                        <div class="image" style="height: 260px;">
-                            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                                alt="..." />
+                        <div class="image image-cover" style="height: 260px;">
+                            <img src="{{auth.user.avatar}}" alt="..."  onerror="this.onerror=null;this.src='assets/img/default-avatar.png';"/>
                         </div>
                         <div class="content text-center">
-                            <div class="author" style="margin-top: -150px;">
-                                <img class="avatar border-gray" style="width: 200px; height: 200px;"
-                                    src="{{auth.user.avatar}}" alt="..." />
-                                <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
-                                    <small>{{auth.user.email}}</small><br>
-                                </h4>
-                            </div>
                             <button class="btn btn-outline-success btn-warning">
                                 <i *ngIf="auth.user.roleId!='FREE'" class="pe-7s-medal"
                                     style="font-size: 33px; padding: 5px;"></i><br>
@@ -89,16 +81,15 @@
                                     style="font-size: 33px; padding: 5px;"></i><br>
                                 {{auth.user.roleId}}
                             </button>
-                            <p class="description text-center hidden"> "Lamborghini Mercy <br>
-                                Your chick she so thirsty <br>
-                                I'm in that two seat Lambo"
-                            </p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
+
+                            <hr />
+                            <h4 class="title">{{auth.user.datas.firstName}} {{auth.user.datas.lastName}}<br />
+                                <small>{{auth.user.email}}</small><br>
+                            </h4>
+                            <hr />
                             <a routerLink="/me/user">
                                 <h6>Ver Perfil</h6>
-                            </a>
+                            </a>,
                             <a (click)="signOut()">
                                 <h6>Sair</h6>
                             </a>

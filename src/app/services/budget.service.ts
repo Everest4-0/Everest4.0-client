@@ -19,7 +19,7 @@ export class BudgetService extends AppService<Budget> implements IService<Budget
     return this.getOne(id)
   }
 
-  all(f: any={}): Observable<Array<Budget>> {
+  all(f: any = {}): Observable<Array<Budget>> {
     return this.getAll(f)
   }
 
@@ -27,7 +27,7 @@ export class BudgetService extends AppService<Budget> implements IService<Budget
     return this.updateOne(o);
   }
 
-  create(o: any): Observable<Budget> {
-    return this.createOne(o)
+  create(o: Budget): Observable<Budget> {
+    return this.createOne(o.clone() as Budget)
   }
 }

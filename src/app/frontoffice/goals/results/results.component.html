@@ -1,75 +1,103 @@
-<div class="row">
-    <div class="col-sm-3">
-        <div class="col-sm-12 col-xs-6" (click)="setResults(item)" *ngFor="let item of results">
-            <a class="thumbnail">
-                <div class="frontpage_square  {{item.class}}">
-                    <img src="" class="img img-responsive full-width" />
-                    <div class="label-box vertical-center">
-                        <h1>{{item.code}}</h1>
-                        <span style="font-size: 24px;">{{item.evaluations.length}} {{item.name}}<br>+</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-sm-9">
-        <div class="col-sm-12">
-                <div class="col-md-12">
-                    <div>
-                        <h2>{{currentResults.name}}</h2>
-                        <ul class="list-group" *ngFor="let group of currentResults.groups">
-                            <li (click)="registGoal(currentResults, group[0])"
-                                class="list-group-item list-group-item-action active">
-                                <h3>{{group[0]}}<button class="btn btn-default pull-right btn-sm" (click)="registGoal(currentResults, group[0])" style="color: #FFF;"> <i class="pe-7s-plus" style="color: #FFF;"></i> Registar objecto</button></h3>
-                            </li>
-                            <div *ngFor="let item of group[1]">
-                                <li class="list-group-item">
-                                    {{item.name}}</li>
-                            </div>
-                        </ul>
-                        <ul class="list-group" *ngFor="let group of otherResults">
-                            <li 
-                                class="list-group-item list-group-item-action bg-info">
-                                <h3>{{group}}<button class="btn btn-default pull-right btn-sm" (click)="registGoal(currentResults, group)"> <i class="pe-7s-plus" style="color: #000;"></i> Registar objecto</button></h3>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-
-    <jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}">
-        <h4>Carregar Objectivos e metas para <b>{{goal.group}} </b></h4>
-        <hr>
+<div class="main-content">
+    <div class="container-fluid">
         <div class="row">
-            <form [formGroup]="form" (ngSubmit)="saveGoal()">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Objectivo</label>
-                        <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
-                            formControlName="objectives" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text formContro text-muted hidden">We'll never share your
-                            email with anyone
-                            else.</small>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <a [routerLink]="['/me/diagnostic']" class="btn btn-info pull-right" style="margin: 15px;">
+                                <i class="pe-7s-search"></i> Fazer Auto avaliação
+                            </a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Meta Anual</label>
-                        <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
-                            [(ngModel)]="goal.anualGoal" formControlName="anualGoal">
+                    <div class="row">
+                        <app-diagnostic-view [data]=evaluationDatas *ngIf="evaluationDatas.data!==undefined">
+                        </app-diagnostic-view>
                     </div>
-                    <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">
-                        <div class="form-group" *ngFor="let item of goal.partials; let i=index">
-                            <label for="exampleInputPassword1">{{i+1}}º Trimestre</label>
-                            <input type="number" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp" [(ngModel)]="item.value" name="{{i}}_partial"
-                                (keyup)="setAnualGoal()" [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" *ngFor="let currentResults of results" style="padding:15px">
+                            <h4>
+                                <button class="accordion btn btn-xs pe-7s-angle-down" (click)="accordion($event.target)"
+                                    title='panel-{{currentResults.name}}'></button>
+                                {{currentResults.name}} <span
+                                    class="badge ">{{currentResults.evaluations.length}}</span>
+                            </h4>
+
+                            <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse">
+                            </ngx-skeleton-loader>
+                            <div id="panel-{{currentResults.name}}" class="list-group panel"
+                                *ngIf="currentResults.groups.length>0">
+                                <ul class="list-group" *ngFor="let group of currentResults.groups">
+                                    <li class="list-group-item list-group-item-action active">
+                                        <b>{{group[0]}}</b>
+                                        <button class="btn btn-default pull-right btn-sm"
+                                            (click)="registGoal(currentResults, group[0])" style="color: #FFF;"> <i
+                                                class="pe-7s-plus" style="color: #FFF;"></i> Registar objectivo</button>
+                                    </li>
+                                    <div *ngFor="let item of group[1]">
+                                        <li class="list-group-item">
+                                            {{item.name}}
+                                        </li>
+                                    </div>
+                                </ul>
+
+                                <ul class="list-group" *ngFor="let group of otherResultsx(currentResults)">
+                                    <li class="list-group-item list-group-item-action bg-info">
+                                        <b>{{group}}</b><button class="btn btn-default pull-right btn-sm"
+                                            (click)="registGoal(currentResults, group)"> <i class="pe-7s-plus"
+                                                style="color: #000;"></i> Registar objectivo</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="row text-center"><br>
-            <button class="btn btn-success btn-fill" (click)="saveGoal()">Salvar</button>
-        </div>
-    </jw-modal>
+    </div>
+</div>
+
+
+
+
+<jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}"
+    subtitle="Carregar Objectivos <b>{{goal.group}} </b>">
+    <div class="row">
+        <form [formGroup]="form" (ngSubmit)="saveGoal()">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="inputObjectives">Objectivo<span class="error">*</span></label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
+                        formControlName="objectives" id="inputObjectives">
+                    <div *ngIf="controls.objectives.touched  && controls.objectives.invalid" class="error">
+                        <div *ngIf="controls.objectives.errors.required">Este campo é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAnualGoal">Meta Anual<span class="error">*</span></label>
+                    <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
+                        [(ngModel)]="goal.anualGoal" formControlName="anualGoal" id="inputAnualGoal">
+                    <div *ngIf="controls.anualGoal.touched  && controls.anualGoal.invalid" class="error">
+                        <div *ngIf="controls.anualGoal.errors.required">Este campo é obrigatório</div>
+                    </div>
+                </div>
+                <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">
+                    <div class="form-group" *ngFor="let item of goal.partials; let i=index">
+                        <label for="exampleInputPassword1">{{i+1}}º Trimestre</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            [(ngModel)]="item.value" name="{{i}}_partial" (keyup)="setAnualGoal()"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center"><br>
+                <button class="btn btn-success btn-fill" type="submit">Salvar</button>
+            </div>
+        </form>
+    </div>
+</jw-modal>

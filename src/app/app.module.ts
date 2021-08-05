@@ -6,7 +6,7 @@ import { FirstloginComponent } from './frontoffice/firstlogin/firstlogin.compone
 import { ModalModule } from './components/modal/modal.module';
 import { StorageServices } from './services/storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { isDevMode, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
@@ -51,6 +51,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
 
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { EvaluationComponent } from './frontend/diagnostic/evaluation/evaluation.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -84,14 +86,16 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     //for backoffice
     BackofficeModule,
 
+    PasswordStrengthMeterModule,
+
     ToastModule.forRoot({
       timeOut: 5000
     }),
     MsalModule.forRoot({
       auth: {
         clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
-        authority: "https://login.microsoftonline.com/common/", // This is your tenant ID
-        redirectUri: 'http://everest.nova-vps.com:9000'// This is your redirect URI
+        authority: 'https://login.microsoftonline.com/common/', // This is your tenant ID
+        redirectUri: isDevMode ? 'http://localhost:4200/' : 'https://application.qld.everest40.com/'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -111,6 +115,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       extraQueryParameters: {}
     })
     , NgxPermissionsModule.forRoot()
+    , NgxPermissionsModule.forChild()
   ],
   declarations: [
     FirstloginComponent,
@@ -125,6 +130,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
+    EvaluationComponent,
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,

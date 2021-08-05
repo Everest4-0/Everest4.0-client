@@ -19,11 +19,12 @@ declare interface RouteInfo {
 export const FRONTOFFICE_ROUTES: RouteInfo[] = [
   { path: '/me/dashboard', title: 'Início', icon: 'pe-7s-home', roles: ['PRO', 'BASIC', 'FREE'] },
 
-  { path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['PRO', 'BASIC', 'FREE'] },
-  { path: '/me/goals', title: 'Objectivos e plano de acção', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
-  { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['PRO', 'BASIC','FREE'] },
-  { path: '/me/coaching', title: 'Gestão de carreira e Coaching online', icon: 'pe-7s-umbrella', roles: ['PRO', 'BASIC','FREE']  },
-  { path: '/me/monitoring', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', roles: ['PRO', 'BASIC'] },
+  //{ path: '/me/diagnostic', title: 'Diagnóstico', icon: 'pe-7s-search', roles: ['PRO', 'BASIC', 'FREE'] },
+  //{ path: '/me/personal-planing', title: 'Planeamento pessoal', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/goals', title: 'Planeamento pessoal', icon: 'pe-7s-way', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/courses', title: 'Cursos online ', icon: 'pe-7s-bookmarks', roles: ['PRO', 'BASIC', 'FREE'] },
+  { path: '/me/coaching', title: 'Consultoria de carreira', icon: 'pe-7s-umbrella', roles: ['PRO', 'BASIC', 'FREE'] },
+  // { path: '/me/monitoring', title: 'Monitorização e relatórios ', icon: 'pe-7s-display1', roles: ['PRO', 'BASIC'] },
   { path: '/me/helpdesk', title: 'Apoio ao cliente', icon: 'pe-7s-help1', roles: ['PRO', 'BASIC', 'FREE'] },
   { path: '/me/upgrade', title: 'Mudar para Premium', icon: 'pe-7s-rocket', class: 'active-pro', roles: ['FREE'] },
 

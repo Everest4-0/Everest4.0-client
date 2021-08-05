@@ -83,6 +83,9 @@ import { TestimonialValidationComponent } from './courses/testimonial-validation
 import { CoachingModule } from './coaching/coaching.module';
 import { ComponentsModule } from 'app/components/components.module';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { EvaluationComponent } from './diagnostic/evaluation/evaluation.component';
+
 FullCalendarModule.registerPlugins([
   listPlugin,
   interactionPlugin,
@@ -114,9 +117,11 @@ FullCalendarModule.registerPlugins([
     PdfViewerModule,
     CoachingModule,
     //NgxPermissionsModule.forRoot(),
-
+    NgxPermissionsModule.forChild(),
     ComponentsModule,
-    PaymentModule
+    PaymentModule ,
+
+    NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' })
   ],
   declarations: [
     CounterDirective,
@@ -160,7 +165,8 @@ FullCalendarModule.registerPlugins([
     ListQuizComponent,
     QuizSolveFormComponent,
     TestimonialComponent,
-    TestimonialValidationComponent
+    TestimonialValidationComponent,
+    EvaluationComponent,
   ],
   exports: [
     ModalModule,

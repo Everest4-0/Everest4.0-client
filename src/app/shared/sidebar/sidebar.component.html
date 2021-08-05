@@ -2,35 +2,12 @@
     <div class="logo">
         <a href="#" class="simple-text">
             <div class="logo-img">
-
             </div>
             <img src="/assets/img/eum-logo.png" style="width: 100%;" />
-            <span style="    font-size: 12px; float: right;">{{appVersion}}</span>
+            <span style="font-size: 12px; float: right;">{{appVersion}}</span>
         </a>
     </div>
     <ul class="nav responsive-nav">
-        <li *ngIf="isMobileMenu()">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-globe"></i>
-                <span class="notification hidden-sm hidden-xs">5</span>
-                <p class="hidden-lg hidden-md">
-                    5 Notifications
-                    <b class="caret"></b>
-                </p>
-            </a>
-        </li>
-        <li *ngIf="isMobileMenu()">
-            <a>
-                <i class="fa fa-search"></i>
-                <p class="hidden-lg hidden-md">Search</p>
-            </a>
-        </li>
-        <li *ngIf="isMobileMenu()">
-
-            <a routerLink="/user">
-                <p>Ver Perfil</p>
-            </a>
-        </li>
         <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
 
         <li routerLinkActive="active" title="" *ngFor="let menuItem of frontofficeMenuItems" class="{{menuItem.class}}">
@@ -50,5 +27,24 @@
                 </a>
             </ng-template>
         </li>
+
+        <li class="mobile" *ngIf="isMobileMenu()">
+            <a [routerLink]="['/backoffice']">
+                <span class="hidden-sm">Partilhar</span>
+            </a>
+        </li>
+        <ng-template [ngxPermissionsOnly]="['ADMIN']">
+            <li class="mobile" *ngIf="isMobileMenu()">
+                <a [routerLink]="['/backoffice']" *ngIf="auth.user.roles.includes('ADMIN')">
+                    <span class="hidden-sm">Backoffice</span>
+                </a>
+            </li>
+        </ng-template>
+        <li class="mobile" *ngIf="isMobileMenu()">
+            <a routerLink="/me/user" data-toggle="dropdown">
+                {{auth.user.datas.firstName}} {{auth.user.datas.lastName}}
+            </a>
+        </li>
+
     </ul>
 </div>

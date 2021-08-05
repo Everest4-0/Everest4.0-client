@@ -1,25 +1,35 @@
 <div the_imports="" style="display:none;"><input id="idImportFile" type="file" name="files"><button id="idImportUpload"
         type="file" name="files"></button></div>
-<div class="container-login100" style="background-image: url(assets/img/full-screen-image-3.jpg);">
+<div class="container-login100" style="background-image: url(assets/img/wp/everest-3.jpg);">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
         <img src="assets/img/dum-logo.svg" class="logo" alt="GOOGLE">
-        <form class="login100-form validate-form" *ngIf="!isCollapsed"  #signOnForm="ngForm"
-         [formGroup]="signInForm " (ngSubmit)="signIn(signOnForm)">
+        <form class="login100-form validate-form" *ngIf="!isCollapsed" [formGroup]="signInForm "
+            (ngSubmit)="signIn()">
             <span class="login100-form-title p-b-37">
                 Autenticar-se
             </span>
-            <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter username or email">
-                <input class="input100" type="email" name="email" placeholder="E-mail" formControlName="email" 
-                [(ngModel)]="signInUser.email" >
-                <span class="focus-input100"></span></div>
-            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
-                <input class="input100" type="password" name="passw" placeholder="Palavra passe" formControlName="passw" [(ngModel)]="signInUser.passw">
+            <div class="wrap-input100 validate-input" data-validate="Enter username or email">
+                <input class="input100" type="email" name="email" placeholder="E-mail" formControlName="email"
+                    [(ngModel)]="signInUser.email">
                 <span class="focus-input100"></span>
             </div>
-            
+
+            <div *ngIf="l.email.touched  && l.email.invalid" class="error">
+                <div *ngIf="l.email.errors.required">Por favor insira um E-mail válido</div>
+                <div *ngIf="l.email.errors.invalidEmail">Por favor insira um E-mail válido</div>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <input class="input100" type="password" name="password" placeholder="Palavra passe"
+                    formControlName="password" [(ngModel)]="signInUser.password">
+                <span class="focus-input100"></span>
+            </div>
+
+            <div *ngIf="l.password.touched  && l.password.invalid" class="error">
+                <div *ngIf="l.password.errors.required">Por favor insira um Palavra-passe</div>
+            </div>
             <div class="error" *ngIf="localUser.message">{{localUser.message}}</div>
             <div class="container-login100-form-btn">
-                <button class="login100-form-btn" [disabled]="!signOnForm.valid">
+                <button class="login100-form-btn">
                     Entrar
                 </button>
             </div>
@@ -48,39 +58,53 @@
         </form>
 
 
-        <form class="login100-form validate-form" #signOnForm="ngForm" [formGroup]="signInForm" 
-              (ngSubmit)="signOn(signOnForm)"    *ngIf="isCollapsed">
+        <form class="login100-form validate-form" [formGroup]="signOnForm" (ngSubmit)="signOn()" *ngIf="isCollapsed">
             <span class="login100-form-title p-b-37">
-                Registar-se {{signOnForm.valid}}
+                Registar-se
             </span>
-            <div class="wrap-input100 validate-input m-b-20 " data-validate="Enter email">
+            <div class="wrap-input100 validate-input " data-validate="Enter email">
                 <input class="input100" type="email" formControlName="email" [(ngModel)]="signOnUser.email"
                     placeholder="E-mail">
-                <app-control-messages [control]="userForm.get('email')"></app-control-messages>
 
                 <span class="focus-input100"></span>
             </div>
-            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
-                <input class="input100" type="password" formControlName="passw" [(ngModel)]="signOnUser.passw"
+
+            <div *ngIf="f.email.touched  && f.email.invalid" class="error">
+                <div *ngIf="f.email.errors.required">Por favor insira um E-mail válido</div>
+                <div *ngIf="f.email.errors.invalidEmail">Por favor insira um E-mail válido</div>
+            </div>
+
+            <div *ngIf="errors.email" class="error">
+                <div *ngFor="let error of errors.email">{{error}}</div>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <input class="input100" type="password" formControlName="password" [(ngModel)]="signOnUser.password"
                     placeholder="Palavra passe">
-                <app-control-messages [control]="userForm.get('password')"></app-control-messages>
-                <span class="focus-input100"></span>
-            </div>
-            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
-                <input class="input100" type="password" formControlName="passw" [(ngModel)]="passy"
-                    placeholder="Repita a Palavra passe">
-                    <app-control-messages [control]="userForm.get('email')"></app-control-messages>
+                <password-strength-meter [password]="signOnUser.password" [enableFeedback]="true">
+                </password-strength-meter>
                 <span class="focus-input100"></span>
             </div>
 
-            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
-                <input class="" type="checkbox"> 
-                Ao criar uma conta, você concorda com os Termos de Serviço e Código de Honra e reconhece que a Everest e cada Membro processam seus dados pessoais de acordo com a Política de Privacidade e que tenho idade igual ou maior que 18 anos
-                <app-control-messages [control]="userForm.get('email')"></app-control-messages>
+            <div *ngIf="f.password.touched && f.password.invalid" class="error">
+                <div *ngIf="f.password.errors.required">Password is required.</div>
+                <div *ngIf="f.password.errors.invalidPassword">Por favor insira uma palavra passe válida e mais forte contendo pelomenos 8 caracteres, letras minúsculas e maiúsculas, números e caracteres especiais.
+                </div>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <input class="input100" type="password" formControlName="confirm_password" id="confirm_password"
+                    placeholder="Repita a Palavra passe">
                 <span class="focus-input100"></span>
+            </div>
+            <div *ngIf="f.confirm_password.touched && f.confirm_password.invalid" class="error">
+                <div *ngIf="f.confirm_password.errors.required">Password is required.</div>
+                <div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm Password must be match.
+                </div>
+            </div>
+            <div class="wrap-input100 validate-input m-b-25" data-validate="Enter password">
+                Ao clicar "Registar", você aceita os <a href="#">Termos</a> e a <a href="#"> Política de Privacidade</a>
             </div>
             <div class="container-login100-form-btn">
-                <button class="login100-form-btn" [disabled]="!signOnForm.valid">
+                <button class="login100-form-btn" >
                     Registar
                 </button>
             </div>
@@ -109,4 +133,3 @@
 <div id="the_lights">
     <div id="the_lights_close"></div>
 </div>
-

@@ -23,7 +23,7 @@ export class User {
 
     message: string;
     get avatar(): string {
-        let prefix = this.photoUrl.split('ttps://').length > 1 ? '' : AppService.serverAddress
+        const prefix = this.photoUrl.split('ttps://').length > 1 ? '' : AppService.serverAddress
         return prefix + this.photoUrl
     }
     provider: string = 'LOCAL';
@@ -66,7 +66,7 @@ export class User {
     castGoogleUser(user: SocialUser) {
         this.datas = new UserData()
         this.settings = new UserSetting()
-        let fullName = user.name.split(' ')
+        const fullName = user.name.split(' ')
         this.datas.firstName = fullName.shift()
         this.datas.lastName = fullName.join(' ');
         this.email = user.email
@@ -80,7 +80,7 @@ export class User {
 
         this.datas = new UserData()
         this.settings = new UserSetting()
-        let fullName = user.name.split(' ')
+        const fullName = user.name.split(' ')
         this.datas.firstName = fullName.shift()
         this.datas.lastName = fullName.join(' ');
         this.email = user.userName
@@ -95,9 +95,6 @@ export class User {
 
         return [{ name: this.roleId, icon: 'pe-7s-medal', color: 'bg-warning' },
         { name: this.roleId, icon: 'pe-7s-delete-user', color: 'bg-default' },][this.roleId == 'FREE' ? 0 : 1]
-    }
-    set passw(p: string) {
-        this.password = p + '~'
     }
 
 }

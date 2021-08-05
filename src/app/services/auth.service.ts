@@ -19,19 +19,23 @@ export class AuthService extends AppService<User> implements IService<any> {
     private store: StorageServices,
     private permissionsService: NgxPermissionsService) {
     super(http, 'users');
-    let u = store.get<User>('current_user').data
-    if (u === undefined)
+    const u = store.get<User>('current_user').data
+    if (u === undefined) {
       this.user = undefined
-    else
+    } else {
       this.user = Object.assign(new User(), u);
+    }
   }
 
   authorizationKey = () => this.user.apikey;
 
+  signOn(o: User): Observable<any> {
+    return this.http.post(this.url + '?key=' + o.apikey, o, { 'headers': this.headers })
+  }
   authenticate(o: User, callback): Observable<any> {
     const service = this.http.post(this.url + '/authenticate', o);
     service.subscribe((u: User) => {
-      
+
       switch (parseInt(u.code)) {
         case 401:
           u.message = 'Endereço de e-mail ou palavra-passe esta incorretas.'
@@ -64,7 +68,7 @@ export class AuthService extends AppService<User> implements IService<any> {
     return this.getOne(id)
   }
 
-  all(f: any={}): Observable<Array<User>> {
+  all(f: any = {}): Observable<Array<User>> {
     return this.getAll(f)
   }
 

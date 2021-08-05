@@ -1,12 +1,13 @@
 import { Goal } from './../models/goal/goal';
-import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 export class GoalForm {
 
-    constructor(fb: FormBuilder, that:Goal) {
+    constructor(that: Goal) {
+        let fb=new FormBuilder()
         return fb.group({
             objectives: ['', Validators.required],
-            anualGoal:[],
+            anualGoal:['', Validators.required],
             partials: fb.array(that.partials)
         })
     }

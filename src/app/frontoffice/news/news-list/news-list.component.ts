@@ -3,14 +3,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 @Component({
-  selector: 'app-news-list',
+  selector: 'app-news',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss']
 })
 export class NewsListComponent implements OnInit {
 
   bingNews: any = {};
-  news: any;
+  news: [];
 
 
   public show: boolean = true;

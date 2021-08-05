@@ -15,6 +15,7 @@ export class UpdateEvaluationComponent implements OnInit {
 
   public form = new EvaluationForm(this.fb)
   public evaluation: Evaluation = new Evaluation();
+  public domains: Array<string> = ['Pessoal', 'Profissional', 'Financeiro']
   constructor(
     private fb: FormBuilder,
     private evaluationService: EvaluationService,
@@ -29,7 +30,7 @@ export class UpdateEvaluationComponent implements OnInit {
     this.evaluationService.one(id).subscribe(evaluation => this.evaluation = evaluation)
   }
 
-  saveForm(t={}) {
+  saveForm() {
     this.evaluationService.update(this.evaluation).subscribe(evaluation => {
       this.toast.success('Vaiavel actualizado com successo', 'Sucesso', {
         timeOut: 5000,

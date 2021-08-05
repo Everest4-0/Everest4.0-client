@@ -1,18 +1,94 @@
-.frontpage_square{
-    position:relative;
-    overflow:hidden;
-    padding-bottom:100%;
+.frontpage_square {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
 
-    div.label-box{
-            position: absolute;
-            
-            width: 100%;
+    div.label-box {
+        position: absolute;
+
+        width: 100%;
+        text-align: center;
+        * {
             text-align: center;
-            *{
-                text-align: center;
+        }
+    }
+}
+.frontpage_square img {
+    position: absolute;
+}
+
+.accordion {
+    transition: 0.4s;
+    border: none;
+    font-size: 20px;
+    padding: 0 5px;
+    margin: 0;
+    text-align: center;
+    width: 30px;
+}
+
+.active,
+.accordion:hover {
+}
+
+.accordion:after {
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+}
+
+.panel {
+    border-radius: none;
+    overflow: hidden;
+    margin-top: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.card {
+    .card-header {
+        padding: 5px 15px;
+        background: #fff;
+        padding: 5px;
+        border-radius: 5px 5px 0 0;
+        position: relative;
+        overflow: hidden;
+        background: #1dc7ea;
+        background: linear-gradient(to bottom, #1dc7ea 0%, #4091ff 100%);
+        background-size: 150% 150%;
+
+        h3 {
+            padding: 5px;
+            position: relative;
+            z-index: 2;
+            color: #fff;
+        }
+        img {
+            position: absolute;
+            left: 0;
+            top: -70%;
+            width: 100%;
+            height: auto;
+            opacity: 0.3;
+        }
+    }
+
+    ul {
+        li.list-group-item.bg-info {
+            background: #eee;
+            border-top: solid #aaa;
+        }
+        li.list-group-item {
+            border: none;
+            border-bottom: solid 1px #eee;
+
+            .btn.btn-sm {
+                border: none;
+                padding: 0;
             }
+        }
     }
-    }
-    .frontpage_square img{
-    position:absolute;
-    }
+}

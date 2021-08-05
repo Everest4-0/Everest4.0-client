@@ -5,11 +5,14 @@ import { UserEvaluationService } from 'app/services/user-evaluation.service';
 import { AuthService } from 'app/services/auth.service';
 import { GoalService } from 'app/services/goal.service';
 import { Goal } from 'app/models/goal/goal';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GoalForm } from './../../../forms/goal.form';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { PartialGoal } from 'app/models/goal/partial-goal';
+import { ActivatedRoute } from '@angular/router';
+import { EvaluationService } from 'app/services/evaluation.service';
+import { Evaluation } from 'app/models/diagnostic/evaluation';
 
 @Component({
   selector: 'app-results',
@@ -17,73 +20,93 @@ import { PartialGoal } from 'app/models/goal/partial-goal';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
+  public currentResults = { name: null, currentResults: [], groups: [] };
+  public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
+  public userEvaluations: Array<UserEvaluation> = [];
+  public evaluations: Array<Evaluation> = [];
+  goal = new Goal();
+  form = new GoalForm(this.goal)
 
-
+  get controls() {
+    return this.form.controls;
+  }
   public results = [
     { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
     { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
-    /*{ code: 'O', name: 'Oportunidades' },
-    { code: 'T', name: 'Ameaças' },*/
-  ]
-  public currentResults = {name:null, currentResults: [], groups: [] };
-  public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
-  public evaluations: Array<UserEvaluation> = [];
-  goal = new Goal();
-  form = new GoalForm(this.fb, this.goal)
+  ];
+
+
+  public diagnosticDatas: any = {};
+  public evaluationDatas: any = {}
+  public weakness = [];
+  public strengths = []
 
   constructor(
     private auth: AuthService,
     private modalService: ModalService,
     private fb: FormBuilder,
-    private evaluationService: UserEvaluationService,
+    private userEvaluationService: UserEvaluationService,
     private goalService: GoalService,
-    private toast: ToastService
+    private toast: ToastService,
+
   ) { }
 
   ngOnInit(): void {
 
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
-    this.evaluationService.all({ userId: this.auth.user.id }).subscribe(evaluations => {
+    this.userEvaluationService.all({ requesterId: this.auth.user.id }).subscribe(userEvaluations => {
 
-      let fin = []
-      let evs = []
-      let setEv = evaluations.forEach((ev) => {
-        if (!evs.map(x => x[0]).includes(ev.evaluation.name))
-          evs.push([ev.evaluation.name, evaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
+      const evs = []
+      userEvaluations.forEach((ev) => {
+        if (!evs.map(x => x[0]).includes(ev.evaluation.name)) {
+          evs.push([ev.evaluation.name, userEvaluations.filter(e => e.evaluation.name === ev.evaluation.name)])
+        }
       })
       evs.forEach((e, k) => {
 
-        let points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
+        const points = (e[1].reduce((r, s) => r + parseInt(s.points), 0) / e[1].length)
         if (points === 4) {
           e.push(true)
-        }
-        else if (points < 3) {
+        } else if (points < 3) {
           e.push(false)
         } else {
           evs.splice(k, 1);
         }
 
       })
-      this.evaluations = evaluations
-      let full = evaluations.reduce((x, y) => x + parseInt(y.points + ''), 0)
+      this.userEvaluations = userEvaluations
       this.results.forEach(result => {
 
 
         result.evaluations = evs
           .filter(evaluation => result.conditions(evaluation[2])).map(g => g[1][0].evaluation);
 
-        /* result.evaluations = evaluations
-           .filter(evaluation => result.conditions(evaluation.points) && evaluation.requested === null);*/
-        result.groups = this.groupBy(result.evaluations, 'group')/*result.evaluations.map(x => x.group)
-          .filter((value, index, self) => {
-            return self.indexOf(value) === index;
-          })*/
+        result.groups = this.groupBy(result.evaluations, 'group')
+
         result.groups = Object.keys(result.groups).map((key) => [key, result.groups[key]]);
+
+
+        const evaluationsGross = userEvaluations.reduce((result, currentObject) => {
+          const val = currentObject.evaluation['group']
+          result[val] = result[val] || []
+          result[val].push(currentObject)
+          return result
+        }, {})
+
+        let evaluationArr: Array<Array<any>>;
+        evaluationArr = Object.entries(evaluationsGross)
+        evaluationArr.forEach(((arr) => {
+          arr[3] = (arr[1].reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (arr[1].length)).toFixed(2);
+        }))
+
+        this.evaluationDatas = { labels: evaluationArr.map(x => x[0]), data: evaluationArr.map(x => parseFloat(x[3])) }
+
+
+
       })
     })
   }
-
   groupBy = (xs, key) => {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -100,17 +123,21 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
+debugger
+    if (this.form.dirty && this.form.valid) {
+      this.goalService.create(this.goal).subscribe(goal => {
+        this.goal = new Goal()
+        this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
 
-    this.goalService.create(this.goal).subscribe(goal => {
-      this.goal = new Goal()
-      this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
-
-      this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
-        timeOut: 50000,
-        progressBar: true,
+        this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
+          timeOut: 50000,
+          progressBar: true,
+        })
+        this.modalService.close('result-modal')
       })
-      this.modalService.close('result-modal')
-    })
+    } else {
+      this.validateAllFormFields(this.form);
+    }
   }
   openModal(id) {
     this.modalService.open(id);
@@ -122,10 +149,55 @@ export class ResultsComponent implements OnInit {
     this.openModal('result-modal')
   }
 
-  setResults(e) {
+  otherResultsx(e) {
+    return ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+  }
 
-    let u = this.results;
+
+  notIn(arr: Array<any>, a): boolean {
+    return arr.filter(x => x !== a).length === 0
+  }
+
+  groupByx = (xs, key) => {
+    return xs.reduce(function (rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  }
+
+  setResultsx(e) {
     this.currentResults = e
     this.otherResults = ['Pessoal', 'Profissional', 'Financeiro'].filter(x => !e.groups.map(x => x[0]).includes(x))
+  }
+
+  accordion(that: any): void {
+
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
+
+    const panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+
+  }
+
+
+  /**
+   * refine
+   */
+  validateAllFormFields(formGroup: FormGroup) {
+
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 }

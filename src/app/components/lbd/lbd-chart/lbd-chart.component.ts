@@ -25,16 +25,16 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   public title: string;
 
   @Input()
-  public subtitle: string;
+  public subtitle: string = '';
 
   @Input()
-  public chartClass: string;
+  public chartClass: string = '';
 
   @Input()
   public chartType: ChartType;
 
   @Input()
-  public chartData: any;
+  public chartData: any = {};
 
   @Input()
   public chartOptions: any;
@@ -43,21 +43,21 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   public chartResponsive: any[];
 
   @Input()
-  public footerIconClass: string;
+  public footerIconClass: string = '';
 
   @Input()
-  public footerText: string;
+  public footerText: string = '';
 
   @Input()
   public legendItems: LegendItem[];
 
   @Input()
-  public withHr: boolean;
+  public withHr: boolean = false;
 
   @Input()
   public chart;
 
-  public chartId: string;
+  public chartId: string = '';
 
   constructor() {
   }

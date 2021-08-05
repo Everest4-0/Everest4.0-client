@@ -1,58 +1,33 @@
 <div class="card">
     <div class="header">
         <h4 class="title">Feedbacks</h4>
-        <p class="category">...</p>
     </div>
     <div class="content">
-        <div class="table-full-width">
-            <table class="table" *ngIf="requests.length>0">
-                <thead>
-                    <tr>
-                        <th colspan="3">
-                            <h6>Solicitações recebidas</h6>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of requests; let y=index">
-                        <td>
-                            <div class="checkbox" *ngIf="item.evaluations.length>=evaluations.length">
-                                <input id="checkbox{{y}}" type="checkbox" checked="false">
-                                <label for="checkbox{{y}}">
+        <div class="row" *ngFor="let item of requests; let y=index">
+            <div class="col-md-1">
+                <img src="{{getUserAvatar(item.requester.photoUrl)}}"
+                    onerror="this.onerror=null;this.src='assets/img/default-avatar.png';"
+                    class="img-thumbnail pull-left">
+            </div>
+            <div class="col-md-11">
+                <h4 style="padding: 0;margin: 0;line-height: 0px;">
+                    {{item.requester.datas.firstName}}
+                    {{item.requester.datas.lastName}}
+                    - <span class="label label-default" style="margin: 5px;">{{['Familiar','Colega de
+                        trabalho','Amigo'][item.relationId-1]}}</span>
 
-                                </label>
-                            </div>
-                        </td>
-                        <td style="width: 100px;">
-                            <img src="{{getUserAvatar(item.requester.photoUrl)}}"
-                                class="img-thumbnail pull-left" style="width:100px">
-                        </td>
-                        <td>
+                    <span class="label label-success" *ngIf="item.evaluations.length>=evaluations.length">
+                        Completo
+                    </span>
+                </h4><br>
 
-                            <div></div>
-                            <h4 style="padding: 0;margin: 0;line-height: 0px;">
-                                {{item.requester.datas.firstName}}
-                                {{item.requester.datas.lastName}}
-                                - <span class="label label-default"
-                                    style="margin: 5px;">{{['Familiar','Colega de trabalho','Amigo'][item.relationId-1]}}</span>
-                            </h4><br>
-
-                            {{item.createdAt|date}}
-                            <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}"></app-progress-bar>
-
-                            <button type="button" rel="tooltip" title="Edit Task"
-                                class="btn btn-info btn-simple btn-xs pull-right" (click)="selectRequest(item)">
-                                <i class="fa fa-chevron-right"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
-        </div>
-        <div class="footer">
-            <div class="stats">
-                <i class="fa fa-history"></i> ...
+                {{item.createdAt|date}}
+                <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}">
+                </app-progress-bar>
+                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs pull-right"
+                    (click)="selectRequest(item,true)">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -63,58 +38,34 @@
     <div *ngFor="let item of requesteds" class="col-sm-2">
         <div class="card" style="padding: 5px;">
             <img class="card-img-top img img-responsive full-width" src="{{getUserAvatar(item.requested.photoUrl)}}"
-                style="width: 100%;">
+                onerror="this.onerror=null;this.src='assets/img/default-avatar.png';" style="width: 100%;">
             <div class="card-body">
                 <app-progress-bar done="{{100*item.evaluations.length/evaluations.length}}"></app-progress-bar>
-                <h5 class="card-title">{{item.requested.datas.firstName}} {{item.requested.datas.lastName}}</h5>
-            </div>
-            <div class="card-footer">
+                <h5 class="card-title">{{item.requested.datas.firstName}} {{item.requested.datas.lastName}}
+                    <button type="button" rel="tooltip" title="Edit Task"
+                        class="btn btn-info btn-simple btn-xs pull-right" (click)="selectRequest(item, false)">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </h5>
             </div>
         </div>
     </div>
 </div>
-<jw-modal id="evaluation-modal" class="md">
-    <h4>Feedback para {{request.requester.datas.firstName}} {{request.requester.datas.lastName}}</h4>
+<jw-modal id="evaluation-modal" class="x-lg">
+    <h1>{{request.requester.datas.firstName}} {{request.requester.datas.lastName}}</h1>
     <hr>
-    <div class="row text-center">
-        <div class="col-md-12">
-            <ul class="list-group" *ngFor="let g of evaluations | groupBy:'group'">
-                <li class="list-group-item text-left active">
-                    {{g[0]}}
-                </li>
-                <div *ngFor="let item of evaluations; let i = index">
-                    <li class="list-group-item text-left" *ngIf="g[0]==item.group">
-                        {{item.name}}
-                        <button class="btn btn-xs pull-right {{item.points>0 ? 'btn-success' : ''}}"
-                            (click)="makeEvaluation(item)">
-                            <i *ngIf="item.points==0" class="fa fa-chevron-right"></i>
-                            <span *ngIf="item.points>0">{{item.points}}</span>
-                        </button>
-                    </li>
-                </div>
-            </ul>
-        </div>
+    <div class="row">
+        <app-evaluation [evaluations]="evaluations" [requester]="request.requester" [request]="request"
+            [requested]="request.requested" [editable]="requestEditable"></app-evaluation>
     </div>
     <div class="row">
         <div class="col-md-12">
             <label>Comentários</label>
-            <textarea class="form-control" #descriptions placeholder="(opcional)" (change)="updateDescriptions(descriptions.value)">{{request.descriptions}}</textarea>
+            <textarea class="form-control" [disabled]="!requestEditable" #descriptions placeholder="(opcional)"
+                (change)="updateDescriptions(descriptions.value)">{{request.descriptions}}</textarea>
         </div>
     </div>
-
-    <div class="row text-center"><br>
+    <div class="row text-center" *ngIf="requestEditable"><br>
         <button class="btn btn-success btn-fill" (click)="saveEvaluationComent()">Salvar</button>
     </div>
-
-    <jw-modal id="self-evaluation-modal" class="sm" title="Avaliação - {{currentEvaluation.name}}">
-        <h4>{{currentEvaluation.group}}</h4>
-        <hr>
-        <div class="row text-center">
-            <app-rating max=4 (change)='onEvaluationChange($event)' rating={{currentEvaluation.points}}></app-rating>
-            <h5>{{label[currentEvaluation.points-1]}}</h5>
-        </div>
-        <div class="row text-center"><br>
-            <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>
-        </div>
-    </jw-modal>
 </jw-modal>

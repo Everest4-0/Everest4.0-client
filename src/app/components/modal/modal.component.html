@@ -2,6 +2,7 @@
     <div class="{{class}} jw-modal-body ">
         <div class="header" *ngIf="title">
             <h3>{{title}}</h3>
+            <span class="tin-text" [innerHTML]="subtitle"></span>
             <img src="assets/img/sidebar-5.jpg">
         </div>
         <ng-content></ng-content>

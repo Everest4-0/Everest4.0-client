@@ -1,12 +1,12 @@
 <app-backoffice-navbar [title]="'Variaveis de avaliação'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-        <h4 class="title">TESTE</h4>
-        <p class="category">Here is a subtitle for this table</p>
+        <h4 class="title">Editar a váriavel {{evaluation.name}}</h4>
+        
     </div>
 
     <div class="content">
-        <form #evaluation="ngForm" [formGroup]="form" (ngSubmit)="saveForm()" >
+        <form #evaluationForm="ngForm" [formGroup]="form" (ngSubmit)="saveForm()" >
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -20,8 +20,12 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Domínio</label>
-                        <input type="text" class="form-control" formControlName="group"
+                        <select class="form-control" formControlName="group"
                         [(ngModel)]="evaluation.group" value="evaluation.group">
+                            <option *ngFor="let domain of domains" [selected]="domain==evaluation.group">{{domain}}
+                            </option>
+                        </select>
+
                     </div>
                 </div>
             </div>
@@ -48,7 +52,7 @@
                 </div>
             </div><br><br>
             <button type="submit" class="btn btn-success btn-fill pull-rightx" 
-                    [disabled]="!evaluation.valid">Salvar</button>
+                    >Salvar</button>
             <div class="clearfix"></div>
         </form>
     </div>

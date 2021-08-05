@@ -1,0 +1,45 @@
+<div class="col-md-12" style=" padding: 15px;">
+    <app-progress-bar done="{{getPbvalue(evaluations)}}" showLabel=true></app-progress-bar>
+</div>
+<div class="col-md-4" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
+    <div class="card">
+        <div class="card-header ">
+            <h3 class="pull-left">{{item[0]}}</h3>
+            <button class="btn border-none pull-right close" *ngIf="editable" (click)="removeEvaluation(item[0])"><h3><i class="pe-7s-close"></i></h3></button>
+            <img src="assets/img/sidebar-{{i+1}}.jpg">
+        </div>
+        <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
+
+            <ul class="list-group">
+                <div *ngFor="let v of evaluations">
+                    <li class="list-group-item" *ngIf="v.group==item[0]">
+                        <button class="btn btn-xs pe-7s-help1 border-none" title="{{v.descriptions}}"> </button>
+                        {{v.name}}
+                        <button class="btn btn-xs pull-right border-none" *ngIf="v.points"> <label
+                                class="label">{{label[v.points-1]}}</label></button>
+                        <button class="btn btn-xs pull-right btn-info btn-fill"
+                            (click)="openModal('self-evaluation-modal', v)" *ngIf="!v.points && editable"> Avaliar</button>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div class="card-footer" style="padding: 15px; border-top:solid 1px #eee">
+            <app-progress-bar done="{{getPbvalue(item[1])}}"></app-progress-bar>
+            <span class="badge badge-info"></span>
+        </div>
+    </div>
+</div>
+
+
+
+<jw-modal id="self-evaluation-modal" class="sm" title="Auto Avaliação - {{currentEvaluation.evaluation.name}}">
+    <h4>{{currentEvaluation.evaluation.group}}</h4>
+    <hr>
+    <div class="row text-center">
+        <app-rating max=4 (change)='onChange($event)' rating={{currentEvaluation.points}}></app-rating>
+        <h5>{{label[currentEvaluation.points-1]}}</h5>
+    </div>
+    <div class="row text-center"><br>
+        <button class="btn btn-success bg-success" (click)="saveEvaluation()">Salvar</button>
+    </div>
+</jw-modal>
