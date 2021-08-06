@@ -46,8 +46,7 @@
                                                 style="color: #F00;" *ngIf="!inTime(task.dueDate)"></i></span>
                                     </td>
                                     <td>
-                                        <span
-                                            class="label label-{{['default','danger','warning','success','danger','default'][task.state]}}">
+                                        <span class="label label-{{['default','primary','warning','success','danger','default'][task.state]}}">
                                             {{statesArr[task.state]}}</span>
 
                                     </td>
@@ -188,7 +187,7 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span
-                            class="label label-{{['default','danger','warning','success','danger','default'][taskDetails.state]}}">
+                            class="label label-{{['default','primary','warning','success','danger','default'][taskDetails.state]}}">
                             {{statesArr[taskDetails.state]}}
                             <b class="caret" *ngIf="states(taskDetails.state).length"></b></span>
                     </a>

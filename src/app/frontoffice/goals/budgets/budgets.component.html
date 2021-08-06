@@ -24,6 +24,10 @@
                                 <div>
                                     <span class="tin-text">{{item.goal.objectives}}</span><br />
                                     {{item.descriptions}}
+                                    <span title="{{taskStatesArr[item.state]}}"
+                                        class="label btn-xs label-{{['default','primary','warning','success','danger','default'][item.state]}}">
+                                       . 
+                                    </span>
                                 </div>
 
                             </div>
@@ -109,11 +113,15 @@
                                 <div>
                                     <span class="tin-text">{{item.goal.objectives}}</span><br />
                                     {{item.descriptions}}
+                                    <span title="{{taskStatesArr[item.state]}}"
+                                        class="label btn-xs label-{{['default','primary','warning','success','danger','default'][item.state]}}">
+                                       . 
+                                    </span>
                                 </div>
                             </div>
                             <div class="col col-xs-3 text-right">
                                 {{item.expenses}} kzs<br>
-                                <span class="tin-text">{{valueToFix(item)}}</span>
+                                <span class="tin-text">{{valueToFix(item, false)}}</span>
                             </div>
 
                             <div class="col col-xs-2">
@@ -189,6 +197,10 @@
                     <label for="value">Valor</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="budget.value"
                         formControlName="value" #value>
+
+                    <div *ngIf="controls.value.touched  && controls.value.invalid" class="error">
+                        <div *ngIf="controls.value.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12">
@@ -198,6 +210,10 @@
                         formControlName="category" #category>
                         <option *ngFor="let item of getBudgetCategories" [ngValue]="item">{{item.name}}</option>
                     </select>
+
+                    <div *ngIf="controls.category.touched  && controls.category.invalid" class="error">
+                        <div *ngIf="controls.category.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
             </div>
 

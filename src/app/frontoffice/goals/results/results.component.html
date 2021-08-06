@@ -22,9 +22,8 @@
                     <div class="col-md-12">
                         <div class="card" *ngFor="let currentResults of results" style="padding:15px">
                             <h4>
-                                
-                                {{currentResults.name}} <span
-                                    class="badge ">{{currentResults.evaluations.length}}</span>
+                                {{currentResults.name}} 
+                                <span class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
 
                             <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse">

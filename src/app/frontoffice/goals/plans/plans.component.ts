@@ -66,12 +66,10 @@ export class PlansComponent implements OnInit {
     return new Date(t) > new Date()
   }
   addTask(g) {
-    debugger
     this.task.goal = g
     this.openModal('plan-modal');
   }
   updateState(task: Task, state: number) {
-    debugger
     task.state = state
     this.updateTask(task)
   }
@@ -102,7 +100,7 @@ export class PlansComponent implements OnInit {
       this.taskService.create(this.task).subscribe(task => {
         this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
         this.task = new Task()
-        task.goal = this.task.goal
+        
         this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
           timeOut: 50000,
           progressBar: true,
