@@ -22,15 +22,14 @@
                     <div class="col-md-12">
                         <div class="card" *ngFor="let currentResults of results" style="padding:15px">
                             <h4>
-                                <button class="accordion btn btn-xs pe-7s-angle-down" (click)="accordion($event.target)"
-                                    title='panel-{{currentResults.name}}'></button>
+                                
                                 {{currentResults.name}} <span
                                     class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
 
                             <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse">
                             </ngx-skeleton-loader>
-                            <div id="panel-{{currentResults.name}}" class="list-group panel"
+                            <div id="panel-{{currentResults.name}}" class="list-group"
                                 *ngIf="currentResults.groups.length>0">
                                 <ul class="list-group" *ngFor="let group of currentResults.groups">
                                     <li class="list-group-item list-group-item-action active">

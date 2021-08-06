@@ -32,7 +32,7 @@ export class ResultsComponent implements OnInit {
   }
   public results = [
     { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
-    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
+    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: 'bg-danger', conditions: (x) => !x }
   ];
 
 
@@ -123,7 +123,6 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
-debugger
     if (this.form.dirty && this.form.valid) {
       this.goalService.create(this.goal).subscribe(goal => {
         this.goal = new Goal()

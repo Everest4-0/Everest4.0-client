@@ -1,13 +1,14 @@
 import Swal from 'sweetalert2';
 import { TaskService } from './../../../services/task.service';
 import { TaskForm } from './../../../forms/task.form';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Task } from './../../../models/goal/task';
 import { AuthService } from './../../../services/auth.service';
 import { Goal } from './../../../models/goal/goal';
 import { GoalService } from './../../../services/goal.service';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-plans',
@@ -22,11 +23,14 @@ export class PlansComponent implements OnInit {
   tasks: Array<Task> = [];
   goals: Array<Goal> = []
   now: Date = new Date()
+
+  statesArr = ['Pendente', 'Por inicial', 'Em curso', 'Concluido', 'Cancelado'];
   constructor(
     private fb: FormBuilder,
     private modalService: ModalService,
     private goalService: GoalService,
     private taskService: TaskService,
+    private toast: ToastService,
     private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -34,14 +38,6 @@ export class PlansComponent implements OnInit {
 
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
       this.goals = goals
-      goals.forEach(x => {
-        x.tasks.forEach(t => {
-          x.tasks = null
-          t.goal = x
-          this.tasks.push(t)
-        })
-
-      })
     })
   }
 
@@ -49,7 +45,7 @@ export class PlansComponent implements OnInit {
     this.taskDetails = task
     this.openModal('task-detail-modal')
   }
-  //['Pendente','Por inicial','Em curso','Concluido']
+
   states(s) {
     switch (parseInt(s)) {
       case 0:
@@ -60,58 +56,106 @@ export class PlansComponent implements OnInit {
         break;
       case 2:
         return [0, 3, 4]
-
     }
     return []
   }
   setEstate(s) {
     this.task.state = s
   }
-  inTime(t){
+  inTime(t) {
     return new Date(t) > new Date()
   }
   addTask(g) {
-    
+    debugger
     this.task.goal = g
     this.openModal('plan-modal');
   }
-  updateState(task, state) {
+  updateState(task: Task, state: number) {
+    debugger
     task.state = state
+    this.updateTask(task)
+  }
+  updateTask(task: Task) {
+
     this.taskService.update(task).subscribe(task => {
-      this.tasks.forEach(t => {
-        if (t.id === task.id)
-          t = task
-      });
-      Swal.fire(
-        'Sucesso!',
-        'Resultados esperado registado com sucesso',
-        'success'
-      )
+
+      let y = this.goals;
+      y = y.filter(g => g.id = this.task.goal.id)[0]
+      y = y.tasks
+      y = y.filter(t => t.id = this.task.id)
+      y = y[0]
+      y = this.task
+
+      this.toast.success('Tarefa foi actualizada com sucesso', 'Sucesso', {
+        timeOut: 50000,
+        progressBar: true,
+      })
       this.modalService.close('plan-modal')
     })
   }
   saveTask() {
-    let dueDate = this.task.dueDate
-    this.task.dueDate = new Date(dueDate)
-    this.taskService.create(this.task).subscribe(task => {
-      this.task = new Task()
-      task.goal=this.task.goal
-      this.tasks.push(task)
-      Swal.fire(
-        'Sucesso!',
-        'Resultados esperado registado com sucesso',
-        'success'
-      )
-      this.modalService.close('plan-modal')
-    })
+    if (this.form.dirty && this.form.valid) {
+      const dueDate = this.task.dueDate
+
+      this.task.dueDate = new Date(dueDate)
+
+      this.taskService.create(this.task).subscribe(task => {
+        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
+        this.task = new Task()
+        task.goal = this.task.goal
+        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
+          timeOut: 50000,
+          progressBar: true,
+        })
+
+        this.modalService.close('plan-modal')
+      })
+
+    } else {
+      this.validateAllFormFields(this.form);
+    }
   }
   anualGoal(goal: Goal) {
-    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0)+'') }, 0)
+    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
   };
   openModal(id) {
     this.modalService.open(id);
   }
   closeModal(id) {
     this.modalService.close(id);
+  }
+
+  get controls() {
+    return this.form.controls;
+  }
+  /**
+   * refine
+   */
+  validateAllFormFields(formGroup: FormGroup) {
+
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
+
+  accordion(that) {
+
+    that.classList.toggle("pe-7s-angle-up");
+    that.classList.toggle("pe-7s-angle-down");
+
+    var panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+
+
   }
 }

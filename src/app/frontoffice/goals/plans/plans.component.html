@@ -13,63 +13,63 @@
         <div class="card-body">
             <ngx-skeleton-loader *ngIf="goals.length==0" count=5 animation="pulse"></ngx-skeleton-loader>
             <div class="col-xs-12">
-                <div class="row" *ngFor="let goal of goals">
-                    <div class="col col-xs-6">{{goal.objectives}}</div>
-                    <div class="col col-xs-4 text-right">{{anualGoal(goal)}}</div>
-                    <div class="col col-xs-2 actions text-right"><button class="btn" (click)="addTask(goal)"><i
-                                class="pe-7s-plus"></i></button> </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer"> . . .</div>
-    </div>
-    <h2>Tarefas</h2>
-    <div class="card">
-        <div class="card-header">
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="col col-xs-6">Tarefa</div>
-                    <div class="col col-xs-6 text-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-xs"><i class="pe-7s-angle-left"></i></button>
-                            <button type="button" class="btn btn-xs"><i class="pe-7s-angle-right"></i></button>
+                <div class="row" *ngFor="let goal of goals; let i = index">
+                    <div class="col-md-12">
+                        <div class="col col-xs-6">
+                            <button class="accordion btn btn-xs pe-7s-angle-down pull-left" title="panel-goal-{{i}}"
+                                (click)="accordion($event.target)"></button>
+                            {{goal.objectives}}
+                            <span class="badge ">{{goal.tasks.length}}</span>
+                        </div>
+                        <div class="col col-xs-4 text-right">{{anualGoal(goal)}}</div>
+                        <div class="col col-xs-2 actions text-right"><button class="btn" (click)="addTask(goal)"><i
+                                    class="pe-7s-plus"></i></button>
                         </div>
                     </div>
+
+                    <div class="panel" id="panel-goal-{{i}}">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tarefa</th>
+                                    <th>Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let task of goal.tasks; let t=index" (click)="showTaskDetails(task)">
+                                    <td>{{t+1}}</td>
+                                    <td>
+                                        {{task.descriptions}}<br />
+                                        <span class="tin-text">{{task.updatedAt|date}} <i class="pe-7s-clock"
+                                                style="color: #F00;" *ngIf="!inTime(task.dueDate)"></i></span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="label label-{{['default','danger','warning','success','danger','default'][task.state]}}">
+                                            {{statesArr[task.state]}}</span>
+
+                                    </td>
+                                    <td class="text-right">
+                                        <button class="btn btn-xs border-none" (click)="showTaskDetails(task)">
+                                            <i class="pe-7s-angle-right"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="goal.tasks.length<1">
+                                    <td colspan="3" class="text-center">
+                                        Sem registo
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-
-            <ngx-skeleton-loader *ngIf="tasks.length==0" count=5 animation="pulse"></ngx-skeleton-loader>
-            <div class="col-xs-12">
-                <div class="row" *ngFor="let task of tasks">
-                    <div class="col col-sm-8 col-md-8" (click)="showTaskDetails(task)">{{task.descriptions}} <br>
-                        <span class="tin-text">{{task.updatedAt|date}} <i class="pe-7s-clock" style="color: #F00;"
-                                *ngIf="!inTime(task.dueDate)"></i></span>
-                    </div>
-                    <div class="col col-sm-4 col-md-4 actions text-right">
-                        <div class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span
-                                    class="label label-{{['default','danger','warning','success','danger'][task.state]}}">{{['Pendente','Por
-                                    inicial','Em curso','Concluido','Cancelado'][task.state]}}
-
-                                    <b class="caret" *ngIf="states(task.state).length"></b></span>
-
-                            </a>
-                            <ul class="dropdown-menu" *ngIf="states(task.state).length">
-                                <li *ngFor="let state of states(task.state)">
-                                    <a (click)="updateState(task,state)">{{['Pendente','Por inicial','Em
-                                        curso','Concluido','Cancelar'][state]}}</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer"> . . .</div>
     </div>
 </div>
 <div class="col-sm-4">
@@ -85,7 +85,6 @@
 
 <jw-modal id="plan-modal" class="md" title="{{task.goal.objectives}}" subtitle="Registar nova tarefa">
     <div class="row">
-        <input type="text" b5kDatepicker>
         <form [formGroup]="form" (ngSubmit)="saveTask()">
             <div class="col-md-12">
                 <div class="form-group  col-md-12">
@@ -94,31 +93,42 @@
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="task.descriptions"
                         formControlName="descriptions" #descriptions>
 
-                    <span class="validation">
-                        <i class="fa fa-check text-success" *ngIf="!descriptions.invalid"></i>
-                        <i class="fa fa-times text-danger" *ngIf="descriptions.invalid"></i>
-                    </span>
+                    <div *ngIf="controls.descriptions.touched  && controls.descriptions.invalid" class="error">
+                        <div *ngIf="controls.descriptions.errors.required">Este campo é obrigatório</div>
+                    </div>
 
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputDuration">Duração (minutos)</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.duration"
                         formControlName="duration" id="duration">
+                    <div *ngIf="controls.duration.touched  && controls.duration.invalid" class="error">
+                        <div *ngIf="controls.duration.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="inputDueDate">Data de conclusão</label>
                     <input type="date" class="form-control form-control-lg" [(ngModel)]="task.dueDate"
                         formControlName="dueDate" id="inputDueDate">
+                    <div *ngIf="controls.dueDate.touched  && controls.dueDate.invalid" class="error">
+                        <div *ngIf="controls.dueDate.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputRevenue">Receitas</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.revenue"
                         formControlName="revenue" id="inputRevenue">
+                    <div *ngIf="controls.revenue.touched  && controls.revenue.invalid" class="error">
+                        <div *ngIf="controls.revenue.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputExpenses">Curstos</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
                         formControlName="expenses" id="inputExpenses">
+                    <div *ngIf="controls.expenses.touched  && controls.expenses.invalid" class="error">
+                        <div *ngIf="controls.expenses.errors.required">Este campo é obrigatório</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="exampleInputPassword1">Estado</label>
@@ -146,10 +156,10 @@
                         formControlName="observations" id="textAreaObservations"></textarea>
                 </div>
             </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success btn-fill">Salvar</button>
+            </div>
         </form>
-    </div>
-    <div class="row text-center"><br>
-        <button class="btn btn-success btn-fill" (click)="saveTask()">Salvar</button>
     </div>
 </jw-modal>
 
@@ -178,13 +188,13 @@
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span
-                            class="label label-{{['default','danger','warning','success'][taskDetails.state]}}">{{['Pendente','Por
-                            inicial','Em curso','Concluido'][taskDetails.state]}}
+                            class="label label-{{['default','danger','warning','success','danger','default'][taskDetails.state]}}">
+                            {{statesArr[taskDetails.state]}}
                             <b class="caret" *ngIf="states(taskDetails.state).length"></b></span>
                     </a>
                     <ul class="dropdown-menu" *ngIf="states(taskDetails.state).length">
-                        <li *ngFor="let state of states(taskDetails.state)">
-                            <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
+                        <li *ngFor="let state of states(taskDetails.state)" (click)="updateState(taskDetails, state)">
+                            <a>{{statesArr[state]}}</a>
                         </li>
                     </ul>
                 </div>
