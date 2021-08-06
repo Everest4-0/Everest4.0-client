@@ -84,7 +84,7 @@
 
 <jw-modal id="plan-modal" class="md" title="{{task.goal.objectives}}" subtitle="Registar nova tarefa">
     <div class="row">
-        <form [formGroup]="form" (ngSubmit)="saveTask()">
+        <form [formGroup]="form.fg" (ngSubmit)="saveTask()">
             <div class="col-md-12">
                 <div class="form-group  col-md-12">
 
@@ -92,8 +92,8 @@
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="task.descriptions"
                         formControlName="descriptions" #descriptions>
 
-                    <div *ngIf="controls.descriptions.touched  && controls.descriptions.invalid" class="error">
-                        <div *ngIf="controls.descriptions.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.descriptions.touched && form.controls.descriptions.invalid" class="error">
+                        <div *ngIf="form.controls.descriptions.errors.required">Este campo é obrigatório</div>
                     </div>
 
                 </div>
@@ -101,32 +101,32 @@
                     <label for="inputDuration">Duração (minutos)</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.duration"
                         formControlName="duration" id="duration">
-                    <div *ngIf="controls.duration.touched  && controls.duration.invalid" class="error">
-                        <div *ngIf="controls.duration.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.duration.touched && form.controls.duration.invalid" class="error">
+                        <div *ngIf="form.controls.duration.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="inputDueDate">Data de conclusão</label>
                     <input type="date" class="form-control form-control-lg" [(ngModel)]="task.dueDate"
                         formControlName="dueDate" id="inputDueDate">
-                    <div *ngIf="controls.dueDate.touched  && controls.dueDate.invalid" class="error">
-                        <div *ngIf="controls.dueDate.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.dueDate.touched && form.controls.dueDate.invalid" class="error">
+                        <div *ngIf="form.controls.dueDate.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputRevenue">Receitas</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.revenue"
                         formControlName="revenue" id="inputRevenue">
-                    <div *ngIf="controls.revenue.touched  && controls.revenue.invalid" class="error">
-                        <div *ngIf="controls.revenue.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.revenue.touched  && form.controls.revenue.invalid" class="error">
+                        <div *ngIf="form.controls.revenue.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="inputExpenses">Curstos</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
                         formControlName="expenses" id="inputExpenses">
-                    <div *ngIf="controls.expenses.touched  && controls.expenses.invalid" class="error">
-                        <div *ngIf="controls.expenses.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.expenses.touched  && form.controls.expenses.invalid" class="error">
+                        <div *ngIf="form.controls.expenses.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div class="form-group col-md-12">

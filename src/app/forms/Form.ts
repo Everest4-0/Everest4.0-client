@@ -1,8 +1,23 @@
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-export default class Form  {
-    fb;
-    cosntructor() {
-        this.fb = new FormBuilder()
+export default class Form {
+    public fg: FormGroup;
+    public fb = new FormBuilder()
+    public valid: boolean;
+    public dirty: boolean;
+    public controls: any
+
+    constructor() {
+    }
+
+    public validateAllFormFields() {
+        Object.keys(this.fg.controls).forEach(field => {
+            const control = this.fg.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof Form) {
+                control.validateAllFormFields();
+            }
+        });
     }
 }

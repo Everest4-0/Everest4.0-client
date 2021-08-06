@@ -179,7 +179,7 @@
 <jw-modal id="budget-modal" class="sm" title="{{budget.task.descriptions}}"
     subtitle="Registo de <b>{{budget.direction ? 'entradas' : 'saídas'}}</b>">
     <div toastContainer></div>
-    <form [formGroup]="form" (ngSubmit)="saveBudget()">
+    <form [formGroup]="form.fg" (ngSubmit)="saveBudget()">
         <div class="row">
             <div class="col-md-6">
                 <h5>Orçamento</h5>
@@ -197,9 +197,8 @@
                     <label for="value">Valor</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="budget.value"
                         formControlName="value" #value>
-
-                    <div *ngIf="controls.value.touched  && controls.value.invalid" class="error">
-                        <div *ngIf="controls.value.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.value.touched  && form.controls.value.invalid" class="error">
+                        <div *ngIf="form.controls.value.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
             </div>
@@ -210,9 +209,8 @@
                         formControlName="category" #category>
                         <option *ngFor="let item of getBudgetCategories" [ngValue]="item">{{item.name}}</option>
                     </select>
-
-                    <div *ngIf="controls.category.touched  && controls.category.invalid" class="error">
-                        <div *ngIf="controls.category.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.category.touched  && form.controls.category.invalid" class="error">
+                        <div *ngIf="form.controls.category.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
             </div>

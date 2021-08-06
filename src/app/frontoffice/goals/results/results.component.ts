@@ -135,7 +135,7 @@ export class ResultsComponent implements OnInit {
         this.modalService.close('result-modal')
       })
     } else {
-      this.validateAllFormFields(this.form);
+      this.form.validateAllFormFields();
     }
   }
   openModal(id) {
@@ -188,15 +188,4 @@ export class ResultsComponent implements OnInit {
   /**
    * refine
    */
-  validateAllFormFields(formGroup: FormGroup) {
-
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
 }
