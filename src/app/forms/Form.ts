@@ -6,7 +6,7 @@ export default class Form {
     public valid: boolean;
     public dirty: boolean;
     public controls: any
-
+    public errors: any;
     constructor() {
     }
 

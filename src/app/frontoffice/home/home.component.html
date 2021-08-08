@@ -1,44 +1,27 @@
 <div class="main-content">
     <div class="container-fluid">
 
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6">
-                    <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'% Objectivos semanais'"
-                        [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType"
-                        [chartData]="emailChartDataSeries" [legendItems]="emailChartLegendItems" [withHr]="true"
-                        [chartOptions]="chartOptions">
-                    </lbd-chart>
-                </div>
-
-                <div class="col-md-6">
-                    <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'Dashboard executivo'"
-                        [chartType]="activityChartType" [chartData]="activityChartData"
-                        [chartOptions]="activityChartOptions" [chartResponsive]="activityChartResponsive"
-                        [legendItems]="activityChartLegendItems" [withHr]="true">
-                    </lbd-chart>
-                </div>
-            </div>
-            <div class="row">
-                <app-news></app-news>
-            </div>
-
+        <div class="col-md-4">
+            <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'% Objectivos semanais'"
+                [chartClass]="'ct-perfect-fourth'" [chartType]="emailChartType" [chartData]="emailChartDataSeries"
+                [legendItems]="emailChartLegendItems" [withHr]="true" [chartOptions]="chartOptions">
+            </lbd-chart>
         </div>
-        <div class="col-md-4" style=" min-height: 200px">
-            <div class="" style=" padding: 15px">
-                <a [routerLink]="['/me/quizes']" class="btn btn-success">
-                    Desafios
-                </a>
-                <ng-template [ngxPermissionsOnly]="['PRO', 'BASIC'] ">
-                    <a [routerLink]="['/me/vacant-n-jobs']" class="btn btn-info">
-                        <i class="pe-7s-speaker"></i> Vagas de emprego
-                    </a>
 
-                </ng-template>
-            </div>
+        <div class="col-md-4">
+            <lbd-chart *ngIf="dataLoaded" [subtitle]="''" [title]="'Dashboard executivo'"
+                [chartType]="activityChartType" [chartData]="activityChartData" [chartOptions]="activityChartOptions"
+                [chartResponsive]="activityChartResponsive" [legendItems]="activityChartLegendItems" [withHr]="true">
+            </lbd-chart>
+        </div>
+
+        <div class="col-md-4">
             <app-task></app-task>
         </div>
 
+
+        <div class="col-md-12">
+            <app-news></app-news>
+        </div>
+        <app-quiz-solve-form></app-quiz-solve-form>
     </div>
-    <app-quiz-solve-form></app-quiz-solve-form>
-</div>

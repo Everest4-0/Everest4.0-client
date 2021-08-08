@@ -46,7 +46,8 @@
                                                 style="color: #F00;" *ngIf="!inTime(task.dueDate)"></i></span>
                                     </td>
                                     <td>
-                                        <span class="label label-{{['default','primary','warning','success','danger','default'][task.state]}}">
+                                        <span
+                                            class="label label-{{['default','primary','warning','success','danger','default'][task.state]}}">
                                             {{statesArr[task.state]}}</span>
 
                                     </td>

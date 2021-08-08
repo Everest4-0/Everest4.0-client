@@ -1,6 +1,45 @@
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
     z-index: 2;
     color: #000;
     background-color: #ececec;
     border-color: #c5c5c5;
+}
+
+.card-body.tasks {
+    padding: 0 30px;
+    .list-group-item {
+        transition: .2 !important;
+        border: none;
+        border: 1px solid #eee;
+        border-left: solid 5px #ff5e5e;
+        border-radius: 0;
+        padding: 5px;
+        margin-bottom: 2px;
+    }
+    .checkbox{
+        margin: 0;
+    }
+    h5.date{
+        padding: 0;margin: 0; font-size: 10px;
+    }
+    .list-group-item:hover {
+        border-left-width: 8px;
+    }
+    .list-group-item.task-default {
+        border-left-color: #eee !important;
+    }
+    .list-group-item.task-danger {
+        border-left-color:#dc3545!important;
+    }
+    .list-group-item.task-warning {
+        border-left-color:#ffc107!important;
+    }
+    .list-group-item.task-success {
+        border-left-color:#28a745!important;
+    }
+    .list-group-item.task-info {
+        border-color:#17a2b8!important;
+    }
 }

@@ -89,7 +89,8 @@ export class PlansComponent implements OnInit {
   }
 
   saveTask() {
-    if (this.form.dirty && this.form.valid) {
+    debugger
+    if (this.form.fg.dirty && this.form.fg.valid) {
       const dueDate = this.task.dueDate
 
       this.task.dueDate = new Date(dueDate)
