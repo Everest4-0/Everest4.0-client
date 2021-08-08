@@ -22,6 +22,7 @@ import { EnrollingCourseComponent } from './enrolling-course/enrolling-course.co
 import { PaginateComponent } from './paginate/paginate.component';
 import { SharedTodoComponent } from './shared-todo/shared-todo.component';
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
+import { FeedbackChartComponent } from './feedback-chart/feedback-chart.component';
 
 
 
@@ -33,29 +34,25 @@ import { ControlMessagesComponent } from './control-messages/control-messages.co
     TaskComponent,
     CalendarComponent,
     ScheduleComponent,
-    
+
     CoachingNoteComponent,
     DiagnosticViewComponent,
+    FeedbackChartComponent,
     CoachingFeedbackComponent,
     CoachingEvolutionComponent,
 
-    
     ChatComponent,
 
-    
     VirtualDataroomComponent,
 
-    
     EnrollingCourseComponent,
 
-    
     PaginateComponent,
 
-    
     SharedTodoComponent,
 
-    
-    ControlMessagesComponent
+    ControlMessagesComponent,
+
   ],
   imports: [
     MomentModule,
@@ -70,7 +67,7 @@ import { ControlMessagesComponent } from './control-messages/control-messages.co
 
     RouterModule
   ],
-  exports:[
+  exports: [
     ProgressBarComponent,
     RatingComponent,
 
@@ -80,6 +77,7 @@ import { ControlMessagesComponent } from './control-messages/control-messages.co
 
     CoachingNoteComponent,
     DiagnosticViewComponent,
+    FeedbackChartComponent,
     CoachingFeedbackComponent,
     CoachingEvolutionComponent,
 
@@ -89,7 +87,7 @@ import { ControlMessagesComponent } from './control-messages/control-messages.co
 
     FormsModule,
     ReactiveFormsModule,
-    
+
     VirtualDataroomComponent,
     EnrollingCourseComponent,
 
