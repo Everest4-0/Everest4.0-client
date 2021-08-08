@@ -45,7 +45,7 @@ export class TaskComponent implements OnInit {
     this.todo.user = this.auth.user
     this.toDoService.create(this.todo).subscribe(toDo => {
       this.toast.success('Evento registado com Sucesso', 'Sucesso')
-      if (moment(0, "HH").diff(toDo.startDate, "days") === 0) { this.child.todos.push(toDo) }
+     // if (moment(0, "HH").diff(toDo.startDate, "days") === 0) { this.child.todos.push(toDo) }
       this.todo = new ToDo()
       this.modalService.close('todo-modal')
     })

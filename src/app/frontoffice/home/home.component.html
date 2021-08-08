@@ -19,7 +19,28 @@
             <app-task></app-task>
         </div>
 
-
+        <div class="col-md-12 vacants">
+            <div class="col-md-12 card">
+                <div class="col-md-2 card" style="margin-top: 15px;">
+                    <h4>
+                        Vagas de
+                        Emprego
+                    </h4>
+                    </div>
+                <div class="col-md-2 vacant" *ngFor="let item of vacants">
+                    <div class=" col col-md-4">
+                        <img src="/assets/img/logos/{{item.id}}.png" class="img-responsive">
+                    </div>
+                    <div class="col col-md-8">
+                        <span><b>{{item.title}}</b></span><br />
+                        <span>{{item.company}}</span><br />
+                        <span>{{item.regim}} | {{item.place}}</span>
+                    </div>
+                    
+                </div>
+            <span class="pull-right"><a>ver mais</a></span>
+            </div>
+        </div>
         <div class="col-md-12">
             <app-news></app-news>
         </div>
