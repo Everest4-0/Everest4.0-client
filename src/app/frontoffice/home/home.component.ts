@@ -70,6 +70,12 @@ export class HomeComponent implements OnInit {
       title: 'Tecnico de informatica',
       place: 'Luanda, Angola',
       regim: 'Part time'
+    }, {
+      id: 6,
+      company: 'Paypel',
+      title: 'Help desk',
+      place: 'Remoto',
+      regim: 'Part time'
     },
   ]
   constructor(

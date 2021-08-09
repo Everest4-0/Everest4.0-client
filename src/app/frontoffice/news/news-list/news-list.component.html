@@ -19,8 +19,7 @@
                     <div class="card">
                         <div class="card-header">
                             <img src="{{ item.urlToImage}}"
-                                onerror="this.onerror=null;this.src='assets/img/image_not_found.png';"
-                                class="img-responsive" style="width: 100%;" />
+                                class="img-responsive image-cover" style="width: 100%;" />
                         </div>
                         <div class="card-body" style="padding: 5px 15px; height: 140px;">
                             <label class="pull-right">{{item.publishedAt|amLocale:'pt'| amTimeAgo}}</label>
@@ -30,7 +29,6 @@
                         <div class="card-footer  hidden"
                             style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
                             <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
-
                         </div>
                     </div>
                 </a>

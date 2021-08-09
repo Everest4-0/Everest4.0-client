@@ -52,3 +52,21 @@
 .card{
   box-shadow: 0 0 15px rgba(0,0,0,.2);
 }
+
+.image-cover {
+  background-size: cover;
+  background-position: center;
+  background-image: url(assets/img/image_not_found.png);
+}
+
+.avatar {
+  object-fit: cover;
+}
+
+
+.error {
+  color: #f00;
+  padding: 0 5px;
+  /* width: 100%; */
+  font-size: 12px;
+}

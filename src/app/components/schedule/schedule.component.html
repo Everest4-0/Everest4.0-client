@@ -46,9 +46,8 @@
         </h4>
     </div>
 
-    <div class="card-body tasks">
-        <div class="col-md-12">
-            <div class="list-group"  *ngIf="tasks.overDue.length>0">
+    <div class="card-body tasks row">
+            <div class="list-group  list-group-flush"  *ngIf="tasks.overDue.length>0">
                 <a class="list-group-item task-{{['default','danger','warning','success','danger'][item.state]}}"
                     *ngFor="let item of tasks.overDue| slice:0:overDueLimit let i = index">
                     <div class="row">
@@ -81,7 +80,6 @@
             <div *ngIf="tasks.overDue.length==0" class="text-center">
                 Não existe agendas e pendentes para hoje
             </div>
-        </div>
     </div>
 
     <div class="header">
