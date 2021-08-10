@@ -1,3 +1,4 @@
+import { FeedbackChartComponent } from './../components/feedback-chart/feedback-chart.component';
 import { PaymentModule } from './../payment/payment.module';
 import { QuizSolveFormComponent } from './quiz/quiz-solve-form/quiz-solve-form.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
@@ -116,10 +117,10 @@ FullCalendarModule.registerPlugins([
     QRCodeModule,
     PdfViewerModule,
     CoachingModule,
-    //NgxPermissionsModule.forRoot(),
+
     NgxPermissionsModule.forChild(),
     ComponentsModule,
-    PaymentModule ,
+    PaymentModule,
 
     NgxSkeletonLoaderModule.forRoot({ animation: 'pulse', loadingText: 'This item is actually loading...' })
   ],

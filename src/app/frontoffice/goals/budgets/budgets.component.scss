@@ -1,32 +1,31 @@
-
-.card{
-    .card-header{
-        .row{
+.card {
+    .card-header {
+        .row {
             border-bottom: solid 1px #ccc;
-            div.col{
+            div.col {
                 padding: 15px;
                 font-size: 18px;
                 font-weight: 0;
             }
         }
     }
-    .card-body{
-        .row{
+    .card-body {
+        .row {
             border-bottom: solid 1px #ccc;
             background-color: #f4fbff;
-            div.col{
+            div.col {
                 padding: 15px;
                 font-size: 16px;
                 font-weight: 900;
-                span.tin-text{
+                span.tin-text {
                     font-size: 12px;
                     font-weight: 100;
                 }
             }
-            div.col.actions{ 
+            div.col.actions {
                 padding-left: 15px;
                 padding-right: 15px;
-                    .btn{
+                .btn {
                     padding: 0 15px;
                     font-size: 25px;
                     border-color: transparent;
@@ -36,61 +35,22 @@
         }
     }
 }
-        
-.frontpage_square{
-    position:relative;
-    overflow:hidden;
-    padding-bottom:100%;
 
-    div.label-box{
-            position: absolute;
-            
-            width: 100%;
-            text-align: center;
-            *{
-                text-align: center;
-            }
-    }
-    }
-    .frontpage_square img{
-    position:absolute;
-    }
+.frontpage_square {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
 
+    div.label-box {
+        position: absolute;
 
-    .accordion {
-        
-        transition: 0.4s;border: none;
-        font-size: 20px;
-        padding: 0 5px;
-        margin: 0;
+        width: 100%;
         text-align: center;
-        width: 30px;
+        * {
+            text-align: center;
+        }
     }
-    
-    .active, .accordion:hover {
-        background-color: #ccc;
-    }
-    
-    .accordion:after {
-      //  content: '\2304';
-        color: #777;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
-    }
-    
-    .active:after {
-      //  content: "\2303";
-    }
-    
-    .panel {
-        padding: 0 18px;
-        background-color: #FFF;
-        box-shadow: 0 0 15px rgba(0,0,0,.1);
-        border-radius: none;
-        max-height: 0;
-        overflow: hidden;
-        margin: 0 15px;
-        margin-top: 0;
-        transition: max-height 0.2s ease-out;
-    }
+}
+.frontpage_square img {
+    position: absolute;
+}

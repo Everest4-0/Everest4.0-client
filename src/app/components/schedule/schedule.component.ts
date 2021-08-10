@@ -25,7 +25,7 @@ export class ScheduleComponent implements OnInit {
   public overDueLimit = 5;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
-  public todos: Array<ToDo> = []
+  public todos: Array<Task> = []
   form = new ToDoForm(this.fb)
   now: Date = new Date();
   constructor(
@@ -51,25 +51,19 @@ export class ScheduleComponent implements OnInit {
       this.tasks.all = goals.map(goal => goal.tasks)
       this.tasks.all = this.tasks.all.sort((x, y) => x.createdAt > y.createdAt ? 1 : -1).reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
-      this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
+      this.tasks.thisWeek = this.tasks.all
+      .filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
       eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
       sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
       sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
+      this.todos = this.tasks.all.filter(task => moment().format('YYYY-MM-DD') === moment(task.dueDate).format('YYYY-MM-DD'))
 
     })
-
-    this.toDoService.all({ userId: this.auth.user.id }).subscribe(todos => {
-
-      this.todos = todos
-        .filter(toDo => moment().format('YYYY-MM-DD') === moment(toDo.startDate).format('YYYY-MM-DD'))
-        .sort((x, y) => x.startDate > y.startDate ? 1 : -1)
-    })
-
 
   }
 
   updateState(task, state, list) {
-    
+  
     task.state = state
     task.goal = null
     this.taskService.update(task).subscribe(task => {

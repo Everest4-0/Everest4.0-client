@@ -1,7 +1,72 @@
+.error {
+  color: #f00;
+  padding: 0 5px;
+  /* width: 100%; */
+  font-size: 12px;
+}
 
-    .error {
-        color: #f00;
-        padding: 0 5px;
-        /* width: 100%; */
-        font-size: 12px;
-      }
+.tin-text{
+  font-size: 10px;
+}
+.btn-xs{
+  font-size: 10px
+}
+
+.accordion {
+  transition: 0.4s;
+  border: none;
+  font-size: 20px;
+  padding: 0 5px;
+  margin: 0;
+  text-align: center;
+  width: 30px;
+}
+
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: none;
+  max-height: 0;
+  overflow: hidden;
+  margin: 0 15px;
+  margin-top: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+
+.card{
+  box-shadow: 0 0 15px rgba(0,0,0,.2);
+}
+
+.image-cover {
+  background-size: cover;
+  background-position: center;
+  background-image: url(assets/img/image_not_found.png);
+}
+
+.avatar {
+  object-fit: cover;
+}
+
+
+.error {
+  color: #f00;
+  padding: 0 5px;
+  /* width: 100%; */
+  font-size: 12px;
+}

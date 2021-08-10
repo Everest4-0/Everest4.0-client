@@ -3,32 +3,37 @@
     <p class="category hidden">Fonte: BING</p>
     <label style="font-size: 10px; color: #AAA; font-weight: normal;">{{bingNews.readLink}}</label>
 </div>
+<div class="col-md-12">
+    <div class="row" style="margin: 0 -80px ;background: #2f2e2e;">
 
-<ngx-skeleton-loader *ngIf="news.length==0" count="5" appearance="circle" [theme]="{
+        <ngx-skeleton-loader *ngIf="news.length==0" count="5" appearance="circle" [theme]="{
     width: '70px',
     height: '70px',
     'border-radius': '10px'
   }">
-</ngx-skeleton-loader>
-<div class="row" *ngIf="news.length>0">
+        </ngx-skeleton-loader>
+        <div class="row" style="margin: 15px 50px;" *ngIf="news.length>0">
 
-    <div class="col-md-3 " *ngFor="let item of news| slice:0:8" style="height: 300px;">
-        <a href="{{item.url}}" target="_blank">
-            <div class="card">
-                <div class="card-header">
-                    <img src="{{ item.urlToImage}}" onerror="this.onerror=null;this.src='assets/img/image_not_found.png';" class="img-responsive" style="width: 100%;" />
-                </div>
-                <div class="card-body" style="padding: 5px 15px; height: 140px;">
-                    <label class="pull-right">{{item.publishedAt|amLocale:'pt'| amTimeAgo}}</label>
-                    <h5>{{ item.title }}</h5>
-                    <p style="display: none;">{{ item.description }}</p>
-                </div>
-                <div class="card-footer  hidden" style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
-                    <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
-
-                </div>
+            <div class="col-md-2 " *ngFor="let item of news| slice:0:8" style="height: 300px;">
+                <a href="{{item.url}}" target="_blank">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="{{ item.urlToImage}}"
+                                class="img-responsive image-cover" style="width: 100%;" />
+                        </div>
+                        <div class="card-body" style="padding: 5px 15px; height: 140px;">
+                            <label class="pull-right">{{item.publishedAt|amLocale:'pt'| amTimeAgo}}</label>
+                            <h5>{{ item.title }}</h5>
+                            <p style="display: none;">{{ item.description }}</p>
+                        </div>
+                        <div class="card-footer  hidden"
+                            style="padding: 15px; border-top:solid 1px #eee; height: 80px;">
+                            <span *ngFor="let x of item.mentions" class="badge badge-info">{{ x.name }}</span>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
 
+        </div>
+    </div>
 </div>

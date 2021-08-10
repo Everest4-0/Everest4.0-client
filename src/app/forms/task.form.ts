@@ -1,22 +1,24 @@
-import { Goal } from '../models/goal/goal';
-import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-export class TaskForm {
+import { Validators } from '@angular/forms';
+import Form from './Form';
 
-    constructor(fb: FormBuilder) {
-        return fb.group({
-            descriptions: ['', {
-                validators: [
-                    Validators.required,
-                ],
-                updateOn: 'blur'
-            }],
-            revenue: ['', Validators.required,],
+export class TaskForm extends Form {
+
+    constructor() {
+        super();
+        this.fg = this.fb.group({
+            descriptions: ['', Validators.required],
+            revenue: ['', Validators.required],
             expenses: ['', Validators.required],
-            state: [],
             duration: ['', Validators.required],
             dueDate: ['', Validators.required],
             observations: [],
+            state: [],
         })
+
+        this.valid = this.fg.valid
+        this.dirty = this.fg.dirty
+        this.controls = this.fg.controls
+        this.errors = this.fg.errors
     }
 }

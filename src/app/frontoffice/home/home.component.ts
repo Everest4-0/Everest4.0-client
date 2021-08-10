@@ -13,7 +13,7 @@ import { NgLocalization } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
@@ -39,6 +39,45 @@ export class HomeComponent implements OnInit {
   public emailChartDataSeries = { series: ['0', '100'] }
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
 
+  public vacants = [
+    {
+      id: 1,
+      company: 'Renailer',
+      title: 'Contabilista Senior',
+      place: 'Luanda, Angola',
+      regim: 'Full time'
+    }, {
+      id: 2,
+      company: 'Rosalis',
+      title: 'Gestor de contas',
+      place: 'Benguela, Angola',
+      regim: 'Full time'
+    }, {
+      id: 3,
+      company: 'Bona Kardin',
+      title: 'Assitente Administrativo',
+      place: 'Luanda, Angola',
+      regim: 'Full time'
+    }, {
+      id: 4,
+      company: 'Salgados e Doces',
+      title: 'Chefe de cozinha',
+      place: 'Cabinda, Angola',
+      regim: 'Full time'
+    }, {
+      id: 5,
+      company: 'Radio 96 FM',
+      title: 'Tecnico de informatica',
+      place: 'Luanda, Angola',
+      regim: 'Part time'
+    }, {
+      id: 6,
+      company: 'Paypel',
+      title: 'Help desk',
+      place: 'Remoto',
+      regim: 'Part time'
+    },
+  ]
   constructor(
     private goalService: GoalService,
     public auth: AuthService,
@@ -92,7 +131,7 @@ export class HomeComponent implements OnInit {
         ]
       };
 
-     
+
 
       this.dataLoaded = true;
     })
@@ -151,7 +190,7 @@ export class HomeComponent implements OnInit {
 
   }
 
- 
+
 
   getEmailChartDataSeries() {
 

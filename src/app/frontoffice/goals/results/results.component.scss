@@ -27,18 +27,11 @@
     width: 30px;
 }
 
-.active,
-.accordion:hover {
-}
-
 .accordion:after {
     color: #777;
     font-weight: bold;
     float: right;
     margin-left: 5px;
-}
-
-.active:after {
 }
 
 .panel {

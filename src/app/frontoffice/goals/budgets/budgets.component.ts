@@ -39,6 +39,7 @@ export class BudgetsComponent implements OnInit {
   public expensesCharData;
   public revenueCharData;
 
+  taskStatesArr = ['Pendente', 'Por inicial', 'Em curso', 'Concluido', 'Cancelado'];
 
   constructor(
     private fb: FormBuilder,
@@ -48,15 +49,17 @@ export class BudgetsComponent implements OnInit {
     private modalService: ModalService,
     private budgetCategoryService: BudgetCategoryService,
     private toast: ToastService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
     this.budgetCategoryService.all({}).subscribe(categories => {
       this.budgetCategories = categories
-      let
+      const
         getActivityChartData = (direction) => {
-          const categories = this.budgetCategories.filter(x => x.direction === direction).sort((t, u) => t.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) > u.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) ? -1 : 0)
+          const categories = this.budgetCategories
+            .filter(x => x.direction === direction)
+            .sort((t, u) => t.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) > u.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) ? -1 : 0)
           let labels = categories.map(x => x.name)
 
 
@@ -115,42 +118,38 @@ export class BudgetsComponent implements OnInit {
   }
 
   saveBudget() {
-    /* if (this.form.valid)
-
-    {return false;
 
 
-      this.toastForm.error('Orçamento registado com sucesso', 'Sucesso', {
-        timeOut: 5000,
-        progressBar: true,
-      })
-    }*/
+    if (this.form.dirty && this.form.valid) {
 
-    this.budgetService.create(this.budget).subscribe(budget => {
+      this.budgetService.create(this.budget).subscribe(budget => {
 
-      budget.task = this.budget.task;
-      budget.category = this.budget.category
-      this.budget = new Budget();
-      if (budget.direction) {
-        this.revenue.forEach(task => {
-          if (task.id === budget.task.id) {
-            task.budgets.push(budget)
-          }
+        budget.task = this.budget.task;
+        budget.category = this.budget.category
+        this.budget = new Budget();
+        if (budget.direction) {
+          this.revenue.forEach(task => {
+            if (task.id === budget.task.id) {
+              task.budgets.push(budget)
+            }
+          })
+        } else {
+          this.expenses.forEach(task => {
+            if (task.id === budget.task.id) {
+              task.budgets.push(budget)
+            }
+          })
+        }
+        this.toast.success('Orçamento registado com sucesso', 'Sucesso', {
+          timeOut: 5000,
+          progressBar: true,
         })
-      } else {
-        this.expenses.forEach(task => {
-          if (task.id === budget.task.id) {
-            task.budgets.push(budget)
-          }
-        })
-      }
-      this.toast.success('Orçamento registado com sucesso', 'Sucesso', {
-        timeOut: 5000,
-        progressBar: true,
-      })
 
-      this.closeModal('budget-modal')
-    })
+        this.closeModal('budget-modal')
+      })
+    } else {
+      this.form.validateAllFormFields();
+    }
   }
   createBudget(task: Task, direction: boolean) {
     this.budget.task = task
@@ -164,22 +163,20 @@ export class BudgetsComponent implements OnInit {
   closeModal(id) {
     this.modalService.close(id);
   }
-  valueToFix(task: Task, direction: boolean = true) {
-    let final = task.budgets.reduce((x: number, y) => x + parseFloat(y.value + ''), 0).toFixed(2)
-
-    return final;
+  valueToFix(task: Task, direction = true) {
+    return task.budgets.filter(b => b.direction === direction).reduce((x: number, y) => x + parseFloat(y.value + ''), 0).toFixed(2)
   }
   stateBudget(task: Task, direction: boolean) {
-    let total = (direction ? task.revenue : task.expenses)
-    let pago = parseFloat(this.valueToFix(task, direction) + '')
-    let resto = total - pago
-    //
-    if (pago > total)
+    const total = (direction ? task.revenue : task.expenses)
+    const pago = parseFloat(this.valueToFix(task, direction) + '')
+
+    if (pago > total) {
       return 0
-    else if (pago > total - total * 10 / 100)
+    } else if (pago > total - total * 10 / 100) {
       return 1;
-    else
+    } else {
       return 2
+    }
   }
 
   get getBudgetCategories() {
@@ -188,18 +185,14 @@ export class BudgetsComponent implements OnInit {
 
 
   accordion(that) {
+    that.classList.toggle('pe-7s-angle-up');
+    that.classList.toggle('pe-7s-angle-down');
 
-    that.classList.toggle("pe-7s-angle-up");
-    that.classList.toggle("pe-7s-angle-down");
-
-    var panel = document.getElementById(that.getAttribute('title'))
+    const panel = document.getElementById(that.getAttribute('title'))
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
     } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.style.maxHeight = panel.scrollHeight + 'px';
     }
-
-
   }
-
 }

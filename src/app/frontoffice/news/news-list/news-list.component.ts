@@ -13,11 +13,11 @@ export class NewsListComponent implements OnInit {
   news: [];
 
 
-  public show: boolean = true;
+  public show = true;
 
-  public type: string = 'component';
+  public type = 'component';
 
-  public disabled: boolean = false;
+  public disabled = false;
 
   constructor(private newsService: NewsService) { }
 

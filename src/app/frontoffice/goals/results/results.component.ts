@@ -32,7 +32,7 @@ export class ResultsComponent implements OnInit {
   }
   public results = [
     { code: 'S', name: 'Forças', evaluations: [], groups: [], class: 'bg-info', conditions: (x) => x },
-    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: "bg-danger", conditions: (x) => !x }
+    { code: 'W', name: 'Fraquezas', evaluations: [], groups: [], class: 'bg-danger', conditions: (x) => !x }
   ];
 
 
@@ -123,7 +123,6 @@ export class ResultsComponent implements OnInit {
     })
   }
   saveGoal() {
-debugger
     if (this.form.dirty && this.form.valid) {
       this.goalService.create(this.goal).subscribe(goal => {
         this.goal = new Goal()
@@ -136,7 +135,7 @@ debugger
         this.modalService.close('result-modal')
       })
     } else {
-      this.validateAllFormFields(this.form);
+      this.form.validateAllFormFields();
     }
   }
   openModal(id) {
@@ -189,6 +188,7 @@ debugger
   /**
    * refine
    */
+<<<<<<< HEAD
   validateAllFormFields(formGroup) {
 
     Object.keys(formGroup.controls).forEach(field => {
@@ -200,4 +200,6 @@ debugger
       }
     });
   }
+=======
+>>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
 }

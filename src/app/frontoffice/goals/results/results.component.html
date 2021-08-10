@@ -22,15 +22,13 @@
                     <div class="col-md-12">
                         <div class="card" *ngFor="let currentResults of results" style="padding:15px">
                             <h4>
-                                <button class="accordion btn btn-xs pe-7s-angle-down" (click)="accordion($event.target)"
-                                    title='panel-{{currentResults.name}}'></button>
-                                {{currentResults.name}} <span
-                                    class="badge ">{{currentResults.evaluations.length}}</span>
+                                {{currentResults.name}} 
+                                <span class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
 
                             <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse">
                             </ngx-skeleton-loader>
-                            <div id="panel-{{currentResults.name}}" class="list-group panel"
+                            <div id="panel-{{currentResults.name}}" class="list-group"
                                 *ngIf="currentResults.groups.length>0">
                                 <ul class="list-group" *ngFor="let group of currentResults.groups">
                                     <li class="list-group-item list-group-item-action active">
@@ -68,22 +66,22 @@
 <jw-modal id="result-modal" class="sm" title="{{goal.val.code}} - {{goal.val.name}}"
     subtitle="Carregar Objectivos <b>{{goal.group}} </b>">
     <div class="row">
-        <form [formGroup]="form" (ngSubmit)="saveGoal()">
+        <form [formGroup]="form.fg" (ngSubmit)="saveGoal()">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="inputObjectives">Objectivo<span class="error">*</span></label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
                         formControlName="objectives" id="inputObjectives">
-                    <div *ngIf="controls.objectives.touched  && controls.objectives.invalid" class="error">
-                        <div *ngIf="controls.objectives.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.objectives.touched && form.controls.objectives.invalid" class="error">
+                        <div *ngIf="form.controls.objectives.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputAnualGoal">Meta Anual<span class="error">*</span></label>
                     <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
                         [(ngModel)]="goal.anualGoal" formControlName="anualGoal" id="inputAnualGoal">
-                    <div *ngIf="controls.anualGoal.touched  && controls.anualGoal.invalid" class="error">
-                        <div *ngIf="controls.anualGoal.errors.required">Este campo é obrigatório</div>
+                    <div *ngIf="form.controls.anualGoal.touched && form.controls.anualGoal.invalid" class="error">
+                        <div *ngIf="form.controls.anualGoal.errors.required">Este campo é obrigatório</div>
                     </div>
                 </div>
                 <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">

@@ -9,8 +9,8 @@ import { Chart } from 'chart.js';
 export class DiagnosticViewComponent implements AfterViewInit {
   @ViewChild('radarCanvas') radarCanvas;
 
-  @Input() public data = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3,1] };
-  public datai = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3,1] };
+  @Input() public data = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3, 1] };
+  public datai = { labels: ['Running', 'Swimming', 'Eating'], data: [2, 3.3, 1] };
   radarChart: any;
 
 

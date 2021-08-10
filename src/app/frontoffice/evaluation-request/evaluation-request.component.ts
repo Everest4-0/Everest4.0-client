@@ -64,7 +64,6 @@ export class EvaluationRequestComponent implements OnInit {
   }
 
   saveEvaluation() {
-    
     this.userEvaluation.evaluation = this.currentEvaluation;
     this.userEvaluation.requester = this.request.requester;
     this.userEvaluation.requested = this.auth.user;
@@ -100,7 +99,6 @@ export class EvaluationRequestComponent implements OnInit {
     this.request = item;
     this.requestEditable = editable;
 
-    debugger
     this.userEvaluationService.all({ requestId: this.request.id }).subscribe(uevaluations => {
       this.userEvaluations = uevaluations
       this.evaluationService.all().subscribe(evaluations => {

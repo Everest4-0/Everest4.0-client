@@ -1,13 +1,14 @@
 import Swal from 'sweetalert2';
 import { TaskService } from './../../../services/task.service';
 import { TaskForm } from './../../../forms/task.form';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Task } from './../../../models/goal/task';
 import { AuthService } from './../../../services/auth.service';
 import { Goal } from './../../../models/goal/goal';
 import { GoalService } from './../../../services/goal.service';
 import { ModalService } from './../../../components/modal/modal.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-plans',
@@ -18,15 +19,17 @@ export class PlansComponent implements OnInit {
 
   task: Task = new Task();
   taskDetails: Task = new Task();
-  form = new TaskForm(this.fb)
+  form = new TaskForm()
   tasks: Array<Task> = [];
   goals: Array<Goal> = []
   now: Date = new Date()
+
+  statesArr = ['Pendente', 'Por inicial', 'Em curso', 'Concluido', 'Cancelado'];
   constructor(
-    private fb: FormBuilder,
     private modalService: ModalService,
     private goalService: GoalService,
     private taskService: TaskService,
+    private toast: ToastService,
     private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -34,14 +37,6 @@ export class PlansComponent implements OnInit {
 
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
       this.goals = goals
-      goals.forEach(x => {
-        x.tasks.forEach(t => {
-          x.tasks = null
-          t.goal = x
-          this.tasks.push(t)
-        })
-
-      })
     })
   }
 
@@ -50,6 +45,7 @@ export class PlansComponent implements OnInit {
     this.openModal('task-detail-modal')
   }
 
+<<<<<<< HEAD
   onEdit(task) {
     this.task = task;
     this.openModal('plan-modal')
@@ -57,6 +53,8 @@ export class PlansComponent implements OnInit {
   }
 
   //['Pendente','Por inicial','Em curso','Concluido']
+=======
+>>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
   states(s) {
     switch (parseInt(s)) {
       case 0:
@@ -67,7 +65,6 @@ export class PlansComponent implements OnInit {
         break;
       case 2:
         return [0, 3, 4]
-
     }
     return []
   }
@@ -81,22 +78,28 @@ export class PlansComponent implements OnInit {
     this.task.goal = g
     this.openModal('plan-modal');
   }
-  updateState(task, state) {
+  updateState(task: Task, state: number) {
     task.state = state
+    this.updateTask(task)
+  }
+  updateTask(task: Task) {
+
     this.taskService.update(task).subscribe(task => {
-      this.tasks.forEach(t => {
-        if (t.id === task.id)
-          t = task
-      });
-      Swal.fire(
-        'Sucesso!',
-        'Resultados esperado registado com sucesso',
-        'success'
-      )
+
+      this.goals
+        .filter(g => g.id = this.task.goal.id)[0].tasks
+        .filter(t => t.id = this.task.id)[0] = this.task
+
+      this.toast.success('Tarefa foi actualizada com sucesso', 'Sucesso', {
+        timeOut: 50000,
+        progressBar: true,
+      })
       this.modalService.close('plan-modal')
     })
   }
+
   saveTask() {
+<<<<<<< HEAD
     let dueDate = this.task.dueDate
     this.task.dueDate =  Date(dueDate)
       (this.task.id ?
@@ -113,6 +116,29 @@ export class PlansComponent implements OnInit {
         )
         this.modalService.close('plan-modal')
       })
+=======
+    debugger
+    if (this.form.fg.dirty && this.form.fg.valid) {
+      const dueDate = this.task.dueDate
+
+      this.task.dueDate = new Date(dueDate)
+
+      this.taskService.create(this.task).subscribe(task => {
+        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
+        this.task = new Task()
+
+        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
+          timeOut: 50000,
+          progressBar: true,
+        })
+
+        this.modalService.close('plan-modal')
+      })
+
+    } else {
+      this.form.validateAllFormFields();
+    }
+>>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
   }
   anualGoal(goal: Goal) {
     return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
@@ -122,5 +148,20 @@ export class PlansComponent implements OnInit {
   }
   closeModal(id) {
     this.modalService.close(id);
+  }
+
+  accordion(that) {
+
+    that.classList.toggle('pe-7s-angle-up');
+    that.classList.toggle('pe-7s-angle-down');
+
+    const panel = document.getElementById(that.getAttribute('title'))
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+
+
   }
 }
