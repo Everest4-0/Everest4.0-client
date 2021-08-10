@@ -49,6 +49,13 @@ export class PlansComponent implements OnInit {
     this.taskDetails = task
     this.openModal('task-detail-modal')
   }
+
+  onEdit(task) {
+    this.task = task;
+    this.openModal('plan-modal')
+    this.modalService.close('task-detail-modal')
+  }
+
   //['Pendente','Por inicial','Em curso','Concluido']
   states(s) {
     switch (parseInt(s)) {
@@ -67,11 +74,10 @@ export class PlansComponent implements OnInit {
   setEstate(s) {
     this.task.state = s
   }
-  inTime(t){
+  inTime(t) {
     return new Date(t) > new Date()
   }
   addTask(g) {
-    
     this.task.goal = g
     this.openModal('plan-modal');
   }
@@ -92,21 +98,24 @@ export class PlansComponent implements OnInit {
   }
   saveTask() {
     let dueDate = this.task.dueDate
-    this.task.dueDate = new Date(dueDate)
-    this.taskService.create(this.task).subscribe(task => {
-      this.task = new Task()
-      task.goal=this.task.goal
-      this.tasks.push(task)
-      Swal.fire(
-        'Sucesso!',
-        'Resultados esperado registado com sucesso',
-        'success'
-      )
-      this.modalService.close('plan-modal')
-    })
+    this.task.dueDate =  Date(dueDate)
+      (this.task.id ?
+        this.taskService.update(this.task) :
+        this.taskService.create(this.task))
+      .subscribe(task => {
+        this.task = new Task()
+        task.goal = this.task.goal
+        this.tasks.push(task)
+        Swal.fire(
+          'Sucesso!',
+          'Resultados esperado registado com sucesso',
+          'success'
+        )
+        this.modalService.close('plan-modal')
+      })
   }
   anualGoal(goal: Goal) {
-    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0)+'') }, 0)
+    return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
   };
   openModal(id) {
     this.modalService.open(id);

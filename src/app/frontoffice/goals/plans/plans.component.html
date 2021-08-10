@@ -142,7 +142,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="textAreaObservations">Observações</label>
-                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
+                    <textarea type="date" class="form-control form-control-lg" [(ngMode)]="task.observations"
                         formControlName="observations" id="textAreaObservations"></textarea>
                 </div>
             </div>
@@ -233,6 +233,7 @@
             </div>
         </div>
     </div>
+        <a class="btn btn-simple btn-warning btn-icon" (click)="onEdit(taskDetails)">Editar</a>
     <div class="row text-center"><br>
 
     </div>

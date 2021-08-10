@@ -189,7 +189,7 @@ debugger
   /**
    * refine
    */
-  validateAllFormFields(formGroup: FormGroup) {
+  validateAllFormFields(formGroup) {
 
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
