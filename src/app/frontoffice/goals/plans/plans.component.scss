@@ -111,14 +111,16 @@
                 margin-top: -10px;
             }
         }
-        .Editar{
-            border-color: rgb(58, 174, 52);
-            color: rgb(58, 174, 52);
-            position: relative;
-            top: 12px;
-            float: right;
-        }
+        
     }
+    #editar{
+        border: 1px solid rgb(58, 174, 52);
+        color: rgb(58, 174, 52);
+        position: relative;
+        top: 12px;
+        float: right;
+    }
+
     .Salvar{
         background-color: rgb(58, 174, 52);
         color: #fff;

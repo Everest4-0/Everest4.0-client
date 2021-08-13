@@ -188,18 +188,4 @@ export class ResultsComponent implements OnInit {
   /**
    * refine
    */
-<<<<<<< HEAD
-  validateAllFormFields(formGroup) {
-
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
-=======
->>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
 }

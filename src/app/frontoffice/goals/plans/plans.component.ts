@@ -45,7 +45,6 @@ export class PlansComponent implements OnInit {
     this.openModal('task-detail-modal')
   }
 
-<<<<<<< HEAD
   onEdit(task) {
     this.task = task;
     this.openModal('plan-modal')
@@ -53,8 +52,6 @@ export class PlansComponent implements OnInit {
   }
 
   //['Pendente','Por inicial','Em curso','Concluido']
-=======
->>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
   states(s) {
     switch (parseInt(s)) {
       case 0:
@@ -99,8 +96,7 @@ export class PlansComponent implements OnInit {
   }
 
   saveTask() {
-<<<<<<< HEAD
-    let dueDate = this.task.dueDate
+    let dueDate = this.task.dueDate;
     this.task.dueDate =  Date(dueDate)
       (this.task.id ?
         this.taskService.update(this.task) :
@@ -116,29 +112,6 @@ export class PlansComponent implements OnInit {
         )
         this.modalService.close('plan-modal')
       })
-=======
-    debugger
-    if (this.form.fg.dirty && this.form.fg.valid) {
-      const dueDate = this.task.dueDate
-
-      this.task.dueDate = new Date(dueDate)
-
-      this.taskService.create(this.task).subscribe(task => {
-        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
-        this.task = new Task()
-
-        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
-          timeOut: 50000,
-          progressBar: true,
-        })
-
-        this.modalService.close('plan-modal')
-      })
-
-    } else {
-      this.form.validateAllFormFields();
-    }
->>>>>>> e8f43b78f9fb4d917df8b02c11b80b727013f536
   }
   anualGoal(goal: Goal) {
     return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
