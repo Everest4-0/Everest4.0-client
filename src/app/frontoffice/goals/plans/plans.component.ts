@@ -80,7 +80,6 @@ export class PlansComponent implements OnInit {
     this.updateTask(task)
   }
   updateTask(task: Task) {
-
     this.taskService.update(task).subscribe(task => {
 
       this.goals
@@ -96,12 +95,13 @@ export class PlansComponent implements OnInit {
   }
 
   saveTask() {
-    let dueDate = this.task.dueDate;
-    this.task.dueDate =  Date(dueDate)
-      (this.task.id ?
-        this.taskService.update(this.task) :
-        this.taskService.create(this.task))
-      .subscribe(task => {
+    let dueDate = this.task.dueDate
+    this.task.dueDate = new Date(dueDate);
+    (this.task.id ?
+      this.taskService.update(this.task) :
+      this.taskService.create(this.task))
+    
+    .subscribe(task => {
         this.task = new Task()
         task.goal = this.task.goal
         this.tasks.push(task)

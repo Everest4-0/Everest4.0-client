@@ -134,15 +134,15 @@
                     <label for="exampleInputPassword1">Estado</label>
                     <div>
                         <div class="o-switch btn-group" data-toggle="buttons" role="group">
-                            <label class="btn btn-secondary active color-yellow" (click)="setEstate(1)">
+                            <label class="btn btn-secondary active color-red" (click)="setEstate(1)">
                                 <input type="radio" [(ngModel)]="task.state" name="option1" value="1" id="option1"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}" checked> Por iniciar
                             </label>
-                            <label class="btn btn-secondary color-green" (click)="setEstate(2)">
+                            <label class="btn btn-secondary color-yellow" (click)="setEstate(2)">
                                 <input type="radio" [(ngModel)]="task.state" name="option2" value="2" id="option2"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}"> Em curso
                             </label>
-                            <label class="btn btn-secondary color-red" (click)="setEstate(3)">
+                            <label class="btn btn-secondary color-green" (click)="setEstate(3)">
                                 <input type="radio" [(ngModel)]="task.state" name="option3" value="3" id="option3"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}"> Concluido
                             </label>
