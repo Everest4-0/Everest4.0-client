@@ -33,15 +33,17 @@ export class PlansComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.task = new Task();
 
     this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
       this.goals = goals
     })
   }
 
-  showTaskDetails(task) {
-    this.taskDetails = task
+  showTask(task: Task, goal: Goal) {
+    debugger
+    this.task = task
+    this.task.goal = goal
+
     this.openModal('task-detail-modal')
   }
 
@@ -64,50 +66,72 @@ export class PlansComponent implements OnInit {
   inTime(t) {
     return new Date(t) > new Date()
   }
-  addTask(g) {
+  addTask(g: Goal) {
     this.task.goal = g
     this.openModal('plan-modal');
   }
+
+  onEdit() {
+
+    this.openModal('plan-modal')
+    this.modalService.close('task-detail-modal')
+  }
+
   updateState(task: Task, state: number) {
     task.state = state
-    this.updateTask(task)
+    this.task = task;
+    this.updateTask()
   }
-  updateTask(task: Task) {
+  updateTask() {
 
-    this.taskService.update(task).subscribe(task => {
+    this.taskService.update(this.task)
+      .subscribe(task => {
 
-      this.goals
-        .filter(g => g.id = this.task.goal.id)[0].tasks
-        .filter(t => t.id = this.task.id)[0] = this.task
+        this.task = task
+        this.tasks.filter(t => t.id === task.id)[0] = task;
 
-      this.toast.success('Tarefa foi actualizada com sucesso', 'Sucesso', {
-        timeOut: 50000,
-        progressBar: true,
-      })
-      this.modalService.close('plan-modal')
-    })
-  }
+        this.goals.filter(goal => goal.id = this.task.goal.id)[0]
+          .tasks.filter(t => t.id === task.id)[0] = task;
 
-  saveTask() {
-    
-    if (this.form.fg.dirty && this.form.fg.valid) {
-      const dueDate = this.task.dueDate
-
-      this.task.dueDate = new Date(dueDate)
-
-      this.taskService.create(this.task).subscribe(task => {
-        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
-        this.task = new Task()
-
-        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
-          timeOut: 50000,
+        this.toast.success('Tarefa actualizada com sucesso', 'Sucesso', {
+          timeOut: 5000,
           progressBar: true,
         })
-
+        this.task = task
         this.modalService.close('plan-modal')
       })
+  }
 
-    } else {
+  createTask() {
+
+    this.taskService.create(this.task)
+      .subscribe(task => {
+        this.tasks.push(task)
+
+        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(task)
+
+        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
+          timeOut: 5000,
+          progressBar: true,
+        })
+        this.task = new Task()
+        this.modalService.close('plan-modal')
+      })
+  }
+
+
+  saveTask() {
+    if (this.form.fg.dirty && this.form.fg.valid) {
+
+      this.task.dueDate = new Date(this.task.dueDate);
+
+      if (this.task.id) {
+        this.updateTask()
+      } else {
+        this.createTask()
+      }
+    // tslint:disable-next-line: one-line
+    }else {
       this.form.validateAllFormFields();
     }
   }

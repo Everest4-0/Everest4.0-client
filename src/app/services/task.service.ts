@@ -19,15 +19,17 @@ export class TaskService extends AppService<Task> implements IService<Task> {
     return this.getOne(id)
   }
 
-  all(f: any={}): Observable<Array<Task>> {
+  all(f: any = {}): Observable<Array<Task>> {
     return this.getAll(f)
   }
 
   update(o: any): Observable<Task> {
+    o.goal = null;
     return this.updateOne(o);
   }
 
   create(o: any): Observable<Task> {
+    o.goal = null;
     return this.createOne(o)
   }
 }

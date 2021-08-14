@@ -38,27 +38,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let task of goal.tasks; let t=index" (click)="showTaskDetails(task)">
-                                    <td>{{t+1}}</td>
+                                <tr *ngFor="let t of goal.tasks; let r=index" (click)="showTask(t, goal)">
+                                    <td>{{r+1}}</td>
                                     <td>
-                                        {{task.descriptions}}<br />
-                                        <span class="tin-text">{{task.updatedAt|date}} <i class="pe-7s-clock"
-                                                style="color: #F00;" *ngIf="!inTime(task.dueDate)"></i></span>
+                                        {{t.descriptions}}<br />
+                                        <span class="tin-text">{{t.updatedAt|date}} <i class="pe-7s-clock"
+                                                style="color: #F00;" *ngIf="!inTime(t.dueDate)"></i></span>
                                     </td>
                                     <td>
                                         <span
-                                            class="label label-{{['default','primary','warning','success','danger','default'][task.state]}}">
-                                            {{statesArr[task.state]}}</span>
+                                            class="label label-{{['default','primary','warning','success','danger','default'][t.state]}}">
+                                            {{statesArr[t.state]}}</span>
 
                                     </td>
                                     <td class="text-right">
-                                        <button class="btn btn-xs border-none" (click)="showTaskDetails(task)">
+                                        <button class="btn btn-xs border-none" (click)="showTask(t, goal)">
                                             <i class="pe-7s-angle-right"></i>
                                         </button>
                                     </td>
                                 </tr>
 
-                                <tr *ngIf="goal.tasks.length<1">
+                                <tr *ngIf="goal.tasks.length1">
                                     <td colspan="3" class="text-center">
                                         Sem registo
                                     </td>
@@ -134,15 +134,15 @@
                     <label for="exampleInputPassword1">Estado</label>
                     <div>
                         <div class="o-switch btn-group" data-toggle="buttons" role="group">
-                            <label class="btn btn-secondary active color-yellow" (click)="setEstate(1)">
+                            <label class="btn btn-secondary {{task.state==1 ? 'active':''}} color-yellow" (click)="this.task.state=1">
                                 <input type="radio" [(ngModel)]="task.state" name="option1" value="1" id="option1"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}" checked> Por iniciar
                             </label>
-                            <label class="btn btn-secondary color-green" (click)="setEstate(2)">
+                            <label class="btn btn-secondary {{task.state==2 ? 'active':''}} color-green" (click)="this.task.state=2">
                                 <input type="radio" [(ngModel)]="task.state" name="option2" value="2" id="option2"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}"> Em curso
                             </label>
-                            <label class="btn btn-secondary color-red" (click)="setEstate(3)">
+                            <label class="btn btn-secondary {{task.state==3 ? 'active':''}} color-red" (click)="this.task.state=3">
                                 <input type="radio" [(ngModel)]="task.state" name="option3" value="3" id="option3"
                                     autocomplete="off" [ngModelOptions]="{standalone: true}"> Concluido
                             </label>
@@ -152,7 +152,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="textAreaObservations">Observações</label>
-                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
+                    <textarea type="date" class="form-control form-control-lg" [(ngMode)]="task.observations"
                         formControlName="observations" id="textAreaObservations"></textarea>
                 </div>
             </div>
@@ -173,27 +173,27 @@
         <div class="col-md-6">
             <div class="row">
                 <h5>Tarefa</h5>
-                <h3 style="font-weight: 900;">{{taskDetails.descriptions}}</h3>
+                <h3 style="font-weight: 900;">{{task.descriptions}}</h3>
             </div>
             <div class="row">
                 <h5>Receitas</h5>
-                <h4>{{taskDetails.revenue||0.00}} <span style="font-size: 14px;">KZs</span></h4>
+                <h4>{{task.revenue||0.00}} <span style="font-size: 14px;">KZs</span></h4>
             </div>
             <div class="row">
                 <h5>Curstos</h5>
-                <h4>{{taskDetails.expenses||0.00}} <span style="font-size: 14px;">KZs</span></h4>
+                <h4>{{task.expenses||0.00}} <span style="font-size: 14px;">KZs</span></h4>
             </div>
             <div class="row">
                 <h5>Estado</h5>
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span
-                            class="label label-{{['default','primary','warning','success','danger','default'][taskDetails.state]}}">
-                            {{statesArr[taskDetails.state]}}
-                            <b class="caret" *ngIf="states(taskDetails.state).length"></b></span>
+                            class="label label-{{['default','primary','warning','success','danger','default'][task.state]}}">
+                            {{statesArr[task.state]}}
+                            <b class="caret" *ngIf="states(task.state).length"></b></span>
                     </a>
-                    <ul class="dropdown-menu" *ngIf="states(taskDetails.state).length">
-                        <li *ngFor="let state of states(taskDetails.state)" (click)="updateState(taskDetails, state)">
+                    <ul class="dropdown-menu" *ngIf="states(task.state).length">
+                        <li *ngFor="let state of states(task.state)" (click)="updateState(task, state)">
                             <a>{{statesArr[state]}}</a>
                         </li>
                     </ul>
@@ -203,25 +203,25 @@
         <div class="col-md-6">
             <div class="row">
                 <h5>Data de criação</h5>
-                <h4>{{taskDetails.createdAt|date}}</h4>
+                <h4>{{task.createdAt|date}}</h4>
             </div>
             <div class="row">
                 <h5>Último acesso</h5>
-                <h4>{{taskDetails.updatedAt|date}}</h4>
+                <h4>{{task.updatedAt|date}}</h4>
             </div>
             <div class="row">
                 <h5>Data de conclusão</h5>
-                <h4>{{taskDetails.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
-                        *ngIf="!inTime(taskDetails.dueDate)"></i></h4>
+                <h4>{{task.dueDate|date}} <i class="pe-7s-clock" style="color: #F00;"
+                        *ngIf="!inTime(task.dueDate)"></i></h4>
             </div>
             <div class="row">
                 <h5>Duração</h5>
-                <h4>{{taskDetails.duration}} minutos</h4>
+                <h4>{{task.duration}} minutos</h4>
             </div>
             <div class="row bd-callout bd-callout-info">
 
                 <h5>Observações</h5>
-                <span>{{taskDetails.observations}}</span>
+                <span>{{task.observations}}</span>
 
             </div>
         </div>
@@ -232,17 +232,18 @@
             <div class="col-md-6">
                 <div class="row">
                     <h5>Objectivo</h5>
-                    <h4>{{taskDetails.goal.objectives}} - {{anualGoal(taskDetails.goal)}} por ano</h4>
+                    <h4>{{task.goal.objectives}} - {{anualGoal(task.goal)}} por ano</h4>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <h5>Domínio</h5>
-                    <h4>{{taskDetails.goal.group}}</h4>
+                    <h4>{{task.goal.group}}</h4>
                 </div>
             </div>
         </div>
     </div>
+        <a id="editar" class="btn btn-simple btn-warning btn-icon" (click)="onEdit()">Editar</a>
     <div class="row text-center"><br>
 
     </div>
