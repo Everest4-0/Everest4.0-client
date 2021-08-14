@@ -34,7 +34,7 @@
                         {{overDueLimit==100 ?'menos':'mais ' + (tasks.overDue.length -5)}}
                     </a>
                 </div>
-                <div *ngIf="todos.length==0" class="text-center">
+                <div *ngIf="todos.length==0" class="text-center not-found">
                     Não existe agendas e pendentes para hoje
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     </a>
                 </div>
             </div>
-            <div *ngIf="tasks.overDue.length==0" class="text-center">
+            <div *ngIf="tasks.overDue.length==0" class="text-center not-found">
                 Não existe agendas e pendentes para hoje
             </div>
     </div>
