@@ -6,10 +6,16 @@
     background-color: #ececec;
     border-color: #c5c5c5;
 }
-
+.not-found {
+    border: dotted 1px #999;
+    color: #aaa;
+}
 .card-body.tasks {
     padding: 0 30px;
-        transition: .2 !important;
+    transition: 0.2 !important;
+    .list-group {
+        margin-bottom: 0px;
+    }
     .list-group-item {
         border: none;
         border: 1px solid #eee;
@@ -18,11 +24,13 @@
         padding: 5px;
         margin-bottom: 2px;
     }
-    .checkbox{
+    .checkbox {
         margin: 0;
     }
-    h5.date{
-        padding: 0;margin: 0; font-size: 10px;
+    h5.date {
+        padding: 0;
+        margin: 0;
+        font-size: 10px;
     }
     .list-group-item:hover {
         border-left-width: 8px;
@@ -31,15 +39,15 @@
         border-left-color: #eee !important;
     }
     .list-group-item.task-danger {
-        border-left-color:#dc3545!important;
+        border-left-color: #dc3545 !important;
     }
     .list-group-item.task-warning {
-        border-left-color:#ffc107!important;
+        border-left-color: #ffc107 !important;
     }
     .list-group-item.task-success {
-        border-left-color:#28a745!important;
+        border-left-color: #28a745 !important;
     }
     .list-group-item.task-info {
-        border-color:#17a2b8!important;
+        border-color: #17a2b8 !important;
     }
 }
