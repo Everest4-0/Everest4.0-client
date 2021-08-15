@@ -1,5 +1,5 @@
 <div class="col-md-12" style=" padding: 15px;">
-    <app-progress-bar done="{{getPbvalue(evaluations)}}" showLabel=true></app-progress-bar>
+    <app-progress-bar done="{{getPbprogress()}}" showLabel=true></app-progress-bar>
 </div>
 <div class="col-md-4" *ngFor="let item of evaluations | groupBy:'group'; let i =index">
     <div class="card">
