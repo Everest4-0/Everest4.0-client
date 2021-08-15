@@ -35,7 +35,7 @@ import { CoachingComponent } from './coaching-backoffice/coaching/coaching.compo
 
 const backOfficeRoutes: Routes = [
 
-    
+
     { path: 'users',                 component: ListUserComponent },
     { path: 'users/create',          component: CreateUserComponent },
     { path: 'users/update/:id',      component: UpdateUserComponent },
@@ -75,7 +75,7 @@ const backOfficeRoutes: Routes = [
     { path: 'courses/update/:id',              component: UpdateCourseComponent },
     { path: 'courses/delete/:id',              component: DeleteUserComponent },
     { path: 'courses/details/:id',             component: DetailsCourseComponent },
-    
+
     {
       path: 'coaching',
       component: CoachingComponent,

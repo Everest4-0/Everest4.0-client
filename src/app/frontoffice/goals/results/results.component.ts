@@ -53,7 +53,7 @@ export class ResultsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentResultsIsLoading=true;
+    this.currentResultsIsLoading = true;
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.userEvaluationService.all({ requesterId: this.auth.user.id }).subscribe(userEvaluations => {
@@ -106,7 +106,7 @@ export class ResultsComponent implements OnInit {
 
 
       })
-      this.currentResultsIsLoading=false
+      this.currentResultsIsLoading = false;
     })
   }
   groupBy = (xs, key) => {

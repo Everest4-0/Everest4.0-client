@@ -1,86 +1,118 @@
 <div class="container-fluid menu-coach bg-header">
     <div class="row">
-        <div class="col-md-6"><h2>Gestão de Carreira e coaching online</h2></div>
+        <div class="col-md-6">
+            <h2>Gestão de Carreira e coaching online</h2>
+        </div>
         <div class="col-md-6 text-right" *ngIf="subscription">
             <a [routerLink]="['board/'+subscription.id]" class="btn btn-info btn-fill"
                 *ngIf="subscription.id && subscription.isActive && subscription.coach!=null">Portal do Profissional</a>
+                
             <button class="btn btn-danger btn-fill" (click)='openSubscription()'
                 *ngIf="subscription.id===undefined">Subscrever serviço</button>
-            <button class="btn btn-primary btn-fill btn-lg" (click)='openPandingPayment()'
+            <button class="btn btn-primary btn-fill btn-lg" (click)='openPendingPayment()'
                 *ngIf="subscription.payment && subscription.payment.id && !subscription.payment.isActive">
                 <i class="pe-7s-attention text-red"></i>
                 Serviço pendente</button>
         </div>
     </div>
 </div>
-<div class="main-content" *ngIf="subscription.id && subscription.isActive && subscription.coach==null">
+<div class="main-content">
     <div class="container-fluid">
-        <div class="col-md-12">
-            <h2>Passo 2: Selecione o seu Gestor de carreira</h2>
-            <div class="row">
-                <div *ngFor="let coach of coaches" class="col-md-2">
-                    <div class="card text-center "
-                        style="background: url({{coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{coach.photoUrl}}); background-size:cover; background-position: center;">
-                        <img src="/assets/img/faces/base.png" class="img-thumbnail" style="opacity: .0" />
-
-                    </div><b>{{coach.datas.fullName}}</b><br>
-                    <small>{{coach.createdAt|amLocale:'pt'|amTimeAgo}}</small>
-
-                    <div class="row text-center">
-                        <button class="btn btn-xs btn-info btn-fill" (click)="selectCoach(coach)"> Selecionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="main-content" *ngIf="!(subscription.id && subscription.isActive && subscription.coach==null)">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-5" style="text-align: end; margin-top: 5%;">
-                            <a href="#" class=" btn btn-info">
-                                <i class="pe-7s-note"></i>
-                            </a>
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <app-diagnostic-view [data]=evaluationDatas *ngIf="evaluationDatas.data!==undefined">
-                            </app-diagnostic-view>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
+        <div class="col-lg-10">
+            <div class="main-content" *ngIf="subscription.id && subscription.isActive && subscription.coach==null">
+                <div class="container-fluid">
                     <div class="col-md-12">
-                        <div class="card" *ngFor="let currentResults of results" style="padding:15px">
-                            <h4>
-                                <button class="accordion btn btn-xs pe-7s-angle-down" (click)="accordion($event.target)"
-                                    title='panel-{{currentResults.name}}'></button>
-                                {{currentResults.name}} <span
-                                    class="badge ">{{currentResults.evaluations.length}}</span>
-                            </h4>
-                            <div id="panel-{{currentResults.name}}" class="list-group panel">
-                                <ul class="list-group" *ngFor="let group of currentResults.groups">
-                                    <li class="list-group-item list-group-item-action active">
-                                        <b>{{group[0]}}</b>
-                                    </li>
-                                    <div *ngFor="let item of group[1]">
-                                        <li class="list-group-item">
-                                            {{item.name}}</li>
+                        <h2>Passo 2: Selecione o seu Gestor de carreira</h2>
+                        <div class="row">
+                            <div *ngFor="let coach of coaches" class="col-md-2">
+                                <div class="card">
+                                    <div
+                                        style="background: url({{coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{coach.photoUrl}}); background-size:cover; background-position: center;">
+                                        <img src="/assets/img/faces/base.png" class="img-thumbnail"
+                                            style="opacity: .0" />
+
                                     </div>
-                                </ul>
-                                <ul class="list-group" *ngFor="let group of currentResults.otherGroups">
-                                    <li class="list-group-item list-group-item-action active">
-                                        <b>{{group}}</b>
-                                    </li>
-                                </ul>
+                                    <div class="card-body text-center">
+                                        <div class='row'>
+                                            <div class="col-md-12">
+                                                <b>{{coach.datas.fullName}}</b><br />
+                                                <small>{{coach.createdAt|amLocale:'pt'|amTimeAgo}}</small>
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="#" class="btn btn-simple"><i
+                                                        class="fa fa-facebook-square"></i></a>
+                                                <a href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></a>
+                                                <a href="#" class="btn btn-simple"><i class="fa fa-linkedin"></i></a>
+                                            </div><br />
+
+                                            <div class="col-md-6">
+                                                <button class="btn btn-xs btn-info btn-fill"
+                                                    (click)="selectCoach(coach)">
+                                                    Selecionar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" *ngIf="!(subscription.id && subscription.isActive && subscription.coach==null)">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <a [routerLink]="['/me/diagnostic']" class="btn btn-info pull-right"
+                                            style="margin: 15px;">
+                                            <i class="pe-7s-search"></i> Fazer Auto avaliação
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <app-diagnostic-view [data]=evaluationDatas
+                                        *ngIf="evaluationDatas.data!==undefined">
+                                    </app-diagnostic-view>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card" *ngFor="let currentResults of results" style="padding:15px">
+                                        <h4>
+                                            {{currentResults.name}}
+                                            <span class="badge ">{{currentResults.evaluations.length}}</span>
+                                        </h4>
+
+                                        <ngx-skeleton-loader *ngIf="currentResultsIsLoading" count=5 animation="pulse">
+                                        </ngx-skeleton-loader>
+                                        <div id="panel-{{currentResults.name}}" class="list-group"
+                                            *ngIf="currentResults.groups.length>0">
+                                            <ul class="list-group" *ngFor="let group of currentResults.groups">
+                                                <li class="list-group-item list-group-item-action active">
+                                                    <b>{{group[0]}}</b>
+                                                </li>
+                                                <div *ngFor="let item of group[1]">
+                                                    <li class="list-group-item">
+                                                        {{item.name}}
+                                                    </li>
+                                                </div>
+                                            </ul>
+
+                                            <ul class="list-group" *ngFor="let group of otherResultsx(currentResults)">
+                                                <li class="list-group-item list-group-item-action bg-info">
+                                                    <b>{{group}}</b>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +121,6 @@
         </div>
     </div>
 </div>
-
 <jw-modal id="coach-subscription" class="sm" title="Coaching online e gestão de carreiras">
     <h4 class="h4 title">Subscrevendo serviço coaching</h4>
     <hr>
@@ -124,11 +155,12 @@
 </jw-modal>
 
 
-<jw-modal id="payment-subscription" class="xx-lg" >
-    <app-payment (close)="closePayment()" (done)="paymentDone($event)" [serviceKey]="'premium'" [exclusice]="true"></app-payment>
+<jw-modal id="payment-subscription" class="xx-lg">
+    <app-payment (close)="closePayment()" (done)="paymentDone($event)" [serviceKey]="'premium'" [exclusice]="true">
+    </app-payment>
 </jw-modal>
-<jw-modal id="panding-payment" class="md" *ngIf="subscription.payment.id && subscription.payment.isActive===false" >
-    <div class="card text-center refereal-payment"  style="padding:30px 16%;">
+<jw-modal id="panding-payment" class="md" *ngIf="subscription.payment.id && subscription.payment.isActive===false">
+    <div class="text-center refereal-payment" style="padding:30px 16%;">
 
         <h2>Faça o pagamento para a concluir a adesão ao serviço</h2>
         <br>
@@ -139,10 +171,10 @@
         <span>Referência: </span> <b>{{subscription.payment.reference}}</b><br>
         <span>Montante: </span> <b>KZ {{subscription.payment.amount|currency:' ':''}}</b><br>
 
-        <small>Pagamento disponível até {{subscription.payment.createdAt | amLocale:'pt'| amAdd: 24 : 'hours'| amParseZone | amDateFormat: "DD/MM/YYYY [ás] HH:mm" }}</small>
+        <small>Pagamento disponível até {{subscription.payment.createdAt | amLocale:'pt'| amAdd: 24 : 'hours'|
+            amParseZone | amDateFormat: "DD/MM/YYYY [ás] HH:mm" }}</small>
 
         <br>
-        
+
     </div>
 </jw-modal>
-

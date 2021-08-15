@@ -16,12 +16,13 @@ export class CoachingNoteComponent implements OnInit {
   @Input() cssClass = 'default'
   i = 0;
   public notes: Array<Note> = []
+  public notesPaginated: Array<Note> = []
   @Input() public subscription: CoachingSubscription = new CoachingSubscription();
   public note: Note = new Note();
   public form = new NoteForm()
-  public editting = this.note.id !== undefined;
+  public editing = this.note.id !== undefined;
 
-  public paginate = { firstInPage: 0, page: 1 };
+  onChangePage = (notes) => this.notesPaginated = notes;
 
   constructor(
     private noteService: NoteService,
@@ -34,10 +35,16 @@ export class CoachingNoteComponent implements OnInit {
     })
   }
 
+
   onSubmit() {
-    return this.note.id
-      ? this.update()
-      : this.create()
+
+    if (this.form.fg.dirty && this.form.fg.valid) {
+      return this.note.id
+        ? this.update()
+        : this.create()
+    } else {
+      this.form.validateAllFormFields()
+    }
   }
 
   create() {
@@ -57,14 +64,11 @@ export class CoachingNoteComponent implements OnInit {
   openModal(note = null) {
 
     this.note = note !== null ? note : new Note();
-    this.editting = this.note.id !== undefined;
+    this.editing = this.note.id !== undefined;
     this.modalService.open('note-modal');
   }
   closeModal() {
 
     this.modalService.close('note-modal');
-  }
-  updatePage($event) {
-    this.paginate = $event
   }
 }

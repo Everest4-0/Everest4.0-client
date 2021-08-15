@@ -10,10 +10,10 @@
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let feedback of feedbacks.slice(paginate.firstInPage,paginate.page*4); let i=index">
+            <li class="list-group-item" *ngFor="let feedback of feedbacksPaginated; let i=index">
                 <div class="row">
                     <div class="col-md-6">
-                        Feedback {{feedbacks.length - (i + paginate.firstInPage)}}<br>
+                        Feedback {{feedbacks.length - i }}<br>
                         <small>{{feedback.createdAt|amLocale:'pt'|amTimeAgo}}</small>
                     </div>
 
@@ -32,15 +32,9 @@
             </li>
         </ul>
     </div>
-    <div class="card-footer row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                
-            </div>
-            <div class="col-md-6 text-right">
-                <app-paginate [items]="feedbacks" *ngIf="feedbacks.length>0" (updatePage)="updatePage($event)"></app-paginate>
-            </div>
-        </div>
+    
+    <div class="card-footer">
+        <app-jw-pagination [items]="feedbacks" (changePage)="onChangePage($event)" *ngIf="feedbacks.length>0"></app-jw-pagination>
     </div>
 </div>
 

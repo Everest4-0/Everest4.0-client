@@ -28,13 +28,14 @@ export class CoachingFeedbackComponent implements OnInit {
   public editing = false;
   public feedback: Feedback = new Feedback();
   public feedbacks: Array<Feedback> = [];
+  public feedbacksPaginated: Array<Feedback> = [];
   public feedbackItems: Array<FeedbackItem> = [];
   public comment: FeedbackComment = new FeedbackComment();
   public commentForm = new FeedBackCommentForm();
   public form = new FeedBackForm();
 
+  onChangePage = (items) => this.feedbacksPaginated = items
 
-  public paginate = { firstInPage: 0, page: 1 };
   constructor(
     public auth: AuthService,
     private feedbackItemService: FeedbackItemService,
@@ -120,10 +121,5 @@ export class CoachingFeedbackComponent implements OnInit {
   points(feedback) {
 
     return (feedback.points.reduce((x, y) => x + y.point, 0) / feedback.points.length).toFixed(2)
-  }
-
-
-  updatePage($event) {
-    this.paginate = $event
   }
 }
