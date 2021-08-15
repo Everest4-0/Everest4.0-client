@@ -42,7 +42,7 @@
                                     <td>{{r+1}}</td>
                                     <td>
                                         {{t.descriptions}}<br />
-                                        <span class="tin-text">{{t.updatedAt|date}} <i class="pe-7s-clock"
+                                        <span class="tin-text">{{t.dueDate|date}} <i class="pe-7s-clock"
                                                 style="color: #F00;" *ngIf="!inTime(t.dueDate)"></i></span>
                                     </td>
                                     <td>
