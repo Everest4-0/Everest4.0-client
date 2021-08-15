@@ -23,6 +23,7 @@ import { PaginateComponent } from './paginate/paginate.component';
 import { SharedTodoComponent } from './shared-todo/shared-todo.component';
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
 import { FeedbackChartComponent } from './feedback-chart/feedback-chart.component';
+import { JwPaginationComponent } from './jw-pagination/jw-pagination.component';
 
 
 
@@ -52,6 +53,8 @@ import { FeedbackChartComponent } from './feedback-chart/feedback-chart.componen
     SharedTodoComponent,
 
     ControlMessagesComponent,
+
+    JwPaginationComponent,
 
   ],
   imports: [
@@ -91,9 +94,8 @@ import { FeedbackChartComponent } from './feedback-chart/feedback-chart.componen
     VirtualDataroomComponent,
     EnrollingCourseComponent,
 
-
-
-    SharedTodoComponent
+    SharedTodoComponent,
+    JwPaginationComponent,
   ]
 })
 export class ComponentsModule { }

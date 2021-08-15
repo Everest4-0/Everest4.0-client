@@ -23,7 +23,9 @@ export class BudgetsComponent implements OnInit {
 
 
   revenue: Array<Task> = []
+  revenuePaginated: Array<Task> = []
   expenses: Array<Task> = []
+  expensesPaginated: Array<Task> = []
   budget: Budget = new Budget();
   budgetCategories: Array<BudgetCategory> = [];
   form = new BudgetForm()
@@ -41,6 +43,10 @@ export class BudgetsComponent implements OnInit {
 
   taskStatesArr = ['Pendente', 'Por inicial', 'Em curso', 'Concluido', 'Cancelado'];
 
+
+  onChangePage = (pageOfItems: Array<any>) => this.expensesPaginated = pageOfItems;
+  onRevenueChangePage = (pageOfItems: Array<any>) => this.revenuePaginated = pageOfItems;
+
   constructor(
     private fb: FormBuilder,
     private goalService: GoalService,
@@ -57,7 +63,7 @@ export class BudgetsComponent implements OnInit {
       this.budgetCategories = categories
       const
         getActivityChartData = (direction) => {
-          
+
           const categories = this.budgetCategories
             .filter(x => x.direction === direction)
             .sort((t, u) => t.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) > u.budgets.reduce((a, b) => parseFloat(b.value + '') + a, 0) ? -1 : 0)
@@ -65,7 +71,7 @@ export class BudgetsComponent implements OnInit {
 
 
           const total = categories.reduce((x, y) => parseFloat(y.budgets.reduce((r, s) => parseFloat(s.value + '') + r, 0) + '') + x, 0)
-          let series = categories.map(x => parseFloat(x.budgets.filter(b => b.direction === direction).reduce((a, b) => parseFloat(b.value+'') + a, 0) + ''));
+          let series = categories.map(x => (100 * parseFloat(x.budgets.filter(b => b.direction === direction).reduce((a, b) => parseFloat(b.value + '') + a, 0) + '')) / total);
 
           return {
             labels: labels,
@@ -116,7 +122,6 @@ export class BudgetsComponent implements OnInit {
       }]
     ];
   }
-
   saveBudget() {
 
 
