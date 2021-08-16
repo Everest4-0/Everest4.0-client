@@ -1,16 +1,16 @@
-import { CourseService } from './../../../services/courses/course.service';
-import { CoachingSubscription } from './../../../models/coaching/coaching_subscription';
-import { CoachingSubscriptionService } from './../../../services/coaching/coaching-subscription.service';
-import { AuthService } from './../../../services/auth.service';
+import { CourseService } from '../../../services/courses/course.service';
+import { CoachingSubscription } from '../../../models/coaching/coaching_subscription';
+import { CoachingSubscriptionService } from '../../../services/coaching/coaching-subscription.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'app/models/course/course';
 
 @Component({
   selector: 'app-coaching-dashboard',
-  templateUrl: './coaching-dashboard.component.html',
-  styleUrls: ['./coaching-dashboard.component.scss']
+  templateUrl: './coaching-backoffice-dashboard.component.html',
+  styleUrls: ['./coaching-backoffice-dashboard.component.scss']
 })
-export class CoachingDashboardComponent implements OnInit {
+export class CoachingBackOfficeDashboardComponent implements OnInit {
 
   public lessSbscriptions: Array<any> = [];
   public subscriptions: Array<CoachingSubscription> = []

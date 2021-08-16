@@ -10,7 +10,7 @@
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
 
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let feedback of feedbacksPaginated; let i=index">
+            <li class="list-group-item" *ngFor="let feedback of feedbacksPaginated; let i=index"  (click)="feedbackView(feedback,i)">
                 <div class="row">
                     <div class="col-md-6">
                         Feedback {{feedbacks.length - i }}<br>
@@ -21,8 +21,8 @@
                         <button class="btn btn-xs btn-info"> {{points(feedback)}}</button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-xs pull-right border-none" (click)="feedbackView(feedback,i)">
-                            <i class="pe-7s-angle-right text24"></i>
+                        <button class="btn btn-xs pull-right border-none text24" style="font-size: 24px;">
+                            <i class="pe-7s-angle-right "></i>
                         </button>
                     </div>
 

@@ -11,26 +11,27 @@ import { ToastService } from 'ng-uikit-pro-standard';
 })
 export class AppComponent implements OnInit {
   isLogedin = false;
+  
   constructor(public location: Location,
     public auth: AuthService,
-    private toast: ToastService,
     private permissionsService: NgxPermissionsService) {
     this.isLogedin = !!auth.user
   }
 
   ngOnInit() {
     if (this.auth.user) {
+      this.permissionsService.flushPermissions();
       this.permissionsService.loadPermissions(this.auth.user.roles);
     }
   }
 
+   get roles() { return this.permissionsService.getPermissions(); }
   isMap(path) {
-    var titlee = this.location.prepareExternalUrl(this.location.path());
+    let titlee = this.location.prepareExternalUrl(this.location.path());
     titlee = titlee.slice(1);
-    if (path == titlee) {
+    if (path === titlee) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }

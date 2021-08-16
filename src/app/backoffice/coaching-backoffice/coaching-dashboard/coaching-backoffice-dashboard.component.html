@@ -8,7 +8,7 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                <a routerLink="/backoffice/coaching/board/{{subscription.id}}"
+                <a routerLink="/backoffice/coaching/board/m/{{subscription.id}}"
                     *ngFor="let subscription of subscriptions" class="col-md-3">
                     <div class="card text-center">
                         <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail" />
@@ -81,7 +81,7 @@
                                         <app-progress-bar done="73" [noLabel]=true></app-progress-bar>
                                     </div>
                                     <div class="col-md-1">
-                                        <a routerLink="/backoffice/coaching/board/{{subscription.id}}" class="btn btn-xs border-none pull-right"> <i class="pe-7s-angle-right" style="font-size: 24px;margin: 15px 0;"></i></a>
+                                        <a routerLink="/backoffice/coaching/board/m/{{subscription.id}}" class="btn btn-xs border-none pull-right"> <i class="pe-7s-angle-right" style="font-size: 24px;margin: 15px 0;"></i></a>
                                     </div>
                                 </div>
                             </a>

@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-    userRoles = this.auth.user.roles.map(x => x + ' * ')
+    userRoles = this.auth.user.roles.join(' * ')
     private toggleButton: any;
     private sidebarVisible: boolean;
 

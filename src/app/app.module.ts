@@ -114,7 +114,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       ],
       extraQueryParameters: {}
     })
-    , NgxPermissionsModule.forRoot()
     , NgxPermissionsModule.forChild()
   ],
   declarations: [
@@ -143,7 +142,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     ToastModule,
-    NgxPermissionsModule,
     JwPaginationComponent,
   ],
   providers: [

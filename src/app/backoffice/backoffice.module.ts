@@ -1,4 +1,3 @@
-import { NgxPermissionsModule } from 'ngx-permissions';
 import { FrontofficeModule } from './../frontoffice/frontoffice.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from './../pipes/pipes.module';
@@ -136,7 +135,6 @@ import { ProgramEnrollmentComponent } from './coaching-backoffice/program-enroll
     TextBoxModule,
     DropDownListModule,
     PipesModule,
-    NgxPermissionsModule.forChild()
   ]
 })
 export class BackofficeModule { }

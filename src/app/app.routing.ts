@@ -22,13 +22,6 @@ const routes: Routes = [
   }, {
     path: 'backoffice',
     component: BackofficeComponent,
-    canActivate: [NgxPermissionsGuard],
-    data: {
-      permissions: {
-        only: ['ADMIN'],
-        redirectTo: '/me/403'
-      }
-    },
     children: [
       {
         path: '',

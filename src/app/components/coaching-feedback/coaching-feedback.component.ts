@@ -77,9 +77,9 @@ export class CoachingFeedbackComponent implements OnInit {
   }
   openModal(feedback = null) {
 
-    if (feedback !== null)
+    if (feedback !== null) {
       this.feedback = feedback
-    else {
+    } else {
       this.feedback = new Feedback();
       this.feedback.points =
         this.feedbackItems.map(item => new FeedbackPoint(item))
@@ -109,7 +109,7 @@ export class CoachingFeedbackComponent implements OnInit {
 
   scrollToEnd() {
     setTimeout(() => {
-      var elem = document.getElementById('card-body');
+      const elem = document.getElementById('card-body');
       elem.scrollTop = elem.scrollHeight;
     }, 500)
   }
@@ -119,7 +119,6 @@ export class CoachingFeedbackComponent implements OnInit {
   }
 
   points(feedback) {
-
     return (feedback.points.reduce((x, y) => x + y.point, 0) / feedback.points.length).toFixed(2)
   }
 }
