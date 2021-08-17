@@ -63,7 +63,7 @@
 <div class="main-content">
     <div class="col-md-8">
         <div class="col-md-6">
-            <div class="card" style="padding: 25px;">
+            <div class="card" style="padding: 25px; min-height: 365px;">
                 <h4>Diagnóstico</h4>
                 <app-diagnostic-view [data]=diagnosticDatas *ngIf="diagnosticDatas.data!==undefined">
                 </app-diagnostic-view>
@@ -71,10 +71,10 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card" style="padding: 25px;">
+            <div class="card" style="padding: 25px; min-height: 365px;">
 
                 <h4 class="pull-left">Evolução</h4>
-                <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas.length>0">
+                <app-coaching-evolution [data]=feedbackDatas *ngIf="feedbackDatas.length>0">
                 </app-coaching-evolution>
             </div>
         </div>
@@ -84,8 +84,9 @@
             </app-coaching-note>
         </div>
 
+        
         <div class="col-md-6">
-            <app-coaching-feedback [subscription]="subscription" (feedbackListUpdate)="feedbackListUpdate($event)"
+            <app-coaching-feedback [subscription]="subscription" *ngIf="subscription.id" (feedbackListUpdate)="feedbackListUpdate($event)"
                 [role]="'coach'"></app-coaching-feedback>
         </div>
     </div>

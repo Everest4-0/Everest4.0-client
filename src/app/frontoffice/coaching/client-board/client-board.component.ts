@@ -42,8 +42,6 @@ export class ClientBoardComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private fb: FormBuilder,
-    private goalService: GoalService,
     private userEvaluationService: UserEvaluationService,
     private coachingSubscriptionService: CoachingSubscriptionService,
     private route: ActivatedRoute

@@ -55,7 +55,7 @@
         </div>
 
         <div class="col-md-6" style="min-height: 300px;">
-            <app-coaching-feedback [subscription]="subscription" (feedbackListUpdate)="feedbackListUpdate($event)">
+            <app-coaching-feedback [subscription]="subscription" *ngIf="subscription.id" (feedbackListUpdate)="feedbackListUpdate($event)">
             </app-coaching-feedback>
         </div>
     </div>

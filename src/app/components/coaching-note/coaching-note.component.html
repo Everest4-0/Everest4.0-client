@@ -27,7 +27,7 @@
 
 <jw-modal id="note-modal" class="sm {{editing ? 'editing':''}}">
     <br>
-    <h4><span *ngIf="!editing">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota {{editing}}</span>
+    <h4><span *ngIf="!editing">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota</span>
         <button class="btn pull-right border-none" (click)="editing=!editing" *ngIf="editing"><i
                 class="pe-7s-note"></i></button>
     </h4>
