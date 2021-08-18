@@ -32,11 +32,10 @@
                         <span class="hidden-sm">Partilhar</span>
                     </button>
                 </li>
-                <ng-template [ngxPermissionsOnly]="['ADMIN']">
+                <ng-template [ngxPermissionsOnly]="['FREE', 'BASIC', 'PRO', 'ADMIN']">
                     <li>
-                        <a [routerLink]="['/backoffice']" *ngIf="auth.user.roles.includes('ADMIN')"
-                            class="btn btn-danger">
-                            <span class="hidden-sm">backoffice</span>
+                        <a [routerLink]="['/quizes']" class="btn btn-default">
+                            <span class="hidden-sm">Desafios</span>
                         </a>
                     </li>
                 </ng-template>
@@ -66,20 +65,18 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{auth.user.avatar}}" style="max-width: 100%;border-radius: 100px;width: 30px;height: 30px;"
+                        <img src="{{auth.user.avatar}}"
+                            style="max-width: 100%;border-radius: 100px;width: 30px;height: 30px;"
                             onerror="this.onerror=null;this.src='assets/img/default-avatar.png';">
                     </a>
                     <div class="card card-user dropdown-menu" style="width: 300px;">
                         <div class="image image-cover" style="height: 260px;">
-                            <img src="{{auth.user.avatar}}" alt="..."  onerror="this.onerror=null;this.src='assets/img/default-avatar.png';"/>
+                            <img src="{{auth.user.avatar}}" alt="..."
+                                onerror="this.onerror=null;this.src='assets/img/default-avatar.png';" />
                         </div>
                         <div class="content text-center">
                             <button class="btn btn-outline-success btn-warning">
-                                <i *ngIf="auth.user.roleId!='FREE'" class="pe-7s-medal"
-                                    style="font-size: 33px; padding: 5px;"></i><br>
-                                <i *ngIf="auth.user.roleId=='FREE'" class="pe-7s-delete-user"
-                                    style="font-size: 33px; padding: 5px;"></i><br>
-                                {{auth.user.roleId}}
+                                {{userRoles}}
                             </button>
 
                             <hr />
@@ -87,9 +84,15 @@
                                 <small>{{auth.user.email}}</small><br>
                             </h4>
                             <hr />
+
+                            <ng-template [ngxPermissionsOnly]="['ADMIN']">
+                                <a [routerLink]="['/backoffice']" class="btn btn-danger btn-xs">
+                                    <span class="hidden-sm">Backoffice</span>
+                                </a>
+                            </ng-template>
                             <a routerLink="/me/user">
                                 <h6>Ver Perfil</h6>
-                            </a>,
+                            </a>
                             <a (click)="signOut()">
                                 <h6>Sair</h6>
                             </a>

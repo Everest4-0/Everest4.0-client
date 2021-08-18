@@ -18,7 +18,7 @@ export class DiagnosticComponent implements OnInit {
   evaluations: Array<any> = []
   userEvaluations: Array<UserEvaluation> = [];
   currentEvaluation: UserEvaluation = new UserEvaluation();
-  isTab = 2;
+  isTab = 1;
   label = ['Insuficiente', 'Suficiente', 'Bom', 'Excelente'];
 
   constructor(

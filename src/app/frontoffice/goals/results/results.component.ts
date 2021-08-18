@@ -21,6 +21,7 @@ import { Evaluation } from 'app/models/diagnostic/evaluation';
 })
 export class ResultsComponent implements OnInit {
   public currentResults = { name: null, currentResults: [], groups: [] };
+  public currentResultsIsLoading = true;
   public otherResults = ['Pessoal', 'Profissional', 'Financeiro'];
   public userEvaluations: Array<UserEvaluation> = [];
   public evaluations: Array<Evaluation> = [];
@@ -52,7 +53,7 @@ export class ResultsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.currentResultsIsLoading = true;
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
     this.userEvaluationService.all({ requesterId: this.auth.user.id }).subscribe(userEvaluations => {
@@ -105,6 +106,7 @@ export class ResultsComponent implements OnInit {
 
 
       })
+      this.currentResultsIsLoading = false;
     })
   }
   groupBy = (xs, key) => {

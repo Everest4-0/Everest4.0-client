@@ -16,7 +16,7 @@
 
                 <ngx-skeleton-loader *ngIf="revenue.length==0" count=3 animation="pulse"></ngx-skeleton-loader>
                 <div class="col-xs-12">
-                    <div class="row" *ngFor="let item of revenue; let i = index">
+                    <div class="row" *ngFor="let item of revenuePaginated; let i = index">
                         <div class="col-md-12">
                             <div class="col col-xs-6">
                                 <button class="accordion btn btn-xs pe-7s-angle-down pull-left"
@@ -76,7 +76,9 @@
 
                 </div>
             </div>
-            <div class="card-footer">. . . </div>
+            <div class="card-footer">
+                <app-jw-pagination [items]="revenue" (changePage)="onRevenueChangePage($event)" *ngIf="revenue.length>0"></app-jw-pagination>
+            </div>
         </div>
     </div>
     <div class="col-sm-6">
@@ -105,7 +107,7 @@
 
                 <ngx-skeleton-loader *ngIf="expenses.length==0" count=3 animation="pulse"></ngx-skeleton-loader>
                 <div class="col-xs-12">
-                    <div class="row" *ngFor="let item of expenses; let i = index">
+                    <div class="row" *ngFor="let item of expensesPaginated; let i = index">
                         <div class="col-md-12">
                             <div class="col col-xs-6">
                                 <button class="accordion btn btn-xs pe-7s-angle-down pull-left"
@@ -164,7 +166,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">. . . </div>
+            <div class="card-footer">
+                <app-jw-pagination [items]="expenses" (changePage)="onChangePage($event)" *ngIf="expenses.length>0"></app-jw-pagination>
+            </div>
         </div>
     </div>
     <div class="col-md-6">

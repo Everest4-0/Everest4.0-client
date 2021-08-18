@@ -9,9 +9,9 @@ export class Feedback {
     subscription: CoachingSubscription = new CoachingSubscription();
     user: User = new User();
     points: Array<FeedbackPoint> = []
-    orderNo: number = 0;
+    orderNo = 0;
 
-    comments:Array<FeedbackComment>=[];
+    comments: Array<FeedbackComment> = [];
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;

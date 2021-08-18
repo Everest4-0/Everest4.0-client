@@ -1,4 +1,7 @@
-import { NgxPermissionsModule } from 'ngx-permissions';
+import { UpdateQuizBackOfficeComponent } from './quiz/update-quiz/update-quiz-backoffice.component';
+import { DeleteQuizBackOfficeComponent } from './quiz/delete-quiz/delete-quiz-backoffice.component';
+import { DetailsQuizBackOfficeComponent } from './quiz/details-quiz/details-quiz-backoffice.component';
+import { ListQuizBackOfficeComponent } from './quiz/list-quiz/list-quiz-backoffice.component';
 import { FrontofficeModule } from './../frontoffice/frontoffice.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from './../pipes/pipes.module';
@@ -39,10 +42,10 @@ import { CreateWorkSituationComponent } from './workSituation/create-work-situat
 import { ListProfessionalExperienceComponent } from './professional-experience/list-professional-experience/list-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from './professional-experience/update-professional-experience/update-professional-experience.component';
 import { CreateProfessionalExperienceComponent } from './professional-experience/create-professional-experience/create-professional-experience.component';
-import { ListCourseComponent } from './courses/list-course/list-course.component';
-import { CreateCourseComponent } from './courses/create-course/create-course.component';
-import { DetailsCourseComponent } from './courses/details-course/details-course.component';
-import { UpdateCourseComponent } from './courses/update-course/update-course.component';
+
+
+import { DetailsCourseComponent } from './courses/details-course-backoffice/details-course.component';
+import { UpdateCourseComponent } from './courses/update-course-backoffice/update-course.component';
 
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 
@@ -63,13 +66,11 @@ import { RadioButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
-import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
-import { DetailsQuizComponent } from './quiz/details-quiz/details-quiz.component';
-import { DeleteQuizComponent } from './quiz/delete-quiz/delete-quiz.component';
-import { UpdateQuizComponent } from './quiz/update-quiz/update-quiz.component';
-import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
 import { ComponentsModule } from 'app/components/components.module';
 import { ProgramEnrollmentComponent } from './coaching-backoffice/program-enrollment/program-enrollment.component';
+import { ListCourseBackOfficeComponent } from './courses/list-course-backoffice/list-course-backoffice.component';
+import { CreateCourseBackOfficeComponent } from './courses/create-course-backoffice/create-course-backoffice.component';
+import { CreateQuizBackOfficeComponent } from './quiz/create-quiz/create-quiz-backoffice.component';
 
 
 @NgModule({
@@ -96,15 +97,15 @@ import { ProgramEnrollmentComponent } from './coaching-backoffice/program-enroll
     ListProfessionalExperienceComponent,
     UpdateProfessionalExperienceComponent,
     CreateProfessionalExperienceComponent,
-    ListCourseComponent,
-    CreateCourseComponent,
+    ListCourseBackOfficeComponent,
+    CreateCourseBackOfficeComponent,
     DetailsCourseComponent,
     UpdateCourseComponent,
-    ListQuizComponent,
-    DetailsQuizComponent,
-    DeleteQuizComponent,
-    UpdateQuizComponent,
-    CreateQuizComponent,
+    ListQuizBackOfficeComponent,
+    DetailsQuizBackOfficeComponent,
+    DeleteQuizBackOfficeComponent,
+    UpdateQuizBackOfficeComponent,
+    CreateQuizBackOfficeComponent,
   ],
   imports: [
     FrontofficeModule,
@@ -136,7 +137,6 @@ import { ProgramEnrollmentComponent } from './coaching-backoffice/program-enroll
     TextBoxModule,
     DropDownListModule,
     PipesModule,
-    NgxPermissionsModule.forChild()
   ]
 })
 export class BackofficeModule { }

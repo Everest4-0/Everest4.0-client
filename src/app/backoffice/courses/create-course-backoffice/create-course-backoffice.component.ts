@@ -1,10 +1,10 @@
 import { AuthService } from 'app/services/auth.service';
-import { Evaluation } from './../../../models/diagnostic/evaluation';
-import { EvaluationService } from './../../../services/evaluation.service';
+import { Evaluation } from '../../../models/diagnostic/evaluation';
+import { EvaluationService } from '../../../services/evaluation.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { CourseService } from './../../../services/courses/course.service';
-import { CourseForm } from './../../forms/course.form';
+import { CourseService } from '../../../services/courses/course.service';
+import { CourseForm } from '../../forms/course.form';
 import { Course } from 'app/models/course/course';
 import { Component, OnInit } from '@angular/core';
 import { Module } from 'app/models/course/module';
@@ -12,10 +12,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-create-course',
-  templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.css']
+  templateUrl: './create-course-backoffice.component.html',
+  styleUrls: ['./create-course-backoffice.component.scss']
 })
-export class CreateCourseComponent implements OnInit {
+export class CreateCourseBackOfficeComponent implements OnInit {
 
   public course: Course = new Course()
   public evaluations: Array<Evaluation> = []

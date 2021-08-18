@@ -58,7 +58,7 @@ export const FrontOfficeRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    },{
+    }, {
       path: 'vacant-n-jobs', component: VacantJobComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
@@ -72,7 +72,7 @@ export const FrontOfficeRoutes: Routes =
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['PRO','BASIC','FREE'],
+          only: ['PRO', 'BASIC', 'FREE'],
           redirectTo: '/me/403'
         }
       }
@@ -81,7 +81,7 @@ export const FrontOfficeRoutes: Routes =
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['PRO','BASIC'],
+          only: ['PRO', 'BASIC'],
           redirectTo: '/me/403'
         }
       }
@@ -148,7 +148,7 @@ export const FrontOfficeRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    },{
+    }, {
       path: 'quizes', component: ListQuizComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
@@ -157,13 +157,13 @@ export const FrontOfficeRoutes: Routes =
           redirectTo: '/me/403'
         }
       }
-    }, 
+    },
     {
       path: 'courses', component: ListCourseComponent,
       canActivate: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['FREE','BASIC', 'PRO'],
+          only: ['FREE', 'BASIC', 'PRO'],
           redirectTo: '/me/403'
         }
       }
@@ -206,17 +206,16 @@ export const FrontOfficeRoutes: Routes =
     {
       path: 'coaching',
       component: CoachingComponent,
-      canActivate: [NgxPermissionsGuard],
+      canLoad: [NgxPermissionsGuard],
       data: {
         permissions: {
-          only: ['FREE','BASIC', 'PRO', 'ADMIN'],
-          redirectTo: '/me/403'
+          only: ['FREE', 'BASIC', 'PRO', 'ADMIN'],
         }
       },
       children: [
         {
           path: '',
-          loadChildren: './coaching/coaching.module#CoachingModule'
+          loadChildren: 'app/frontoffice/coaching/coaching.module#CoachingModule'
         }]
     }
   ];

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastModule, TooltipModule } from 'ng-uikit-pro-standard';
 
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
@@ -72,7 +73,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ModalModule,
     FormsModule,
     ReactiveFormsModule,
-
     TooltipModule,
     // for HttpClient use:
     LoadingBarHttpClientModule,
@@ -114,7 +114,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       ],
       extraQueryParameters: {}
     })
-    , NgxPermissionsModule.forRoot()
     , NgxPermissionsModule.forChild()
   ],
   declarations: [
@@ -131,6 +130,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsCompleteComponent,
     FormValidatorComponent,
     EvaluationComponent,
+    JwPaginationComponent,
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,
@@ -142,7 +142,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     ToastModule,
-    NgxPermissionsModule
+    JwPaginationComponent,
   ],
   providers: [
     StorageServices,

@@ -8,7 +8,7 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-8">
-                <a routerLink="/backoffice/coaching/board/{{subscription.id}}"
+                <a routerLink="/backoffice/coaching/board/m/{{subscription.id}}"
                     *ngFor="let subscription of subscriptions" class="col-md-3">
                     <div class="card text-center">
                         <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}" class="img-thumbnail" />
@@ -69,19 +69,16 @@
                     </div>
                     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
                         <ul class="list-group">
-                            <a *ngFor="let subscription of subscriptions" class="list-group-item">
+                            <a *ngFor="let subscription of subscriptions" class="list-group-item" routerLink="/backoffice/coaching/board/m/{{subscription.id}}">
                                 <div class="row">
                                     <div class="col-md-2" style="padding: 0;">
                                         <img src="{{auth.serverAddress}}{{subscription.user.photoUrl}}"
                                             class=""  style="    width: 100%;margin: -10px 1px;"/>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <b>{{subscription.user.datas.fullName}}</b><br>
                                         <small>{{subscription.createdAt|amLocale:'pt'|amTimeAgo}}</small>
                                         <app-progress-bar done="73" [noLabel]=true></app-progress-bar>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a routerLink="/backoffice/coaching/board/{{subscription.id}}" class="btn btn-xs border-none pull-right"> <i class="pe-7s-angle-right" style="font-size: 24px;margin: 15px 0;"></i></a>
                                     </div>
                                 </div>
                             </a>

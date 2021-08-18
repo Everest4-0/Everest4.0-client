@@ -174,6 +174,7 @@ FullCalendarModule.registerPlugins([
 
     FormsModule,
     ReactiveFormsModule,
+    ResultsComponent
   ],
   providers: [
   ]

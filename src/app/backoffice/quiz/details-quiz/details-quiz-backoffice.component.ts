@@ -1,14 +1,14 @@
-import { QuizService } from './../../../services/quiz.service';
+import { QuizService } from '../../../services/quiz.service';
 import { ActivatedRoute } from '@angular/router';
-import { Quiz } from './../../../models/quiz/quiz';
+import { Quiz } from '../../../models/quiz/quiz';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-details-quiz',
-  templateUrl: './details-quiz.component.html',
-  styleUrls: ['./details-quiz.component.css']
+  templateUrl: './details-quiz-backoffice.component.html',
+  styleUrls: ['./details-quiz-backoffice.component.css']
 })
-export class DetailsQuizComponent implements OnInit {
+export class DetailsQuizBackOfficeComponent implements OnInit {
 
   public quiz: Quiz = new Quiz()
 

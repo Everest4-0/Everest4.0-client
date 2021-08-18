@@ -46,7 +46,10 @@ export class EvaluationComponent implements OnInit {
   }
 
   getPbvalue = (arr: Array<any>) =>
-    (arr.reduce((t: number, v) => { return t + (parseInt(v.points)) }, 0) / (4 * arr.length) * 100).toFixed(2);
+    (arr.reduce((t: number, v) => { return t + v.points }, 0) / (4 * arr.length) * 100).toFixed(2);
+
+  getPbprogress = () =>
+    this.evaluations.filter(v => v.points > 0).length * 100 / this.evaluations.length;
 
   openModal(id: string, v: Evaluation) {
     debugger

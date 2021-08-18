@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-6" style="padding: 15px;">
+        <label style="margin-left: 15px;"> {{pager.totalItems}} Itens</label>
+    </div>
+    <div class="col-md-6 text-right">
+
+        <ul *ngIf="pager.pages && pager.pages.length && !mini" class="pagination pull-right">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                <a (click)="setPage(1)" class="page-link">Primeira</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="btn border-none">
+                <a (click)="setPage(pager.currentPage - 1)" class="page-link"><i
+                        class="pe-7s-angle-left text24"></i></a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+                class="page-item number-item">
+                <a (click)="setPage(page)" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                <a (click)="setPage(pager.currentPage + 1)" class="page-link"><i
+                        class="pe-7s-angle-right text24"></i></a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                <a (click)="setPage(pager.totalPages)" class="page-link">Última</a>
+            </li>
+        </ul>
+
+        <div class="btn-group" *ngIf="mini">
+            <button type="button" class="btn border-none" (click)="setPage(pager.currentPage - 1)"
+                [ngClass]="{disabled:pager.currentPage === 1}"><i class="pe-7s-angle-left icon"></i></button>
+            <button type="button" class="btn border-none "><small>{{pager.currentPage}} de
+                    {{pager.totalPages}}</small></button>
+            <button type="button" class="btn border-none" (click)="setPage(pager.currentPage +1)"
+                [ngClass]="{disabled:pager.currentPage === pager.totalPages}"><i
+                    class="pe-7s-angle-right icon"></i></button>
+        </div>
+
+    </div>
+</div>

@@ -26,7 +26,7 @@
                                 <span class="badge ">{{currentResults.evaluations.length}}</span>
                             </h4>
 
-                            <ngx-skeleton-loader *ngIf="currentResults.groups.length==0" count=5 animation="pulse">
+                            <ngx-skeleton-loader *ngIf="currentResultsIsLoading" count=5 animation="pulse">
                             </ngx-skeleton-loader>
                             <div id="panel-{{currentResults.name}}" class="list-group"
                                 *ngIf="currentResults.groups.length>0">

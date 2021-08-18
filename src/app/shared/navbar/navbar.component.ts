@@ -1,7 +1,7 @@
 
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { BACKOFFICE_ROUTES, FRONTOFFICE_ROUTES  } from '../sidebar/sidebar.component';
+import { BACKOFFICE_ROUTES, FRONTOFFICE_ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,10 +14,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
+    userRoles = this.auth.user.roles.join(' * ')
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location, private element: ElementRef, public auth: AuthService, 
+    constructor(location: Location, private element: ElementRef, public auth: AuthService,
         private router: Router) {
         this.location = location;
         this.sidebarVisible = false;

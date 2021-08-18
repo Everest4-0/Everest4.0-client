@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListQuizComponent } from './list-quiz.component';
+import { JwPaginationComponent } from './jw-pagination.component';
 
-describe('ListQuizComponent', () => {
-  let component: ListQuizComponent;
-  let fixture: ComponentFixture<ListQuizComponent>;
+describe('JwPaginationComponent', () => {
+  let component: JwPaginationComponent;
+  let fixture: ComponentFixture<JwPaginationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListQuizComponent ]
+      declarations: [ JwPaginationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListQuizComponent);
+    fixture = TestBed.createComponent(JwPaginationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

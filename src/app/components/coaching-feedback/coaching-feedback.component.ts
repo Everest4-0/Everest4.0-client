@@ -28,13 +28,14 @@ export class CoachingFeedbackComponent implements OnInit {
   public editing = false;
   public feedback: Feedback = new Feedback();
   public feedbacks: Array<Feedback> = [];
+  public feedbacksPaginated: Array<Feedback> = [];
   public feedbackItems: Array<FeedbackItem> = [];
   public comment: FeedbackComment = new FeedbackComment();
   public commentForm = new FeedBackCommentForm();
   public form = new FeedBackForm();
 
+  onChangePage = (items) => this.feedbacksPaginated = items
 
-  public paginate = { firstInPage: 0, page: 1 };
   constructor(
     public auth: AuthService,
     private feedbackItemService: FeedbackItemService,
@@ -44,8 +45,8 @@ export class CoachingFeedbackComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.feedbackService.all().subscribe(feedbacks => {
+debugger
+    this.feedbackService.all({subscriptionId:this.subscription.id}).subscribe(feedbacks => {
       this.feedbacks = feedbacks.reverse()
 
       this.feedbackListUpdate.emit(this.feedbacks);
@@ -76,9 +77,9 @@ export class CoachingFeedbackComponent implements OnInit {
   }
   openModal(feedback = null) {
 
-    if (feedback !== null)
+    if (feedback !== null) {
       this.feedback = feedback
-    else {
+    } else {
       this.feedback = new Feedback();
       this.feedback.points =
         this.feedbackItems.map(item => new FeedbackPoint(item))
@@ -108,7 +109,7 @@ export class CoachingFeedbackComponent implements OnInit {
 
   scrollToEnd() {
     setTimeout(() => {
-      var elem = document.getElementById('card-body');
+      const elem = document.getElementById('card-body');
       elem.scrollTop = elem.scrollHeight;
     }, 500)
   }
@@ -118,12 +119,6 @@ export class CoachingFeedbackComponent implements OnInit {
   }
 
   points(feedback) {
-
     return (feedback.points.reduce((x, y) => x + y.point, 0) / feedback.points.length).toFixed(2)
-  }
-
-
-  updatePage($event) {
-    this.paginate = $event
   }
 }

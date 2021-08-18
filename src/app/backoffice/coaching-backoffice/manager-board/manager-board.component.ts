@@ -38,6 +38,7 @@ export class ManagerBoardComponent implements OnInit {
   ];
 
   public subscription: CoachingSubscription = new CoachingSubscription();
+  public feedbackDatas: Array<any> = [];
   public programsRecomendados: Array<Course> = []
   public programsOutros: Array<Course> = []
   public currentResults = [];
@@ -74,16 +75,17 @@ export class ManagerBoardComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const id = this.route.snapshot.params['id'];
-    this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
 
+    const id = this.route.snapshot.params['id'];
+debugger
+    this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
+      coachingSubscription.notes = coachingSubscription.notes.filter(x => x.userId === this.auth.user.id)
       this.subscription = coachingSubscription;
       this.courseService.all({ userId: this.auth.user.id }).subscribe(programs => {
         this.programsOutros = programs
         this.programsRecomendados = [];//programs.filter(c => c.evaluations.filter(e => this.subscription.goal.descriptions === e.name));
       })
     })
-
 
     this.goal.user = this.auth.user;
     this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
@@ -141,11 +143,13 @@ export class ManagerBoardComponent implements OnInit {
 
     })
   }
+
   feedbackListUpdate(feedbacks: Array<Feedback>) {
-    this.evaluationDatas = []
-    let items = feedbacks[0].points.map(point => point.item)
+
+    this.feedbackDatas = []
+    const items = feedbacks[0].points.map(point => point.item)
     items.forEach((item, i) => {
-      this.evaluationDatas.push(
+      this.feedbackDatas.push(
         {
           label: item.title,
           fill: false,

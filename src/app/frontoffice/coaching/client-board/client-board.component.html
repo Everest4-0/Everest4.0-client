@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="col-md-2">
-                <img src="{{subscription.coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{subscription.coach.photoUrl}}" class="img-thumbnail">
+                <img *ngIf="subscription.coach.photoUrl" src="{{subscription.coach.photoUrl.includes('http') ? '' : auth.serverAddress}}{{subscription.coach.photoUrl}}" class="img-thumbnail">
             </div>
 
         </div>
@@ -29,8 +29,10 @@
         <div class="col-md-6">
             <div class="card" style="padding: 25px;">
                 <h4>Diagnóstico</h4>
-                <app-diagnostic-view [data]=diagnosticDatas *ngIf="diagnosticDatas.data!==undefined">
-                </app-diagnostic-view>
+                
+                <app-diagnostic-view [data]=evaluationDatas
+                *ngIf="evaluationDatas.data!==undefined">
+            </app-diagnostic-view>
             </div>
         </div>
 
@@ -43,7 +45,7 @@
                     Plano de Acção: <b>{{subscription.enrollment.course.title}}</b>
                 </a>
                 <h4 class="pull-left">Evolução</h4>
-                <app-coaching-evolution [data]=evaluationDatas *ngIf="evaluationDatas.length>0">
+                <app-coaching-evolution [data]=feedbackDatas *ngIf="feedbackDatas.length>0">
                 </app-coaching-evolution>
             </div>
         </div>
@@ -53,7 +55,7 @@
         </div>
 
         <div class="col-md-6" style="min-height: 300px;">
-            <app-coaching-feedback [subscription]="subscription" (feedbackListUpdate)="feedbackListUpdate($event)">
+            <app-coaching-feedback [subscription]="subscription" *ngIf="subscription.id" (feedbackListUpdate)="feedbackListUpdate($event)">
             </app-coaching-feedback>
         </div>
     </div>

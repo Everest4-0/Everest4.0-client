@@ -8,39 +8,32 @@
     </div>
     <div class="card-body" style="padding: 15px; border-top:solid 1px #eee">
         <ul class="list-group">
-            <div *ngFor="let note of notes.slice(paginate.firstInPage,paginate.page*4);let j=index">
-                <li class="list-group-item">
-                    <span class="pull-left">{{j+paginate.firstInPage+1}}. &nbsp;&nbsp;</span>
-                    {{note.title}}<br>
-                    <small>{{note.updatedAt|amLocale:'pt'|amTimeAgo}}</small>
-                    <button class="btn btn-xs pull-right border-none" (click)="openModal(note)"><i
-                            class="pe-7s-note"></i></button>
-                </li>
-            </div>
+            <li class="list-group-item" (click)="openModal(note)" *ngFor="let note of notesPaginated;let j=index">
+                <button class="btn btn-xs pull-right border-none" style="font-size: 24px;">
+                    <i class="pe-7s-angle-right text24"></i>
+                </button>
+                <span class="pull-left">{{j+1}}. &nbsp;&nbsp;</span>
+                {{note.title}}<br>
+                <small>{{note.updatedAt|amLocale:'pt'|amTimeAgo}}</small>
+            </li>
         </ul>
     </div>
-    <div class="card-footer row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                
-            </div>
-            <div class="col-md-6 text-right">
-                <app-paginate [items]="notes" *ngIf="notes.length>0" (updatePage)="updatePage($event)"></app-paginate>
-            </div>
-        </div>
+    <div class="card-footer">
+        <app-jw-pagination [items]="notes" (changePage)="onChangePage($event)" *ngIf="notes.length>0">
+        </app-jw-pagination>
     </div>
 </div>
 
 
-<jw-modal id="note-modal" class="sm {{editting ? 'editting':''}}">
+<jw-modal id="note-modal" class="sm {{editing ? 'editing':''}}">
     <br>
-    <h4><span *ngIf="!editting">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota</span>
-        <button class="btn pull-right border-none" (click)="editting=!editting" *ngIf="editting"><i
+    <h4><span *ngIf="!editing">{{note.id ==undefined ? 'Nova' : 'Actualizar'}} Nota</span>
+        <button class="btn pull-right border-none" (click)="editing=!editing" *ngIf="editing"><i
                 class="pe-7s-note"></i></button>
     </h4>
     <hr>
-    <div class="row text-center card-body">
-        <form #courseF="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row text-center card-body {{editing ? 'editing':''}}">
+        <form #courseF="ngForm" [formGroup]="form.fg" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-md-12">
@@ -48,6 +41,10 @@
                             <input type="email" style="font-weight: 900;font-size: 24px;"
                                 class="form-control form-title form-control-lg" [(ngModel)]="note.title"
                                 formControlName="title" required aria-describedby="emailHelp" placeholder="Título">
+
+                            <div *ngIf="form.controls.title.touched && form.controls.title.invalid" class="error">
+                                <div *ngIf="form.controls.title.errors.required">Este campo é obrigatório</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,12 +54,17 @@
                             <textarea type="email" class="form-control form-control-lg" [(ngModel)]="note.descriptions"
                                 formControlName="descriptions" required aria-describedby="emailHelp"
                                 placeholder="insira o seu texto aqui" style="height: 400px;"></textarea>
+
+                            <div *ngIf="form.controls.descriptions.touched && form.controls.descriptions.invalid"
+                                class="error">
+                                <div *ngIf="form.controls.descriptions.errors.required">Este campo é obrigatório</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row text-center"><br>
-                <button class="btn btn-success bg-success" *ngIf="!editting || note.id===undefined">Salvar</button>
+                <button class="btn btn-success bg-success" *ngIf="!editing || note.id===undefined">Salvar</button>
             </div>
         </form>
 

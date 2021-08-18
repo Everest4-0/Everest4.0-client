@@ -1,3 +1,5 @@
+import { ResultsComponent } from './../goals/results/results.component';
+import { FrontofficeComponent } from './../frontoffice/frontoffice.component';
 import { PaymentModule } from './../../payment/payment.module';
 import { ComponentsModule } from 'app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

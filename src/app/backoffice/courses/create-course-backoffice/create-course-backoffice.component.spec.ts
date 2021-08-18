@@ -1,20 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CreateCourseBackOfficeComponent } from './create-course-backoffice.component';
 
-import { CreateCourseComponent } from './create-course.component';
+
 
 describe('CreateCourseComponent', () => {
-  let component: CreateCourseComponent;
-  let fixture: ComponentFixture<CreateCourseComponent>;
+  let component: CreateCourseBackOfficeComponent;
+  let fixture: ComponentFixture<CreateCourseBackOfficeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateCourseComponent ]
+      declarations: [ CreateCourseBackOfficeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCourseComponent);
+    fixture = TestBed.createComponent(CreateCourseBackOfficeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

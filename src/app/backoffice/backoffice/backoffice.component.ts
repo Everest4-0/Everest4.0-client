@@ -1,3 +1,5 @@
+import { NgxPermissionsService } from 'ngx-permissions';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackofficeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public auth: AuthService,
+    private permissionsService: NgxPermissionsService
+  ) { }
 
   ngOnInit(): void {
+
+    if (this.auth.user) {
+      this.permissionsService.loadPermissions(this.auth.user.roles);
+    }
   }
 
 }
