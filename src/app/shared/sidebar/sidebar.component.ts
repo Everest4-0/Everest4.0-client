@@ -31,12 +31,12 @@ export const FRONTOFFICE_ROUTES: RouteInfo[] = [
 export const BACKOFFICE_ROUTES: RouteInfo[] = [
   { path: '/backoffice/users', title: 'Usuários', icon: 'pe-7s-users', roles: ['ADMIN'] },
   { path: '/backoffice/evaluations', title: 'Variaveis de avaliação', icon: 'pe-7s-star', roles: ['ADMIN'] },
-  { path: '/backoffice/quizes', title: 'Desafios', icon: 'pe-7s-timer', roles: ['ADMIN'] },
+  { path: '/backoffice/quizes/m', title: 'Desafios', icon: 'pe-7s-timer', roles: ['ADMIN'] },
   { path: '/backoffice/academic-levels', title: 'Níveis académico', icon: 'pe-7s-study', roles: ['ADMIN'] },
   { path: '/backoffice/professional-experiencies', title: 'Experiências profissionais', icon: 'pe-7s-graph3', roles: ['ADMIN'] },
   { path: '/backoffice/work-situations', title: 'Situações de trabalho', icon: 'pe-7s-portfolio', roles: ['ADMIN'] },
   { path: '/backoffice/budget-categories', title: 'Categorias de orçamento', icon: 'pe-7s-cash', roles: ['ADMIN'] },
-  { path: '/backoffice/courses', title: 'Cursos on-line', icon: 'pe-7s-bookmarks', roles: ['ADMIN'] },
+  { path: '/backoffice/courses/m', title: 'Cursos on-line', icon: 'pe-7s-bookmarks', roles: ['ADMIN'] },
   { path: '/backoffice/coaching/start', title: 'Gestão de carreira e Coaching online', icon: 'pe-7s-umbrella', roles: ['ADMIN'] }
 ]
 @Component({

@@ -1,18 +1,18 @@
 import { ToastService } from 'ng-uikit-pro-standard';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuizService } from './../../../services/quiz.service';
-import { AuthService } from './../../../services/auth.service';
-import { Quiz } from './../../../models/quiz/quiz';
-import { QuizForm } from './../../forms/quiz.form';
+import { QuizService } from '../../../services/quiz.service';
+import { AuthService } from '../../../services/auth.service';
+import { Quiz } from '../../../models/quiz/quiz';
+import { QuizForm } from '../../forms/quiz.form';
 import { Component, OnInit } from '@angular/core';
 import { Answer } from 'app/models/quiz/answer';
 
 @Component({
   selector: 'app-create-quiz',
-  templateUrl: './create-quiz.component.html',
-  styleUrls: ['./create-quiz.component.scss']
+  templateUrl: './create-quiz-backoffice.component.html',
+  styleUrls: ['./create-quiz-backoffice.component.scss']
 })
-export class CreateQuizComponent implements OnInit {
+export class CreateQuizBackOfficeComponent implements OnInit {
 
   public form = new QuizForm()
 

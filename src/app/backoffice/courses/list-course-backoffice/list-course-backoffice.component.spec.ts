@@ -1,20 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ListCourseBackOfficeComponent } from './list-course-backoffice.component';
 
-import { ListCourseComponent } from './list-course.component';
+
 
 describe('ListCourseComponent', () => {
-  let component: ListCourseComponent;
-  let fixture: ComponentFixture<ListCourseComponent>;
+  let component: ListCourseBackOfficeComponent;
+  let fixture: ComponentFixture<ListCourseBackOfficeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListCourseComponent ]
+      declarations: [ ListCourseBackOfficeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListCourseComponent);
+    fixture = TestBed.createComponent(ListCourseBackOfficeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

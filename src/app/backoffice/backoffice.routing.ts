@@ -1,13 +1,9 @@
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { CreateQuizComponent } from 'app/backoffice/quiz/create-quiz/create-quiz.component';
-import { UpdateQuizComponent } from 'app/backoffice/quiz/update-quiz/update-quiz.component';
-import { DeleteQuizComponent } from 'app/backoffice/quiz/delete-quiz/delete-quiz.component';
-import { DetailsQuizComponent } from 'app/backoffice/quiz/details-quiz/details-quiz.component';
-import { ListQuizComponent } from 'app/backoffice/quiz/list-quiz/list-quiz.component';
-import { UpdateCourseComponent } from 'app/backoffice/courses/update-course/update-course.component';
-import { DetailsCourseComponent } from 'app/backoffice/courses/details-course/details-course.component';
-import { CreateCourseComponent } from 'app/backoffice/courses/create-course/create-course.component';
-import { ListCourseComponent } from 'app/backoffice/courses/list-course/list-course.component';
+import { CreateQuizBackOfficeComponent } from 'app/backoffice/quiz/create-quiz/create-quiz-backoffice.component';
+import { UpdateQuizBackOfficeComponent } from 'app/backoffice/quiz/update-quiz/update-quiz-backoffice.component';
+import { DeleteQuizBackOfficeComponent } from 'app/backoffice/quiz/delete-quiz/delete-quiz-backoffice.component';
+import { UpdateCourseComponent } from 'app/backoffice/courses/update-course-backoffice/update-course.component';
+import { DetailsCourseComponent } from 'app/backoffice/courses/details-course-backoffice/details-course.component';
 import { CreateProfessionalExperienceComponent } from 'app/backoffice/professional-experience/create-professional-experience/create-professional-experience.component';
 import { UpdateProfessionalExperienceComponent } from 'app/backoffice/professional-experience/update-professional-experience/update-professional-experience.component';
 import { ListProfessionalExperienceComponent } from 'app/backoffice/professional-experience/list-professional-experience/list-professional-experience.component';
@@ -32,6 +28,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CreateCategoryBudgetComponent } from 'app/backoffice/budgetCategory/create-category-budget/create-category-budget.component';
 import { CoachingComponent } from 'app/backoffice/coaching-backoffice/coaching/coaching.component';
+import { DetailsQuizBackOfficeComponent } from './quiz/details-quiz/details-quiz-backoffice.component';
+import { CreateCourseBackOfficeComponent } from './courses/create-course-backoffice/create-course-backoffice.component';
+import { ListCourseBackOfficeComponent } from './courses/list-course-backoffice/list-course-backoffice.component';
+import { ListQuizBackOfficeComponent } from './quiz/list-quiz/list-quiz-backoffice.component';
 
 
 const backOfficeRoutes: Routes = [
@@ -65,17 +65,17 @@ const backOfficeRoutes: Routes = [
   { path: 'professional-experiencies/create', component: CreateProfessionalExperienceComponent },
   { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent },
 
-  { path: 'quizes', component: ListQuizComponent },
-  { path: 'quizes/create', component: CreateQuizComponent },
-  { path: 'quizes/update/:id', component: UpdateQuizComponent },
-  { path: 'quizes/delete/:id', component: DeleteQuizComponent },
-  { path: 'quizes/details/:id', component: DetailsQuizComponent },
+  { path: 'quizes/m', component: ListQuizBackOfficeComponent },
+  { path: 'quizes/m/create', component: CreateQuizBackOfficeComponent },
+  { path: 'quizes/m/update/:id', component: UpdateQuizBackOfficeComponent },
+  { path: 'quizes/m/delete/:id', component: DeleteQuizBackOfficeComponent },
+  { path: 'quizes/m/details/:id', component: DetailsQuizBackOfficeComponent },
 
-  { path: 'courses', component: ListCourseComponent },
-  { path: 'courses/create', component: CreateCourseComponent },
-  { path: 'courses/update/:id', component: UpdateCourseComponent },
-  { path: 'courses/delete/:id', component: DeleteUserComponent },
-  { path: 'courses/details/:id', component: DetailsCourseComponent },
+  { path: 'courses/m', component: ListCourseBackOfficeComponent },
+  { path: 'courses/m/create', component: CreateCourseBackOfficeComponent },
+  { path: 'courses/m/update/:id', component: UpdateCourseComponent },
+  { path: 'courses/m/delete/:id', component: DeleteUserComponent },
+  { path: 'courses/m/details/:id', component: DetailsCourseComponent },
 
   {
     path: 'coaching',

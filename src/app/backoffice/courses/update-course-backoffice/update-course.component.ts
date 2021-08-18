@@ -1,11 +1,11 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EvaluationService } from './../../../services/evaluation.service';
+import { EvaluationService } from '../../../services/evaluation.service';
 import { ToastService } from 'ng-uikit-pro-standard';
-import { CourseService } from './../../../services/courses/course.service';
+import { CourseService } from '../../../services/courses/course.service';
 import { AuthService } from 'app/services/auth.service';
-import { CourseForm } from './../../forms/course.form';
-import { Evaluation } from './../../../models/diagnostic/evaluation';
+import { CourseForm } from '../../forms/course.form';
+import { Evaluation } from '../../../models/diagnostic/evaluation';
 import { Course } from 'app/models/course/course';
 import { Component, OnInit } from '@angular/core';
 import { Module } from 'app/models/course/module';
