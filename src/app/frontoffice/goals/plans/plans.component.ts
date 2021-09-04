@@ -156,7 +156,7 @@ export class PlansComponent implements OnInit {
       this.goalService.update(this.goal).subscribe(goal => {
         this.goals.filter(f => f.id === goal.id)[0] = this.goal
 
-        this.toast.success('Registo actualizado com sucesso', 'Sucesso', {
+        this.toast.success('Registo actualizado com sucesso!', 'Sucesso', {
           timeOut: 50000,
           progressBar: true,
         })
