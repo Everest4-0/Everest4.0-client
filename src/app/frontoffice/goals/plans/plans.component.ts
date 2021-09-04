@@ -7,6 +7,7 @@ import { AuthService } from './../../../services/auth.service';
 import { Goal } from './../../../models/goal/goal';
 import { GoalService } from './../../../services/goal.service';
 import { ModalService } from './../../../components/modal/modal.service';
+import { LegendItem, ChartType } from '../../../components/lbd/lbd-chart/lbd-chart.component';
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from 'ng-uikit-pro-standard';
 import { GoalForm } from 'app/forms/goal.form';
@@ -17,7 +18,6 @@ import { GoalForm } from 'app/forms/goal.form';
   styleUrls: ['./plans.component.scss']
 })
 export class PlansComponent implements OnInit {
-
   task: Task = new Task();
   taskDetails: Task = new Task();
   form = new TaskForm()
