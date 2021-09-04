@@ -145,7 +145,7 @@ export class DetailsCourseComponent implements OnInit {
       this.activityService.create(activity))
       .subscribe(activity => {
         
-        this.toast.success('Actividade actualizada com sucesso', 'Sucesso', {
+        this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })

@@ -20,16 +20,16 @@ import { ToDo } from 'app/models/goal/todo';
 export class ScheduleComponent implements OnInit {
 
 
-  @Input() filters=[]
+  @Input() filters = []
   public thisWeekLimit = 5;
   public overDueLimit = 5;
   public tasks: any = { overDue: [], thisWeek: [], all: [] }
   public taskDetails: Task = new Task()
   public todos: Array<Task> = []
+  public actualTaskList: string;
   form = new ToDoForm(this.fb)
   now: Date = new Date();
   constructor(
-    private goalService: GoalService,
     public auth: AuthService,
     private taskService: TaskService,
     private toast: ToastService,
@@ -45,14 +45,14 @@ export class ScheduleComponent implements OnInit {
     nSunday = new Date((new Date()).setHours(0, 0, 0, 0));
     lSunday.setDate(lSunday.getDate() - (lSunday.getDay() || 7) + 0);
     nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 7);
-    let sAnt, sAct, eAtr, dashBoard;
-    this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
-      goals.forEach(goal => goal.tasks.forEach(t => t.goal = goal))
-      this.tasks.all = goals.map(goal => goal.tasks)
+    let sAnt, sAct, eAtr;
+    this.taskService.all({ userId: this.auth.user.id }).subscribe(tasks => {
+
+      this.tasks.all = tasks;
       this.tasks.all = this.tasks.all.sort((x, y) => x.createdAt > y.createdAt ? 1 : -1).reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
       this.tasks.thisWeek = this.tasks.all
-      .filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
+        .filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
       eAtr = this.tasks.all.filter(task => new Date(task.dueDate) > now)
       sAct = this.tasks.all.filter(task => new Date(task.createdAt) > lSunday)
       sAnt = this.tasks.all.filter(task => new Date(task.createdAt) < lSunday)
@@ -63,7 +63,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateState(task, state, list) {
-  
+    debugger
     task.state = state
     task.goal = null
     this.taskService.update(task).subscribe(task => {
@@ -97,8 +97,9 @@ export class ScheduleComponent implements OnInit {
   anualGoal(goal: Goal) {
     return goal.partials.reduce((x: number, y) => { return x + parseFloat((y.value || 0) + '') }, 0)
   };
-  showTaskDetails(task) {
+  showTaskDetails(task, str) {
     this.taskDetails = task
+    this.actualTaskList = str
     this.openModal('task-detail-modal')
   }
   //['Pendente','Por inicial','Em curso','Concluido']

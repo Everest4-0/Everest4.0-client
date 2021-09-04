@@ -89,7 +89,7 @@ export class EvaluationRequestComponent implements OnInit {
   saveEvaluationComent() {
     this.evaluationRequestService.update(this.request).subscribe(e => {
       this.closeModal('evaluation-modal')
-      this.toast.success('Feedback actualizado com sucesso', 'Sucesso', {
+      this.toast.success('Registo actualizado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })

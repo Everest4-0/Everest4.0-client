@@ -130,7 +130,7 @@ export class ResultsComponent implements OnInit {
         this.goal = new Goal()
         this.goal.partials = [new PartialGoal(), new PartialGoal(), new PartialGoal(), new PartialGoal()];
 
-        this.toast.success('Resultados esperado registado com sucesso', 'Sucesso', {
+        this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 50000,
           progressBar: true,
         })

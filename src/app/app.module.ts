@@ -53,7 +53,6 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BackofficeModule } from './backoffice/backoffice.module';
 
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { EvaluationComponent } from './frontend/diagnostic/evaluation/evaluation.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -95,7 +94,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: '8d006f57-71cc-402f-8fe3-95e9d004d404', // This is your client ID
         authority: 'https://login.microsoftonline.com/common/', // This is your tenant ID
-        redirectUri: isDevMode ? 'http://localhost:4200/' : 'https://application.qld.everest40.com/'// This is your redirect URI
+        redirectUri: 'https://application.qld.everest40.com/'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -129,7 +128,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-    EvaluationComponent,
     JwPaginationComponent,
   ], exports: [
     FirstloginComponent,

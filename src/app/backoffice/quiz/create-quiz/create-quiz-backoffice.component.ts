@@ -46,7 +46,7 @@ export class CreateQuizBackOfficeComponent implements OnInit {
   saveForm() {
     console.log(this.quiz)
     this.quizService.create(this.quiz).subscribe(data => {
-      this.toast.success('Desafio criado com sucesso', 'Sucesso', {
+      this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })

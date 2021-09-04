@@ -21,7 +21,7 @@ export class DeleteUserComponent implements OnInit {
     const id = this.route.snapshot.params['id']
 
     this.userService.delete(id).subscribe(datas => {
-      this.toast.success('Eliminado com sucesso', 'Sucesso', {
+      this.toast.success('registo eliminado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true
       })

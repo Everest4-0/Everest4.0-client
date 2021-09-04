@@ -95,9 +95,9 @@ export class HomeComponent implements OnInit {
     nSunday.setDate(nSunday.getDate() - (nSunday.getDay() || 7) + 7);
     let sAnt, sAct, eAtr, dashBoard;
 
-    this.goalService.all({ userId: this.auth.user.id }).subscribe(goals => {
+    this.taskService.all({ userId: this.auth.user.id }).subscribe(tasks => {
 
-      this.tasks.all = goals.map(goal => goal.tasks)
+      this.tasks.all = tasks
       this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
       this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)
@@ -105,23 +105,16 @@ export class HomeComponent implements OnInit {
       sAct = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday)
       sAnt = this.tasks.all.filter(task => new Date(task.dueDate) < lSunday)
 
-      let done = sAct.filter((x: Task) => x.state > 2).length
-      let all = sAct.length;
+      const done = sAct.filter((x: Task) => x.state > 2).length
+      const all = sAct.length;
 
       this.emailChartDataSeries = {
         series: [(100 * done / all).toFixed(2), (100 * (all - done) / all).toFixed(2)]
       }
-      /*
-            'Pendente'
-            ,'Por inicial'
-            ,'Em curso'
-            ,'Concluido'
-            ,'Cancelado'*/
-      //sAct.
 
-      let fnToDo = (x: Array<Task>) => x.filter(r => r.state < 2).length;
-      let fnDoing = (x: Array<Task>) => x.filter(r => r.state === 2).length;
-      let fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length;
+      const fnToDo = (x: Array<Task>) => x.filter(r => r.state < 2).length;
+      const fnDoing = (x: Array<Task>) => x.filter(r => r.state === 2).length;
+      const fnDone = (x: Array<Task>) => x.filter(r => r.state > 2).length;
       this.activityChartData = {
         labels: ['Por iniciar', 'Em curso', 'Concluido'],
         series: [
@@ -194,11 +187,11 @@ export class HomeComponent implements OnInit {
 
   getEmailChartDataSeries() {
 
-    let now = moment()
-    let done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) > 2).length,
+    const now = moment()
+    const done = this.tasks.all.filter(task => moment(task.dueDate) > now).filter(task => parseInt(task.state) > 2).length,
       toDo = this.tasks.all.filter(task => moment(task.dueDate) < now).filter(task => parseInt(task.state) < 3).length
 
-    let f = {
+    const f = {
       series: [
         (done / (done + toDo) * 100).toFixed(2),
         (toDo / (done + toDo) * 100).toFixed(2)
