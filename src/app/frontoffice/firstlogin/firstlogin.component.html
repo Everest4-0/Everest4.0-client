@@ -1,5 +1,5 @@
 <div class="form-page-container">
-    <app-form-steps count=4></app-form-steps>
+    <app-form-steps count=3></app-form-steps>
     <div class="step-page-container">
         <div class="form-step">
             <form [formGroup]="userForm">
@@ -41,8 +41,8 @@
                                             [value]="user.datas.birthDate" [rules]="['required']"></form-validator>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Telefone:</label>
-                                        <input type="text" class="form-control" placeholder="Telefone"
+                                        <label for="email">Telemóvel:</label>
+                                        <input type="text" class="form-control" placeholder="Telemóvel"
                                             formControlName="telephone" [(ngModel)]="user.telePhone">
                                         <form-validator formControlKey="telePhone" (valid)="formValid($event)"
                                             [value]="user.telePhone" [rules]="['number']"></form-validator>
@@ -51,7 +51,7 @@
                             </div>
                         </app-form-steps-template>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'2'">
+                    <!--<ng-container *ngSwitchCase="'2'">
                         <app-form-steps-template [step]="(currentStep | async)">
                             <div class="row">
                                 <div class="col-md-6">
@@ -108,8 +108,8 @@
                                 </div>
                             </div>
                         </app-form-steps-template>
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'3'">
+                    </ng-container>-->
+                    <ng-container *ngSwitchCase="'2'">
                         <app-form-steps-template [step]="(currentStep | async)">
                             <div class="row">
                                 <div class="col-md-6">
@@ -131,7 +131,7 @@
                             </div>
                         </app-form-steps-template>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'4'">
+                    <ng-container *ngSwitchCase="'3'">
                         <app-form-steps-template [step]="(currentStep | async)">
 
                             <div class="col-md-6">

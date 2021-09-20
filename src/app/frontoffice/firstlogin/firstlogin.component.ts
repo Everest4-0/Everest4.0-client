@@ -26,9 +26,9 @@ export class FirstloginComponent implements OnInit {
   public file: any = {}
   currentStep: Observable<StepModel>;
 
-  academicLevels: Array<any> = [];
-  workSituations: Array<any> = [];
-  professionalExperiences: Array<any> = [];
+  //academicLevels: Array<any> = [];
+  //workSituations: Array<any> = [];
+  //professionalExperiences: Array<any> = [];
   activitySectors: Array<any> = [{ id: 2, name: 'Público' }, { id: 1, name: 'Privado' }, { id: 0, name: 'Outro' }]
   sexs: Array<any> = [{ id: 2, name: 'Masculino' }, { id: 1, name: 'Feminino' }, { id: 0, name: 'Outro' }]
   userForm = this.fb.group({
@@ -40,12 +40,12 @@ export class FirstloginComponent implements OnInit {
     birthDate: [''],
     sex: [''],
 
-    salary: [''],
+    //salary: [''],
     academicLevel: [''],
     workSituation: [''],
     professionalExperience: [''],
 
-    activitySector: [''],
+    //activitySector: [''],
   });
 
   constructor(
@@ -55,18 +55,18 @@ export class FirstloginComponent implements OnInit {
     private router: Router,
     private store: StorageServices,
 
-    private academicLevelService: AcademicLevelService,
-    private workSituationService: WorkSituationService,
-    private professionalExperienceService: ProfessionalExperienceService
+    //private academicLevelService: AcademicLevelService,
+    //private workSituationService: WorkSituationService,
+    //private professionalExperienceService: ProfessionalExperienceService
   ) {
     this.user = this.auth.user;
   }
 
   ngOnInit(): void {
 
-    this.academicLevelService.all().subscribe(x => this.academicLevels = x)
-    this.workSituationService.all().subscribe(x => this.workSituations = x)
-    this.professionalExperienceService.all().subscribe(x => this.professionalExperiences = x)
+    //this.academicLevelService.all().subscribe(x => this.academicLevels = x)
+    //this.workSituationService.all().subscribe(x => this.workSituations = x)
+    //this.professionalExperienceService.all().subscribe(x => this.professionalExperiences = x)
 
     this.file.imageUrl = this.auth.user.avatar
     this.currentStep = this.stepsService.getCurrentStep();
