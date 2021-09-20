@@ -16,7 +16,7 @@
                             <label for="checkbox_{{i}}"></label>
                         </div>
                     </div>
-                    <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                    <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item, 'todos')">
                         <h5 class="date">
                             {{item.dueDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM " }}
                             <span
@@ -57,7 +57,7 @@
                                 <label for="checkbox_{{i}}"></label>
                             </div>
                         </div>
-                        <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                        <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item,'overDue')">
                             <h5 class="date">
                                 {{item.dueDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM " }}
                                 <span
@@ -98,7 +98,7 @@
                             <label for="checkbox_{{i}}"></label>
                         </div>
                     </div>
-                    <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item)">
+                    <div class="col-xs-10 col-md-11" (click)="showTaskDetails(item,'thisWeek')">
                         <h5 class="date">
                             {{item.dueDate|amLocale:'pt'| amParseZone | amDateFormat: "dddd, D [de] MMMM " }}
                             <span
@@ -151,7 +151,7 @@
                             <b class="caret" *ngIf="states(taskDetails.state).length>0"></b></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li *ngFor="let state of states(taskDetails.state)">
+                        <li *ngFor="let state of states(taskDetails.state)" (click)="updateState(taskDetails, state, actualTaskList)">
                             <a>{{['Pendente','Por inicial','Em curso','Concluido','Cancelar'][state]}}</a>
                         </li>
                     </ul>

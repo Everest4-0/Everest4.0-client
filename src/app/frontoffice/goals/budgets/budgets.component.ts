@@ -145,7 +145,7 @@ export class BudgetsComponent implements OnInit {
             }
           })
         }
-        this.toast.success('Orçamento registado com sucesso', 'Sucesso', {
+        this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })

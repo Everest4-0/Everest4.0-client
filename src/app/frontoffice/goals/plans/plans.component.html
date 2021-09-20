@@ -22,8 +22,12 @@
                             <span class="badge ">{{goal.tasks.length}}</span>
                         </div>
                         <div class="col col-xs-4 text-right">{{anualGoal(goal)}}</div>
-                        <div class="col col-xs-2 actions text-right"><button class="btn" (click)="addTask(goal)"><i
+                        <div class="col col-xs-2 actions text-right">
+                            <button class="btn" (click)="addTask(goal)"><i
                                     class="pe-7s-plus"></i></button>
+
+                            <button class="btn" (click)="editGoal(goal)"><i
+                                class="pe-7s-edit"></i></button>
                         </div>
                     </div>
 
@@ -246,5 +250,44 @@
         <a id="editar" class="btn btn-simple btn-warning btn-icon" (click)="onEdit()">Editar</a>
     <div class="row text-center">
         
+    </div>
+</jw-modal>
+
+
+<jw-modal id="goal-modal" class="sm" title="Actualizar"
+    subtitle="Actualizar Objectivos <b>{{goal.group}} </b>">
+    <div class="row">
+        <form [formGroup]="goalForm.fg" (ngSubmit)="saveGoal()">
+            <div class="col-md-12">
+                {{goal.anualGoal|json}}
+                <div class="form-group">
+                    <label for="inputObjectives">Objectivo<span class="error">*</span></label>
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"
+                        formControlName="objectives" id="inputObjectives">
+                    <div *ngIf="goalForm.controls.objectives.touched && goalForm.controls.objectives.invalid" class="error">
+                        <div *ngIf="goalForm.controls.objectives.errors.required">Este campo é obrigatório</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAnualGoal">Meta Anual<span class="error">*</span></label>
+                    <input type="number" class="form-control form-control-lg" (keyup)="setPartialGoal()"
+                        [(ngModel)]="goal.anualGoal" formControlName="anualGoal" id="inputAnualGoal">
+                    <div *ngIf="goalForm.controls.anualGoal.touched && goalForm.controls.anualGoal.invalid" class="error">
+                        <div *ngIf="goalForm.controls.anualGoal.errors.required">Este campo é obrigatório</div>
+                    </div>
+                </div>
+                <div style="border:solid 1px #ddd; padding:5px; padding-left:60px">
+                    <div class="form-group" *ngFor="let item of goal.partials; let i=index">
+                        <label for="exampleInputPassword1">{{i+1}}º Trimestre</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            [(ngModel)]="item.value" name="{{i}}_partial" (keyup)="setAnualGoal()"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center"><br>
+                <button class="btn btn-success btn-fill" type="submit">Salvar</button>
+            </div>
+        </form>
     </div>
 </jw-modal>

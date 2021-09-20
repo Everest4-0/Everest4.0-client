@@ -57,7 +57,7 @@ export class ListQuizComponent implements OnInit {
     this.quiz.answers.forEach(x => x.correct = x.text === id)
   }
   saveForm() {
-    this.quiz.isActive=false;
+    this.quiz.isActive = false;
 
     (this.quiz.id ?
       this.quizService.update(this.quiz) :
@@ -69,7 +69,7 @@ export class ListQuizComponent implements OnInit {
           this.quizzes.push(quiz)
         }
 
-        this.toast.success('Desafio ' + (this.quiz.id ? 'Actualizado' : 'criado') + ' com sucesso', 'Sucesso', {
+        this.toast.success('registo ' + (this.quiz.id ? 'actualizado' : 'criado') + ' com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })
@@ -93,16 +93,16 @@ export class ListQuizComponent implements OnInit {
     this.modalService.open('form-quiz-modal');
   }
 
-  deleteQuiz(quiz: Quiz){
+  deleteQuiz(quiz: Quiz) {
     this.quizService.delete(quiz.id).subscribe(datas => {
-      this.toast.success('Eliminado com sucesso', 'Sucesso',{
-        timeOut:5000,
-        progressBar:true
+      this.toast.success('Registo eliminado com sucesso', 'Sucesso', {
+        timeOut: 5000,
+        progressBar: true
       })
       this.reload()
     })
   }
-  
+
   reload() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';

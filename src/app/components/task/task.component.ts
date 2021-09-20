@@ -41,33 +41,27 @@ export class TaskComponent implements OnInit {
     public modalService: ModalService,
     private toDoService: TodoService
   ) { }
-  ngOnInit(): void { }
-
-  saveToDo() {
-
-    this.todo.endDate = new Date(this.todo.startDate + 'T' + this.todo.endTime + ':00')
-    this.todo.startDate = new Date(this.todo.startDate + 'T' + this.todo.startTime + ':00')
-    this.todo.user = this.auth.user
-    this.toDoService.create(this.todo).subscribe(toDo => {
-      this.toast.success('Evento registado com Sucesso', 'Sucesso')
-      // if (moment(0, "HH").diff(toDo.startDate, "days") === 0) { this.child.todos.push(toDo) }
-      this.todo = new ToDo()
-      this.modalService.close('todo-modal')
-    })
+  ngOnInit(): void {
+    this.task.duration = this.task.revenue = this.task.expenses = 0;
   }
+
 
   saveTask() {
 
-    if (this.form.fg.dirty && this.form.fg.valid) {
+    if (this.form.fg.dirty) {
       const dueDate = this.task.dueDate
-
+      const startDate = new Date(dueDate + 'T' + this.todo.startTime);
+      const endDate = new Date(dueDate + 'T' + this.todo.endTime);
+      const diffMs = endDate.getTime() - startDate.getTime();
+      this.task.duration = Math.round(((diffMs % 86400000) % 3600000) / 60000);
       this.task.dueDate = new Date(dueDate)
 
       this.taskService.create(this.task).subscribe(task => {
-       //  this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
+        //  this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(this.task)
         this.task = new Task()
-
-        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
+        this.todo = new ToDo()
+        this.modalService.close('todo-modal')
+        this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 50000,
           progressBar: true,
         })
@@ -78,5 +72,9 @@ export class TaskComponent implements OnInit {
     } else {
       this.form.validateAllFormFields();
     }
+  }
+
+  setValue($event, field) {
+    this.todo[field] = $event.target.value;
   }
 }

@@ -113,7 +113,7 @@ export class SharedTodoComponent implements OnInit {
     this.todo.startDate = new Date(this.todo.startDate + 'T' + this.todo.startTime + ':00')
 
     this.toDoService.create(this.todo).subscribe(toDo => {
-      this.toast.success('Agenda registado com sucesso', 'Sucesso')
+      this.toast.success('Registo efectuado com sucesso', 'Sucesso')
       debugger
       this.updateList.emit(toDo);
       this.modalService.close('todo-modal')
@@ -126,7 +126,7 @@ export class SharedTodoComponent implements OnInit {
     this.todo.startDate = new Date(this.todo.startDate + 'T' + this.todo.startTime + ':00')
 
     this.toDoService.update(this.todo).subscribe(toDo => {
-      this.toast.success('Agenda actualizado com sucesso', 'Sucesso')
+      this.toast.success('Registo actualizado com sucesso', 'Sucesso')
       todo = toDo;
       this.modalService.close('todo-modal')
     })

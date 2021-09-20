@@ -7,7 +7,7 @@ export class Task {
 
     descriptions: string;
     observations: string;
-    state: number = 1;
+    state = 1;
     duration: number;
     dueDate: Date;
 

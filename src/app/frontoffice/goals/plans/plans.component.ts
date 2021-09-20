@@ -10,6 +10,7 @@ import { ModalService } from './../../../components/modal/modal.service';
 import { LegendItem, ChartType } from '../../../components/lbd/lbd-chart/lbd-chart.component';
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from 'ng-uikit-pro-standard';
+import { GoalForm } from 'app/forms/goal.form';
 
 @Component({
   selector: 'app-plans',
@@ -24,6 +25,9 @@ export class PlansComponent implements OnInit {
   goals: Array<Goal> = []
   now: Date = new Date()
 
+
+  goal = new Goal();
+  goalForm = new GoalForm(this.goal)
   statesArr = ['Pendente', 'Por inicial', 'Em curso', 'Concluido', 'Cancelado'];
   constructor(
     private modalService: ModalService,
@@ -93,7 +97,7 @@ export class PlansComponent implements OnInit {
         this.goals.filter(goal => goal.id = this.task.goal.id)[0]
           .tasks.filter(t => t.id === task.id)[0] = task;
 
-        this.toast.success('Tarefa actualizada com sucesso', 'Sucesso', {
+        this.toast.success('Registo actualizada com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })
@@ -110,7 +114,7 @@ export class PlansComponent implements OnInit {
 
         this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(task)
 
-        this.toast.success('Tarefa registada com sucesso', 'Sucesso', {
+        this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 5000,
           progressBar: true,
         })
@@ -130,8 +134,35 @@ export class PlansComponent implements OnInit {
       } else {
         this.createTask()
       }
-    // tslint:disable-next-line: one-line
-    }else {
+      // tslint:disable-next-line: one-line
+    } else {
+      this.form.validateAllFormFields();
+    }
+  }
+  editGoal(goal) {
+    goal.anualGoal = goal.partials.reduce((x, y) => x + parseFloat(y.value), 0)
+    this.goal = goal
+    this.openModal('goal-modal')
+  }
+
+  setPartialGoal() {
+
+    this.goal.partials.forEach(x => {
+      x.value = this.goal.anualGoal / 4
+    })
+  }
+  saveGoal() {
+    if (this.goalForm.fg.dirty && this.goalForm.fg.valid) {
+      this.goalService.update(this.goal).subscribe(goal => {
+        this.goals.filter(f => f.id === goal.id)[0] = this.goal
+
+        this.toast.success('Registo actualizado com sucesso', 'Sucesso', {
+          timeOut: 50000,
+          progressBar: true,
+        })
+        this.modalService.close('goal-modal')
+      })
+    } else {
       this.form.validateAllFormFields();
     }
   }

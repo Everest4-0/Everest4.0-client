@@ -67,7 +67,7 @@ export class DiagnosticComponent implements OnInit {
       this.currentEvaluation.requested = this.currentEvaluation.requester = this.auth.user
       Swal.fire(
         'Sucesso!',
-        'Avaliação salva com sucesso',
+        'Registo efectuado com sucesso',
         'success'
       )
 

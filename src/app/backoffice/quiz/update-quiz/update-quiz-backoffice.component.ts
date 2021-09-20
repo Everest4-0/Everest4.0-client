@@ -48,7 +48,7 @@ export class UpdateQuizBackOfficeComponent implements OnInit {
   
   saveForm() {
     this.quizService.update(this.quiz).subscribe(data => {
-      this.toast.success('Desafio actualizado com sucesso', 'Sucesso', {
+      this.toast.success('Registo actualizado com sucesso', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })
