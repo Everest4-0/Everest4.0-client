@@ -17,7 +17,7 @@ export class ListAcademicLevelComponent implements OnInit {
   constructor(private academicLevelService: AcademicLevelService) { }
 
   ngOnInit(): void {
-    this.academicLevelService.all({}).subscribe(levels=>this.academicLevels=levels);
+    this.academicLevelService.all({}).subscribe(levels => this.academicLevels = levels);
   }
 
 }

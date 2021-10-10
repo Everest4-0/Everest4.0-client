@@ -10,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class ListCourseBackOfficeComponent implements OnInit {
 
   public serverAddress = this.courseService.serverAddress;
+
   public courses: Array<Course> = []
+  public coursesPaginated: Array<Course> = []
+
+  onChangePage = (courses) => this.coursesPaginated = courses;
+  
   constructor(
     private courseService: CourseService
   ) { }

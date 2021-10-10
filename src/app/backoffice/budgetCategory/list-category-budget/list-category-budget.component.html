@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let budgetCategory of budgetCategories; let i=index">
+                <tr *ngFor="let budgetCategory of budgetCategoriesPaginated; let i=index">
                     <td>{{i+1}}</td>
                     <td>{{budgetCategory.name}}
                         <small>{{budgetCategory.descriptions}}</small>
@@ -29,6 +29,9 @@
                 </tr>
             </tbody>
       </table>
-
+    </div>
+    <div>
+        <app-jw-pagination [items]="budgetCategories" [pageSize]=10  (changePage)="onChangePage($event)" *ngIf="budgetCategories.length>0">
+        </app-jw-pagination>
     </div>
 </div>

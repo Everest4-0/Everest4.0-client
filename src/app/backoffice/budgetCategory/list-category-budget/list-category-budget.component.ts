@@ -10,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class ListCategoryBudgetComponent implements OnInit {
 
   public budgetCategories: Array<BudgetCategory> = []
-  constructor(private budgetCategoryService:BudgetCategoryService) { }
+  public budgetCategoriesPaginated: Array<BudgetCategory> = []
+
+  onChangePage = (budgetCategory) => this.budgetCategoriesPaginated = budgetCategory;
+
+  constructor(private budgetCategoryService: BudgetCategoryService) { }
 
   ngOnInit(): void {
     this.budgetCategoryService.all({}).subscribe(datas => this.budgetCategories = datas);
