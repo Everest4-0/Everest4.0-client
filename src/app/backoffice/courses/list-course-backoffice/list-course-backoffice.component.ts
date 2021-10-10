@@ -15,7 +15,7 @@ export class ListCourseBackOfficeComponent implements OnInit {
   public coursesPaginated: Array<Course> = []
 
   onChangePage = (courses) => this.coursesPaginated = courses;
-  
+
   constructor(
     private courseService: CourseService
   ) { }

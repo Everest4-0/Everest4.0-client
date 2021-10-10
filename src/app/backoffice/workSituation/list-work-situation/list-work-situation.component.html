@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let workSituation of workSituations; let i=index">
+                <tr *ngFor="let workSituation of workSituations; let i=index" routerLink="/backoffice/work-situations/update/{{workSituation.id}}">
                     <td>{{i+1}}</td>
                     <td>{{workSituation.name}}
                         <small> {{workSituation.descriptions}}</small></td>
@@ -24,8 +24,7 @@
                             {{['Activo','Inactivo'][workSituation.isActive ? 0 : 1]}}
                         </button>
                     </td>
-                    <td><a title="Update" routerLink="/backoffice/work-situations/update/{{workSituation.id}}"
-                            class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

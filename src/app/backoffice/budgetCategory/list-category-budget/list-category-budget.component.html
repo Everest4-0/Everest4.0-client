@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let budgetCategory of budgetCategoriesPaginated; let i=index">
+                <tr *ngFor="let budgetCategory of budgetCategoriesPaginated; let i=index" routerLink="/backoffice/budget-categories/update/{{budgetCategory.id}}">
                     <td>{{i+1}}</td>
                     <td>{{budgetCategory.name}}
                         <small>{{budgetCategory.descriptions}}</small>
@@ -25,7 +25,7 @@
                             {{['Activo','Inactivo'][budgetCategory.isActive ? 0 : 1]}}
                         </button>
                     </td>
-                    <td><a title="Update" routerLink="/backoffice/budget-categories/update/{{budgetCategory.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
+                    <td></td>
                 </tr>
             </tbody>
       </table>

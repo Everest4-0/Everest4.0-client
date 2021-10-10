@@ -1,7 +1,6 @@
 <app-backoffice-navbar [title]="'Cursos'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-        <p class="category">Here is a subtitle for this table</p>
     </div>
 
     <div class="content table-responsive table-full-width">
@@ -14,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let course of coursesPaginated; let i=index">
+                <tr *ngFor="let course of coursesPaginated; let i=index" routerLink="/backoffice/courses/details/{{course.id}}">
                     <td>{{i+1}}</td>
                     <td style="width: 100px;"><img src="{{serverAddress}}{{course.cover}}" class="img-thumbnail"></td>
                     <td>
@@ -28,9 +27,7 @@
                         <button class="btn-fill btn-xs btn-{{['success','danger'][course.isActive?0:1]}} btn">{{['Activo','Inactivo'][course.isActive?0:1]}}</button>
                     </td>
                     <td>
-                        <a title="Detalhes" routerLink="/backoffice/courses/details/{{course.id}}" class="text-decoration-none text-success title h4">
-                            <i class="pe-7s-angle-right"></i>
-                        </a>
+                       
                     </td>
                 </tr>
             </tbody>

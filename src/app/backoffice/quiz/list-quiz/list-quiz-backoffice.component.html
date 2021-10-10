@@ -12,7 +12,7 @@
                     <th></th>
             </thead>
             <tbody>
-                <tr *ngFor="let quiz of quizesPaginated; let i=index">
+                <tr *ngFor="let quiz of quizesPaginated; let i=index" routerLink="./details/{{quiz.id}}">
                     <td>{{i+1}}</td>
                     <td>{{quiz.text}}</td>
                     <td>
@@ -24,9 +24,6 @@
                         {{quiz.user.datas.fullName}}
                     </td>
                     <td>
-                        <a routerLink="./details/{{quiz.id}}" class="btn btn-xs border-none title h2">
-                            <h4 class="title"><i class="pe-7s-angle-right"></i></h4>
-                        </a>
                     </td>
                 </tr>
             </tbody>
