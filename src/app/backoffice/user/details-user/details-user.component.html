@@ -5,7 +5,8 @@
     <div class="content">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{user.avatar}}" alt="img" class="img-thumbnail" style="width: 100%;">
+                <img src="{{user.avatar}}" alt="img" class="img-thumbnail" style="width: 100%;"
+                    onerror="this.onerror=null;this.src='assets/img/default-avatar.png';">
             </div>
             <div class="col-md-3">
                 <div class="row">
@@ -38,15 +39,18 @@
                     <div class="col-md-6">Data de nascimento</div>
                     <div class="col-md-9">
                         <h4>
-                            {{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
-                            <span>({{user.datas.birthDate|amLocale:'pt'| amTimeAgo}})</span></h4>
+                            {{user.datas.birthDate|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY"
+                            }}
+                            <span>({{user.datas.birthDate|amLocale:'pt'| amTimeAgo}})</span>
+                        </h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">Membro desde</div>
                     <div class="col-md-9">
                         <h4>
-                            {{user.datas.createdAt|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY" }}
+                            {{user.datas.createdAt|amLocale:'pt'| amParseZone | amDateFormat: " D [de] MMMM [de] YYYY"
+                            }}
                             ({{user.createdAt|amLocale:'pt'| amTimeAgo}})</h4>
                     </div>
                 </div>
@@ -55,9 +59,9 @@
                         <h4>
                             <button
                                 class="btn-fill btn-{{['success','danger'][user.isActive?0:1]}} btn">{{['Activo','Inactivo'][user.isActive?0:1]}}</button>
-                                <hr>
-                            <button *ngFor="let role of user.roles"
-                                class="btn-fill btn-{{role| lowercase}} btn" style="border: none; margin:5px">{{role}}</button>
+                            <hr>
+                            <button *ngFor="let role of user.roles" class="btn-fill btn-{{role| lowercase}} btn"
+                                style="border: none; margin:5px">{{role}}</button>
                         </h4>
                     </div>
                 </div>
@@ -66,7 +70,7 @@
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li class="{{isTab==1 ?'active' : ''}}"><a (click)="isTab=1">Home</a></li>
+    <li class="{{isTab==1 ?'active' : ''}} hidden"><a (click)="isTab=1">Home</a></li>
     <li class="{{isTab==2 ?'active' : ''}}"><a (click)="isTab=2">Mais dados</a></li>
     <li class="{{isTab==3 ?'active' : ''}}"><a (click)="isTab=3">Definição</a></li>
     <li class="{{isTab==4 ?'active' : ''}}"><a (click)="isTab=4">Eventos</a></li>
@@ -83,7 +87,7 @@
 
 <div class="card" *ngIf="isTab==2">
     <div class="header">
-        
+
     </div>
     <div class="content">
 
@@ -110,11 +114,11 @@
                 <div class="row">
                     <div class="col-md-4 text-right">Salário</div>
                     <div class="col-md-8">
-                        <h4>{{user.datas.salary|number:'1.2-2'}} akz</h4>
+                        <h4>{{user.datas.salary|numFormat}}</h4>
                         <ul>
-                            <li>Dia: {{user.datas.salary/22| number:'1.2-2'}} kzs</li>
-                            <li>Hora: {{user.datas.salary/(22*8)| number:'1.2-2'}} kzs</li>
-                            <li>Minuto: {{user.datas.salary/(22*8*60)| number:'1.2-2'}} kzs</li>
+                            <li>Dia: {{user.datas.salary/22|numFormat}}</li>
+                            <li>Hora: {{user.datas.salary/(22*8)| numFormat}} </li>
+                            <li>Minuto: {{user.datas.salary/(22*8*60)|numFormat}} </li>
                         </ul>
                     </div>
                 </div>

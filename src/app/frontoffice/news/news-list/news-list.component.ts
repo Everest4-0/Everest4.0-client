@@ -24,7 +24,7 @@ export class NewsListComponent implements OnInit {
   ngOnInit(): void {
     this.newsService.all({}).subscribe(news => {
        this.bingNews = news;
-       this.news = news.articles//.value.filter(x => x.image !== undefined)
+       this.news = news.articles || [] // .value.filter(x => x.image !== undefined)
        })
   }
 

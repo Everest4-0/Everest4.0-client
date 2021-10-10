@@ -14,7 +14,7 @@ export class DetailsUserComponent implements OnInit {
 
   public user: User;
 
-  public isTab = 1;
+  public isTab = 2;
   constructor(
     public auth: AuthService,
     public userService: UserService,

@@ -128,7 +128,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     FormValidatorComponent,
-    JwPaginationComponent,
   ], exports: [
     FirstloginComponent,
     DragAndDropDirective,
@@ -140,7 +139,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormStepsTemplateComponent,
     FormStepsCompleteComponent,
     ToastModule,
-    JwPaginationComponent,
   ],
   providers: [
     StorageServices,

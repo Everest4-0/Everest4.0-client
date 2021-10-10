@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
 
     this.taskService.all({ userId: this.auth.user.id }).subscribe(tasks => {
 
-      this.tasks.all = tasks
+      this.tasks.all = tasks || []
       this.tasks.all = this.tasks.all.reduce((x, y) => x.concat(y), [])
       this.tasks.overDue = this.tasks.all.filter(task => new Date(task.dueDate) < now && parseInt(task.state) < 3)
       this.tasks.thisWeek = this.tasks.all.filter(task => new Date(task.dueDate) > lSunday && new Date(task.dueDate) < nSunday && parseInt(task.state) < 3)

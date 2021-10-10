@@ -156,7 +156,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="textAreaObservations">Observações</label>
-                    <textarea type="date" class="form-control form-control-lg" [(ngMode)]="task.observations"
+                    <textarea type="date" class="form-control form-control-lg" [(ngModel)]="task.observations"
                         formControlName="observations" id="textAreaObservations"></textarea>
                 </div>
             </div>
@@ -248,8 +248,8 @@
         </div>
     </div>
         <a id="editar" class="btn btn-simple btn-warning btn-icon" (click)="onEdit()">Editar</a>
-    <div class="row text-center">
-        
+    <div class="row text-center"><br>
+
     </div>
 </jw-modal>
 
@@ -259,7 +259,6 @@
     <div class="row">
         <form [formGroup]="goalForm.fg" (ngSubmit)="saveGoal()">
             <div class="col-md-12">
-                {{goal.anualGoal|json}}
                 <div class="form-group">
                     <label for="inputObjectives">Objectivo<span class="error">*</span></label>
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="goal.objectives"

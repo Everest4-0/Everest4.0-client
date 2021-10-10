@@ -1,9 +1,5 @@
-
 <app-backoffice-navbar [title]="'Utilizadores'"></app-backoffice-navbar>
 <div class="card">
-    <div class="header">
-        <p class="category">Here is a subtitle for this table</p>
-    </div>
     <div class="content table-responsive table-full-width">
         <table class="table table-hover table-striped">
             <thead class="thead-dark">
@@ -11,29 +7,32 @@
                     <th>#</th>
                     <th>User</th>
                     <th>Email</th>
-                    <th>Telephone</th>
-                    <th>Active</th>
-                    <th>Role</th>
-                    <th></th>
+                    <th>Telefone</th>
+                    <th>Estado</th>
+                    <th>Perfils</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users; let i=index">
+                <tr *ngFor="let user of usersPaginated; let i=index" routerLink="/backoffice/users/details/{{user.id}}">
                     <td>{{i+1}}</td>
                     <td>{{user.datas.fullName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.telePhone}}</td>
-                    <td><button
-                        class="btn-fill btn-xs btn-{{['success','danger'][user.isActive?0:1]}} btn">{{['Activo','Inactivo'][user.isActive?0:1]}}</button></td>
-                    <td>
-                        <button *ngFor="let role of user.roles"
-                                class="btn-fill btn-xs btn-{{role| lowercase}} btn" style="border: none">{{role}}</button>
+                    <td><label
+                            class="btn-fill btn-xs btn-{{['success','danger'][user.isActive?0:1]}} btn">{{['Activo','Inactivo'][user.isActive?0:1]}}</label>
                     </td>
-                    <td><a title="Detalhes" routerLink="/backoffice/users/details/{{user.id}}" class="text-decoration-none text-success title h4"><i class="pe-7s-angle-right"></i></a></td>
-                    
+                    <td>
+                        <label *ngFor="let role of user.roles" class="btn-fill btn-xs btn-{{role| lowercase}} btn"
+                            style="border: none">{{role}}</label>
+                    </td>
                 </tr>
             </tbody>
-      </table>
+        </table>
 
+    </div>
+    <div>
+        <app-jw-pagination [items]="users" [pageSize]=8  (changePage)="onChangePage($event)" *ngIf="users.length>0">
+        </app-jw-pagination>
     </div>
 </div>

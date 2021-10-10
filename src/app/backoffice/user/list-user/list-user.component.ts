@@ -10,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class ListUserComponent implements OnInit {
 
   public users: Array<User> = []
+  public usersPaginated : Array<User> = []
+
+  onChangePage = (users) => this.usersPaginated = users;
 
   constructor(private userService: UserService) { }
   ngOnInit(): void {
     this.userService.all({}).subscribe(data => this.users = data);
   }
+  
 }

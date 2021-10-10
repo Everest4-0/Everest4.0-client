@@ -6,15 +6,15 @@
 <div class="col-md-12">
     <div class="row" style="margin: 0 -80px ;background: #2f2e2e;">
 
-        <ngx-skeleton-loader *ngIf="news.length==0" count="5" appearance="circle" [theme]="{
+        <ngx-skeleton-loader *ngIf="news && news.length==0" count="5" appearance="circle" [theme]="{
     width: '70px',
     height: '70px',
     'border-radius': '10px'
   }">
         </ngx-skeleton-loader>
-        <div class="row" style="margin: 15px 50px;" *ngIf="news.length>0">
+        <div class="row" style="margin: 15px 50px;" *ngIf="news && news.length>0">
 
-            <div class="col-md-2 " *ngFor="let item of news| slice:0:8" style="height: 300px;">
+            <div class="col-md-2 " *ngFor="let item of news| slice:0:12" style="height: 300px;">
                 <a href="{{item.url}}" target="_blank">
                     <div class="card">
                         <div class="card-header">
