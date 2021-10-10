@@ -34,8 +34,9 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="">Perfil</label>
-                        <ng-select [multiple]="true" [items]="['FREE', 'BASIC','PROFESSIONAL','ADMIN','HELPDESK','COACH']" formControlName="roles"
-                            [(ngModel)]="user.roles">
+                        <ng-select [multiple]="true"
+                            [items]="['FREE', 'BASIC','PROFESSIONAL','ADMIN','HELPDESK','COACH']"
+                            formControlName="roles" [(ngModel)]="user.roles">
                         </ng-select>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                             <input type="checkbox" formControlName="isActive" [(ngModel)]="user.isActive">
                             <span class="control"></span>
                         </label>
-                        
+
                     </div>
                 </div>
             </div>
@@ -70,14 +71,14 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Ultimo Name</label>
+                        <label for="">Último Nome</label>
                         <input type="text" class="form-control" formControlName="lastName"
                             value="{{user.datas.lastName}}" [(ngModel)]="user.datas.lastName">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">Others Name</label>
+                        <label for="">Outros Nomes</label>
                         <input type="text" class="form-control" formControlName="othersName"
                             value="{{user.datas.othersName}}" [(ngModel)]="user.datas.othersName">
                     </div>
@@ -104,7 +105,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Nivel academico</label>
+                        <label for="">Nível Académico</label>
                         <select class="form-control" formControlName="academicLevel"
                             [(ngModel)]="user.datas.academicLevel">
                             <option value="{{item.id}}" *ngFor="let item of academicLevels">{{item.name}}</option>
@@ -113,7 +114,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Situation profissional</label>
+                        <label for="">Situação Profissional</label>
                         <select type="text" class="form-control" formControlName="workSituation"
                             [(ngModel)]="user.datas.workSituation">
                             <option value="{{item.id}}" *ngFor="let item of workSituations">{{item.name}}</option>
@@ -122,8 +123,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Experiencia professional</label>
-                        <select type="text" class="form-control" formControlName="professionalExperience"
+                        <label for="">Experiência Profissional</label>
+                        <select class="form-control" formControlName="professionalExperience"
                             [(ngModel)]="user.datas.professionalExperience">
                             <option value="{{item.id}}" *ngFor="let item of professionalExperiences">{{item.name}}
                             </option>
@@ -134,14 +135,18 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Sector de actividades</label>
-                        <input type="text" class="form-control" formControlName="activitySector"
+                        <label for="">Sector de Actividades</label>
+                        {{user.datas.activitySector.name}}
+                        <select class="form-control" formControlName="activitySector"
                             [(ngModel)]="user.datas.activitySector">
+                            <option value="{{item.id}}" *ngFor="let item of activitiesSectors">{{item.name}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="">Salario (mês)</label>
+                        <label for="">Salário (mês)</label>
                         <input type="text" class="form-control" formControlName="salary" value="{{user.datas.salary}}"
                             [(ngModel)]="user.datas.salary">
                     </div>
@@ -164,17 +169,12 @@
                             [(ngModel)]="user.settings.newsCategories">
                         </ng-select>
                     </div>
-                    <div style="border: solid 1px #ddd; border-radius:5px">
-                        <ul>
-                            <li *ngFor="let item of user.settings.newsCategories">{{item}}</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="">Lingua</label>
+                        <label for="">Idioma</label>
                         <select type="text" class="form-control" formControlName="i18n"
                             [(ngModel)]="user.settings.i18n">
                             <option value="{{item.id}}" *ngFor="let item of i18n">{{item.name}}</option>
@@ -198,7 +198,7 @@
     </div>
     <div class="card col-md-9 border-none">
         <div class="footer">
-            <button type="submit" class="btn btn-info btn-fill">Actualizar dados</button>
+            <button type="submit" class="btn btn-info btn-fill">Salvar dados</button>
             <div class="clearfix"></div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserForm } from 'app/backoffice/forms/user.form';
 import * as moment from 'moment-timezone'
 import { games } from 'googleapis/build/src/apis/games';
+import { GenericService } from 'app/services/main/generic.service';
 
 @Component({
   selector: 'app-update-user',
@@ -19,7 +20,6 @@ import { games } from 'googleapis/build/src/apis/games';
 export class UpdateUserComponent implements OnInit {
 
   public form = new UserForm(this.fb);
-
   public user: User = new User();
   sexs: Array<any> = [{ id: 2, name: 'Masculino' }, { id: 1, name: 'Feminino' }, { id: 0, name: 'Outro' }]
   i18n: Array<any> = [{ id: 'pt', name: 'Português' }, { id: 'en', name: 'Inglês' }, { id: 'fr', name: 'Francês' }]
@@ -48,6 +48,7 @@ export class UpdateUserComponent implements OnInit {
   public workSituations: Array<any> = []
   public academicLevels: Array<any> = []
   public professionalExperiences: Array<any> = []
+  public activitiesSectors: any[] = []
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
@@ -55,8 +56,8 @@ export class UpdateUserComponent implements OnInit {
     private router: Router,
     private toast: ToastService,
 
-
     private academicLevelService: AcademicLevelService,
+    private genericService: GenericService,
     private workSituationService: WorkSituationService,
     private professionalExperienceService: ProfessionalExperienceService
   ) { }
@@ -67,11 +68,13 @@ export class UpdateUserComponent implements OnInit {
     this.academicLevelService.all().subscribe(academicLevels => this.academicLevels = academicLevels)
     this.workSituationService.all().subscribe(workSituations => this.workSituations = workSituations)
     this.professionalExperienceService.all().subscribe(professionalExperiences => this.professionalExperiences = professionalExperiences)
+    this.genericService.activitiesSectors().subscribe(activitiesSectors => this.activitiesSectors = activitiesSectors);
     const id = this.route.snapshot.params['id'];
     this.userService.one(id).subscribe(user => {
       user.datas.workSituation = user.datas.workSituation.id
       user.datas.professionalExperience = user.datas.professionalExperience.id
       user.datas.academicLevel = user.datas.academicLevel.id
+      user.datas.activitySector = user.datas.activitySector.id
       this.user = user
     });
 
@@ -86,9 +89,8 @@ export class UpdateUserComponent implements OnInit {
         progressBar: true,
       })
 
-      this.router.navigate(['/backoffice/users']);
+      this.router.navigate(['/backoffice/users/details/' + this.user.id]);
 
-      console.log(user);
     })
 
   }

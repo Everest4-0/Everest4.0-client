@@ -35,7 +35,7 @@ export class AppService<T> {
     return this.http.get(this.url + '/' + s + '?' + str, { 'headers': this.headers })
   }
 
-  protected getAll(a: any): Observable<any> {
+  protected getAll(a: any = {}): Observable<any> {
     const str = this.getQuery(a);
     return this.http.get(this.url + '?' + str, { 'headers': this.headers })
   }
