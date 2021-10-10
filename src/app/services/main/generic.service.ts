@@ -16,4 +16,9 @@ export class GenericService extends AppService<any> {
     this.url = `${this.serverAddress}/api/v1/mains/consts/activities-sectors`;
     return this.getAll()
   }
+
+  newsCategories(): Observable<any> {
+    this.url = `${this.serverAddress}/api/v1/mains/consts/news-categories`
+    return this.getAll()
+  }
 }

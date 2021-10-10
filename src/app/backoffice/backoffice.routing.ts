@@ -22,7 +22,6 @@ import { DetailsUserComponent } from 'app/backoffice/user/details-user/details-u
 import { ListUserComponent } from 'app/backoffice/user/list-user/list-user.component';
 import { DeleteUserComponent } from 'app/backoffice/user/delete-user/delete-user.component';
 import { UpdateUserComponent } from 'app/backoffice/user/update-user/update-user.component';
-import { CreateUserComponent } from 'app/backoffice/user/create-user/create-user.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -38,7 +37,6 @@ const backOfficeRoutes: Routes = [
 
 
   { path: 'users', component: ListUserComponent },
-  { path: 'users/create', component: CreateUserComponent },
   { path: 'users/update/:id', component: UpdateUserComponent },
   { path: 'users/delete/:id', component: DeleteUserComponent },
   { path: 'users/details/:id', component: DetailsUserComponent },

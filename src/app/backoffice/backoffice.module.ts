@@ -16,7 +16,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { CreateUserComponent } from './user/create-user/create-user.component';
 import { UpdateUserComponent } from './user/update-user/update-user.component';
 import { DeleteUserComponent } from './user/delete-user/delete-user.component';
 import { BackofficeComponent } from './backoffice/backoffice.component';
@@ -75,7 +74,6 @@ import { CreateQuizBackOfficeComponent } from './quiz/create-quiz/create-quiz-ba
 
 @NgModule({
   declarations: [
-    CreateUserComponent,
     UpdateUserComponent,
     DeleteUserComponent,
     BackofficeComponent,

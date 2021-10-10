@@ -24,25 +24,7 @@ export class UpdateUserComponent implements OnInit {
   sexs: Array<any> = [{ id: 2, name: 'Masculino' }, { id: 1, name: 'Feminino' }, { id: 0, name: 'Outro' }]
   i18n: Array<any> = [{ id: 'pt', name: 'Português' }, { id: 'en', name: 'Inglês' }, { id: 'fr', name: 'Francês' }]
 
-  public newsCategories = ['Negócio',
-    'Finança',
-    'Economia',
-    'Computadores',
-    'Ciência',
-    'Tecnologia',
-    'Entretenimento',
-    'Arte',
-    'Cultura',
-    'Noticias gerais',
-    'Atualidades',
-    'Saúde',
-    'Remédio',
-    'Estilo de vida',
-    'Desporto',
-    'Videogames',
-    'Lazer',
-    'Comércio',
-    'Profissional'].sort((x, y) => x > y ? 1 : -1);
+  public newsCategories: any[] = []
 
   public timeZonesList = moment.tz.names()
   public workSituations: Array<any> = []
@@ -69,6 +51,7 @@ export class UpdateUserComponent implements OnInit {
     this.workSituationService.all().subscribe(workSituations => this.workSituations = workSituations)
     this.professionalExperienceService.all().subscribe(professionalExperiences => this.professionalExperiences = professionalExperiences)
     this.genericService.activitiesSectors().subscribe(activitiesSectors => this.activitiesSectors = activitiesSectors);
+    this.genericService.newsCategories().subscribe(newsCategories => this.newsCategories = newsCategories)
     const id = this.route.snapshot.params['id'];
     this.userService.one(id).subscribe(user => {
       user.datas.workSituation = user.datas.workSituation.id

@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 export class BackofficeNavbarComponent implements OnInit {
 
   @Input() title;
+  @Input() create = true;
+
   public url;
   public id;
   public list;
