@@ -31,6 +31,9 @@
                 </tr>
             </tbody>
         </table>
-        
+    </div>
+    <div>
+        <app-jw-pagination [items]="quizes" [pageSize]=10  (changePage)="onChangePage($event)" *ngIf="quizes.length>0">
+        </app-jw-pagination>
     </div>
 </div>

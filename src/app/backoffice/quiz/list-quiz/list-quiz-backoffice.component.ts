@@ -11,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class ListQuizBackOfficeComponent implements OnInit {
 
   public quizes: Array<Quiz> = [];
+  public quizesPaginated: Array<Quiz> = []
+
+  onChangePage = (users) => this.quizesPaginated = users;
 
   constructor(private quizService: QuizService,
     private auth: AuthService) { }

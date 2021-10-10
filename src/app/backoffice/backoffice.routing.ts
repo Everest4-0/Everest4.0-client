@@ -35,6 +35,7 @@ import { ListQuizBackOfficeComponent } from './quiz/list-quiz/list-quiz-backoffi
 
 const backOfficeRoutes: Routes = [
 
+  //TODO: Resolver os probelmas das rotas! 
 
   { path: 'users', component: ListUserComponent },
   { path: 'users/update/:id', component: UpdateUserComponent },
