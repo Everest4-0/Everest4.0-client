@@ -12,12 +12,12 @@ export class UserData {
     othersName: string;
     birthDate: Date;
 
-    academicLevel:any;
-    workSituation:any;
-    professionalExperience:any;
+    academicLevel: any;
+    workSituation: any;
+    professionalExperience: any;
 
-    salary:number;
-    activitySector: number;
+    salary: number;
+    activitySector: any;
     createdAt: Date;
     updatedAt: Date;
 
