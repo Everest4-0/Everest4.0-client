@@ -2,7 +2,7 @@
 <app-backoffice-navbar [title]="'Variaveis de avalaição'"></app-backoffice-navbar>
 <div class="card">
     <div class="header">
-        <p class="category">Here is a subtitle for this table</p>
+        <p class="category"></p>
     </div>
     <div class="content table-responsive table-full-width">
         <table class="table table-hover table-striped">
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let evaluation of evaluations; let i=index">
+                <tr *ngFor="let evaluation of evaluationPaginated; let i=index" routerLink="/backoffice/evaluations/update/{{evaluation.id}}">
                     <td>{{i+1}}</td>
                     <td>{{evaluation.name}}</td>
                     <td>{{evaluation.group}}</td>
@@ -29,10 +29,13 @@
                             {{['Activo','Inactivo'][evaluation.isActive ? 0 : 1]}}
                         </button>
                     </td>
-                    <td><a title="Update" routerLink="/backoffice/evaluations/update/{{evaluation.id}}" class="btn btn-xs border-none title h2"><i class="pe-7s-note"></i></a></td>
                 </tr>
             </tbody>
       </table>
 
+    </div>
+    <div>
+        <app-jw-pagination [items]="evaluations" [pageSize]=10  (changePage)="onChangePage($event)" *ngIf="evaluations.length>0">
+        </app-jw-pagination>
     </div>
 </div>

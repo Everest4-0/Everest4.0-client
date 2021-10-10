@@ -15,6 +15,8 @@ export class CreateEvaluationComponent implements OnInit {
 
   public form = new EvaluationForm(this.fb)
   public evaluation: Evaluation = new Evaluation();
+  public domains: Array<string> = ['Pessoal', 'Profissional', 'Financeiro']
+
   constructor(
     private fb: FormBuilder,
     private evaluationService: EvaluationService,
@@ -33,5 +35,4 @@ export class CreateEvaluationComponent implements OnInit {
       this.router.navigate(['/backoffice/evaluations']);
     })
   }
-
 }

@@ -32,7 +32,7 @@ export class UpdateEvaluationComponent implements OnInit {
 
   saveForm() {
     this.evaluationService.update(this.evaluation).subscribe(evaluation => {
-      this.toast.success('Vaiavel actualizado com successo', 'Sucesso', {
+      this.toast.success('Variavel actualizado com successo', 'Sucesso', {
         timeOut: 5000,
         progressBar: true,
       })

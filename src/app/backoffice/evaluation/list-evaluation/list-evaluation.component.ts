@@ -10,12 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class ListEvaluationComponent implements OnInit {
 
   public evaluations: Array<Evaluation> = []
+  public evaluationPaginated: Array<Evaluation> = []
+
   constructor(private evaluationService: EvaluationService) { }
 
-
+  onChangePage = (evaluations) => this.evaluationPaginated = evaluations;
 
   ngOnInit(): void {
-    this.evaluationService.all().subscribe(evaluations => this.evaluations = evaluations.sort((x,y)=>x.group>y.group ? 1: -1))
+    this.evaluationService.all().subscribe(evaluations => this.evaluations = evaluations.sort((x, y) => x.group > y.group ? 1 : -1))
   }
-
 }

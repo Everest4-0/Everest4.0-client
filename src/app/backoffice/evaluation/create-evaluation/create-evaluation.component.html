@@ -20,7 +20,12 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Domínio</label>
-                        <input type="text" class="form-control" formControlName="group" [(ngModel)]="evaluation.group">
+                        <select class="form-control" formControlName="group"
+                        [(ngModel)]="evaluation.group" value="evaluation.group">
+                            <option *ngFor="let domain of domains" [selected]="domain==evaluation.group">{{domain}}
+                            </option>
+                        </select>
+
                     </div>
                 </div>
             </div>
