@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let academicLevel of academicLevels; let i=index">
+                <tr *ngFor="let academicLevel of academicLevelsPaginated; let i=index">
                     <td>{{i+1}}</td>
                     <td>{{academicLevel.name}}</td>
                     <td>
@@ -33,5 +33,9 @@
             </tbody>
         </table>
 
+    </div>
+    <div>
+        <app-jw-pagination [items]="academicLevels" [pageSize]=10  (changePage)="onChangePage($event)" *ngIf="academicLevels.length>0">
+        </app-jw-pagination>
     </div>
 </div>

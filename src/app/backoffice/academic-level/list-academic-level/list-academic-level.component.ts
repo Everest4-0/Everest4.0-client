@@ -10,6 +10,9 @@ import { AcademicLevel } from 'app/models/backoffice/academicLevel.model';
 export class ListAcademicLevelComponent implements OnInit {
 
   public academicLevels: Array<AcademicLevel> = [];
+  public academicLevelsPaginated: Array<AcademicLevel> = []
+
+  onChangePage = (academicLevelsPaginated) => this.academicLevelsPaginated = academicLevelsPaginated;
 
   constructor(private academicLevelService: AcademicLevelService) { }
 

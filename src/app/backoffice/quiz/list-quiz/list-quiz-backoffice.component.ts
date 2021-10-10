@@ -13,7 +13,7 @@ export class ListQuizBackOfficeComponent implements OnInit {
   public quizes: Array<Quiz> = [];
   public quizesPaginated: Array<Quiz> = []
 
-  onChangePage = (users) => this.quizesPaginated = users;
+  onChangePage = (quizes) => this.quizesPaginated = quizes;
 
   constructor(private quizService: QuizService,
     private auth: AuthService) { }
