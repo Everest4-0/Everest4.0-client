@@ -52,7 +52,7 @@ export class EvaluationComponent implements OnInit {
     this.evaluations.filter(v => v.points > 0).length * 100 / this.evaluations.length;
 
   openModal(id: string, v: Evaluation) {
-    debugger
+    
     if (v.points > 0) {
       this.toast.warning('Já foi feita auto avaliação sobre ' + v.name + ' no Dominio ' + v.group + ' Aguarde próximo ciclo ou contacte o apoio ao cliente',
         'Atenção', {

@@ -91,7 +91,7 @@ export class SharedTodoComponent implements OnInit {
     return new Date(t) > new Date()
   }
   openModal(id, toDo?: ToDo) {
-    debugger
+    
     if (toDo) {
       this.todo = toDo;
       this.todo.endTime=this.todo.startDate.toString().split('T')[1].slice(0,5)
@@ -114,7 +114,7 @@ export class SharedTodoComponent implements OnInit {
 
     this.toDoService.create(this.todo).subscribe(toDo => {
       this.toast.success('Registo efectuado com sucesso', 'Sucesso')
-      debugger
+      
       this.updateList.emit(toDo);
       this.modalService.close('todo-modal')
     })

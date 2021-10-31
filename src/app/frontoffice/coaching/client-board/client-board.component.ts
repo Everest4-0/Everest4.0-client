@@ -49,7 +49,7 @@ export class ClientBoardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-debugger
+
     const id = this.route.snapshot.params['id'];
     this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
       coachingSubscription.notes = coachingSubscription.notes.filter(x => x.userId === this.auth.user.id)

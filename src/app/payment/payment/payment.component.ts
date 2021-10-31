@@ -70,7 +70,7 @@ export class PaymentComponent implements OnInit {
 
   createToken(): void {
     this.payment.customer.name = this.stripeTest.get('name').value;
-    debugger
+    
     this.payment.customer.address.line1 = this.stripeTest.get('address').value;
     this.payment.customer.address.city = this.stripeTest.get('city').value;
     this.payment.customer.address.country = this.stripeTest.get('country').value;

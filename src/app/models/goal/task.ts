@@ -20,6 +20,7 @@ export class Task {
     isActive: boolean;
     createdAt: Date;
     updatedAt: Date;
+  goalId: string;
 
     constructor() {
     }

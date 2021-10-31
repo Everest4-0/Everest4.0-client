@@ -15,7 +15,7 @@ export class ControlMessagesComponent  {
   constructor() {}
 
   get errorMessage() {
-    debugger
+    
     for (let propertyName in this.control.errors) {
       if (
         this.control.errors.hasOwnProperty(propertyName) &&

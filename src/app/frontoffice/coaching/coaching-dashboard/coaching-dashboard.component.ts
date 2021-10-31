@@ -194,7 +194,7 @@ export class CoachingDashboardComponent implements OnInit {
   }
 
   paymentDone({ payment, quantity }) {
-    debugger
+    
     this.subscription.payment = payment;
     this.subscription.duration = this.coachingDurations.filter(d => d.months === quantity)[0] || this.coachingDurations[0];
     this.coachingSubscriptionService.create(this.subscription).subscribe(subscription => {

@@ -134,7 +134,7 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
   signIn() {
-    debugger
+    
     if (this.signInForm.dirty && this.signInForm.valid) {
       this.auth.authenticate(this.signInUser, (u: User) => {
         this.localUser = u;

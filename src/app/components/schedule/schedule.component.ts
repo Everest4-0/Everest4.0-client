@@ -63,7 +63,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   updateState(task, state, list) {
-    debugger
+    
     task.state = state
     task.goal = null
     this.taskService.update(task).subscribe(task => {

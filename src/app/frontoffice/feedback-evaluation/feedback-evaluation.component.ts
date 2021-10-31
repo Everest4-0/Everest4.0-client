@@ -181,7 +181,7 @@ export class FeedbackEvaluationComponent implements OnInit {
   }
 
   setActiveRelation() {
-    debugger
+    
     const t = [1, 2, 3].filter(y => !this.userEvaluations.filter(y => y.request).map(x => x.request.relationId).includes(y))
     this.activeRelation = t;
   }

@@ -44,7 +44,7 @@ export class PlansComponent implements OnInit {
   }
 
   showTask(task: Task, goal: Goal) {
-    debugger
+    
     this.task = task
     this.task.goal = goal
 
@@ -82,6 +82,7 @@ export class PlansComponent implements OnInit {
   }
 
   updateState(task: Task, state: number) {
+    
     task.state = state
     this.task = task;
     this.updateTask()
@@ -107,12 +108,11 @@ export class PlansComponent implements OnInit {
   }
 
   createTask() {
-
     this.taskService.create(this.task)
       .subscribe(task => {
         this.tasks.push(task)
 
-        this.goals.filter(goal => goal.id = this.task.goal.id)[0].tasks.push(task)
+        this.goals.filter(goal => goal.id = task.goalId)[0].tasks.push(task)
 
         this.toast.success('Registo efectuado com sucesso', 'Sucesso', {
           timeOut: 5000,

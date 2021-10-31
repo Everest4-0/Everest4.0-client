@@ -23,11 +23,15 @@
                         </div>
                         <div class="col col-xs-4 text-right">{{anualGoal(goal)}}</div>
                         <div class="col col-xs-2 actions text-right">
-                            <button class="btn" (click)="addTask(goal)"><i
-                                    class="pe-7s-plus"></i></button>
-
-                            <button class="btn" (click)="editGoal(goal)"><i
-                                class="pe-7s-edit"></i></button>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="pe-7s-more"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a  (click)="addTask(goal)">
+                                    <i class="pe-7s-plus"></i> Criar nova</a></li>
+                                  <li><a (click)="editGoal(goal)"><i class="pe-7s-edit"></i> Editar</a></li>
+                                </ul>
+                              </div>
                         </div>
                     </div>
 
@@ -62,7 +66,7 @@
                                     </td>
                                 </tr>
 
-                                <tr *ngIf="goal.tasks.length1">
+                                <tr *ngIf="goal.tasks.length==0">
                                     <td colspan="3" class="text-center">
                                         Sem registo
                                     </td>
@@ -127,7 +131,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="inputExpenses">Curstos</label>
+                    <label for="inputExpenses">Custos</label>
                     <input type="number" class="form-control form-control-lg" [(ngModel)]="task.expenses"
                         formControlName="expenses" id="inputExpenses">
                     <div *ngIf="form.controls.expenses.touched  && form.controls.expenses.invalid" class="error">

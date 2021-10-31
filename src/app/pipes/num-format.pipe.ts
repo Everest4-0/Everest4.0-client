@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NumFormatPipe implements PipeTransform {
 
-  transform = (number: any, currency = 'AOA', style = 'currency', lang = 'pt'): string
-    => new Intl.NumberFormat(lang, { style, currency }).format(number);
+  transform = (number: any, currency = 'AOA', style = 'currency', lang = 'pt') =>
+   new Intl.NumberFormat(lang, { style, currency }).format(number);
 
 
 }

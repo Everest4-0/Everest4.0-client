@@ -23,13 +23,13 @@ export class TaskService extends AppService<Task> implements IService<Task> {
     return this.getAll(f)
   }
 
-  update(o: any): Observable<Task> {
-    o.goal = null;
+  update(task: any): Observable<Task> {
+    const o = { ...task, ...{ goal: null, goalId: task.goalId ?? task.goal.id } };
     return this.updateOne(o);
   }
 
-  create(o: any): Observable<Task> {
-    o.goal = null;
+  create(task: any): Observable<Task> {
+    const o = { ...task, ...{ goal: null, goalId: task.goalId ?? task.goal.id } };
     return this.createOne(o)
   }
 }

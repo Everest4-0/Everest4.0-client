@@ -259,7 +259,7 @@ ul[role="menu"] {
 }
 
 .bg-header {
-    background: url(assets/img/background-part.png);
+    background: url(/assets/img/background-part.png);
     color: #fff !important;
     background-position: 25%;
     background-repeat: no-repeat;

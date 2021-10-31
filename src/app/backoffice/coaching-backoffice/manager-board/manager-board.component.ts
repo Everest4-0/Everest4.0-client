@@ -77,7 +77,7 @@ export class ManagerBoardComponent implements OnInit {
 
 
     const id = this.route.snapshot.params['id'];
-debugger
+
     this.coachingSubscriptionService.one(id).subscribe(coachingSubscription => {
       coachingSubscription.notes = coachingSubscription.notes.filter(x => x.userId === this.auth.user.id)
       this.subscription = coachingSubscription;
