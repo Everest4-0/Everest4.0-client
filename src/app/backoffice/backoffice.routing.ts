@@ -65,17 +65,17 @@ const backOfficeRoutes: Routes = [
   { path: 'professional-experiencies/create', component: CreateProfessionalExperienceComponent },
   { path: 'professional-experiencies/update/:id', component: UpdateProfessionalExperienceComponent },
 
-  { path: 'quizes/m', component: ListQuizBackOfficeComponent },
-  { path: 'quizes/m/create', component: CreateQuizBackOfficeComponent },
-  { path: 'quizes/m/update/:id', component: UpdateQuizBackOfficeComponent },
-  { path: 'quizes/m/delete/:id', component: DeleteQuizBackOfficeComponent },
-  { path: 'quizes/m/details/:id', component: DetailsQuizBackOfficeComponent },
+  { path: 'quizes', component: ListQuizBackOfficeComponent },
+  { path: 'quizes/create', component: CreateQuizBackOfficeComponent },
+  { path: 'quizes/update/:id', component: UpdateQuizBackOfficeComponent },
+  { path: 'quizes/delete/:id', component: DeleteQuizBackOfficeComponent },
+  { path: 'quizes/details/:id', component: DetailsQuizBackOfficeComponent },
 
-  { path: 'courses/m', component: ListCourseBackOfficeComponent },
-  { path: 'courses/m/create', component: CreateCourseBackOfficeComponent },
-  { path: 'courses/m/update/:id', component: UpdateCourseComponent },
-  { path: 'courses/m/delete/:id', component: DeleteUserComponent },
-  { path: 'courses/m/details/:id', component: DetailsCourseComponent },
+  { path: 'courses', component: ListCourseBackOfficeComponent },
+  { path: 'courses/create', component: CreateCourseBackOfficeComponent },
+  { path: 'courses/update/:id', component: UpdateCourseComponent },
+  { path: 'courses/delete/:id', component: DeleteUserComponent },
+  { path: 'courses/details/:id', component: DetailsCourseComponent },
 
   {
     path: 'coaching',
